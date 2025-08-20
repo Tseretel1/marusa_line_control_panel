@@ -1,3 +1,5 @@
 export const AppRoutes = {
-  posts: 'posts',
+  posts: '/posts',
+  addPosts: '/add-posts',
+  editPosts: '/edit-posts/',
 };

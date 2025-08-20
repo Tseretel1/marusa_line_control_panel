@@ -2,13 +2,19 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { PhotoAlbumComponent } from '../../shared/components/photo-album/photo-album.component';
 import { provideSweetAlert2 } from '@sweetalert2/ngx-sweetalert2';
+import { RouterLink } from '@angular/router';
+import { AppRoutes } from '../../shared/AppRoutes/AppRoutes';
+import * as AOS from 'aos'
+
 @Component({
   selector: 'app-posts',
-  imports: [CommonModule,PhotoAlbumComponent],
+  imports: [CommonModule, PhotoAlbumComponent, RouterLink],
   templateUrl: './posts.component.html',
   styleUrl: './posts.component.scss'
 })
 export class PostsComponent implements OnInit{
+
+  AppRoutes=AppRoutes;
   gallery: GalleryPhotos[] = [];
   cards: Posts[] = [];
 
@@ -20,6 +26,11 @@ export class PostsComponent implements OnInit{
       this.likeCount = this.likeCount + element.likeCount;
       this.viewCount = this.viewCount + element.viewCount;
     })
+    AOS.init({
+        duration: 500,
+        easing: 'ease-in-out',
+        once: false, 
+    });
   }
 
    private generateCards(count: number): Posts[] {
