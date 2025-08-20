@@ -1,7 +1,7 @@
 <div class="center-component">
     <div class="component">
         <div class="photo-align">
-            <div *ngFor="let p of photos;let i = index" class="ng-container" data-aos="fade-in">
+            <div *ngFor="let p of photoss;let i = index" class="ng-container" data-aos="fade-in">
                 <button class="remove-photo"(click)="removePhoto(p.id)">
                     <i class="fas fa-times"></i>
                 </button>
@@ -45,6 +45,12 @@
                 <label class="form-control-label">პროდუქტის აღწერა</label>
                 <textarea name="" id="" class="description"></textarea>
             </div>
+            <button class="noselect">
+                <span class="text">ატვირთვა </span>
+                <span class="icon">
+                   <i class="fas fa-cloud-upload-alt"></i>
+                </span>
+            </button>
         </div>
     </div>
 </div> 

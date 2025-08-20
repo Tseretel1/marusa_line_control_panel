@@ -16,11 +16,11 @@
             grid-template-columns: repeat(3,1fr);
             width: 100%;
             gap: 10px;
+            position: relative;
             .ng-container{
-                position: relative;
                 .photo-container{
-                    width: 100%;
                     height: 250px;
+                    width: 100%;
                     display: flex;
                     justify-content: center;
                     align-items: center;
@@ -141,6 +141,66 @@
             .description:focus{
                 background-color: rgba(0, 0, 0, 0.507);
             }
+        }
+        button {
+        width: 150px;
+        height: 50px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        border: none;
+        border-radius: 5px;
+        box-shadow: 1px 1px 3px rgba(0,0,0,0.15);
+        background: green;
+        }
+
+        button, button span {
+        transition: 200ms;
+        }
+
+        button .text {
+        transform: translateX(35px);
+        color: white;
+        font-weight: bold;
+        }
+
+        button .icon {
+        position: absolute;
+        border-left: 1px solid green;
+        transform: translateX(110px);
+        height: 40px;
+        width: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        }
+
+        button svg {
+        width: 15px;
+        fill: #eee;
+        }
+
+        button:hover {
+        background: green;
+        }
+
+        button:hover .text {
+        color: transparent;
+        }
+
+        button:hover .icon {
+        width: 150px;
+        border-left: none;
+        transform: translateX(0);
+        }
+
+        button:focus {
+        outline: none;
+        }
+
+        button:active .icon svg {
+        transform: scale(0.8);
         }
     }
 }
