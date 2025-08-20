@@ -6,7 +6,7 @@
                     {{photos.name}}
                 </b>
                 <p>{{photos.price}}₾</p></b>
-            <b class="title-price" *ngIf="photos.discountprice!=null">
+                    <b class="title-price" *ngIf="photos.discountprice!=null">
                 <b class="title">
                     {{photos.name}}
                 </b>
@@ -22,7 +22,7 @@
                 </p>
                 <div class="like-learn-more">
                     <p class="likes">{{photos.viewCount}} <i class="fas fa-heart"></i></p>
-                    <button class="button">
+                    <button class="button" [routerLink]="AppRoutes.editPosts+photos.id">
                         <i class="fas fa-edit"></i> 
                     </button>
                 </div>

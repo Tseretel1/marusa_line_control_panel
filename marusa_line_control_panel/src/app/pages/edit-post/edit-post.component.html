@@ -1,1 +1,56 @@
-<p>edit-post works!</p>
+<div class="center-component">
+    <div class="component">
+        <div class="photo-align">
+            <div *ngFor="let p of photoss;let i = index" class="ng-container" data-aos="fade-in">
+                <button class="remove-photo"(click)="removePhoto(p.id)">
+                    <i class="fas fa-times"></i>
+                </button>
+                <div class="photo-container">
+                    <img [src]="p.photoUrl" alt="" class="photo">
+                </div>
+            </div>
+            <div class="add-new-photo" (click)="pushPhoto()" *ngIf="photoCount<=6">
+                <i class="fas fa-plus-square"></i>
+            </div>
+        </div>
+        <div class="form-align">
+            <div class="input-group">
+                <div class="form-control-group">
+                    <label class="form-control-label">დასახელება</label>
+                    <input type="text" class="form-control" placeholder="მაგ: ჭადრაკი">
+                </div>
+                <div class="form-control-group">
+                    <label class="form-control-label">პროდუქტის ტიპი</label>
+                    <select name=""  class="form-control select-control" id="">
+                        <option value=""></option>
+                        <option value="">ჭადრაკი</option>
+                        <option value="">საათი</option>
+                        <option value="">ჭადრაკი</option>
+                    </select>
+                </div>
+                <div class="form-control-group">
+                    <label class="form-control-label">ფასი</label>
+                    <input type="text" class="form-control" placeholder="₾">
+                </div>
+                <div class="form-control-group">
+                    <label class="form-control-label">ფასდაკლება</label>
+                    <input type="text" class="form-control" placeholder="₾">
+                </div>
+                <div class="form-control-group">
+                    <label class="form-control-label">რაოდენობა მარაგში</label>
+                    <input type="text" class="form-control" placeholder="">
+                </div>
+            </div>
+            <div class="description-group">
+                <label class="form-control-label">პროდუქტის აღწერა</label>
+                <textarea name="" id="" class="description"></textarea>
+            </div>
+            <button class="noselect">
+                <span class="text">ატვირთვა </span>
+                <span class="icon">
+                <i class="fas fa-cloud-upload-alt"></i>
+                </span>
+            </button>
+        </div>
+    </div>
+</div> 
