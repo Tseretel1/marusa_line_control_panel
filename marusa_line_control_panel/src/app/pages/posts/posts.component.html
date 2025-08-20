@@ -1,0 +1,41 @@
+
+<div class="statistics-align">
+    <div class="statistics-component">
+        <table >
+            <thead>
+                <tr>
+                    <th>
+                        პოსტების რაოდენობა
+                        <i class="fas fa-camera"></i>
+                    </th>
+                    <th>
+                        ნახვების რაოდენობა
+                        <i class="fas fa-eye"></i>
+                    </th>
+                    <th>
+                        ლაიქების რაოდენობა
+                        <i class="fas fa-heart"></i>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{cards.length}}</td>
+                    <td>{{likeCount}}</td>
+                    <td>{{likeCount}}</td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+</div>
+<div class="gallery-align">
+    <div class="photo-align">
+        <ng-container *ngFor="let p of cards;let i = index">
+            <div *ngIf="i==0" class="add-new-post">
+                <i class="fas fa-plus-square"></i>
+            </div>
+            <app-photo-album [photos]="p" class="album"></app-photo-album>
+        </ng-container>
+    </div>
+</div>

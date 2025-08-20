@@ -1,0 +1,236 @@
+
+.component{
+    height: 100px;
+    color: white;
+    position: fixed;
+    z-index: 20;
+    width: 100%;
+    .header{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        padding: 10px 0px;
+        background-color: rgba(7, 3, 32, 0.644);
+        backdrop-filter: blur(10px);
+        .header-align{
+            position: relative;
+            width: 90%;
+            display: flex;
+            .float-logo{
+                position: absolute;
+                display: flex;
+                align-items: center;
+                gap: 15px;
+                .logo-container{
+                    overflow: hidden;
+                    width: 60px;
+                    height: 60px;
+                    border-radius: 50%;
+                    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.158);
+                    .logo{
+                        width: 100%;
+                        height: 100%;
+                        object-fit: cover;
+                        cursor: pointer;
+                        transition: 0.3s all ease-in-out;
+                    }
+                    .logo:hover{
+                        scale: 1.1;
+                    }
+                }
+                .header-title{
+                    color: white;
+                    letter-spacing: 2px;
+                    font-size: 22px;
+                    font-weight: bold;
+                    text-decoration: none;
+                    text-shadow: 0px 0px 2px black;
+                    transition: 0.3s all ease-in-out;
+                }
+                
+            }
+            .float-logo:hover .header-title{
+                filter: drop-shadow(0px 0px 10px white);
+            }
+            .navigation-align{
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                gap: 25px;
+                .nav-link{
+                    cursor: pointer;
+                    display: flex;
+                    align-items: center;
+                    gap: 10px;  cursor: pointer;
+                    color: inherit;
+                    text-decoration: none; 
+                    cursor: pointer;
+                    transition: 0.3s;
+                    padding: 10px 0px;
+                    border-bottom: 1px solid transparent;
+                    .fas{
+                        transition: 0.2s all ease-in-out;
+                    }
+                }
+                .nav-link:focus,
+                .nav-link:active {
+                outline: none;
+                background: none;
+                box-shadow: none;
+                border: none;
+                }
+                .active-link{
+                    filter: drop-shadow(0px 0px 10px whitesmoke);
+                }
+                .nav-link:hover .fas{
+                    filter: drop-shadow(0px 0px 20px whitesmoke);
+                    scale: 1.25;
+                }
+                .nav-link:hover {
+                    text-shadow: 0px 0px 2px black;
+                    filter: drop-shadow(0px 0px 20px whitesmoke);
+                }
+            }
+            .mobile-navigation-align{
+                width: 100%;
+                display: flex;
+                justify-content: flex-end;
+            }
+            .burger-icon-align{
+                width: 100%;
+                display: none;
+                justify-content: flex-end;
+                .nav-link{
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+}
+.sidenav-align{
+    position: fixed;
+    z-index: 30;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: flex-end;
+    .background-exit{
+        display: flex;
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.226);
+        animation: OpacityIn 0.5s;
+    }
+    .background-close{
+        animation: OpacityOut 0.5s;
+    }
+    .mobile-navigation-align{
+        width: 50%;
+        background-color: rgba(0, 0, 0, 0.308);
+        backdrop-filter: blur(20px);
+        color: white;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        height: 100%;
+        gap: 30px;
+        transform: translate(0%);
+        animation :sidenavAnimation 0.5s;
+        .cancel-icon-align{
+            display: flex;
+            width: 100%;
+            justify-content: flex-end;
+            padding: 15px;
+            i{
+                cursor: pointer;
+                scale: 1.2;
+                transition: 0.3s;
+            }
+            i:hover{
+                rotate: 180deg;
+                color: red;
+            }
+        }
+        .nav-center{
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            .nav-link{
+                font-size: 20px;
+                cursor: pointer;
+            }
+            .nav-link:focus,
+            .nav-link:active {
+                outline: none;
+                background: none;
+                box-shadow: none;
+                border: none;
+            }
+        }
+    }
+    .left-toright{
+        animation:lefttoright 0.5s;
+    }
+    @keyframes sidenavAnimation {
+        0%{
+            transform: translateX(100%);
+        }
+        100%{
+            transform: translateX(0%);
+        }
+    }
+     @keyframes lefttoright {
+        0%{
+            transform: translateX(0%);
+        }
+        100%{
+            transform: translateX(100%);
+        }
+    }
+    @keyframes OpacityIn {
+        0%{
+            opacity: 0;
+        }
+        100%{
+            opacity: 1;
+        }
+    }
+     @keyframes OpacityOut {
+        0%{
+            opacity: 1;
+        }
+        100%{
+            opacity: 0;
+        }
+    }
+}
+
+
+@media screen and (max-width: 900px){
+.component{
+    .header{
+        .header-align{
+            padding: 15px 0px;
+            .float-logo{
+                top: 0px;
+                 .logo-container{
+                     width: 50px;
+                     height: 50px;
+                 }
+                
+             }
+            .navigation-align{
+                display: none;
+            }
+            .burger-icon-align{
+                display: flex;
+            }
+        }
+    }
+}
+}
+
+
