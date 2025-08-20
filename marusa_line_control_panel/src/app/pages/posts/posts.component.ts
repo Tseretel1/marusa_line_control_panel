@@ -27,7 +27,7 @@ export class PostsComponent implements OnInit{
       this.viewCount = this.viewCount + element.viewCount;
     })
     AOS.init({
-        duration: 500,
+        duration: 300,
         easing: 'ease-in-out',
         once: false, 
     });
