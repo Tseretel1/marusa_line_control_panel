@@ -1,51 +1,56 @@
 <div class="center-component">
     <div class="component">
         <div class="photo-align">
-            <div *ngFor="let p of photoss;let i = index" class="ng-container" data-aos="fade-in">
-                <button class="remove-photo"(click)="removePhoto(p.id)">
+           <div *ngFor="let p of uploadPhotos; let i = index" class="ng-container" data-aos="fade-in">
+                <button class="remove-photo" *ngIf="p.preview" (click)="removePhoto(p.id)">
                     <i class="fas fa-times"></i>
                 </button>
                 <div class="photo-container">
-                    <img [src]="p.photoUrl" alt="" class="photo">
+                    <img *ngIf="p.preview" [src]="p.preview" class="photo">
                 </div>
-            </div>
-            <div class="add-new-photo" (click)="pushPhoto()" *ngIf="photoCount<=6">
-                <i class="fas fa-plus-square"></i>
+                <input id="photo-{{i}}" type="file" (change)="onFileChange($event, i)" accept="image/*" hidden>
+                <div class="add-new-photo" *ngIf="!p.preview" (click)="triggerFileInput(i)">
+                    <i class="fas fa-plus-square"></i>
+                </div>
             </div>
         </div>
         <div class="form-align">
+            <div class="discount-top" [ngClass]="{'green-background':discountedPercentage>0,'red-background':discountedPercentage<0}">
+                <p *ngIf="discountedPercentage>0">-</p>
+                {{discountedPercentage}}%
+            </div>
             <div class="input-group">
                 <div class="form-control-group">
                     <label class="form-control-label">დასახელება</label>
-                    <input type="text" class="form-control" placeholder="მაგ: ჭადრაკი">
+                    <input type="text" class="form-control" placeholder="მაგ: ჭადრაკი" [(ngModel)]="title">
                 </div>
                 <div class="form-control-group">
                     <label class="form-control-label">პროდუქტის ტიპი</label>
-                    <select name=""  class="form-control select-control" id="">
+                    <select name=""  class="form-control select-control" id="" [(ngModel)]="productType">
                         <option value=""></option>
-                        <option value="">ჭადრაკი</option>
-                        <option value="">საათი</option>
-                        <option value="">ჭადრაკი</option>
+                        <option value="ჭადრაკი">ჭადრაკი</option>
+                        <option value="საათი">საათი</option>
+                        <option value="ვაზა">ვაზა</option>
                     </select>
                 </div>
                 <div class="form-control-group">
                     <label class="form-control-label">ფასი</label>
-                    <input type="text" class="form-control" placeholder="₾">
+                    <input type="number" class="form-control" placeholder="₾" (input)="discountAmountChangeDetection()" [(ngModel)]="price">
                 </div>
                 <div class="form-control-group">
                     <label class="form-control-label">ფასდაკლება</label>
-                    <input type="text" class="form-control" placeholder="₾">
+                    <input type="number" class="form-control" placeholder="₾" (input)="discountAmountChangeDetection()" [(ngModel)]="discountedPrice">
                 </div>
                 <div class="form-control-group">
                     <label class="form-control-label">რაოდენობა მარაგში</label>
-                    <input type="text" class="form-control" placeholder="">
+                    <input type="number" class="form-control" placeholder="" [(ngModel)]="quantity">
                 </div>
             </div>
             <div class="description-group">
                 <label class="form-control-label">პროდუქტის აღწერა</label>
-                <textarea name="" id="" class="description"></textarea>
+                <textarea name="" id="" class="description" [(ngModel)]="description"></textarea >
             </div>
-            <button class="noselect">
+            <button class="noselect" (click)="sendApplicationtoBackend()">
                 <span class="text">ატვირთვა </span>
                 <span class="icon">
                 <i class="fas fa-cloud-upload-alt"></i>
