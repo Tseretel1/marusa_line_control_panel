@@ -1,15 +1,18 @@
-import { Component, Input } from '@angular/core';
-import { Posts } from '../../../pages/posts/posts.component';
+import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { AppRoutes } from '../../AppRoutes/AppRoutes';
+import { GetPost } from '../../services/post.service';
 @Component({
   selector: 'app-photo-album',
   imports: [CommonModule,RouterLink],
   templateUrl: './photo-album.component.html',
   styleUrl: './photo-album.component.scss'
 })
-export class PhotoAlbumComponent {
+export class PhotoAlbumComponent implements OnInit{
+  @Input() posts!:GetPost;
   AppRoutes=AppRoutes;
- @Input() photos!:Posts;
+  ngOnInit(): void {
+    console.log(this.posts)
+  }
 }

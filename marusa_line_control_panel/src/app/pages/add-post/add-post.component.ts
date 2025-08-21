@@ -1,7 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import * as AOS from 'aos'
-import { Posts } from '../posts/posts.component';
 import { Observable, forkJoin, tap,} from 'rxjs';
 import { PostService } from '../../shared/services/post.service';
 import { FormsModule } from '@angular/forms';
@@ -27,14 +26,31 @@ export class AddPostComponent implements OnInit{
     });
   }
 
-  title:string = '';
-  productType:string = '';
-  price!:number;
-  discountedPrice!:number;
-  description:string = '';
-  quantity!:number;
-  photos:photo [] = [];
-    
+  title: string = '';
+  productType: string = '';
+  price!: number;
+  discountedPrice!: number;
+  description: string = '';
+  quantity!: number;
+  photos: Insertphoto[] = [];
+  InsertPhotos: Insertphoto[] = [];
+
+  validatedata(): any {
+    if (this.title != '' && this.productType != '' && this.price != 0) {
+      const InsertPost: InsertPost = {
+        title: this.title,
+        productType: this.productType,
+        price: this.price,
+        discountedPrice: this.discountedPrice,
+        description: this.description,
+        quantity: this.quantity,
+        photos: [],
+      };
+      return InsertPost;
+    }
+    return null;
+  }
+
   sendApplicationtoBackend() {
     if (this.title && this.productType && this.price > 0) {
       this.uploadAllImages().subscribe({
@@ -46,39 +62,51 @@ export class AddPostComponent implements OnInit{
             discountedPrice: this.discountedPrice,
             description: this.description,
             quantity: this.quantity,
-            photos: this.photos 
+            photos: this.InsertPhotos,
           };
-          Swal.fire({
-            icon:'success',
-            timer:3000,
-            showConfirmButton:true,
-            confirmButtonText: 'ოქეი',
-            confirmButtonColor:'green',
-            title:'პოსტი წარმატებით დაემატა!',
-          }).then((results)=>{
-            window.location.reload();
-          })
-          setTimeout(() => {
-            window.location.reload();
-          }, 3000);
-          console.log("Ready to send:", InsertPost);
+          console.log(InsertPost);
+          this.postService.addPost(InsertPost).subscribe(
+            (resp) => {
+              if (resp != null) {
+                Swal.fire({
+                  icon: 'success',
+                  timer: 3000,
+                  showConfirmButton: true,
+                  confirmButtonText: 'ოქეი',
+                  confirmButtonColor: 'green',
+                  title: 'პოსტი წარმატებით დაემატა!',
+                }).then((results) => {
+                  // window.location.reload();
+                });
+                setTimeout(() => {
+                  // window.location.reload();
+                }, 3000);
+              }
+            },
+            (error) => {
+              console.error(error);
+            }
+          );
         },
         error: (err) => {
-          console.error("Upload failed:", err);
-        }
+          console.error('Upload failed:', err);
+        },
       });
-    } 
-    else {
-      console.warn("Validation failed!");
+    } else {
+      console.warn('Validation failed!');
     }
   }
 
-  uploadPhotos: { id: number; preview?: string | ArrayBuffer | null; file?: File | null }[] = [
-    { id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }, { id: 5 }, { id: 6 }
-  ];
+  uploadPhotos: {
+    id: number;
+    preview?: string | ArrayBuffer | null;
+    file?: File | null;
+  }[] = [{ id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }, { id: 5 }, { id: 6 }];
 
   triggerFileInput(index: number): void {
-    const fileInput = document.getElementById('photo-' + index) as HTMLInputElement;
+    const fileInput = document.getElementById(
+      'photo-' + index
+    ) as HTMLInputElement;
     fileInput.click();
   }
 
@@ -99,12 +127,30 @@ export class AddPostComponent implements OnInit{
     }
   }
 
+  discountedPercentage: number = 0;
+  discountAmountChangeDetection() {
+    this.discountedPercentage =
+      ((this.price - this.discountedPrice) / this.price) * 100;
+    this.discountedPercentage = Math.round(this.discountedPercentage);
+  }
   removePhoto(id: number) {
-    const photo = this.uploadPhotos.find(p => p.id === id);
-    if (photo) {
-      photo.file = null;
-      photo.preview = null;
-    }
+    Swal.fire({
+      showConfirmButton: true,
+      showCancelButton: true,
+      cancelButtonText: 'არა',
+      cancelButtonColor: 'red',
+      confirmButtonText: 'დიახ',
+      confirmButtonColor: 'green',
+      title: 'ნამდვილად გსურთ ფოტოს წაშლა?',
+    }).then((results) => {
+      if (results.isConfirmed) {
+        const photo = this.uploadPhotos.find((p) => p.id === id);
+        if (photo) {
+          photo.file = null;
+          photo.preview = null;
+        }
+      }
+    });
   }
 
   uploadAllImages(): Observable<any[]> {
@@ -113,7 +159,10 @@ export class AddPostComponent implements OnInit{
       if (p.file) {
         const upload$ = this.postService.uploadImage(p.file).pipe(
           tap((response: any) => {
-            this.photos.push(response.secure_url);
+            const photo : Insertphoto={
+              photoUrl :response.secure_url
+            }
+            this.InsertPhotos.push(photo);
           })
         );
         uploads.push(upload$);
@@ -121,23 +170,17 @@ export class AddPostComponent implements OnInit{
     });
     return forkJoin(uploads);
   }
- discountedPercentage:number =0;  
-  discountAmountChangeDetection(){
-    this.discountedPercentage = ((this.price - this.discountedPrice) / this.price) * 100;
-    this.discountedPercentage = Math.round(this.discountedPercentage);
-  }
 }
 
-
-export interface InsertPost{
-  title:string;
-  productType:string;
-  description:string;
-  price:number;
-  discountedPrice:number;
-  quantity:number;
-  photos:photo[];
+export interface InsertPost {
+  title: string;
+  productType: string;
+  description: string;
+  price: number;
+  discountedPrice: number;
+  quantity: number;
+  photos: Insertphoto[];
 }
-export interface photo{
-  photoUrl:string;
+export interface Insertphoto {
+  photoUrl: string;
 }

@@ -20,9 +20,9 @@
             </thead>
             <tbody>
                 <tr>
-                    <td>{{cards.length}}</td>
+                    <!-- <td>{{cards.length}}</td>
                     <td>{{viewCount}}</td>
-                    <td>{{likeCount}}</td>
+                    <td>{{likeCount}}</td> -->
                 </tr>
             </tbody>
         </table>
@@ -31,11 +31,11 @@
 </div>
 <div class="gallery-align">
     <div class="photo-align">
-        <ng-container *ngFor="let p of cards;let i = index" >
+        <ng-container *ngFor="let p of posts;let i = index" >
             <div *ngIf="i==0" class="add-new-post" [routerLink]="AppRoutes.addPosts" >
                 <i class="fas fa-plus-square"></i>
             </div>
-            <app-photo-album [photos]="p" class="album" data-aos="fade-up"></app-photo-album>
+            <app-photo-album [posts]="p" class="album" data-aos="fade-up"></app-photo-album>
         </ng-container>
     </div>
 </div>

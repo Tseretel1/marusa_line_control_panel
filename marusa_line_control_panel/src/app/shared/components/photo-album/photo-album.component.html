@@ -1,18 +1,19 @@
 <div class="photo-container" >
     <div class="information-align">
         <div class="text-align">
-            <b class="title-price" *ngIf="photos.discountprice==null"> 
+            <b class="title-price" *ngIf="posts.discountedPrice==null"> 
                 <b class="title">
-                    {{photos.name}}
+                    {{posts.title}}
                 </b>
-                <p>{{photos.price}}₾</p></b>
-                    <b class="title-price" *ngIf="photos.discountprice!=null">
+              <p>{{posts.price}}₾</p>
+            </b>
+            <b class="title-price" *ngIf="posts.discountedPrice!=null">
                 <b class="title">
-                    {{photos.name}}
+                    {{posts.title}}
                 </b>
                 <div style="display: flex; align-items: center;gap: 10px;">
-                    <p  class="discounted-price">{{photos.price}}₾</p>
-                    <p>{{photos.discountprice}}₾</p>
+                    <p  class="discounted-price">{{posts.price}}₾</p>
+                    <p>{{posts.discountedPrice}}₾</p>
                 </div>
             </b>
             <div class="learn-more-align">
@@ -21,13 +22,13 @@
                 <p class="description">
                 </p>
                 <div class="like-learn-more">
-                    <p class="likes">{{photos.viewCount}} <i class="fas fa-heart"></i></p>
-                    <button class="button" [routerLink]="AppRoutes.editPosts+photos.id">
+                    <p class="likes">{{posts.likeCount}} <i class="fas fa-heart"></i></p>
+                    <button class="button" [routerLink]="AppRoutes.editPosts+posts.id">
                         <i class="fas fa-edit"></i> 
                     </button>
                 </div>
             </div>
         </div>
     </div>
-    <img [src]="photos.photoUrl" alt="" class="photo">
+    <img [src]="posts.photos[0].photoUrl" alt="" class="photo">
 </div>
