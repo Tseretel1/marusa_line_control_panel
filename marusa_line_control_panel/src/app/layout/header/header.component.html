@@ -11,7 +11,10 @@
             <span class="nav-link" [routerLink]="AppRoutes.posts" routerLinkActive="active-link" >
                 <i class="fas fa-camera"></i>
                 <b>პოსტები</b> </span>
-            <span class="nav-link" routerLinkActive="active-link" ><b><i class="fas fa-address-book"></i> შეკვეთები</b> </span>
+            <span class="nav-link" routerLinkActive="active-link"  [routerLink]="AppRoutes.orders">
+                <i class="fas fa-address-book"></i> 
+                <b>შეკვეთები</b> 
+            </span>
         </div>
         <div class="burger-icon-align" >
             <span class="nav-link" routerLinkActive="active-link" (click)="openSidenav()"><i class="fas fa-bars"></i></span>
@@ -28,7 +31,10 @@
         </div>
         <div class="nav-center">
             <span class="nav-link" routerLinkActive="active-link" [routerLink]="AppRoutes.posts"><i class="fas fa-shopping-cart"></i><b>პოსტები</b> </span>
-            <span class="nav-link" routerLinkActive="active-link" ><b><i class="fas fa-address-book"></i> შეკვეთები</b> </span>
+            <span class="nav-link" routerLinkActive="active-link"  [routerLink]="AppRoutes.orders">
+                <i class="fas fa-address-book"></i> 
+                <b>შეკვეთები</b> 
+            </span>
         </div>
     </div>
 </div>
