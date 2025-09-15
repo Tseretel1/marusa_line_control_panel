@@ -30,13 +30,13 @@ export class OrdersComponent implements OnInit{
       {
         id: 1,
         photoId: 101,
-        photoUrl: "https://www.solidsmack.com/wp-content/uploads/2019/06/epoxy-resin-chessset-00.jpg",
+        photoUrl: "https://scontent.ftbs5-2.fna.fbcdn.net/v/t51.82787-15/532018856_17853764127507299_7763299281408285407_n.jpg?stp=dst-jpegr_s600x600_tt6&_nc_cat=103&ccb=1-7&_nc_sid=127cfc&_nc_ohc=7EpVcaMUvKMQ7kNvwEnvo4i&_nc_oc=Adk4lRBQbS1Hj3B5Wfki8zs6s9uKgdLlrOqUndsIGYVu8x_ycXgM0Fx5CkOe88YuHiM&_nc_zt=23&se=-1&_nc_ht=scontent.ftbs5-2.fna&_nc_gid=XeFKtfHCgKgGtECIXzaZwQ&oh=00_AfWJMLjnao8-ubGq-SJszWCePMP0j6N16VN2V5dWh7EbHg&oe=68A918E1",
         postId: 1
       },
       {
         id: 2,
         photoId: 102,
-        photoUrl: "https://www.solidsmack.com/wp-content/uploads/2019/06/epoxy-resin-chessset-00.jpg",
+        photoUrl: "https://scontent.ftbs5-2.fna.fbcdn.net/v/t51.82787-15/524396955_17851591905507299_3175430878758152086_n.jpg?stp=dst-jpegr_s600x600_tt6&_nc_cat=104&ccb=1-7&_nc_sid=127cfc&_nc_ohc=gJ54qIeVbQsQ7kNvwEc5bls&_nc_oc=Adnf9AVmjCJw1mpqkhlDIia-YlV8ZSgF1uxMMdiEnXhjNfwd37Hs7oqvfUG0NWX8Ncg&_nc_zt=23&se=-1&_nc_ht=scontent.ftbs5-2.fna&_nc_gid=uHjOrDPNS5fWQmJHodGSvQ&oh=00_AfVsuKSbCF6PiyhJqsgMPgKWljLoQGiS5cKuq6fiAWpcqA&oe=68A92AE4",
         postId: 1
       }
     ]

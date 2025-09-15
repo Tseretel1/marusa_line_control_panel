@@ -6,17 +6,26 @@
         <div class="order-card-align" >
             <div class="order-card" *ngFor="let o of RandomOrdersObject.orders">
                 <div class="order-details">
-                    <div class="user">
-                        <b class="user-title">მომხმარებელი</b>
-                        <div class="user-info">
-                          <p>{{o.user.name}}</p>
-                          <p>{{o.user.lastName}}</p>
+                    <div class="order">
+                        <p class="">{{o.post.title}}</p>
+                        <div class="post-container">
+                             <img [src]="o.post.photos[0].photoUrl" class="post-photo" alt="">
                         </div>
                     </div>
+                    <div class="user">
+                          <b class="user-title">
+                            მომხმარებელი  
+                            <div class="user-photo-container">
+                              <img [src]="o.post.photos[0].photoUrl" class="user-photo" alt="">
+                            </div></b>
+                          <p>სახელი : <b>{{o.user.name}}</b> </p>
+                          <p>გვარი : <b>{{o.user.lastName}}</b> </p>
+                          <p>მობილური : <b>{{o.user.phoneNumber}}</b> </p>
+                          <p>ლოკაცია : <b>{{o.user.location}}</b> </p>
+                          <button>პროფილის ნახვა</button>
+                    </div>
                 </div>
-                <div class="post-container">
-                    <app-photo-album [posts]="o.post"></app-photo-album>
-                </div>
+                
             </div>
         </div>
     </div>
