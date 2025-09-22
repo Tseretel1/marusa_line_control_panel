@@ -26,11 +26,9 @@
                 </div>
                 <div class="form-control-group">
                     <label class="form-control-label">პროდუქტის ტიპი</label>
-                    <select name=""  class="form-control select-control" id="" [(ngModel)]="productType">
-                        <option value=""></option>
-                        <option value="ჭადრაკი">ჭადრაკი</option>
-                        <option value="საათი">საათი</option>
-                        <option value="ვაზა">ვაზა</option>
+                    <select name=""  class="form-control select-control" id="" [(ngModel)]="productTypeId">
+                        <option value="0"></option>
+                        <option *ngFor="let i of productTypesList" [value]="i.id">{{i.productType}}</option>
                     </select>
                 </div>
                 <div class="form-control-group">
@@ -38,7 +36,7 @@
                     <input type="number" class="form-control" placeholder="₾" (input)="discountAmountChangeDetection()" [(ngModel)]="price">
                 </div>
                 <div class="form-control-group">
-                    <label class="form-control-label">ფასდაკლება</label>
+                    <label class="form-control-label">ფასდაკლებული ფასი</label>
                     <input type="number" class="form-control" placeholder="₾" (input)="discountAmountChangeDetection()" [(ngModel)]="discountedPrice">
                 </div>
                 <div class="form-control-group">

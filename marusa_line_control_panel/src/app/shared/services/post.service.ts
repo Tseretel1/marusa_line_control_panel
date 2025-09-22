@@ -8,7 +8,7 @@ import { InsertPost } from '../../pages/edit-post/edit-post.component';
 })
 export class PostService {
 
-  private apiUrl = 'https://192.168.1.14:7174/';
+  private apiUrl = 'https://localhost:7173/';
   constructor(private http:HttpClient)
   {
 
@@ -44,9 +44,11 @@ export class PostService {
   }
 
   deletePhoto(PhotoId:number): Observable<any> {
-    return this.http.post<any>(this.apiUrl + `post/delete-photoId=${PhotoId}`,{});
+    return this.http.post<any>(this.apiUrl + `post/delete-photo?photoId=${PhotoId}`,{});
   }
-  
+  getProductTypes(): Observable<ProductTypes[]> {
+    return this.http.get<ProductTypes[]>(this.apiUrl+'post/get-product-types');
+  }
 
 
 
@@ -63,7 +65,7 @@ export interface GetPost {
   title: string;
   description: string;
   price: number;
-  productType:string;
+  productTypeId:number;
   discountedPrice: number;
   photoUrl?: string | null; 
   photoId?: number | null;  
@@ -71,4 +73,9 @@ export interface GetPost {
   likeCount: number;        
   photos: GetPhoto[];
   quantity: number;
+}
+
+export interface ProductTypes{
+ id:number;
+ productType:string;
 }

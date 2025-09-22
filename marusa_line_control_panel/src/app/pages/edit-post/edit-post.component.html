@@ -1,17 +1,17 @@
 <div class="center-component">
     <div class="component">
         <div class="photo-align">
-               <div *ngFor="let p of uploadPhotos; let i = index" class="ng-container" data-aos="fade-in">
-                <button class="remove-photo" *ngIf="p.preview" (click)="removePhoto(p.id)">
+            <div *ngFor="let p of uploadPhotos; let i = index" class="ng-container" data-aos="fade-in">
+                <!-- <div class="photo-container" *ngIf="i==0" (click)="triggerFileInput(i)">
+                    <i class="fas fa-plus-square"></i>
+                </div> -->
+                <button class="remove-photo"  (click)="removePhoto(p.id)">
                     <i class="fas fa-times"></i>
                 </button>
                 <div class="photo-container">
-                    <img *ngIf="p.preview" [src]="p.preview" class="photo">
+                    <img [src]="p.preview" class="photo">
                 </div>
                 <input id="photo-{{i}}" type="file" (change)="onFileChange($event, i)" accept="image/*" hidden>
-                <div class="add-new-photo" *ngIf="!p.preview" (click)="triggerFileInput(i)">
-                    <i class="fas fa-plus-square"></i>
-                </div>
             </div>
         </div>
         <div class="form-align">
@@ -26,11 +26,9 @@
                 </div>
                 <div class="form-control-group">
                     <label class="form-control-label">პროდუქტის ტიპი</label>
-                    <select name=""  class="form-control select-control" id=""  [(ngModel)]="productType">
-                        <option value=""></option>
-                        <option value="ჭადრაკი">ჭადრაკი</option>
-                        <option value="საათი">საათი</option>
-                        <option value="ვაზა">ვაზა</option>
+                    <select name=""  class="form-control select-control" id=""  [(ngModel)]="productTypeId">
+                        <option value="0"></option>
+                        <option *ngFor="let i of productTypesList" [value]="i.id">{{i.productType}}</option>
                     </select>
                 </div>
                 <div class="form-control-group"  >

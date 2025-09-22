@@ -8,6 +8,7 @@ import {
   GetPhoto,
   GetPost,
   PostService,
+  ProductTypes,
 } from '../../shared/services/post.service';
 import Swal from 'sweetalert2';
 
@@ -27,6 +28,15 @@ export class EditPostComponent {
     this.postId = Number(id);
   }
 
+  productTypesList :ProductTypes[]= [];
+  getProductTypes(){
+    this.postService.getProductTypes().subscribe(
+      (resp)=>{
+        this.productTypesList = resp;
+      }
+    )
+  }
+
   photoId: number = 1;
   ngOnInit(): void {
     AOS.init({
@@ -34,65 +44,68 @@ export class EditPostComponent {
       easing: 'ease-in-out',
       once: false,
     });
+    this.getProductTypes();
     this.getPost();
-    this.discountAmountChangeDetection();
   }
+  uploadPhotos: {
+    id: number;
+    preview?: string | ArrayBuffer | null;
+    file?: File | null;
+  }[] = [];
 
   getPost() {
     this.postService.getPostWithId(this.postId).subscribe((resp) => {
-      console.log(resp)
       this.posts = resp[0];
       this.title = this.posts.title;
       this.description = this.posts.description;
-      this.productType = this.posts.productType;
+      this.productTypeId = this.posts.productTypeId;
       this.price = this.posts.price;
       this.discountedPrice = this.posts.discountedPrice;
       this.photos = this.posts.photos;
-      this.uploadPhotos.forEach((item, index) => {
-        if (this.photos[index]) {
-          item.preview = this.photos[index].photoUrl;
-        }
-      });
+      console.log(this.photos);
+      this.uploadPhotos = this.photos.map(item => ({
+        id: item.photoId!,                   
+        preview: item.photoUrl ?? null, 
+        file: null
+      }));
       this.quantity = this.posts.quantity;
-      if (
-        this.posts.discountedPrice != null &&
-        this.posts.discountedPrice > 0
-      ) {
+      if (this.posts.discountedPrice != null &&this.posts.discountedPrice > 0) {
+        this.discountAmountChangeDetection();
       }
     });
   }
   title: string = '';
-  productType: string = '';
+  productTypeId: number = 0;
   price!: number;
   discountedPrice!: number;
   description: string = '';
   quantity!: number;
   photos: GetPhoto[] = [];
 
-  validatedata(): any {
-    if (this.title != '' && this.productType != '' && this.price != 0) {
-      const InsertPost: InsertPost = {
-        title: this.title,
-        productType: this.productType,
-        price: this.price,
-        discountedPrice: this.discountedPrice,
-        description: this.description,
-        quantity: this.quantity,
-        photos: [],
-      };
-      return InsertPost;
-    }
-    return null;
-  }
+  // validatedata(): any {
+  //   if (this.title != '' && this.productTypeId != 0 && this.price != 0) {
+  //     const InsertPost: InsertPost = {
+  //       title: this.title,
+  //       productTypeId: this.productTypeId,
+  //       price: this.price,
+  //       discountedPrice: this.discountedPrice,
+  //       description: this.description,
+  //       quantity: this.quantity,
+  //       photos: [],
+  //     };
+  //     return InsertPost;
+  //   }
+  //   return null;
+  // }
 
   sendApplicationtoBackend() {
-    if (this.title && this.productType && this.price > 0) {
+    if (this.title && this.productTypeId && this.price > 0) {
       this.uploadAllImages().subscribe({
         next: (results) => {
           const InsertPost: InsertPost = {
             Id : this.postId,
             title: this.title,
-            productType: this.productType,
+            productTypeId: this.productTypeId,
             price: this.price,
             discountedPrice: this.discountedPrice,
             description: this.description,
@@ -132,11 +145,7 @@ export class EditPostComponent {
     }
   }
 
-  uploadPhotos: {
-    id: number;
-    preview?: string | ArrayBuffer | null;
-    file?: File | null;
-  }[] = [];
+
 
   triggerFileInput(index: number): void {
     const fileInput = document.getElementById(
@@ -179,14 +188,10 @@ export class EditPostComponent {
       title: 'ნამდვილად გსურთ ფოტოს წაშლა?',
     }).then((results) => {
       if (results.isConfirmed) {
-         const photo = this.uploadPhotos.find((p) => p.id === id);
-         if (photo) {
-             photo.file = null;
-             photo.preview = null;
-             this.postService.deletePhoto(photo.id).subscribe((resp)=>{
+         this.uploadPhotos = this.uploadPhotos.filter(p => p.id !== id);
+             this.postService.deletePhoto(id).subscribe((resp)=>{
                 console.log(resp);
              })        
-         }
       }
     });
   }
@@ -213,7 +218,7 @@ export class EditPostComponent {
 export interface InsertPost {
   Id?:number;
   title: string;
-  productType: string;
+  productTypeId: number;
   description: string;
   price: number;
   discountedPrice: number;

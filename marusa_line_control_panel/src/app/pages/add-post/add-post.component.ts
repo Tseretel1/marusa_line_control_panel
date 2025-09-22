@@ -2,9 +2,11 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import * as AOS from 'aos'
 import { Observable, forkJoin, tap,} from 'rxjs';
-import { PostService } from '../../shared/services/post.service';
+import { PostService, ProductTypes } from '../../shared/services/post.service';
 import { FormsModule } from '@angular/forms';
 import Swal from 'sweetalert2';
+import { Router } from '@angular/router';
+import { AppRoutes } from '../../shared/AppRoutes/AppRoutes';
 @Component({
   selector: 'app-add-post',
   imports: [CommonModule,FormsModule],
@@ -15,7 +17,8 @@ import Swal from 'sweetalert2';
 
 export class AddPostComponent implements OnInit{
 
-  constructor(private postService:PostService,){
+  AppRoutes = AppRoutes;
+  constructor(private postService:PostService,private router: Router){
   }
 
   ngOnInit(): void {
@@ -24,10 +27,18 @@ export class AddPostComponent implements OnInit{
       easing: 'ease-in-out',
       once: false, 
     });
+    this.getProductTypes();
   }
-
+  productTypesList :ProductTypes[]= [];
+  getProductTypes(){
+    this.postService.getProductTypes().subscribe(
+      (resp)=>{
+        this.productTypesList = resp;
+      }
+    )
+  }
   title: string = '';
-  productType: string = '';
+  productTypeId: number = 0;
   price!: number;
   discountedPrice!: number;
   description: string = '';
@@ -36,10 +47,10 @@ export class AddPostComponent implements OnInit{
   InsertPhotos: Insertphoto[] = [];
 
   validatedata(): any {
-    if (this.title != '' && this.productType != '' && this.price != 0) {
+    if (this.title != '' && this.productTypeId != 0 && this.price != 0) {
       const InsertPost: InsertPost = {
         title: this.title,
-        productType: this.productType,
+        productTypeId: this.productTypeId,
         price: this.price,
         discountedPrice: this.discountedPrice,
         description: this.description,
@@ -52,12 +63,12 @@ export class AddPostComponent implements OnInit{
   }
 
   sendApplicationtoBackend() {
-    if (this.title && this.productType && this.price > 0) {
+    if (this.title && this.productTypeId && this.price > 0) {
       this.uploadAllImages().subscribe({
         next: (results) => {
           const InsertPost: InsertPost = {
             title: this.title,
-            productType: this.productType,
+            productTypeId:Number(this.productTypeId),
             price: this.price,
             discountedPrice: this.discountedPrice,
             description: this.description,
@@ -76,7 +87,7 @@ export class AddPostComponent implements OnInit{
                   confirmButtonColor: 'green',
                   title: 'პოსტი წარმატებით დაემატა!',
                 }).then((results) => {
-                  // window.location.reload();
+                  this.router.navigate([this.AppRoutes.posts])
                 });
                 setTimeout(() => {
                   // window.location.reload();
@@ -134,6 +145,7 @@ export class AddPostComponent implements OnInit{
     this.discountedPercentage = Math.round(this.discountedPercentage);
   }
   removePhoto(id: number) {
+    console.log(id);
     Swal.fire({
       showConfirmButton: true,
       showCancelButton: true,
@@ -174,7 +186,7 @@ export class AddPostComponent implements OnInit{
 
 export interface InsertPost {
   title: string;
-  productType: string;
+  productTypeId: number;
   description: string;
   price: number;
   discountedPrice: number;

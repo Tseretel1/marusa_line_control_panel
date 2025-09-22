@@ -1,5 +1,5 @@
 <div class="photo-container" >
-    <div class="information-align">
+    <div class="information-align" [routerLink]="AppRoutes.editPosts+posts.id">
         <div class="text-align">
             <b class="title-price" *ngIf="posts.discountedPrice==null"> 
                 <b class="title">
@@ -16,18 +16,6 @@
                     <p>{{posts.discountedPrice}}₾</p>
                 </div>
             </b>
-            <div class="learn-more-align">
-            </div>
-            <div class="description-price">
-                <p class="description">
-                </p>
-                <div class="like-learn-more">
-                    <p class="likes">{{posts.likeCount}} <i class="fas fa-heart"></i></p>
-                    <button class="button" [routerLink]="AppRoutes.editPosts+posts.id">
-                        <i class="fas fa-edit"></i> 
-                    </button>
-                </div>
-            </div>
         </div>
     </div>
     <img [src]="posts.photos[0].photoUrl" alt="" class="photo">

@@ -20,7 +20,7 @@ export class OrdersComponent implements OnInit{
     description: "High-quality over-ear headphones with noise cancellation and 20 hours battery life.",
     price: 120,
     discountedPrice: 99,
-    productType: "Electronics",
+    productTypeId: 1,
     photoUrl: "https://example.com/photos/headphones-main.jpg",
     photoId: 101,
     postId: 1,
