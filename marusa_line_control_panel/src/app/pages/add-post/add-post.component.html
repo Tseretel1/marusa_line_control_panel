@@ -8,10 +8,10 @@
                 <div class="photo-container">
                     <img *ngIf="p.preview" [src]="p.preview" class="photo">
                 </div>
-                <input id="photo-{{i}}" type="file" (change)="onFileChange($event, i)" accept="image/*" hidden>
-                <div class="add-new-photo" *ngIf="!p.preview" (click)="triggerFileInput(i)">
-                    <i class="fas fa-plus-square"></i>
-                </div>
+            </div>
+            <input id="photoinput" type="file" (change)="onFileChange($event)" accept="image/*" hidden>
+            <div class="square-container" (click)="triggerFileInput()">
+                <i class="fas fa-plus-square"></i>
             </div>
         </div>
         <div class="form-align">

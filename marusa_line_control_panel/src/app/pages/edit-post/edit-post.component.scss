@@ -11,13 +11,28 @@
         display: grid;
         grid-template-columns: repeat(2,1fr);
         gap: 20px;
+        height: auto;
         .photo-align{
             display: grid;
             grid-template-columns: repeat(3,1fr);
             width: 100%;
             gap: 15px;
-            height: 0;
+            .square-container{
+                width: 100%;
+                height: 250px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                border: 1px solid white;
+                cursor: pointer;
+                .fas{
+                    scale: 2;
+                }
+            }
             .ng-container{
+                border: 1px solid white;
+                position: relative;
+                height: 250px;
                 .add-new-photo{
                     width: 100%;
                     height: 100%;
@@ -33,9 +48,6 @@
                         transition: 0.3s all ease-in-out;
                     }
                 }
-                border: 1px solid white;
-                position: relative;
-                height: 250px;
                 .photo-container{
                     width: 100%;
                     display: flex;
@@ -47,6 +59,8 @@
                         width: 100%;
                         height: 100%;
                         object-fit: cover;
+                    }
+                    .fa-plus-square{
                     }
                 }
                 .remove-photo{
@@ -84,8 +98,28 @@
         background-color: rgba(0, 0, 0, 0.582);
         padding: 10px;
         gap: 30px;
-        justify-content: space-between;
         position: relative;
+        .remove-revert-align{
+            width: 100%;
+            display:flex;
+            justify-content: flex-end;
+            .btn{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            .remove{
+                background-color: red;
+                color: white;
+                font-weight: bolder;
+            }
+            .revert{
+                background-color:green;
+                color: white;
+                font-weight: bolder;
+            }
+        }
+
         .discount-top{
             top: -25px;
             left: 20px;
@@ -260,6 +294,9 @@
     .center-component{
         .component{
             .photo-align{
+                .square-container{
+                  height: 150px;
+                }
                 .ng-container{
                     height: 150px;
                 }

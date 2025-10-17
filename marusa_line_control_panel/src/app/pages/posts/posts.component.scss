@@ -41,7 +41,7 @@
     .photo-align{
         width: 90%;
         display: grid;
-        grid-template-columns: repeat(4,1fr);
+        grid-template-columns: repeat(6,1fr);
         gap: 2px;
         .add-new-post{
             width: 100%;
@@ -52,7 +52,7 @@
             background-color: rgba(0, 0, 0, 0.582);
             backdrop-filter: blur(2px);
             cursor: pointer;
-            height: 450px;
+            height: 250px;
             transition: 0.3s all ease-in-out;
             .fas{
                 color: white;
@@ -69,7 +69,7 @@
         }
         .album{
             width: 100%;
-            height: 450px;
+            height: 250px;
         }
     }
 }
@@ -77,25 +77,26 @@
 @media screen and (max-width:1200px){
     .gallery-align{
         .photo-align{
-            grid-template-columns: repeat(3,1fr);
+            grid-template-columns: repeat(5,1fr);
         }
     }
 }
 @media screen and (max-width:850px){
     .gallery-align{
        .photo-align{
-        grid-template-columns: repeat(2,1fr);
+        grid-template-columns: repeat(4,1fr);
     }
   }
 }
 @media screen and (max-width:700px){
     .gallery-align{
         .photo-align{
+            grid-template-columns: repeat(3,1fr);
             .album{
-                height: 350px;
+                height: 250px;
             }
             .add-new-post{
-                height: 350px;
+                height: 250px;
             }
         }
     }
@@ -103,6 +104,7 @@
 @media screen and (max-width:550px){
     .gallery-align{
         .photo-align{
+            grid-template-columns: repeat(2,1fr);
             .album{
                 height: 250px;
             }

@@ -2,6 +2,7 @@ import { HttpClient, HttpParamsOptions } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { InsertPost } from '../../pages/edit-post/edit-post.component';
+import { UntypedFormBuilder } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root'
@@ -29,29 +30,35 @@ export class PostService {
 
 
   getPosts(): Observable<GetPost[]> {
-    return this.http.get<GetPost[]>(this.apiUrl+'post/get-posts');
+    return this.http.get<GetPost[]>(this.apiUrl+'Product/get-posts-for-adminpanel');
   }
   getPostWithId(id:number): Observable<any> {
-    return this.http.get<any>(this.apiUrl+`post/get-post-with-id?id=${id}`);
+    return this.http.get<any>(this.apiUrl+`Product/get-post-with-id?id=${id}`);
   }
 
   addPost(obj: InsertPost): Observable<any> {
-    return this.http.post<any>(this.apiUrl + `post/add-post`, obj);
+    return this.http.post<any>(this.apiUrl + `Product/add-post`, obj);
   }
 
   EditPost(obj: InsertPost): Observable<any> {
-    return this.http.post<any>(this.apiUrl + `post/edit-post`, obj);
+    return this.http.post<any>(this.apiUrl + `Product/edit-post`, obj);
   }
 
   deletePhoto(PhotoId:number): Observable<any> {
-    return this.http.post<any>(this.apiUrl + `post/delete-photo?photoId=${PhotoId}`,{});
+    return this.http.post<any>(this.apiUrl + `Product/delete-photo?photoId=${PhotoId}`,{});
   }
   getProductTypes(): Observable<ProductTypes[]> {
-    return this.http.get<ProductTypes[]>(this.apiUrl+'post/get-product-types');
+    return this.http.get<ProductTypes[]>(this.apiUrl+'Product/get-product-types');
   }
-
-
-
+  getTotalLikesCount(): Observable<number> {
+    return this.http.get<number>(this.apiUrl+'Product/get-like-count');
+  }
+  removePost(postId:number): Observable<number> {
+    return this.http.post<number>(this.apiUrl+`Product/remove-post?postid=${postId}`,{});
+  }
+  revertPost(postId:number): Observable<number> {
+    return this.http.post<number>(this.apiUrl+`Product/revert-post?postid=${postId}`,{});
+  }
 }
 export interface GetPhoto {
   id?: number;  
@@ -73,6 +80,7 @@ export interface GetPost {
   likeCount: number;        
   photos: GetPhoto[];
   quantity: number;
+  dateDeleted:string|null;
 }
 
 export interface ProductTypes{

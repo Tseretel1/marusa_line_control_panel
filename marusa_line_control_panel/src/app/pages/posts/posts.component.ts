@@ -17,11 +17,16 @@ export class PostsComponent implements OnInit{
   
   AppRoutes=AppRoutes;
   posts: GetPost[] = [];
+  likeCount:number = 0;
   constructor(private postService:PostService){
     this.postService.getPosts().subscribe(
       (resp)=>{
         this.posts = resp;
-        console.log(resp)
+      }
+    )
+    this.postService.getTotalLikesCount().subscribe(
+      (resp)=>{
+        this.likeCount = resp;
       }
     )
   }
@@ -32,6 +37,4 @@ export class PostsComponent implements OnInit{
       once: false, 
     });
   }
-
-   
 }

@@ -47,15 +47,12 @@ export class EditPostComponent {
     this.getProductTypes();
     this.getPost();
   }
-  uploadPhotos: {
-    id: number;
-    preview?: string | ArrayBuffer | null;
-    file?: File | null;
-  }[] = [];
+
 
   getPost() {
     this.postService.getPostWithId(this.postId).subscribe((resp) => {
-      this.posts = resp[0];
+      console.log(resp)
+      this.posts = resp;
       this.title = this.posts.title;
       this.description = this.posts.description;
       this.productTypeId = this.posts.productTypeId;
@@ -98,78 +95,125 @@ export class EditPostComponent {
   //   return null;
   // }
 
-  sendApplicationtoBackend() {
-    if (this.title && this.productTypeId && this.price > 0) {
-      this.uploadAllImages().subscribe({
-        next: (results) => {
-          const InsertPost: InsertPost = {
-            Id : this.postId,
-            title: this.title,
-            productTypeId: this.productTypeId,
-            price: this.price,
-            discountedPrice: this.discountedPrice,
-            description: this.description,
-            quantity: this.quantity,
-            photos: this.InsertPhotos,
-          };
-          console.log(InsertPost);
-          this.postService.EditPost(InsertPost).subscribe(
-            (resp) => {
-              if (resp != null) {
-                Swal.fire({
-                  icon: 'success',
-                  timer: 3000,
-                  showConfirmButton: true,
-                  confirmButtonText: 'ოქეი',
-                  confirmButtonColor: 'green',
-                  title: 'პოსტი წარმატებით რედაქტირდა!',
-                }).then((results) => {
-                  // window.location.reload();
-                });
-                setTimeout(() => {
-                  // window.location.reload();
-                }, 3000);
-              }
-            },
-            (error) => {
-              console.error(error);
+
+    uploadPhotos: {
+    id: number;
+    preview?: string | ArrayBuffer | null;
+    file?: File | null;
+  }[] = [];
+
+   uploadPhotosTobackend: {
+    id: number;
+    preview?: string | ArrayBuffer | null;
+    file?: File | null;
+  }[] = [];
+  uploadAllImages(): Observable<any[]> {
+    const uploads: Observable<any>[] = [];
+    this.uploadPhotosTobackend.forEach((p, index) => {
+      if (p.file) {
+        const upload$ = this.postService.uploadImage(p.file).pipe(
+          tap((response: any) => {
+            const photo : Insertphoto={
+              photoUrl :response.secure_url
             }
-          );
-        },
-        error: (err) => {
-          console.error('Upload failed:', err);
-        },
-      });
-    } else {
-      console.warn('Validation failed!');
-    }
+            this.InsertPhotos.push(photo);
+          })
+        );
+        uploads.push(upload$);
+      }
+    });
+    return forkJoin(uploads);
   }
 
 
+sendApplicationtoBackend() {
+  if (!(this.title && this.productTypeId && this.price > 0)) {
+    console.warn('Validation failed!');
+    return;
+  }
+  const newFilesExist = this.uploadPhotos.some(p => p.file);
 
-  triggerFileInput(index: number): void {
+  if (newFilesExist) {
+    this.InsertPhotos = [];
+    this.uploadAllImages().subscribe({
+      next: () => {
+        this.submitPost();
+      },
+      error: (err) => {
+        console.error('Upload failed:', err);
+      }
+    });
+  } else {
+    this.submitPost();
+  }
+}
+private submitPost() {
+  const photosToSend = this.InsertPhotos.length
+    ? this.InsertPhotos
+    : this.uploadPhotosTobackend
+        .filter(p => p.preview) 
+        .map(p => ({ photoUrl: p.preview as string }));
+
+  const InsertPost: InsertPost = {
+    Id: this.postId,
+    title: this.title,
+    productTypeId: this.productTypeId,
+    price: this.price,
+    discountedPrice: this.discountedPrice,
+    description: this.description,
+    quantity: this.quantity,
+    photos: photosToSend,
+  };
+
+  this.postService.EditPost(InsertPost).subscribe(
+    (resp) => {
+      if (resp != null) {
+        Swal.fire({
+          icon: 'success',
+          timer: 3000,
+          showConfirmButton: true,
+          confirmButtonText: 'ოქეი',
+          confirmButtonColor: 'green',
+          title: 'პოსტი წარმატებით რედაქტირდა!',
+        });
+      }
+    },
+    (error) => {
+      console.error(error);
+    }
+  );
+}
+
+
+
+  triggerFileInput(): void {
     const fileInput = document.getElementById(
-      'photo-' + index
+      'photoinput'
     ) as HTMLInputElement;
     fileInput.click();
   }
 
-  onFileChange(event: Event, index: number) {
-    const input = event.target as HTMLInputElement;
-    if (input.files && input.files[0]) {
-      const file = input.files[0];
-      this.uploadPhotos[index].file = file;
+  onFileChange(event: Event) {
+  const input = event.target as HTMLInputElement;
+  if (input.files && input.files[0]) {
+    const file = input.files[0];
 
-      const reader = new FileReader();
-      reader.onload = () => {
-        this.uploadPhotos[index].preview = reader.result;
-      };
-      reader.readAsDataURL(file);
-    } else {
-      this.uploadPhotos[index].file = null;
-      this.uploadPhotos[index].preview = null;
-    }
+    const newPhoto: { id: number; preview: string | ArrayBuffer | null; file: File } = {
+      id: Date.now(),
+      file: file,
+      preview: null
+    };
+
+    const reader = new FileReader();
+    reader.onload = () => {
+      newPhoto.preview = reader.result;
+      this.uploadPhotos.push(newPhoto);
+      this.uploadPhotosTobackend.push(newPhoto);
+    };
+    reader.readAsDataURL(file);
   }
+  }
+
 
   discountedPercentage: number = 0;
   discountAmountChangeDetection() {
@@ -196,22 +240,24 @@ export class EditPostComponent {
     });
   }
 
-  uploadAllImages(): Observable<any[]> {
-    const uploads: Observable<any>[] = [];
-    this.uploadPhotos.forEach((p, index) => {
-      if (p.file) {
-        const upload$ = this.postService.uploadImage(p.file).pipe(
-          tap((response: any) => {
-            const photo : Insertphoto={
-              photoUrl :response.secure_url
-            }
-            this.InsertPhotos.push(photo);
-          })
-        );
-        uploads.push(upload$);
+
+  removePost(){
+    this.postService.removePost(this.postId).subscribe(
+      (resp)=>{
+        if(resp){
+          this.posts.dateDeleted = new Date().toString();
+        }
       }
-    });
-    return forkJoin(uploads);
+    )
+  }
+  revertPost(){
+    this.postService.revertPost(this.postId).subscribe(
+      (resp)=>{
+        if(resp){
+          this.posts.dateDeleted = null;
+        }
+      }
+    )
   }
 }
 

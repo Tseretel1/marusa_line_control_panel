@@ -26,6 +26,7 @@ export class OrdersComponent implements OnInit{
     postId: 1,
     likeCount: 57,
     quantity: 25,
+    dateDeleted :'',
     photos: [
       {
         id: 1,

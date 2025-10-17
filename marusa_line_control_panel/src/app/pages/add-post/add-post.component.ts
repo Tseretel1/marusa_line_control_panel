@@ -112,30 +112,33 @@ export class AddPostComponent implements OnInit{
     id: number;
     preview?: string | ArrayBuffer | null;
     file?: File | null;
-  }[] = [{ id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }, { id: 5 }, { id: 6 }];
+  }[] = [];
 
-  triggerFileInput(index: number): void {
+  triggerFileInput(): void {
     const fileInput = document.getElementById(
-      'photo-' + index
+      'photoinput'
     ) as HTMLInputElement;
     fileInput.click();
   }
 
-  onFileChange(event: Event, index: number) {
-    const input = event.target as HTMLInputElement;
-    if (input.files && input.files[0]) {
-      const file = input.files[0];
-      this.uploadPhotos[index].file = file;
+  onFileChange(event: Event) {
+  const input = event.target as HTMLInputElement;
+  if (input.files && input.files[0]) {
+    const file = input.files[0];
 
-      const reader = new FileReader();
-      reader.onload = () => {
-        this.uploadPhotos[index].preview = reader.result;
-      };
-      reader.readAsDataURL(file);
-    } else {
-      this.uploadPhotos[index].file = null;
-      this.uploadPhotos[index].preview = null;
-    }
+    const newPhoto: { id: number; preview: string | ArrayBuffer | null; file: File } = {
+      id: Date.now(),
+      file: file,
+      preview: null
+    };
+
+    const reader = new FileReader();
+    reader.onload = () => {
+      newPhoto.preview = reader.result;
+      this.uploadPhotos.push(newPhoto);
+    };
+    reader.readAsDataURL(file);
+  }
   }
 
   discountedPercentage: number = 0;

@@ -2,20 +2,24 @@
     <div class="component">
         <div class="photo-align">
             <div *ngFor="let p of uploadPhotos; let i = index" class="ng-container" data-aos="fade-in">
-                <!-- <div class="photo-container" *ngIf="i==0" (click)="triggerFileInput(i)">
-                    <i class="fas fa-plus-square"></i>
-                </div> -->
                 <button class="remove-photo"  (click)="removePhoto(p.id)">
                     <i class="fas fa-times"></i>
                 </button>
                 <div class="photo-container">
                     <img [src]="p.preview" class="photo">
                 </div>
-                <input id="photo-{{i}}" type="file" (change)="onFileChange($event, i)" accept="image/*" hidden>
             </div>
+            <div class="square-container"  (click)="triggerFileInput()">
+                <i class="fas fa-plus-square"></i>
+            </div>
+            <input id="photoinput" type="file" (change)="onFileChange($event)" accept="image/*" hidden>
         </div>
         <div class="form-align">
-           <div class="discount-top" [ngClass]="{'green-background':discountedPercentage>0,'red-background':discountedPercentage<0}">
+            <div class="remove-revert-align">
+              <button class="remove btn" *ngIf="posts.dateDeleted==null" (click)="removePost()">წაშლა</button>
+              <button class="revert btn" *ngIf="posts.dateDeleted" (click)="revertPost()">აღდგენა</button>
+            </div>
+            <div class="discount-top" [ngClass]="{'green-background':discountedPercentage>0,'red-background':discountedPercentage<0}">
                 <p *ngIf="discountedPercentage>0">-</p>
                 {{discountedPercentage}}%
             </div>

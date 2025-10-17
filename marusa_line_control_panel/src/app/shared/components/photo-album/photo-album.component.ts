@@ -11,8 +11,7 @@ import { GetPost } from '../../services/post.service';
 })
 export class PhotoAlbumComponent implements OnInit{
   @Input() posts!:GetPost;
-  AppRoutes=AppRoutes;
+  AppRoutes = AppRoutes;
   ngOnInit(): void {
-    console.log(this.posts)
   }
 }
