@@ -3,29 +3,61 @@
         <div class="title">
             <p>შეკვეთები</p>
         </div>
-        <div class="order-card-align" >
-            <div class="order-card" *ngFor="let o of RandomOrdersObject.orders">
-                <div class="order-details">
-                    <div class="order">
-                        <p class="">{{o.post.title}}</p>
-                        <div class="post-container">
-                             <img [src]="o.post.photos[0].photoUrl" class="post-photo" alt="">
-                        </div>
-                    </div>
-                    <div class="user">
-                          <b class="user-title">
-                            მომხმარებელი  
-                            <div class="user-photo-container">
-                              <img [src]="o.post.photos[0].photoUrl" class="user-photo" alt="">
-                            </div></b>
-                          <p>სახელი : <b>{{o.user.name}}</b> </p>
-                          <p>გვარი : <b>{{o.user.lastName}}</b> </p>
-                          <p>მობილური : <b>{{o.user.phoneNumber}}</b> </p>
-                          <p>ლოკაცია : <b>{{o.user.location}}</b> </p>
-                          <button>პროფილის ნახვა</button>
+        <div class="order-filter-align">
+            <div class="filters">
+                <div class="filter">
+                    <label for=""></label>
+                    <input type="number" class="search-input"[(ngModel)]="orderSearchNum" (change)="OrderSearch()">
+                    <div class="searchbutton" (click)="OrderSearch()">
+                        <i class="fas fa-search"></i>
                     </div>
                 </div>
-                
+                <div class="filter" [ngClass]="{'topay':!getOrderDto.IsPaid}" (click)="getPaidOrUnpaidOrders(false)">გადასახდელი</div>
+                <div class="filter" [ngClass]="{'ispayed':getOrderDto.IsPaid}" (click)="getPaidOrUnpaidOrders(true)">გადახდილი</div>
+            </div>
+        </div>
+        <div class="order-card-align" >
+            <div class="order-card" *ngFor="let o of orders">
+                <div class="pay-align">
+                    <span class="pay-span">No.{{o.orderId}}</span>
+                    <span class="pay-span" [ngClass]="{'payed-span': o.isPaid,'unpayed-span': !o.isPaid}">{{o.finalPrice}}₾</span>
+                </div>
+                <div class="user-align">
+                    <div class="user-details">
+                        <div class="user-container">
+                            <img [src]="o.user.profilePhoto" class="user-img" alt="">
+                        </div>
+                       {{o.user.name}}
+                    </div>
+                    <div class="user-details">
+                        <p class=""> <i class="fas fa-phone"></i> {{o.user.phoneNumber}} </p>
+                    </div>
+                     <div class="user-details">
+                        <p> <i class="fas fa-envelope"></i> {{o.user.email}} </p>
+                    </div>
+                </div>
+                <div class="order-details">
+                    <div class="order">
+                        <p> <i class="fas fa-calendar"></i> {{o.createDate| date:'dd MMM YYY | HH:mm '}} </p>
+                    </div>
+                    <div class="order">
+                        <p> <i class="fas fa-calendar"></i> {{o.deliveryType}} </p>
+                    </div>
+                    <div class="order">
+                        <p> <i class="fas fa-map"></i> {{o.user.location}} </p>
+                    </div>
+                    <div class="order">
+                        <p>კომენტარი</p>
+                        <p style="word-break: break-all;" class="comment"> {{o.comment}} </p>
+                    </div>
+                    
+                    <div class="order">
+                        <p class="">{{o.title}}</p>
+                        <div class="order-photo-container">
+                            <img [src]="o.photos[0].photoUrl" class="order-photo" alt="">
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

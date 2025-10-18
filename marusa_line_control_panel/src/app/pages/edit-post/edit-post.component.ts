@@ -232,7 +232,8 @@ private submitPost() {
       title: 'ნამდვილად გსურთ ფოტოს წაშლა?',
     }).then((results) => {
       if (results.isConfirmed) {
-         this.uploadPhotos = this.uploadPhotos.filter(p => p.id !== id);
+             this.uploadPhotos = this.uploadPhotos.filter(p => p.id !== id);
+             this.uploadPhotosTobackend = this.uploadPhotosTobackend.filter(p => p.id !== id);
              this.postService.deletePhoto(id).subscribe((resp)=>{
                 console.log(resp);
              })        

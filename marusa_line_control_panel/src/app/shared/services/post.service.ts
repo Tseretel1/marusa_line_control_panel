@@ -9,7 +9,7 @@ import { UntypedFormBuilder } from '@angular/forms';
 })
 export class PostService {
 
-  private apiUrl = 'https://localhost:7173/';
+  private apiUrl = 'https://192.168.1.14:7174/';
   constructor(private http:HttpClient)
   {
 
@@ -30,34 +30,38 @@ export class PostService {
 
 
   getPosts(): Observable<GetPost[]> {
-    return this.http.get<GetPost[]>(this.apiUrl+'Product/get-posts-for-adminpanel');
+    return this.http.get<GetPost[]>(this.apiUrl+'ControlPanel/get-products');
   }
   getPostWithId(id:number): Observable<any> {
-    return this.http.get<any>(this.apiUrl+`Product/get-post-with-id?id=${id}`);
+    return this.http.get<any>(this.apiUrl+`ControlPanel/get-post-byid-controlpanel?id=${id}`);
   }
 
   addPost(obj: InsertPost): Observable<any> {
-    return this.http.post<any>(this.apiUrl + `Product/add-post`, obj);
+    return this.http.post<any>(this.apiUrl + `ControlPanel/add-post`, obj);
   }
 
   EditPost(obj: InsertPost): Observable<any> {
-    return this.http.post<any>(this.apiUrl + `Product/edit-post`, obj);
+    return this.http.post<any>(this.apiUrl + `ControlPanel/edit-post`, obj);
   }
 
   deletePhoto(PhotoId:number): Observable<any> {
-    return this.http.post<any>(this.apiUrl + `Product/delete-photo?photoId=${PhotoId}`,{});
+    return this.http.post<any>(this.apiUrl + `ControlPanel/delete-photo?photoId=${PhotoId}`,{});
   }
   getProductTypes(): Observable<ProductTypes[]> {
-    return this.http.get<ProductTypes[]>(this.apiUrl+'Product/get-product-types');
+    return this.http.get<ProductTypes[]>(this.apiUrl+'ControlPanel/get-product-types');
   }
   getTotalLikesCount(): Observable<number> {
-    return this.http.get<number>(this.apiUrl+'Product/get-like-count');
+    return this.http.get<number>(this.apiUrl+'ControlPanel/get-like-count');
   }
   removePost(postId:number): Observable<number> {
-    return this.http.post<number>(this.apiUrl+`Product/remove-post?postid=${postId}`,{});
+    return this.http.post<number>(this.apiUrl+`ControlPanel/remove-post?postid=${postId}`,{});
   }
   revertPost(postId:number): Observable<number> {
-    return this.http.post<number>(this.apiUrl+`Product/revert-post?postid=${postId}`,{});
+    return this.http.post<number>(this.apiUrl+`ControlPanel/revert-post?postid=${postId}`,{});
+  }
+  getUserOrders(dto:GetOrderDto): Observable<OrderProduct[]> {
+    console.log(dto)
+    return this.http.post<OrderProduct[]>(this.apiUrl+`ControlPanel/get-orders`,dto);
   }
 }
 export interface GetPhoto {
@@ -86,4 +90,56 @@ export interface GetPost {
 export interface ProductTypes{
  id:number;
  productType:string;
+}
+
+
+
+ interface Photo {
+  id?: number;  
+  photoId?: number;  
+  photoUrl?: string;
+  postId?: number;
+}
+
+export interface OrderProduct {
+  orderId: number;       
+  createDate: string;     
+  statusId: number;
+  isPaid: boolean;
+  quantity:number;
+  id: number;
+  productId: number;
+  title: string;
+  description: string;
+  price: number;
+  discountedPrice: number;
+  productTypeId: number;
+  finalPrice:number;
+  comment:string;
+  deliveryType:string;
+  productQuantity:string;
+
+  likeCount: number;
+  isLiked: boolean;
+
+  photos: Photo[];
+  user:user;
+}
+
+
+export interface user{
+  id: number;
+  name: number;
+  email:string;
+  phoneNumber:string;
+  location:string;
+  profilePhoto:string;
+}
+
+
+export interface GetOrderDto{
+  OrderId:number|null;
+  IsPaid:boolean|null;
+  PageSize:number;
+  PageNumber:number;
 }
