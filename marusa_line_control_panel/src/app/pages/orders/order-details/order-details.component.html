@@ -1,0 +1,95 @@
+
+
+<div class="center-component" >
+    <div class="body-align">
+        <div class="component">
+            <div class="header-grid">
+                <div class="card-information" *ngIf="postsLoaded">
+                    <div class="photo-align" >
+                        <div class="order-num-align">
+                            <div class="order-box" [ngClass]="{'status-waiting':order.statusId ==1,'status-inprogress':order.statusId ==2,'status-ready':order.statusId ==3,}">
+                                <p class="order-status">შეკვეთა </p>
+                                <p class="order-id">
+                                    {{order.orderId}}
+                                </p>    
+                            </div>
+                        </div>
+                        <div class="title-price-align">
+                            <p>
+                                {{posts.title}}
+                            </p>
+                        </div> 
+                        <div class="photo-container"  data-aos="fade-in">
+                             <div *ngFor="let p of photosArray; let i = index" >
+                                 <img [src]="p.photoUrl" *ngIf="i==0" alt="" class="photo">
+                             </div>
+                        </div>
+                        
+                        <div class="product-details-align user-information">
+
+                            
+                            <div class="detail-align ">
+                                <div class="detail info-background" *ngIf="!order.isPaid" [ngClass]="{'to-payed':!order.isPaid}">
+                                    <p class="" >გადასახდელი</p>
+                                    <b> {{order.finalPrice}}₾</b>
+                                    <i class="fas fa-credit-card" ></i>
+                                </div>
+                                <div class="detail info-background payed-container" *ngIf="order.isPaid" [ngClass]="{'is-payed':order.isPaid }">
+                                    <p class="" >გადახდილი</p>
+                                    <b> {{order.finalPrice}}₾</b>
+                                    <i class="fas fa-credit-card" ></i>
+                                </div>
+                            </div>
+                            <div class="info-background date detail">
+                                <i class="fas fa-calendar"></i>
+                                {{ order.createDate | date : 'dd MMM yyyy' }} 
+                            </div> 
+                            <div class="delivery-align info-background detail" *ngIf="posts.quantity>0">
+                                <p class="">რაოდენობა :</p>
+                                <p>{{productQuantity}}</p>   
+                            </div>
+                            <div class="delivery-align info-background detail">
+                                <p style="text-align: center;">{{order.deliveryType}}</p>
+                            </div>                          
+
+                        </div>
+                        <div class="comment-align user-information" >
+                            <div class="form-group">
+                                <label for="" style="display: flex; gap: 20px; color: white;" >კომენტარი <p style="color: gray;">{{comment.length}}/300</p> </label>
+                                <textarea [(ngModel)]="comment" disabled="true" class="form-control"  maxlength="300" style="min-height: 100px;"></textarea>
+                            </div>
+                        </div> 
+                    </div>
+
+                    <div class="user-information" *ngIf="order.isPaid">
+                        <div class="rules-align">
+                            <div class="rulessss" >
+                                <div class="title"><b>შეკვეთის დეტაილები<i class="fas fa-file-alt"></i></b></div>
+                                <div class="rules">
+                                    <div class="detail-align">
+                                        <div class="detail info-background" >
+                                            {{getStatusName(order.statusId)}}
+                                            <i class="fas fa-spinner topay" *ngIf="!order.isPaid"></i>
+                                            <p class="" *ngIf="order.isPaid"></p>
+                                            <p *ngIf="order.statusId ==3">✅</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="rulessss" *ngIf="order.statusId ==2">
+                                <div class="rules"> 1. შეკვეთის მზადება უკვე დაწყებულია✅</div>
+                                <div class="rules"> 
+                                    <div style="display: flex; flex-direction: column; gap: 10px;">
+                                        2. დამზადების შემდგომ თქვენ მიიღებთ ტექსტურ შეტყობინებას იმეილზე
+                                        <p class="email">{{user.Email}} </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> 
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

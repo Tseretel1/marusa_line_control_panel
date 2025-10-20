@@ -15,6 +15,7 @@
             padding: 30px 0px;
             color: white;
             font-weight: bold;
+            gap: 10px;
         }
         .order-filter-align{
             width: 100%;
@@ -62,6 +63,7 @@
                 background-color: rgba(0, 0, 0, 0.263);
                 align-items: center;
                 gap: 20px;
+                cursor: pointer;
                 .pay-align{
                     width: 100%;
                     display: flex;

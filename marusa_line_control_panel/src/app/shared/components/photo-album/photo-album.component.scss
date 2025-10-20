@@ -5,7 +5,6 @@
     height: 100%;
     cursor: pointer;
     position: relative;
-   
     .information-align{
         position: absolute;
         z-index: 1;
@@ -23,6 +22,13 @@
     }
      .deleted-mark{
         background-color: rgba(255, 0, 0, 0.582);
+        opacity: 1;
+        .title{
+            opacity: 0;
+            transition: 0.3s all ease-in-out;
+        }
+    }
+    .deleted-mark:hover .title{
         opacity: 1;
     }
     .photo{

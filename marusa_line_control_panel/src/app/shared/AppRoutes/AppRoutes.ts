@@ -3,4 +3,5 @@ export const AppRoutes = {
   addPosts: '/add-posts',
   editPosts: '/edit-posts/',
   orders: '/orders',
+  orderDetails: '/order-details/'
 };

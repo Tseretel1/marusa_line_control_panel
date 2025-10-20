@@ -3,11 +3,12 @@ import { GetOrderDto, GetPost, OrderProduct, PostService } from '../../shared/se
 import { CommonModule, DatePipe } from '@angular/common';
 import { PhotoAlbumComponent } from "../../shared/components/photo-album/photo-album.component";
 import { FormsModule } from '@angular/forms';
-
+import { RouterLink } from "@angular/router";
+import { AppRoutes } from '../../shared/AppRoutes/AppRoutes';
 
 @Component({
   selector: 'app-orders',
-  imports: [CommonModule, FormsModule,DatePipe],
+  imports: [CommonModule, FormsModule, DatePipe, RouterLink],
   templateUrl: './orders.component.html',
   styleUrl: './orders.component.scss'
 })
@@ -17,6 +18,7 @@ export class OrdersComponent implements OnInit{
     
   }
 
+  AppRoutes = AppRoutes;
   constructor(private service: PostService){
 
   }
@@ -38,6 +40,7 @@ export class OrdersComponent implements OnInit{
           return;
         }
         this.orders = resp;
+        console.log(this.orders)
       }
     )
   }
@@ -54,7 +57,7 @@ export class OrdersComponent implements OnInit{
     return
   }
 
-  orderSearchNum :number = 0;
+  orderSearchNum !:number;
   OrderSearch(){
     this.getOrderDto.OrderId = this.orderSearchNum;
     this.getOrders();

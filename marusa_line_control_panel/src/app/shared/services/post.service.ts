@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { InsertPost } from '../../pages/edit-post/edit-post.component';
 import { UntypedFormBuilder } from '@angular/forms';
+import { orderStatuses } from '../../pages/orders/order-details/order-details.component';
 
 @Injectable({
   providedIn: 'root'
@@ -63,6 +64,22 @@ export class PostService {
     console.log(dto)
     return this.http.post<OrderProduct[]>(this.apiUrl+`ControlPanel/get-orders`,dto);
   }
+  getOrderStatuses(): Observable<orderStatuses[]> {
+    return this.http.get<orderStatuses[]>(this.apiUrl+'Product/get-order-statuses');
+  }
+  getOrderById(orderId:number): Observable<any> {
+    return this.http.get<any>(this.apiUrl+`Product/get-order-details?orderId=${orderId}`);
+  }
+
+  getuserOptionalFields(userId:number): Observable<UserOptionalFields> {
+    return this.http.get<UserOptionalFields>(this.apiUrl+`Product/get-users-optional?id=${userId}`);
+  }
+}
+
+export interface UserOptionalFields{
+  id:number;
+  location:string;
+  phoneNumber:string;
 }
 export interface GetPhoto {
   id?: number;  
@@ -124,6 +141,7 @@ export interface OrderProduct {
 
   photos: Photo[];
   user:user;
+  totalCount :number;
 }
 
 

@@ -1,7 +1,7 @@
 <div class="center-container">
     <div class="container">
         <div class="title">
-            <p>შეკვეთები</p>
+            <p>შეკვეთები {{orders[0].totalCount}}</p>
         </div>
         <div class="order-filter-align">
             <div class="filters">
@@ -17,7 +17,7 @@
             </div>
         </div>
         <div class="order-card-align" >
-            <div class="order-card" *ngFor="let o of orders">
+            <div class="order-card" *ngFor="let o of orders" [routerLink]="AppRoutes.orderDetails + o.orderId">
                 <div class="pay-align">
                     <span class="pay-span">No.{{o.orderId}}</span>
                     <span class="pay-span" [ngClass]="{'payed-span': o.isPaid,'unpayed-span': !o.isPaid}">{{o.finalPrice}}₾</span>
@@ -43,13 +43,13 @@
                     <div class="order">
                         <p> <i class="fas fa-calendar"></i> {{o.deliveryType}} </p>
                     </div>
-                    <div class="order">
+                    <!-- <div class="order">
                         <p> <i class="fas fa-map"></i> {{o.user.location}} </p>
-                    </div>
-                    <div class="order">
+                    </div> -->
+                    <!-- <div class="order">
                         <p>კომენტარი</p>
                         <p style="word-break: break-all;" class="comment"> {{o.comment}} </p>
-                    </div>
+                    </div> -->
                     
                     <div class="order">
                         <p class="">{{o.title}}</p>
