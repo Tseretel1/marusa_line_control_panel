@@ -15,7 +15,7 @@ import { AppRoutes } from '../../shared/AppRoutes/AppRoutes';
 export class OrdersComponent implements OnInit{
   ngOnInit(): void {
     this.getOrders();
-    
+    this.getOrderStatuses();
   }
 
   AppRoutes = AppRoutes;
@@ -40,7 +40,6 @@ export class OrdersComponent implements OnInit{
           return;
         }
         this.orders = resp;
-        console.log(this.orders)
       }
     )
   }
@@ -69,4 +68,20 @@ export class OrdersComponent implements OnInit{
       this.OrderSearch();
     }
   }
+  orderStatuses:orderStatuses[]= [];
+  getOrderStatuses(){
+    this.service.getOrderStatuses().subscribe(
+      (resp)=>{
+        this.orderStatuses = resp;
+      }
+    )
+  }
+  getStatusName(statusid:number){
+    const name  = this.orderStatuses.find((x)=> x.id == statusid);
+    return name?.statusName;
+  }
+}
+export interface orderStatuses{
+ id:number;
+ statusName:string;
 }

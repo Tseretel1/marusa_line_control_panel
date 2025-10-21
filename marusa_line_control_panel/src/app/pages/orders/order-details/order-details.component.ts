@@ -28,11 +28,6 @@ export class OrderDetailsComponent {
   constructor(private postService:PostService, private route :ActivatedRoute){
     const id = this.route.snapshot.paramMap.get('id');
     this.productId = Number(id);
-    const user = localStorage.getItem('user');
-    if(user){
-      this.user =JSON.parse(user);
-      this.userId = this.user.Id
-    }
     this.getOrderStatuses();
     this.postService.getOrderById(this.productId).subscribe(
       (resp)=>{
@@ -57,7 +52,6 @@ export class OrderDetailsComponent {
      top: 0,
      behavior: 'smooth' 
    }); 
-    this.getUserDetails();
   }
 
   mobileNumber:string = '';
@@ -65,22 +59,6 @@ export class OrderDetailsComponent {
 
   oldMobileNumber:string = '';
   oldAddress:string = '';
-
-  getUserDetails(){
-    this.postService.getuserOptionalFields(this.userId).subscribe(
-      (resp)=>{
-        if(resp.location!=null){
-          this.address = resp.location;
-          this.oldAddress = this.address;
-        }
-        if(resp.phoneNumber!=null){
-          this.mobileNumber = resp.phoneNumber;
-          this.oldMobileNumber = this.mobileNumber;
-        }
-      }
-    )
-  }
-
   productPrice:number = 0;
   oneProductPrice:number = 0;
   productQuantity:number = 1;
@@ -135,6 +113,7 @@ export interface OrderDetailsDto {
   productQuantity: number;
   comment: string;
   finalPrice: number;
+  user:User;
 }
 
 
@@ -151,4 +130,13 @@ export interface UserOptionalFields{
   id:number;
   location:string;
   phoneNumber:string;
+}
+export interface User{
+  id:number;
+  name:string;
+  lastName:string;
+  location:string;
+  profileNumber:string;
+  profilePhoto:string;
+  email:string;
 }

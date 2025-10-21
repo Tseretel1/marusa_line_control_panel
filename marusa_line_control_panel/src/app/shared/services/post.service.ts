@@ -61,7 +61,6 @@ export class PostService {
     return this.http.post<number>(this.apiUrl+`ControlPanel/revert-post?postid=${postId}`,{});
   }
   getUserOrders(dto:GetOrderDto): Observable<OrderProduct[]> {
-    console.log(dto)
     return this.http.post<OrderProduct[]>(this.apiUrl+`ControlPanel/get-orders`,dto);
   }
   getOrderStatuses(): Observable<orderStatuses[]> {
@@ -70,7 +69,6 @@ export class PostService {
   getOrderById(orderId:number): Observable<any> {
     return this.http.get<any>(this.apiUrl+`Product/get-order-details?orderId=${orderId}`);
   }
-
   getuserOptionalFields(userId:number): Observable<UserOptionalFields> {
     return this.http.get<UserOptionalFields>(this.apiUrl+`Product/get-users-optional?id=${userId}`);
   }

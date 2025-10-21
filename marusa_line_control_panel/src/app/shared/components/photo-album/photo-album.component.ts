@@ -13,6 +13,5 @@ export class PhotoAlbumComponent implements OnInit{
   @Input() posts!:GetPost;
   AppRoutes = AppRoutes;
   ngOnInit(): void {
-    console.log(this.posts)
   }
 }

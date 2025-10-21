@@ -1,3 +1,6 @@
+button{
+    font-family: inherit;
+}
 .center-container{
     width: 100%;
     display: flex;
@@ -31,6 +34,7 @@
                     color: white;
                     padding: 10px;
                     border-radius: 5px;
+                    font-weight: bolder;
                     cursor: pointer;
                     border: 2px solid transparent;
                     .search-input{
@@ -42,10 +46,12 @@
                     }
                 }
                 .topay{
-                    background-color: rgba(255, 166, 0, 0.718);
+                    background-color: orange;
+                    color: black; 
                 }
                 .ispayed{
-                    background-color: green;
+                    background-color: greenyellow;
+                    color: black; 
                 }
             }
         }
@@ -71,21 +77,24 @@
                     .pay-span{
                         padding: 2px 5px;
                         border-radius: 5px;
-                        background-color: rgba(255, 255, 255, 0.141);
                     }
                     .unpayed-span{
-                        background-color: rgba(255, 166, 0, 0.718);
+                        background-color: orange;
+                        font-weight: bolder;
+                        color: black;
                     }
                     .payed-span{
-                        background-color: green;
+                        background-color: greenyellow;    
+                        font-weight: bolder;
+                        color: black;
                     }
                 }
                 .user-align{
                     display: flex;
                     width: 100%;
                     flex-direction: column;
-                    background-color: rgba(255, 255, 255, 0.063);
                     border-radius: 5px;
+                    background-color: rgba(0, 0, 0, 0.452);
                     .user-details{
                         display: flex;
                         flex-direction: column;
@@ -107,6 +116,13 @@
                                 object-fit: cover;
                             }
                         }
+                        .username{
+                            font-weight: bolder;
+                            width: 250px;
+                            display: flex;
+                            justify-content: center;
+                            overflow: hidden;
+                        }
                     }
                 }
                 .order-details{
@@ -123,7 +139,15 @@
                         flex-direction: column;
                         padding: 5px;
                         width: 100%;
-                        background-color: rgb(28, 28, 28);
+                        background-color: rgb(14, 13, 13);
+                        .topay{
+                            color: orange;
+                            font-weight: bolder;
+                        }
+                        .ispayed{
+                            font-weight: bolder;
+                            color: greenyellow;
+                        }
                         .comment{
                             padding: 5px;
                             border: 1px solid grey;

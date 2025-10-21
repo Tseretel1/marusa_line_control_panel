@@ -16,7 +16,7 @@
         </div>
         <div class="form-align">
             <div class="remove-revert-align">
-              <button class="remove btn" *ngIf="posts.dateDeleted==null" (click)="removePost()">წაშლა</button>
+              <button class="hide btn" *ngIf="posts.dateDeleted==null" (click)="removePost()">დამალვა</button>
               <button class="revert btn" *ngIf="posts.dateDeleted" (click)="revertPost()">აღდგენა</button>
             </div>
             <div class="discount-top" [ngClass]="{'green-background':discountedPercentage>0,'red-background':discountedPercentage<0}">
