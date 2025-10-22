@@ -19,8 +19,8 @@
         <div class="order-card-align" >
             <div class="order-card" *ngFor="let o of orders" [routerLink]="AppRoutes.orderDetails + o.orderId">
                 <div class="pay-align">
-                    <span class="pay-span">No.{{o.orderId}}</span>
-                    <span class="pay-span" [ngClass]="{'payed-span': o.isPaid,'unpayed-span': !o.isPaid}">{{o.finalPrice}}₾</span>
+                    <span class="pay-span" [ngClass]="{'payed-span': o.isPaid,'unpayed-span': !o.isPaid}">No.{{o.orderId}}</span>
+                    <span class="pay-span" >{{o.finalPrice}}₾</span>
                 </div>
                 <div class="user-align">
                     <div class="user-details">
