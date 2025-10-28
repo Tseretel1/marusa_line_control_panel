@@ -30,6 +30,13 @@ export class PostsComponent implements OnInit{
       }
     )
   }
+
+  get ActivePosts(){
+    return this.posts.filter((x)=> x.dateDeleted == null ).length;
+  }
+  get HiddenPosts(){
+    return this.posts.filter((x)=> x.dateDeleted != null ).length;
+  }
   ngOnInit(): void {
     AOS.init({
       duration: 300,

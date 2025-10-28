@@ -10,7 +10,7 @@ import { orderStatuses } from '../../pages/orders/order-details/order-details.co
 })
 export class PostService {
 
-  private apiUrl = 'https://192.168.1.11:7174/';
+  private apiUrl = 'https://localhost:7173/';
   constructor(private http:HttpClient)
   {
 

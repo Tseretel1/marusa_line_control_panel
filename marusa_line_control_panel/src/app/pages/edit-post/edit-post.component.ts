@@ -176,6 +176,7 @@ private submitPost() {
           confirmButtonColor: 'green',
           title: 'პოსტი წარმატებით რედაქტირდა!',
         });
+        window.location.reload();``
       }
     },
     (error) => {
