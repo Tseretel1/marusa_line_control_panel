@@ -461,6 +461,11 @@ textarea{
     background-color: greenyellow;
     color: black;
 }
+
+
+
+
+
 @keyframes spinner {
     0%{
     transform: rotate(0deg);
@@ -472,6 +477,10 @@ textarea{
     transform: rotate(-360deg);
     }
 }
+
+
+
+
 
 
     .body-align::-webkit-scrollbar {
@@ -491,6 +500,8 @@ textarea{
     }
 }
 
+
+
 @keyframes fadeIn {
     0%{
         opacity: 0;
@@ -503,6 +514,92 @@ textarea{
         scale: 1;
     }
 }
+
+
+
+
+
+
+.modal-align{
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.219);
+    z-index: 52;
+    position: fixed;
+    top: 0;
+    left: 0;
+    backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation:0.3s popupModalBack;
+    .modal-cancel{
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+    .modal{
+        width: 90%;
+        max-width: 500px;
+        padding: 50px;
+        border-radius: 10px;
+        background-color: rgb(24, 23, 23);
+        color: white;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        animation:0.5s popupModal;
+        z-index: 2;
+        .button-group{
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            display: grid;
+            grid-template-columns: repeat(2,1fr);
+            .ispaidbutton{
+                color: black;
+                padding: 5px 10px;
+                border-radius: 5px;
+                border: none;
+                background-color: white;
+                cursor: pointer;
+            }
+            .is-paid{
+                background-color: greenyellow;
+            }
+            .is-not-paid{
+                background-color: orange;
+            }
+        }
+    }
+}
+
+@keyframes popupModalBack {
+    0%{
+        backdrop-filter: blur(0px);
+    }
+    100%{
+        backdrop-filter: blur(10px);
+    }
+}
+@keyframes popupModal{
+    0%{
+        opacity: 0;
+        scale: 0.7;
+    }
+    50%{
+        scale: 1.2;
+        opacity: 1;
+    }
+    100%{
+        scale: 1;
+    }
+}
+
+
+
 
 @media screen and (max-width:1200px) {
     .center-component{

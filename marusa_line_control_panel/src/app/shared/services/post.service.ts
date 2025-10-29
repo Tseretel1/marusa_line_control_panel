@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { InsertPost } from '../../pages/edit-post/edit-post.component';
 import { UntypedFormBuilder } from '@angular/forms';
 import { orderStatuses } from '../../pages/orders/order-details/order-details.component';
+import { innerFrom } from 'rxjs/internal/observable/innerFrom';
 
 @Injectable({
   providedIn: 'root'
@@ -36,15 +37,12 @@ export class PostService {
   getPostWithId(id:number): Observable<any> {
     return this.http.get<any>(this.apiUrl+`ControlPanel/get-post-byid-controlpanel?id=${id}`);
   }
-
   addPost(obj: InsertPost): Observable<any> {
     return this.http.post<any>(this.apiUrl + `ControlPanel/add-post`, obj);
   }
-
   EditPost(obj: InsertPost): Observable<any> {
     return this.http.post<any>(this.apiUrl + `ControlPanel/edit-post`, obj);
   }
-
   deletePhoto(PhotoId:number): Observable<any> {
     return this.http.post<any>(this.apiUrl + `ControlPanel/delete-photo?photoId=${PhotoId}`,{});
   }
@@ -60,8 +58,8 @@ export class PostService {
   revertPost(postId:number): Observable<number> {
     return this.http.post<number>(this.apiUrl+`ControlPanel/revert-post?postid=${postId}`,{});
   }
-  getUserOrders(dto:GetOrderDto): Observable<OrderProduct[]> {
-    return this.http.post<OrderProduct[]>(this.apiUrl+`ControlPanel/get-orders`,dto);
+  getUserOrders(dto:GetOrderDto): Observable<OrderReturn> {
+    return this.http.post<OrderReturn>(this.apiUrl+`ControlPanel/get-orders`,dto);
   }
   getOrderStatuses(): Observable<orderStatuses[]> {
     return this.http.get<orderStatuses[]>(this.apiUrl+'Product/get-order-statuses');
@@ -71,6 +69,9 @@ export class PostService {
   }
   getuserOptionalFields(userId:number): Observable<UserOptionalFields> {
     return this.http.get<UserOptionalFields>(this.apiUrl+`Product/get-users-optional?id=${userId}`);
+  }
+  changeOrderIsPaid(orderId:number, isPaid:boolean): Observable<any> {
+    return this.http.post<any>(this.apiUrl+`ControlPanel/change-order-ispaid?orderId=${orderId}&ispaid=${isPaid}`,{});
   }
 }
 
@@ -115,6 +116,12 @@ export interface ProductTypes{
   photoUrl?: string;
   postId?: number;
 }
+
+export interface OrderReturn{
+  orders : OrderProduct[];
+  totalCount:number;
+}
+
 
 export interface OrderProduct {
   orderId: number;       

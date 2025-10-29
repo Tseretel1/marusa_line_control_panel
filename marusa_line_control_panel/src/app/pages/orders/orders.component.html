@@ -1,7 +1,7 @@
 <div class="center-container">
     <div class="container">
         <div class="title">
-            <p>შეკვეთები {{orders[0].totalCount}}</p>
+            <p>შეკვეთები {{totalCount}}</p>
         </div>
         <div class="order-filter-align">
             <div class="filters">
@@ -50,4 +50,31 @@
             </div>
         </div>
     </div>
+</div>
+
+
+<div class="center-pagenation">
+     <div class="pageination-align">
+    <div class="buttons-align">
+       <button class="next-button" type="button" (click)="changePage(selectedPage - 1)">
+         <span class="btn-inner--icon">
+           ◀
+         </span>
+       </button>
+       <div class="page-numbers-align">
+         <ng-container *ngFor="let p of [0,1,2,3,4]">
+           <button *ngIf="(pageNumber + p) <= totalCount / getOrderDto.PageSize" class="pageination-buttons"
+             [class.selected]="selectedPage === (pageNumber + p)" (click)="changePage(pageNumber + p)">
+             {{ pageNumber + p }}
+           </button>
+         </ng-container>
+       </div>
+       <button class="next-button" type="button" (click)="changePage(selectedPage + 1)">
+         <span class="btn-inner--icon">
+          ▶
+         </span>
+       </button>
+    </div>
+</div>
+
 </div>

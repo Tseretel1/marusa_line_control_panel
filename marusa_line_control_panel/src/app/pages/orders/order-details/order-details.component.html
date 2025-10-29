@@ -42,7 +42,7 @@
                         </div>
                         
                         <div class="product-details-align user-information">
-                            <div class="detail-align ">
+                            <div class="detail-align " (click)="openModal(1)">
                                 <div class="detail info-background" *ngIf="!order.isPaid" [ngClass]="{'to-payed':!order.isPaid}">
                                     <p class="" >გადასახდელი</p>
                                     <b> {{order.finalPrice}}₾</b>
@@ -74,13 +74,13 @@
                         </div> 
                     </div>
 
-                    <div class="user-information" *ngIf="order.isPaid">
+                    <div class="user-information">
                         <div class="rules-align">
                             <div class="rulessss" >
                                 <div class="title"><b>შეკვეთის დეტაილები<i class="fas fa-file-alt"></i></b></div>
                                 <div class="rules">
                                     <div class="detail-align">
-                                        <div class="detail info-background" >
+                                        <div class="detail info-background" (click)="openModal(2)">
                                             {{getStatusName(order.statusId)}}
                                             <i class="fas fa-spinner topay" *ngIf="!order.isPaid"></i>
                                             <p class="" *ngIf="order.isPaid"></p>
@@ -93,6 +93,22 @@
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<div class="modal-align" *ngIf="modalGroupNum!=0">
+    <div class="modal-cancel" (click)="modalcancel()"></div>
+    <div class="modal">
+        <div class="button-group" *ngIf="modalGroupNum ==1 ">
+            <button class="ispaidbutton" [ngClass]="{'is-not-paid':!order.isPaid}" (click)="changeOrderIsPaid(false)">გადასახდელი</button>
+            <button class="ispaidbutton" [ngClass]="{'is-paid':order.isPaid}" (click)="changeOrderIsPaid(true)">გადახდილი</button>
+        </div>
+        <div class="button-group" *ngIf="modalGroupNum ==2 ">
+            <button class="ispaidbutton" *ngFor="let o of orderStatuses">{{o.statusName}}</button>
         </div>
     </div>
 </div>

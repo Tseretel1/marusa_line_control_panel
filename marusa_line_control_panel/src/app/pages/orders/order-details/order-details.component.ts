@@ -55,6 +55,8 @@ export class OrderDetailsComponent {
    }); 
   }
 
+
+
   mobileNumber:string = '';
   address:string = '';
 
@@ -77,6 +79,26 @@ export class OrderDetailsComponent {
   getStatusName(statusid:number){
     const name  = this.orderStatuses.find((x)=> x.id == statusid);
     return name?.statusName;
+  }
+
+
+  changeOrderIsPaid(isPaid:boolean){
+    if(isPaid){
+      this.order.isPaid = true;
+    }
+    else{
+      this.order.isPaid = false;
+    }
+    this.postService.changeOrderIsPaid(this.order.orderId, isPaid).subscribe((resp)=>{});
+    this.modalGroupNum = 0;
+  }
+
+  modalGroupNum:number = 0;
+  openModal(num:number){
+    this.modalGroupNum = num;
+  }
+  modalcancel(){
+    this.modalGroupNum = 0;
   }
 }
 
