@@ -22,7 +22,7 @@
                     <span class="pay-span" [ngClass]="{'payed-span': o.isPaid,'unpayed-span': !o.isPaid}">No.{{o.orderId}}</span>
                     <span class="pay-span" >{{o.finalPrice}}₾</span>
                 </div>
-                <div class="user-align">
+                <!-- <div class="user-align">
                     <div class="user-details">
                         <div class="user-container">
                             <img [src]="o.user.profilePhoto" class="user-img" alt="">
@@ -31,14 +31,13 @@
                             {{o.user.name}}
                         </p>
                     </div>
-                </div>
+                </div> -->
                 <div class="order-details">
                     <div class="order">
                         <p  [ngClass]="{'topay':!getOrderDto.IsPaid,'ispayed':getOrderDto.IsPaid}"> <i class="fas fa-calendar"></i> {{o.createDate| date:'dd MMM YYY | HH:mm '}} </p>
                     </div>
-                    <div class="order">
-                        <p *ngIf="o.statusId ==1"> <i class="fas fa-spinner"></i> {{getStatusName(o.statusId)}} </p>
-                        <p *ngIf="o.statusId !=1"> <i class="fas fa-check"></i> {{getStatusName(o.statusId)}} </p>
+                    <div class="order"  *ngIf="o.statusId !=1">
+                        <p> <i class="fas fa-check"></i> {{getStatusName(o.statusId)}} </p>
                     </div>
                     <div class="order">
                         <p class="">{{o.title}}</p>
@@ -63,7 +62,7 @@
        </button>
        <div class="page-numbers-align">
          <ng-container *ngFor="let p of [0,1,2,3,4]">
-           <button *ngIf="(pageNumber + p) <= totalCount / getOrderDto.PageSize" class="pageination-buttons"
+           <button *ngIf="(pageNumber + p) <= totalCount / getOrderDto.PageSize + 1" class="pageination-buttons"
              [class.selected]="selectedPage === (pageNumber + p)" (click)="changePage(pageNumber + p)">
              {{ pageNumber + p }}
            </button>

@@ -14,7 +14,7 @@ import { AppRoutes } from '../../shared/AppRoutes/AppRoutes';
 })
 export class OrdersComponent implements OnInit{
   ngOnInit(): void {
-    this.getOrders();
+    this.getOrdersLocalstorage();
     this.getOrderStatuses();
   }
 
@@ -29,7 +29,7 @@ export class OrdersComponent implements OnInit{
     IsPaid : false,
     OrderId : null,
     PageNumber : 1,
-    PageSize : 10,
+    PageSize : 5,
   }
 
 
@@ -40,39 +40,60 @@ export class OrdersComponent implements OnInit{
   changePage(page: number) {
     if (page < 1 || page > this.lastPage) return;
     this.selectedPage = page;
-    this.getOrderDto.PageNumber = page; 
+    this.getOrderDto.PageNumber = page;
     const middle = this.pageNumber + 2;
     if (page > middle) {
       this.pageNumber = page - 2;
     } else if (page < middle && this.pageNumber > 1) {
       this.pageNumber = Math.max(1, page - 2);
     }
-    this.getOrders();
-    localStorage.setItem('FeedbackPageNumber', this.selectedPage.toString());
+    localStorage.setItem('PageNumber', this.selectedPage.toString());
+    this.getOrdersLocalstorage();
   }
-
+ 
 
   getOrders(){
+    const pageNum= localStorage.getItem('PageNumber');
+    if(pageNum){
+      this.pageNumber == Number(pageNum);
+      this.selectedPage == this.pageNumber;
+      this.getOrderDto.PageNumber = this.pageNumber; 
+    }
+    console.log(this.pageNumber)
     this.service.getUserOrders(this.getOrderDto).subscribe(
       (resp)=>{
-        console.log(resp)
         if(resp==null){
           this.getPaidOrUnpaidOrders(false);
           return;
         }
         this.orders = resp.orders;
         this.totalCount = resp.totalCount;
+        this.lastPage = this.totalCount / this.getOrderDto.PageSize +1;
       }
     )
   }
+
+
+  getOrdersLocalstorage(){
+    const ispaid = localStorage.getItem('orderIdPaid');
+    if(ispaid =='true'){
+      this.getPaidOrUnpaidOrders(true);
+      return;
+    }
+    this.getPaidOrUnpaidOrders(false);
+    return;
+  }
+
 
   getPaidOrUnpaidOrders(IsPaid:boolean){
     this.getOrderDto.OrderId = null;
     if(IsPaid){
       this.getOrderDto.IsPaid = true;
+      localStorage.setItem('orderIdPaid', 'true');
       this.getOrders();
       return
     }
+    localStorage.setItem('orderIdPaid', 'false');
     this.getOrderDto.IsPaid = false;
     this.getOrders();
     return
