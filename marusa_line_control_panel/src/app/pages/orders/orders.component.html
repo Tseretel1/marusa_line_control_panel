@@ -22,7 +22,7 @@
                     <span class="pay-span" [ngClass]="{'payed-span': o.isPaid,'unpayed-span': !o.isPaid}">No.{{o.orderId}}</span>
                     <span class="pay-span" >{{o.finalPrice}}₾</span>
                 </div>
-                <!-- <div class="user-align">
+                <div class="user-align">
                     <div class="user-details">
                         <div class="user-container">
                             <img [src]="o.user.profilePhoto" class="user-img" alt="">
@@ -31,7 +31,7 @@
                             {{o.user.name}}
                         </p>
                     </div>
-                </div> -->
+                </div>
                 <div class="order-details">
                     <div class="order">
                         <p  [ngClass]="{'topay':!getOrderDto.IsPaid,'ispayed':getOrderDto.IsPaid}"> <i class="fas fa-calendar"></i> {{o.createDate| date:'dd MMM YYY | HH:mm '}} </p>
@@ -39,7 +39,7 @@
                     <div class="order"  *ngIf="o.statusId !=1">
                         <p> <i class="fas fa-check"></i> {{getStatusName(o.statusId)}} </p>
                     </div>
-                    <div class="order">
+                    <div class="order no-container">
                         <p class="">{{o.title}}</p>
                         <div class="order-photo-container">
                             <img [src]="o.photos[0].photoUrl" class="order-photo" alt="">
