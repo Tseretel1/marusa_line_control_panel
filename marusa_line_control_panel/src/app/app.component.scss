@@ -1,6 +1,13 @@
 .loader{
     z-index: 9999;
 }
+.auth{
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
 .content{
     padding: 100px 0px;
 }

@@ -51,7 +51,6 @@ export class EditPostComponent {
 
   getPost() {
     this.postService.getPostWithId(this.postId).subscribe((resp) => {
-      console.log(resp)
       this.posts = resp;
       this.title = this.posts.title;
       this.description = this.posts.description;
@@ -59,7 +58,6 @@ export class EditPostComponent {
       this.price = this.posts.price;
       this.discountedPrice = this.posts.discountedPrice;
       this.photos = this.posts.photos;
-      console.log(this.photos);
       this.uploadPhotos = this.photos.map(item => ({
         id: item.photoId!,                   
         preview: item.photoUrl ?? null, 
@@ -79,21 +77,6 @@ export class EditPostComponent {
   quantity!: number;
   photos: GetPhoto[] = [];
 
-  // validatedata(): any {
-  //   if (this.title != '' && this.productTypeId != 0 && this.price != 0) {
-  //     const InsertPost: InsertPost = {
-  //       title: this.title,
-  //       productTypeId: this.productTypeId,
-  //       price: this.price,
-  //       discountedPrice: this.discountedPrice,
-  //       description: this.description,
-  //       quantity: this.quantity,
-  //       photos: [],
-  //     };
-  //     return InsertPost;
-  //   }
-  //   return null;
-  // }
 
 
     uploadPhotos: {
@@ -233,11 +216,10 @@ private submitPost() {
       title: 'ნამდვილად გსურთ ფოტოს წაშლა?',
     }).then((results) => {
       if (results.isConfirmed) {
-             this.uploadPhotos = this.uploadPhotos.filter(p => p.id !== id);
-             this.uploadPhotosTobackend = this.uploadPhotosTobackend.filter(p => p.id !== id);
-             this.postService.deletePhoto(id).subscribe((resp)=>{
-                console.log(resp);
-             })        
+          this.uploadPhotos = this.uploadPhotos.filter(p => p.id !== id);
+          this.uploadPhotosTobackend = this.uploadPhotosTobackend.filter(p => p.id !== id);
+          this.postService.deletePhoto(id).subscribe((resp)=>{
+          })        
       }
     });
   }

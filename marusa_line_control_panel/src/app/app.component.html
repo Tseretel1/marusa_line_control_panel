@@ -1,7 +1,8 @@
 <app-loader class="loader"></app-loader>
 
+<app-authorization class="auth" *ngIf="!Authorised"></app-authorization>
 
-<app-header></app-header>
-<div class="content">
+<app-header *ngIf="Authorised"></app-header>
+<div class="content" *ngIf="Authorised">
   <router-outlet></router-outlet>
 </div>

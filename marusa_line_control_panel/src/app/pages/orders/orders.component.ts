@@ -174,7 +174,7 @@ isOlderThan7Days(dateString: string | Date): boolean {
   const diffInMs = today.getTime() - inputDate.getTime();
   const diffInDays = diffInMs / (1000 * 60 * 60 * 24);
 
-  return diffInDays > 7;
+  return diffInDays >= 7;
 }
 
  scrollTotop(){

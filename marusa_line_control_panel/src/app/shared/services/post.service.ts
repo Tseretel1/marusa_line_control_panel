@@ -74,7 +74,7 @@ export class PostService {
     return this.http.post<any>(this.apiUrl+`ControlPanel/change-order-ispaid?orderId=${orderId}&ispaid=${isPaid}`,{});
   }
   changeOrderStatus(orderId:number, statusId:number): Observable<any> {
-    return this.http.post<any>(this.apiUrl+`ControlPanel/change-order-ispaid?orderId=${orderId}&statusId=${statusId}`,{});
+    return this.http.post<any>(this.apiUrl+`ControlPanel/change-order-status?orderId=${orderId}&statusId=${statusId}`,{});
   }
   deleteOrder(orderId:number,): Observable<any> {
     return this.http.delete<any>(this.apiUrl+`ControlPanel/delete-order?orderId=${orderId}`,{});
