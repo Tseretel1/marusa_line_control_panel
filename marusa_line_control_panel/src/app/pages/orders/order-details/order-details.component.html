@@ -74,7 +74,7 @@
                         </div> 
                     </div>
 
-                    <div class="user-information">
+                    <div class="user-information" *ngIf="order.isPaid">
                         <div class="rules-align">
                             <div class="rulessss" >
                                 <div class="title"><b>შეკვეთის დეტაილები<i class="fas fa-file-alt"></i></b></div>
@@ -82,7 +82,7 @@
                                     <div class="detail-align">
                                         <div class="detail info-background" (click)="openModal(2)">
                                             {{getStatusName(order.statusId)}}
-                                            <i class="fas fa-spinner topay" *ngIf="!order.isPaid"></i>
+                                            <!-- <i class="fas fa-spinner topay" *ngIf="!order.isPaid"></i> -->
                                             <p class="" *ngIf="order.isPaid"></p>
                                             <p *ngIf="order.statusId ==3">✅</p>
                                         </div>
