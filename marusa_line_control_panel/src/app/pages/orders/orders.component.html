@@ -36,6 +36,9 @@
                     <div class="order">
                         <p  [ngClass]="{'topay':!getOrderDto.IsPaid,'ispayed':getOrderDto.IsPaid}"> <i class="fas fa-calendar"></i> {{o.createDate| date:'dd MMM YYY | HH:mm '}} </p>
                     </div>
+                      <div class="order">
+                        <p  [ngClass]="{'topay':!getOrderDto.IsPaid,'ispayed':getOrderDto.IsPaid}"> {{getTimeAgo(o.createDate)}} </p>
+                    </div>
                     <div class="order"  *ngIf="o.statusId !=1">
                         <p> <i class="fas fa-check"></i> {{getStatusName(o.statusId)}} </p>
                     </div>

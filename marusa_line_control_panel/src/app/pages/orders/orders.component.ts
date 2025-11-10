@@ -55,11 +55,10 @@ export class OrdersComponent implements OnInit{
   getOrders(){
     const pageNum= localStorage.getItem('PageNumber');
     if(pageNum){
-      this.pageNumber == Number(pageNum);
-      this.selectedPage == this.pageNumber;
-      this.getOrderDto.PageNumber = this.pageNumber; 
+      this.selectedPage = Number(pageNum);
+      this.getOrderDto.PageNumber = Number(pageNum); 
     }
-    console.log(this.pageNumber)
+    console.log(this.pageNumber, this.selectedPage, this.getOrderDto.PageNumber)
     this.service.getUserOrders(this.getOrderDto).subscribe(
       (resp)=>{
         if(resp==null){
@@ -123,6 +122,39 @@ export class OrdersComponent implements OnInit{
     const name  = this.orderStatuses.find((x)=> x.id == statusid);
     return name?.statusName;
   }
+
+ getTimeAgo(dateString: string): string {
+  const inputDate = new Date(dateString);
+  const now = new Date();
+
+  const diffInMs = now.getTime() - inputDate.getTime();
+  if (diffInMs < 0) {
+    const diffFuture = Math.abs(diffInMs);
+    const days = Math.floor(diffFuture / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((diffFuture / (1000 * 60 * 60)) % 24);
+    const minutes = Math.floor((diffFuture / (1000 * 60)) % 60);
+
+    if (days > 0) return `${days} დღის${days > 1 ? 's' : ''} from now`;
+    if (hours > 0) return `${hours} hour${hours > 1 ? 's' : ''} from now`;
+    if (minutes > 0) return `${minutes} minute${minutes > 1 ? 's' : ''} from now`;
+    return 'Just now';
+  }
+
+  const days = Math.floor(diffInMs / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((diffInMs / (1000 * 60 * 60)) % 24);
+  const minutes = Math.floor((diffInMs / (1000 * 60)) % 60);
+
+  if (days > 0) {
+    return `${days} დღის${days > 1 ? '' : ''} ${hours} საათის${hours !== 1 ? '' : ''} წინ`;
+  } else if (hours > 0) {
+    return `${hours} საათის${hours > 1 ? '' : ''} ${minutes} წუთის${minutes !== 1 ? '' : ''} წინ`;
+  } else if (minutes > 0) {
+    return `${minutes} წუთის${minutes > 1 ? '' : ''} წინ`;
+  } else {
+    return 'ახლახანს';
+  }
+}
+
 
 
 
