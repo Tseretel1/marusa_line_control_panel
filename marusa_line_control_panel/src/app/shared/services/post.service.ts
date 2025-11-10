@@ -73,6 +73,9 @@ export class PostService {
   changeOrderIsPaid(orderId:number, isPaid:boolean): Observable<any> {
     return this.http.post<any>(this.apiUrl+`ControlPanel/change-order-ispaid?orderId=${orderId}&ispaid=${isPaid}`,{});
   }
+  changeOrderStatus(orderId:number, statusId:number): Observable<any> {
+    return this.http.post<any>(this.apiUrl+`ControlPanel/change-order-status?orderId=${orderId}&statusId=${statusId}`,{});
+  }
 }
 
 export interface UserOptionalFields{

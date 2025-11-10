@@ -108,7 +108,7 @@
             <button class="ispaidbutton" [ngClass]="{'is-paid':order.isPaid}" (click)="changeOrderIsPaid(true)">გადახდილი</button>
         </div>
         <div class="button-group" *ngIf="modalGroupNum ==2 ">
-            <button class="ispaidbutton" *ngFor="let o of orderStatuses">{{o.statusName}}</button>
+            <button class="ispaidbutton order-status"  [ngClass]="{'selected-status': order.statusId == o.id}" *ngFor="let o of orderStatuses" (click)="changeOrderStatusId(o.id)">{{o.statusName}}</button>
         </div>
     </div>
 </div>

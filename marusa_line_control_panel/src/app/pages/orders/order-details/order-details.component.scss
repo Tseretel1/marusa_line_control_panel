@@ -567,6 +567,16 @@ textarea{
                 background-color: white;
                 cursor: pointer;
             }
+            .order-status{
+                background-color: grey;
+                color: white;
+                padding: 20px;
+            }
+            .selected-status{
+                background-color: green;
+                box-shadow: 0px 0px 2px black;
+                border: 1px solid green;
+            }
             .is-paid{
                 background-color: greenyellow;
             }

@@ -59,7 +59,7 @@ button{
             width: 100%;
             display: grid;
             grid-template-columns: repeat(4,1fr);
-            gap: 10px;
+            gap: 20px;
             .order-card{
                 width: 100%;
                 color: white;
@@ -68,7 +68,7 @@ button{
                 padding: 15px;
                 background-color: rgba(0, 0, 0, 0.263);
                 align-items: center;
-                gap: 20px;
+                gap: 10px;
                 cursor: pointer;
                 .pay-align{
                     width: 100%;
@@ -172,8 +172,6 @@ button{
                                object-fit: cover;
                             }
                         }
-                    }
-                    .no-container{
                     }
                 }
             }

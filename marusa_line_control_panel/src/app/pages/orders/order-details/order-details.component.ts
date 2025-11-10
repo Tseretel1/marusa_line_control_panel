@@ -92,7 +92,12 @@ export class OrderDetailsComponent {
     this.postService.changeOrderIsPaid(this.order.orderId, isPaid).subscribe((resp)=>{});
     this.modalGroupNum = 0;
   }
-
+  changeOrderStatusId(statusId:number){
+    this.order.statusId = statusId; 
+    this.postService.changeOrderStatus(this.order.orderId,statusId).subscribe((resp)=>{});
+    this.modalGroupNum = 0;
+  }
+  
   modalGroupNum:number = 0;
   openModal(num:number){
     this.modalGroupNum = num;
