@@ -1,7 +1,7 @@
 
 
 <div class="center-component" >
-    <div class="body-align" *ngIf="postsLoaded">
+    <div  class="body-align" *ngIf="postsLoaded">
         <div class="component">
             <div class="header-grid">
                 <div class="card-information" >
@@ -97,6 +97,9 @@
     </div>
 </div>
 
+<div class="delete-order" *ngIf="order.orderId && !order.isPaid">
+    <button class="delete-order-button" (click)="deleteOrder(order.orderId)">წაშლა</button>
+</div>
 
 
 

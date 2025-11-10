@@ -48,17 +48,17 @@ export class OrdersComponent implements OnInit{
       this.pageNumber = Math.max(1, page - 2);
     }
     localStorage.setItem('PageNumber', this.selectedPage.toString());
+    this.scrollTotop();
     this.getOrdersLocalstorage();
   }
  
-
+  totalPages:number =0;
   getOrders(){
     const pageNum= localStorage.getItem('PageNumber');
     if(pageNum){
       this.selectedPage = Number(pageNum);
       this.getOrderDto.PageNumber = Number(pageNum); 
     }
-    console.log(this.pageNumber, this.selectedPage, this.getOrderDto.PageNumber)
     this.service.getUserOrders(this.getOrderDto).subscribe(
       (resp)=>{
         if(resp==null){
@@ -67,7 +67,8 @@ export class OrdersComponent implements OnInit{
         }
         this.orders = resp.orders;
         this.totalCount = resp.totalCount;
-        this.lastPage = this.totalCount / this.getOrderDto.PageSize +1;
+        this.totalPages = Math.ceil(this.totalCount / this.getOrderDto.PageSize);
+        this.lastPage = Math.ceil(this.totalCount / this.getOrderDto.PageSize);
       }
     )
   }
@@ -76,6 +77,7 @@ export class OrdersComponent implements OnInit{
   getOrdersLocalstorage(){
     const ispaid = localStorage.getItem('orderIdPaid');
     if(ispaid =='true'){
+      localStorage.removeItem('PageNumber')
       this.getPaidOrUnpaidOrders(true);
       return;
     }
@@ -87,14 +89,17 @@ export class OrdersComponent implements OnInit{
   getPaidOrUnpaidOrders(IsPaid:boolean){
     this.getOrderDto.OrderId = null;
     if(IsPaid){
-      this.getOrderDto.IsPaid = true;
       localStorage.setItem('orderIdPaid', 'true');
+      this.getOrderDto.IsPaid = true;
+      localStorage.setItem('PageNumber','1');
       this.getOrders();
       return
     }
-    localStorage.setItem('orderIdPaid', 'false');
-    this.getOrderDto.IsPaid = false;
-    this.getOrders();
+    else{
+      localStorage.setItem('orderIdPaid', 'false');
+      this.getOrderDto.IsPaid = false;
+      this.getOrders();
+    }
     return
   }
 
@@ -153,7 +158,28 @@ export class OrdersComponent implements OnInit{
   } else {
     return 'ახლახანს';
   }
+
+  
+
+
 }
+
+
+isOlderThan7Days(dateString: string | Date): boolean {
+  const inputDate = new Date(dateString);
+  const today = new Date();
+  inputDate.setHours(0, 0, 0, 0);
+  today.setHours(0, 0, 0, 0);
+
+  const diffInMs = today.getTime() - inputDate.getTime();
+  const diffInDays = diffInMs / (1000 * 60 * 60 * 24);
+
+  return diffInDays > 7;
+}
+
+ scrollTotop(){
+     window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
 
 
 

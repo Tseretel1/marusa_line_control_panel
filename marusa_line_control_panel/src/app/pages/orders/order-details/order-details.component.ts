@@ -1,11 +1,11 @@
 import { Component, HostListener, OnInit } from '@angular/core';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { CommonModule, DatePipe, NgFor } from '@angular/common';
 import * as  AOS from 'aos';
 import Swal from 'sweetalert2';
 import { FormsModule, ɵInternalFormsSharedModule } from "@angular/forms";
 import { PostService } from '../../../shared/services/post.service';
-
+import { AppRoutes } from '../../../shared/AppRoutes/AppRoutes';
 
 @Component({
   selector: 'app-order-details',
@@ -15,7 +15,7 @@ import { PostService } from '../../../shared/services/post.service';
 })
 export class OrderDetailsComponent {
  
-
+  AppRoutes = AppRoutes;
 
   productId:number = 0;
   posts:Post = {} as Post;
@@ -25,7 +25,7 @@ export class OrderDetailsComponent {
 
   user:any = null;
   userId:number = 0;
-  constructor(private postService:PostService, private route :ActivatedRoute){
+  constructor(private postService:PostService, private route :ActivatedRoute,private router :Router){
     const id = this.route.snapshot.paramMap.get('id');
     this.productId = Number(id);
     this.getOrderStatuses();
@@ -97,6 +97,32 @@ export class OrderDetailsComponent {
     this.postService.changeOrderStatus(this.order.orderId,statusId).subscribe((resp)=>{});
     this.modalGroupNum = 0;
   }
+
+
+  deleteOrder(statusId:number){
+    Swal.fire({
+    title: 'შეკვეთის წაშლა',
+    icon:'error',
+    text: 'ნამდვილად გსურთ შეკვეთის წაშლა?',
+    showCancelButton: true,
+    confirmButtonText: 'წაშლა',
+    cancelButtonText: 'გაუქმება',
+    color: '#ffffff',       
+    background:'rgb(25, 26, 25)',
+    confirmButtonColor: '#d33',
+    cancelButtonColor: '#3085d6',
+    customClass: {
+      popup: 'custom-swal-popup',
+    }
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.postService.deleteOrder(this.order.orderId,).subscribe((resp)=>{
+          this.router.navigate([AppRoutes.orders])
+        });
+      }
+    });
+  }
+  
   
   modalGroupNum:number = 0;
   openModal(num:number){
