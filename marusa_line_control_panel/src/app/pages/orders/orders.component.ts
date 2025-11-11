@@ -62,6 +62,7 @@ export class OrdersComponent implements OnInit{
     this.service.getUserOrders(this.getOrderDto).subscribe(
       (resp)=>{
         if(resp==null){
+          localStorage.setItem('PageNumber','1');
           this.getPaidOrUnpaidOrders(false);
           return;
         }
@@ -91,7 +92,6 @@ export class OrdersComponent implements OnInit{
     if(IsPaid){
       localStorage.setItem('orderIdPaid', 'true');
       this.getOrderDto.IsPaid = true;
-      localStorage.setItem('PageNumber','1');
       this.getOrders();
       return
     }
