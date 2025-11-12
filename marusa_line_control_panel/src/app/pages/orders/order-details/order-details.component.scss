@@ -442,25 +442,22 @@ textarea{
         font-weight: bolder;
         padding: 5px;
         border-radius: 5px;
-        color: black;
         .order-status{
-            color: black;
+            color: white;
             font-weight: bolder;
         }
         .order-id{
-            color: black;
+            color: white;
             font-size: 18px;
             font-weight: bolder;
         }
     }
 }
 .unpaid-order{
-    background-color: orange;
-    color: black;
+    background-color: rgba(255, 136, 0, 0.774);
 }
 .paid-order{
-    background-color: greenyellow;
-    color: black;
+    background-color: green;
 }
 
 

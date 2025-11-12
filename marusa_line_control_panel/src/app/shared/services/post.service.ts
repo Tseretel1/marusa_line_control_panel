@@ -11,7 +11,7 @@ import { innerFrom } from 'rxjs/internal/observable/innerFrom';
 })
 export class PostService {
 
-  private apiUrl = 'https://192.168.1.14:7174/';
+  private apiUrl = 'https://localhost:7173/';
   constructor(private http:HttpClient)
   {
 
