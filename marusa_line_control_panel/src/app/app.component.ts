@@ -31,7 +31,6 @@ export class AppComponent implements OnInit{
     this.checkIfAuthorized();
   }
   
-  
   Authorised:boolean = false;
   checkIfAuthorized(){
     const GetToken = localStorage.getItem('token');
