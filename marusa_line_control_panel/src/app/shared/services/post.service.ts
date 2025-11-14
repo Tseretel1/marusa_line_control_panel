@@ -5,7 +5,7 @@ import { InsertPost } from '../../pages/edit-post/edit-post.component';
 import { UntypedFormBuilder } from '@angular/forms';
 import { orderStatuses } from '../../pages/orders/order-details/order-details.component';
 import { innerFrom } from 'rxjs/internal/observable/innerFrom';
-
+import { getPosts } from '../../pages/posts/posts.component';
 @Injectable({
   providedIn: 'root'
 })
@@ -31,8 +31,8 @@ export class PostService {
 
 
 
-  getPosts(): Observable<GetPost[]> {
-    return this.http.get<GetPost[]>(this.apiUrl+'ControlPanel/get-products');
+  getPosts(getPosts:getPosts): Observable<GetPost[]> {
+    return this.http.post<GetPost[]>(this.apiUrl+'ControlPanel/get-products',getPosts);
   }
   getPostWithId(id:number): Observable<any> {
     return this.http.get<any>(this.apiUrl+`ControlPanel/get-post-byid-controlpanel?id=${id}`);
@@ -107,6 +107,8 @@ export interface GetPost {
   photos: GetPhoto[];
   quantity: number;
   dateDeleted:string|null;
+  totalActiveProducts:number;
+  totalDeletedProducts:number;
 }
 
 export interface ProductTypes{

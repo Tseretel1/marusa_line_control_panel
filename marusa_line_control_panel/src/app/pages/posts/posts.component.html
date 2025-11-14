@@ -4,15 +4,15 @@
         <table >
             <thead>
                 <tr>
-                    <th>
+                    <th (click)="getActivePosts()">
                         აქტიური
                         <i class="fas fa-camera"></i>
-                        <b style="color: orange; padding: 0px 10px;">{{ActivePosts}}</b>
+                        <b style="color: green; padding: 0px 10px;">{{posts[0].totalActiveProducts}}</b>
                     </th>
-                    <th>
+                    <th (click)="getDeletedPosts()">
                         დამალული
                         <i class="fas fa-camera"></i>
-                        <b style="color: orange; padding: 0px 10px;">{{HiddenPosts}}</b>
+                        <b style="color: orange; padding: 0px 10px;">{{posts[0].totalDeletedProducts}}</b>
                     </th>
                     <th>
                         ლაიქები 
@@ -35,4 +35,31 @@
             <app-photo-album [posts]="p" class="album"></app-photo-album>
         </ng-container>
     </div>
+</div>
+
+
+
+<div class="center-pagenation">
+     <div class="pageination-align">
+    <div class="buttons-align">
+       <button class="next-button" type="button" (click)="changePage(selectedPage - 1)">
+         <span class="btn-inner--icon">
+           ◀
+         </span>
+       </button>
+       <div class="page-numbers-align">
+         <ng-container *ngFor="let p of [0,1,2,3,4]">
+           <button *ngIf="(pageNumber + p) <= totalPages" class="pageination-buttons"
+             [class.selected]="selectedPage === (pageNumber + p)" (click)="changePage(pageNumber + p)">
+             {{ pageNumber + p }}
+           </button>
+         </ng-container>
+       </div>
+       <button class="next-button" type="button" (click)="changePage(selectedPage + 1)">
+         <span class="btn-inner--icon">
+          ▶
+         </span>
+       </button>
+    </div>
+</div>
 </div>

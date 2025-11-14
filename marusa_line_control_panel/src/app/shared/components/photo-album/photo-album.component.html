@@ -1,4 +1,4 @@
-<div class="photo-container" >
+<div class="photo-container" data-aos="fade-up">
     <div class="information-align" [routerLink]="AppRoutes.editPosts+posts.id" [ngClass]="{'deleted-mark':posts.dateDeleted!=null}" >
         <div class="text-align">
             <b class="title">
@@ -6,5 +6,6 @@
             </b>
         </div>
     </div>
-    <img [src]="posts.photos[0]?.photoUrl" alt="" class="photo">
+    <img *ngIf="posts.photoUrl==null"  [src]="posts.photos[0]?.photoUrl" alt="" class="photo">
+    <img *ngIf="posts.photoUrl" [src]="posts.photoUrl" alt="" class="photo">
 </div>
