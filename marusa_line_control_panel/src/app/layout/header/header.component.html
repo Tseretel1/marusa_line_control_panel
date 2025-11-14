@@ -30,8 +30,8 @@
             <i class="fas fa-times" (click)="hideSidenav()"></i>
         </div>
         <div class="nav-center">
-            <span class="nav-link" routerLinkActive="active-link" [routerLink]="AppRoutes.posts"><i class="fas fa-shopping-cart"></i><b>პოსტები</b> </span>
-            <span class="nav-link" routerLinkActive="active-link"  [routerLink]="AppRoutes.orders">
+            <span class="nav-link" routerLinkActive="active-link" [routerLink]="AppRoutes.posts" (click)="hideSidenav()"><i class="fas fa-shopping-cart" ></i><b>პოსტები</b> </span>
+            <span class="nav-link" routerLinkActive="active-link"  [routerLink]="AppRoutes.orders" (click)="hideSidenav()">
                 <i class="fas fa-address-book"></i> 
                 <b>შეკვეთები</b> 
             </span>
