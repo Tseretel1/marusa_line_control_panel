@@ -1,10 +1,11 @@
 import { Component, HostListener, OnInit } from '@angular/core';
-import { GetOrderDto, GetPost, OrderProduct, PostService } from '../../shared/services/post.service';
+import { GetOrderDto, GetPost, OrderProduct, PostService, StartEndDate } from '../../shared/services/post.service';
 import { CommonModule, DatePipe } from '@angular/common';
 import { PhotoAlbumComponent } from "../../shared/components/photo-album/photo-album.component";
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from "@angular/router";
 import { AppRoutes } from '../../shared/AppRoutes/AppRoutes';
+import { dateTimestampProvider } from 'rxjs/internal/scheduler/dateTimestampProvider';
 
 @Component({
   selector: 'app-orders',
@@ -16,6 +17,7 @@ export class OrdersComponent implements OnInit{
   ngOnInit(): void {
     this.getOrdersLocalstorage();
     this.getOrderStatuses();
+    this.getDashboardStats();
   }
 
   AppRoutes = AppRoutes;
@@ -182,10 +184,42 @@ isOlderThan7Days(dateString: string | Date): boolean {
   }
 
 
+  startDate:string= '2025-11-01';
+  endDate: string = new Date().toISOString().split('T')[0];
 
+  dashboardStats:Dashboard={
+    totalPaidAmount : 0,
+    totalUnPaidAmount : 0,
+    paidOrdersCount:0,
+    unpaidOrdersCount:0,
+  }
+  getDashboardStats(){
+    const dashboard:StartEndDate={
+      startDate :this.startDate,
+      EndDate :this.endDate,
+    }
+    this.service.GetDahsboardStatistics(dashboard).subscribe(
+      (resp)=>{
+        this.dashboardStats = resp.statistics;
+        console.log(resp)
+      }
+    )
+  }
+  openDatePicker(input: HTMLInputElement) {
+    input.showPicker?.();
+    input.click();          
+  }
 
 }
 export interface orderStatuses{
  id:number;
  statusName:string;
+}
+
+
+export interface Dashboard{
+  totalPaidAmount:number;
+  totalUnPaidAmount:number;
+  paidOrdersCount:number;
+  unpaidOrdersCount:number;
 }

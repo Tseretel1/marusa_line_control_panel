@@ -1,7 +1,34 @@
 <div class="center-container">
     <div class="container">
-        <div class="title">
-            <p>შეკვეთები {{totalCount}}</p>
+        <div class="dashboard">
+            <div class="date">
+                <div class="form-group" (click)="openDatePicker(startDateInput)">
+                    <label for="">დასაწყისი</label>
+                    <input #startDateInput type="date"class="datepicker"  [(ngModel)]="startDate">
+                    <div class="dates" >{{startDate}}</div>
+                </div>
+                <div class="form-group" (click)="openDatePicker(endDateInput)">
+                    <label for="">დასასრული</label>
+                    <input #endDateInput type="date" class="datepicker"  [(ngModel)]="endDate">
+                    <div class="dates" >{{endDate}}</div>
+                </div>
+                <button class="search-date" (click)="getDashboardStats()">ძებნა</button>
+            </div>
+            <div class="stats-align">
+                <div class="stat" *ngIf="getOrderDto.IsPaid">
+                    გადახდილი შეკვეთები  <p >{{dashboardStats.paidOrdersCount}}</p> 
+                </div>
+                <div class="stat" *ngIf="getOrderDto.IsPaid">
+                   შემოსავალი <p class="money paid">{{dashboardStats.totalPaidAmount}}₾ </p> 
+                </div>
+                <div class="stat unpaid" *ngIf="!getOrderDto.IsPaid">
+                   გადასახდელი შეკვეთები {{dashboardStats.unpaidOrdersCount}}
+                </div>
+                <div class="stat unpaid" *ngIf="!getOrderDto.IsPaid">
+                   პოტენციური შემოსავალი <p class="money unpaid">{{dashboardStats.totalUnPaidAmount}}₾</p> 
+                </div>
+
+            </div>
         </div>
         <div class="order-filter-align">
             <div class="filters">

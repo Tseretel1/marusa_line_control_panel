@@ -79,8 +79,15 @@ export class PostService {
   deleteOrder(orderId:number,): Observable<any> {
     return this.http.delete<any>(this.apiUrl+`ControlPanel/delete-order?orderId=${orderId}`,{});
   }
+  GetDahsboardStatistics(date:StartEndDate): Observable<any> {
+    console.log(date)
+    return this.http.post<any>(this.apiUrl+`ControlPanel/get-statistics`,date);
+  }
 }
-
+export interface StartEndDate{
+  startDate :string;
+  EndDate :string;
+}
 export interface UserOptionalFields{
   id:number;
   location:string;
