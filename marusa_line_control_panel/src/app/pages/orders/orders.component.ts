@@ -167,16 +167,16 @@ export class OrdersComponent implements OnInit{
 }
 
 
-isOlderThan7Days(dateString: string | Date): boolean {
+isOlderThan1Day(dateString: string | Date): boolean {
   const inputDate = new Date(dateString);
   const today = new Date();
   inputDate.setHours(0, 0, 0, 0);
   today.setHours(0, 0, 0, 0);
 
   const diffInMs = today.getTime() - inputDate.getTime();
-  const diffInDays = diffInMs / (1000 * 60 * 60 * 24);
+  const diffInDays = diffInMs / 86400000;
 
-  return diffInDays >= 7;
+  return diffInDays > 1;
 }
 
  scrollTotop(){
