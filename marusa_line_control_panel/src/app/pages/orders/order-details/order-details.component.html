@@ -58,9 +58,9 @@
                                 <i class="fas fa-calendar"></i>
                                 {{ order.createDate | date : 'dd MMM yyyy' }} 
                             </div> 
-                            <div class="delivery-align info-background detail" *ngIf="posts.quantity>0">
+                            <div class="delivery-align info-background detail">
                                 <p class="">რაოდენობა :</p>
-                                <p>{{productQuantity}}</p>   
+                                <p>{{order.productQuantity}}</p>   
                             </div>
                             <div class="delivery-align info-background detail">
                                 <p style="text-align: center;">{{order.deliveryType}}</p>

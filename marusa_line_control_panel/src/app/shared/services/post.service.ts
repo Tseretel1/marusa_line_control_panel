@@ -46,9 +46,6 @@ export class PostService {
   deletePhoto(PhotoId:number): Observable<any> {
     return this.http.post<any>(this.apiUrl + `ControlPanel/delete-photo?photoId=${PhotoId}`,{});
   }
-  getProductTypes(): Observable<ProductTypes[]> {
-    return this.http.get<ProductTypes[]>(this.apiUrl+'ControlPanel/get-product-types');
-  }
   getTotalLikesCount(): Observable<number> {
     return this.http.get<number>(this.apiUrl+'ControlPanel/get-like-count');
   }
@@ -82,6 +79,18 @@ export class PostService {
   GetDahsboardStatistics(date:StartEndDate): Observable<any> {
     console.log(date)
     return this.http.post<any>(this.apiUrl+`ControlPanel/get-statistics`,date);
+  }
+  getProductTypes(): Observable<ProductTypes[]> {
+    return this.http.get<ProductTypes[]>(this.apiUrl+'ControlPanel/get-product-types');
+  }
+  InsertProductTypes(productType:string): Observable<ProductTypes[]> {
+    return this.http.post<ProductTypes[]>(this.apiUrl+`ControlPanel/insert-product-type?productType=${productType}`,{});
+  }
+  EditProductTypes(id:number,productType:string): Observable<ProductTypes[]> {
+    return this.http.post<ProductTypes[]>(this.apiUrl+`ControlPanel/insert-product-type?id=${id}&productType=${productType}`,{});
+  }
+  DeleteProductTypes(id:number): Observable<ProductTypes[]> {
+    return this.http.delete<ProductTypes[]>(this.apiUrl+`ControlPanel/insert-product-type?id=${id}`,{});
   }
 }
 export interface StartEndDate{
