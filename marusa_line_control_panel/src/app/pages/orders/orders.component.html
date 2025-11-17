@@ -16,16 +16,16 @@
             </div>
             <div class="stats-align">
                 <div class="stat" *ngIf="getOrderDto.IsPaid">
-                    გადახდილი შეკვეთები  <p >{{dashboardStats.paidOrdersCount}}</p> 
+                   შეკვეთების რაოდენობა <p class="money paid">{{dashboardStats.paidOrdersCount}}₾ </p> 
                 </div>
                 <div class="stat" *ngIf="getOrderDto.IsPaid">
-                   შემოსავალი <p class="money paid">{{dashboardStats.totalPaidAmount}}₾ </p> 
+                   ჯამი <p class="money paid">{{dashboardStats.totalPaidAmount}}₾ </p> 
                 </div>
                 <div class="stat unpaid" *ngIf="!getOrderDto.IsPaid">
-                   გადასახდელი შეკვეთები {{dashboardStats.unpaidOrdersCount}}
+                   შეკვეთების რაოდენობა<p class="money unpaid">{{dashboardStats.unpaidOrdersCount}}</p> 
                 </div>
                 <div class="stat unpaid" *ngIf="!getOrderDto.IsPaid">
-                   პოტენციური შემოსავალი <p class="money unpaid">{{dashboardStats.totalUnPaidAmount}}₾</p> 
+                   ჯამი <p class="money unpaid">{{dashboardStats.totalUnPaidAmount}}₾</p> 
                 </div>
 
             </div>
