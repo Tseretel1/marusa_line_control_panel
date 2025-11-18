@@ -1,11 +1,12 @@
 import { HttpClient, HttpParamsOptions } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { filter, Observable } from 'rxjs';
 import { InsertPost } from '../../pages/edit-post/edit-post.component';
 import { UntypedFormBuilder } from '@angular/forms';
-import { orderStatuses } from '../../pages/orders/order-details/order-details.component';
+import { orderStatuses, User } from '../../pages/orders/order-details/order-details.component';
 import { innerFrom } from 'rxjs/internal/observable/innerFrom';
 import { getPosts } from '../../pages/posts/posts.component';
+import { GetUserFilteredDto, GetusersDto } from '../../pages/users/users.component';
 @Injectable({
   providedIn: 'root'
 })
@@ -91,6 +92,15 @@ export class PostService {
   }
   DeleteProductTypes(id:number): Observable<ProductTypes[]> {
     return this.http.delete<ProductTypes[]>(this.apiUrl+`ControlPanel/insert-product-type?id=${id}`,{});
+  }
+  GetUsersList(filter:GetUserFilteredDto): Observable<GetusersDto[]> {
+    return this.http.post<GetusersDto[]>(this.apiUrl+`ControlPanel/get-users`,filter);
+  }
+  GetUsersById(id:number): Observable<GetusersDto> {
+    return this.http.get<GetusersDto>(this.apiUrl+`ControlPanel/get-user-by-id?id=${id}`);
+  }
+  BlockOrUnblockUser(id:number, role:string): Observable<any> {
+    return this.http.put<any>(this.apiUrl+`ControlPanel/update-user-role?id=${id}&role=${role}`,{});
   }
 }
 export interface StartEndDate{

@@ -1,0 +1,69 @@
+<div class="user-component">
+    <div class="filters-align">
+        <div class="search-align">
+           <input class="user-search" type="number" [(ngModel)]="userId" (change)="getUserById()">
+           <button class="search-button" (click)="getUserById()"> <i class="fas fa-search"></i></button>
+        </div>
+        <div class="filter" [ngClass]="{'active-filter':getuserFitler.isBlocked==null}" (click)="getEveryUser()" >ყველა {{totalCount}}</div>
+        <div class="filter" [ngClass]="{'active-filter':!getuserFitler.isBlocked}" (click)="getUserByBlocked(false)">მომხმარებლები</div>
+        <div class="filter" [ngClass]="{'active-filter':getuserFitler.isBlocked}" (click)="getUserByBlocked(true)">დაბლოკილი</div>
+    </div>
+    <div class="user-align">
+        <div class="user" *ngFor="let u of users">
+            <div class="status-align">
+                <button class="role userid" >{{u.id}}</button>
+                <button class="role" *ngIf="u.role=='User'" (click)="openBlockModal(u.id,true)" >{{u.role}}</button>
+                <button class="role block" *ngIf="u.role=='Blocked'" (click)="openBlockModal(u.id,false)">{{u.role}}</button>
+            </div>
+            <div class="user-profile">
+                <div class="user-profile-container">
+                    <img [src]="u.profilePhoto" class="user-img" alt="">
+                </div>
+                <p class="username">{{u.name}}</p>
+                <div class="info-align">
+                    <p class="info">{{u.phoneNumber}} </p>
+                    <button class="copy-btn"><i class="fas fa-copy"></i></button>
+                </div>
+                <div class="info-align">
+                    <p class="info">{{u.email}}</p>
+                    <button class="copy-btn"><i class="fas fa-copy"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="block-modal-align" *ngIf="blockModalNum!=0">
+    <div class="block-modal-back" (click)="hideBlockModal()"></div>
+    <div class="block-modal">
+        <button class="button green" *ngIf="!isBlocked" (click)="blockOrUnblockUser('User')">განბლოკვა</button>
+        <button class="button red" *ngIf="isBlocked" (click)="blockOrUnblockUser('Blocked')">დაბლოკვა</button>
+    </div>
+</div>
+
+
+
+<div class="center-pagenation">
+     <div class="pageination-align">
+    <div class="buttons-align">
+       <button class="next-button" type="button" (click)="changePage(selectedPage - 1)">
+         <span class="btn-inner--icon">
+           ◀
+         </span>
+       </button>
+       <div class="page-numbers-align">
+         <ng-container *ngFor="let p of [0,1,2,3,4]">
+           <button *ngIf="(pageNumber + p) <= totalPages" class="pageination-buttons"
+             [class.selected]="selectedPage === (pageNumber + p)" (click)="changePage(pageNumber + p)">
+             {{ pageNumber + p }}
+           </button>
+         </ng-container>
+       </div>
+       <button class="next-button" type="button" (click)="changePage(selectedPage + 1)">
+         <span class="btn-inner--icon">
+          ▶
+         </span>
+       </button>
+    </div>
+</div>
+</div>
