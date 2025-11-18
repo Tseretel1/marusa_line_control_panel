@@ -4,9 +4,11 @@
            <input class="user-search" type="number" [(ngModel)]="userId" (change)="getUserById()">
            <button class="search-button" (click)="getUserById()"> <i class="fas fa-search"></i></button>
         </div>
-        <div class="filter" [ngClass]="{'active-filter':getuserFitler.isBlocked==null}" (click)="getEveryUser()" >ყველა {{totalCount}}</div>
+        <div class="filter">{{totalCount}}</div>
+        <div class="filter" [ngClass]="{'active-filter':getuserFitler.isBlocked==null}" (click)="getEveryUser()" >ყველა</div>
         <div class="filter" [ngClass]="{'active-filter':!getuserFitler.isBlocked}" (click)="getUserByBlocked(false)">მომხმარებლები</div>
         <div class="filter" [ngClass]="{'active-filter':getuserFitler.isBlocked}" (click)="getUserByBlocked(true)">დაბლოკილი</div>
+         
     </div>
     <div class="user-align">
         <div class="user" *ngFor="let u of users">
@@ -40,7 +42,6 @@
         <button class="button red" *ngIf="isBlocked" (click)="blockOrUnblockUser('Blocked')">დაბლოკვა</button>
     </div>
 </div>
-
 
 
 <div class="center-pagenation">

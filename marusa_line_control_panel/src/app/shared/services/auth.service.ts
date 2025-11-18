@@ -15,9 +15,7 @@ export class AuthService {
   private apiUrl = 'https://localhost:7173/';
   constructor(private http:HttpClient)
   {
-
   }
-
   Login(obj: Auth): Observable<any> {
     return this.http.post<any>(this.apiUrl + `ControlPanel/login`, obj);
   }

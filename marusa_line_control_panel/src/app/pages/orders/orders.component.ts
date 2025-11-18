@@ -31,7 +31,7 @@ export class OrdersComponent implements OnInit{
     IsPaid : false,
     OrderId : null,
     PageNumber : 1,
-    PageSize : 10,
+    PageSize : 25,
   }
 
 

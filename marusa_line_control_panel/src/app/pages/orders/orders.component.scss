@@ -9,7 +9,6 @@ button{
         width: 90%;
         display: flex;
         flex-direction: column;
-        align-items: center;
         gap: 20px;
         .dashboard{
             display: flex;
@@ -33,6 +32,7 @@ button{
                     padding: 5px 10px;
                     border-radius: 5px;
                     background-color: rgba(0, 0, 0, 0.397);  align-items: center;
+                    border: 1px solid rgba(128, 128, 128, 0.527);
                     input{
                         width: 100%;
                     }
@@ -49,17 +49,20 @@ button{
                 border-radius: 5px;
                 background-color: rgba(0, 0, 0, 0.397);
                 color: white;
+                border: 1px solid rgba(128, 128, 128, 0.527);
                 cursor: pointer;
             }
             .stats-align{
                 display: flex;
                 gap: 10px;
+                overflow-x: scroll;
                 .stat{
                     background-color: rgba(0, 0, 0, 0.445);
                     padding: 5px 10px;
                     border-radius:5px;
                     display: flex;
                     align-items: center;
+                    border: 1px solid rgba(128, 128, 128, 0.527);
                     gap: 10px;
                     .money{
                         border-radius: 5px;
@@ -79,6 +82,9 @@ button{
                 .paid{
                     columns: whitex;
                 }
+            }
+            .stats-align::-webkit-scrollbar{
+                display: none;
             }
         }
         .order-filter-align{
@@ -120,7 +126,7 @@ button{
             width: 100%;
             display: grid;
             grid-template-columns: repeat(4,1fr);
-            gap: 20px;
+            gap: 10px;
             .order-card{
                 width: 100%;
                 color: white;
@@ -130,6 +136,8 @@ button{
                 background-color: rgba(0, 0, 0, 0.263);
                 align-items: center;
                 gap: 10px;
+                border: 1px solid rgba(128, 128, 128, 0.459);
+                border-radius: 5px;
                 cursor: pointer;
                 .pay-align{
                     width: 100%;
