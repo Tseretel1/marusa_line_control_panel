@@ -19,6 +19,11 @@
                                 {{posts.title}}
                             </p>
                         </div> 
+                        <div class="photo-container"  data-aos="fade-in">
+                             <div *ngFor="let p of photosArray; let i = index" >
+                                 <img [src]="p.photoUrl" *ngIf="i==0" alt="" class="photo">
+                             </div>
+                        </div>
                         <div class="product-details-align user-information">
                             <div class="delivery-align info-background detail">
                                 <div class="user-container">
@@ -32,15 +37,15 @@
                             </div>    
                             <div class="delivery-align info-background detail">
                                 <i class="fas fa-flag"></i>
-                                <p style="text-align: center;">{{user.location}}</p>
+                                <p style="text-align: center;">{{order.address}}</p>
                             </div>       
                         </div>
-                        <div class="photo-container"  data-aos="fade-in">
-                             <div *ngFor="let p of photosArray; let i = index" >
-                                 <img [src]="p.photoUrl" *ngIf="i==0" alt="" class="photo">
-                             </div>
-                        </div>
-                        
+                        <div class="comment-align user-information" >
+                            <div class="form-group">
+                                <label for="" style="display: flex; gap: 20px; color: white;" >კომენტარი <p style="color: gray;">{{comment.length}}/300</p> </label>
+                                <textarea [(ngModel)]="comment" disabled="true" class="form-control"  maxlength="300" style="min-height: 100px;"></textarea>
+                            </div>
+                        </div> 
                         <div class="product-details-align user-information">
                             <div class="detail-align " (click)="openModal(1)">
                                 <div class="detail info-background" *ngIf="!order.isPaid" [ngClass]="{'to-payed':!order.isPaid}">
@@ -66,12 +71,6 @@
                                 <p style="text-align: center;">{{order.deliveryType}}</p>
                             </div>     
                         </div>
-                        <div class="comment-align user-information" >
-                            <div class="form-group">
-                                <label for="" style="display: flex; gap: 20px; color: white;" >კომენტარი <p style="color: gray;">{{comment.length}}/300</p> </label>
-                                <textarea [(ngModel)]="comment" disabled="true" class="form-control"  maxlength="300" style="min-height: 100px;"></textarea>
-                            </div>
-                        </div> 
                     </div>
 
                     <div class="user-information" >

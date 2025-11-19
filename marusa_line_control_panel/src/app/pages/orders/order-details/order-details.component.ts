@@ -89,7 +89,7 @@ export class OrderDetailsComponent {
     else{
       this.order.isPaid = false;
     }
-    this.postService.changeOrderIsPaid(this.order.orderId, isPaid).subscribe((resp)=>{});
+    this.postService.changeOrderIsPaid(this.order.orderId, isPaid, this.order.productQuantity).subscribe((resp)=>{});
     this.modalGroupNum = 0;
   }
   changeOrderStatusId(statusId:number){
@@ -168,6 +168,9 @@ export interface OrderDetailsDto {
   comment: string;
   finalPrice: number;
   user:User;
+  address:string;
+  lng:string;
+  lat:string;
 }
 
 
