@@ -84,14 +84,14 @@ export class PostService {
   getProductTypes(): Observable<ProductTypes[]> {
     return this.http.get<ProductTypes[]>(this.apiUrl+'ControlPanel/get-product-types');
   }
-  InsertProductTypes(productType:string): Observable<ProductTypes[]> {
-    return this.http.post<ProductTypes[]>(this.apiUrl+`ControlPanel/insert-product-type?productType=${productType}`,{});
+  InsertProductTypes(productType:string): Observable<any> {
+    return this.http.post<any>(this.apiUrl+`ControlPanel/insert-product-type?productType=${productType}`,{});
   }
-  EditProductTypes(id:number,productType:string): Observable<ProductTypes[]> {
-    return this.http.post<ProductTypes[]>(this.apiUrl+`ControlPanel/insert-product-type?id=${id}&productType=${productType}`,{});
+  EditProductTypes(id:number,productType:string): Observable<any> {
+    return this.http.post<any>(this.apiUrl+`ControlPanel/edit-product-type?id=${id}&productType=${productType}`,{});
   }
-  DeleteProductTypes(id:number): Observable<ProductTypes[]> {
-    return this.http.delete<ProductTypes[]>(this.apiUrl+`ControlPanel/insert-product-type?id=${id}`,{});
+  DeleteProductTypes(id:number): Observable<any> {
+    return this.http.delete<any>(this.apiUrl+`ControlPanel/delete-product-type?id=${id}`,{});
   }
   GetUsersList(filter:GetUserFilteredDto): Observable<GetusersDto[]> {
     return this.http.post<GetusersDto[]>(this.apiUrl+`ControlPanel/get-users`,filter);

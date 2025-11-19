@@ -5,11 +5,12 @@ import { provideSweetAlert2 } from '@sweetalert2/ngx-sweetalert2';
 import { RouterLink } from '@angular/router';
 import { AppRoutes } from '../../shared/AppRoutes/AppRoutes';
 import * as AOS from 'aos'
-import { GetPost, PostService } from '../../shared/services/post.service';
-
+import { GetPost, PostService, ProductTypes } from '../../shared/services/post.service';
+import Swal from 'sweetalert2';
+import { FormsModule } from '@angular/forms';
 @Component({
   selector: 'app-posts',
-  imports: [CommonModule, PhotoAlbumComponent, RouterLink],
+  imports: [CommonModule, PhotoAlbumComponent, RouterLink, FormsModule],
   templateUrl: './posts.component.html',
   styleUrl: './posts.component.scss'
 })
@@ -22,6 +23,7 @@ export class PostsComponent implements OnInit{
       once: false, 
     });
     this.getActivePosts();
+    this.getProductTypes();
   }
   
 
@@ -103,6 +105,64 @@ export class PostsComponent implements OnInit{
   }
  
   totalPages:number =0;
+  productTypesList :ProductTypes[]= [];
+  getProductTypes(){
+    this.postService.getProductTypes().subscribe(
+      (resp)=>{
+        this.productTypesList = resp;
+      }
+    )
+  }
+
+  TypeString :string = '';
+  AddType :string = '';
+  TypeToeditNum:number = 0;
+  openTypeToEdit(num:number){
+    this.TypeToeditNum = num;
+    const typeName = this.productTypesList.find(x=>x.id == num);
+    if(typeName){
+      this.TypeString = typeName.productType;
+    }
+  }
+  hideTypeToEdit(){
+    this.TypeToeditNum = 0;
+  }
+  insertProductTypes(){
+  this.postService.InsertProductTypes(this.AddType).subscribe(
+    (resp)=>{
+      this.productTypesList =resp.productTypes;
+      this.AddType = '';
+    })
+  }
+  editProductTypes(){
+  if(this.TypeString!=''){
+    this.postService.EditProductTypes(this.TypeToeditNum,this.TypeString).subscribe(
+      (resp)=>{
+          const typeName = this.productTypesList.find(x=>x.id == this.TypeToeditNum);
+          if(typeName){
+          typeName.productType = this.TypeString;
+          this.hideTypeToEdit()
+          }
+      })
+    }
+  }
+  removeTypeCompletely(id: number) {
+    Swal.fire({
+      showConfirmButton: true,
+      showCancelButton: true,
+      cancelButtonText: 'არა',
+      cancelButtonColor: 'red',
+      confirmButtonText: 'დიახ',
+      confirmButtonColor: 'green',
+      title: 'ნამდვილად გსურთ ფოტოს წაშლა?',
+    }).then((results) => {
+      if (results.isConfirmed) {
+        this.postService.DeleteProductTypes(id).subscribe((resp) => {
+          this.productTypesList = resp.productTypes;
+        });
+      }
+    });
+  }
 }
 
 export interface getPosts{

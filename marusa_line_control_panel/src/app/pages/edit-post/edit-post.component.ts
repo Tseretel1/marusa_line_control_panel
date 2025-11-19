@@ -159,7 +159,7 @@ private submitPost() {
           confirmButtonColor: 'green',
           title: 'პოსტი წარმატებით რედაქტირდა!',
         });
-        window.location.reload();``
+        window.location.reload();
       }
     },
     (error) => {
@@ -243,6 +243,57 @@ private submitPost() {
       }
     )
   }
+
+  TypeString :string = '';
+  AddType :string = '';
+  TypeToeditNum:number = 0;
+  openTypeToEdit(num:number){
+    this.TypeToeditNum = num;
+    const typeName = this.productTypesList.find(x=>x.id == num);
+    if(typeName){
+      this.TypeString = typeName.productType;
+    }
+  }
+  hideTypeToEdit(){
+    this.TypeToeditNum = 0;
+  }
+  insertProductTypes(){
+  this.postService.InsertProductTypes(this.AddType).subscribe(
+    (resp)=>{
+      this.productTypesList =resp.productTypes;
+      this.AddType = '';
+    })
+  }
+  editProductTypes(){
+  if(this.TypeString!=''){
+    this.postService.EditProductTypes(this.TypeToeditNum,this.TypeString).subscribe(
+      (resp)=>{
+         const typeName = this.productTypesList.find(x=>x.id == this.TypeToeditNum);
+         if(typeName){
+          typeName.productType = this.TypeString;
+          this.hideTypeToEdit()
+         }
+      })
+    }
+  }
+  removeTypeCompletely(id: number) {
+    Swal.fire({
+      showConfirmButton: true,
+      showCancelButton: true,
+      cancelButtonText: 'არა',
+      cancelButtonColor: 'red',
+      confirmButtonText: 'დიახ',
+      confirmButtonColor: 'green',
+      title: 'ნამდვილად გსურთ ფოტოს წაშლა?',
+    }).then((results) => {
+      if (results.isConfirmed) {
+        this.postService.DeleteProductTypes(id).subscribe((resp) => {
+         this.productTypesList = resp.productTypes;
+        });
+      }
+    });
+  }
+
 }
 
 export interface InsertPost {

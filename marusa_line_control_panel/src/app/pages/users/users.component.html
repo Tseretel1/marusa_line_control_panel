@@ -6,7 +6,7 @@
         </div>
         <div class="filter">{{totalCount}}</div>
         <div class="filter" [ngClass]="{'active-filter':getuserFitler.isBlocked==null}" (click)="getEveryUser()" >ყველა</div>
-        <div class="filter" [ngClass]="{'active-filter':!getuserFitler.isBlocked}" (click)="getUserByBlocked(false)">მომხმარებლები</div>
+        <div class="filter" [ngClass]="{'active-filter':!getuserFitler.isBlocked}" (click)="getUserByBlocked(false)">ნებადართული</div>
         <div class="filter" [ngClass]="{'active-filter':getuserFitler.isBlocked}" (click)="getUserByBlocked(true)">დაბლოკილი</div>
          
     </div>
