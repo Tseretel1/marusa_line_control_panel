@@ -276,12 +276,14 @@ button{
             display: flex;
             align-items: center;
             justify-content: center;
+            cursor: pointer;
         }
        .icon-rotate-left {
          transform: rotate(180deg);
         }
         .btn{
             transition: 0.2s all ease-in-out;
+            cursor: pointer;
             margin: 0;
         }
         .btn:hover{
@@ -296,7 +298,8 @@ button{
                 border-radius: 5px;
                 font-size: 14px;
                 transition: 0.2s ;
-            }
+                cursor: pointer;
+             }
             .pageination-buttons:hover{
                 color: white;
                 background-color: #26B4FF;

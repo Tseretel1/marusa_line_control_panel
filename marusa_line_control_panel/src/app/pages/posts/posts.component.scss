@@ -98,6 +98,7 @@
             background-color: white;
             display: flex;
             align-items: center;
+            cursor: pointer;
             justify-content: center;
         }
        .icon-rotate-left {
@@ -119,6 +120,7 @@
                 border-radius: 5px;
                 font-size: 14px;
                 transition: 0.2s ;
+                cursor: pointer;
             }
             .pageination-buttons:hover{
                 color: white;
