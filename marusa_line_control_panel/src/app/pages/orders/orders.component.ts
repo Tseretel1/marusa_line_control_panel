@@ -17,9 +17,16 @@ export class OrdersComponent implements OnInit{
   ngOnInit(): void {
     this.getOrdersLocalstorage();
     this.getOrderStatuses();
-    this.getDashboardStats();
+    this.generateMonthsList();
+    this.setStats();
   }
 
+  setStats(){
+    this.setStartMonth();
+    this.setEndMonth();
+    this.generateYearsList();
+    this.getDashboardStats();
+  }
   AppRoutes = AppRoutes;
   constructor(private service: PostService){
 
@@ -160,10 +167,6 @@ export class OrdersComponent implements OnInit{
   } else {
     return 'ახლახანს';
   }
-
-  
-
-
 }
 
 
@@ -184,8 +187,8 @@ isOlderThan1Day(dateString: string | Date): boolean {
   }
 
 
-  startDate:string= '2025-11-01';
-  endDate: string = new Date().toISOString().split('T')[0];
+  startDate:string= '';
+  endDate: string = '';
 
   dashboardStats:Dashboard={
     totalPaidAmount : 0,
@@ -193,33 +196,122 @@ isOlderThan1Day(dateString: string | Date): boolean {
     paidOrdersCount:0,
     unpaidOrdersCount:0,
   }
+
+  dateBulilder(){
+    var startsMontstring = '';
+    if(this.startMonthNum<9){
+      startsMontstring = '0' +this.startMonthNum;
+    }
+    else{
+      startsMontstring = this.startMonthNum.toString(); 
+    }
+    var endMontstring = '';
+    if(this.endMonthNum<9){
+      endMontstring = '0'+this.endMonthNum;
+    }
+    else{
+      endMontstring = this.endMonthNum.toString(); 
+    }
+    this.startDate = this.currentYear + '-'+ startsMontstring + '-' + '01';
+    this.endDate = this.currentYear + '-'+ endMontstring + '-' + new Date().getDate();
+  }
   getDashboardStats(){
+    this.dateBulilder();
     const dashboard:StartEndDate={
       startDate :this.startDate,
       EndDate :this.endDate,
     }
+    console.log(dashboard)
     this.service.GetDahsboardStatistics(dashboard).subscribe(
       (resp)=>{
         this.dashboardStats = resp.statistics;
-        console.log(resp)
       }
     )
   }
-  openDatePicker(input: HTMLInputElement) {
-    input.showPicker?.();
-    input.click();          
+  dateOpened:number = 0;
+  dateOpen(num:number){
+    this.dateOpened = num;
+  }
+  dateHide(){
+    this.dateOpened= 0;
+  }
+  MonthsList: Months[] = [];
+  generateMonthsList() {
+    const names = [
+      'იანვარი', 'თებერვალი', 'მარტი', 'აპრილი', 'მაისი', 'ივნისი',
+      'ივლისი', 'აგვისტო', 'სექტემბერი', 'ოქტომბერი', 'ნოემბერი', 'დეკემბერი'
+    ];
+    names.forEach((element, index) => {
+      const insertMonth: Months = {
+        id: index + 1,
+        MonthName: element,
+      };
+      this.MonthsList.push(insertMonth);
+    });
+  }
+  changeStartMonth(monthNum:number){
+    this.startMonthNum = monthNum;
+    setTimeout(() => {
+      this.dateHide();
+    }, 100);
+  }
+  changeEndMonth(monthNum:number){
+    this.endMonthNum = monthNum;
+    setTimeout(() => {
+      this.dateHide();
+    }, 100);
   }
 
+
+
+
+
+  startMonthNum:number = 1;
+  endMonthNum:number = 1;
+  setStartMonth() {
+     this.startMonthNum = new Date().getMonth()+ 1;
+  }
+  setEndMonth() {
+     this.endMonthNum = new Date().getMonth() + 1;
+  }
+  getStartMothName(): string | undefined {
+    const found = this.MonthsList.find(m => m.id === this.startMonthNum);
+    return found?.MonthName;
+  }
+  getEndMonthName(): string | undefined {
+    const found = this.MonthsList.find(m => m.id === this.endMonthNum);
+    return found?.MonthName;
+  }
+  Years:number[]=[]
+  currentYear:number = 0;
+  generateYearsList() {
+    const currentYear = new Date().getFullYear();
+    this.currentYear = currentYear;
+    this.Years = []; 
+    for (let i = 0; i <= 5; i++) {
+      this.Years.push(currentYear - i);
+    }
+  }
+  changeYear(num:number){
+    this.currentYear = num;
+    setTimeout(() => {
+      this.dateHide();
+    }, 100);
+  }
 }
 export interface orderStatuses{
  id:number;
  statusName:string;
 }
 
-
 export interface Dashboard{
   totalPaidAmount:number;
   totalUnPaidAmount:number;
   paidOrdersCount:number;
   unpaidOrdersCount:number;
+}
+
+export interface Months{
+  id:number;
+  MonthName:string;
 }

@@ -78,7 +78,6 @@ export class PostService {
     return this.http.delete<any>(this.apiUrl+`ControlPanel/delete-order?orderId=${orderId}`,{});
   }
   GetDahsboardStatistics(date:StartEndDate): Observable<any> {
-    console.log(date)
     return this.http.post<any>(this.apiUrl+`ControlPanel/get-statistics`,date);
   }
   getProductTypes(): Observable<ProductTypes[]> {
