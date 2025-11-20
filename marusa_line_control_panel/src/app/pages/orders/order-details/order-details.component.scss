@@ -195,6 +195,11 @@
             align-items: center;
             gap: 10px;
             width: 100%;
+            flex-direction: column;
+            p {
+                text-align: center; 
+                word-break: break-all;
+            };
             .form-control{
                 border: none;
                 border-radius: 5px;
@@ -209,7 +214,9 @@
                 background-color: rgb(31, 30, 30);
             }
         }
-
+        .user-profile{
+            flex-direction: column;
+        }
         .quantity-align{
             display: flex;
             gap: 5px;

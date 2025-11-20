@@ -25,28 +25,6 @@
                              </div>
                         </div>
                         <div class="product-details-align user-information">
-                            <div class="delivery-align info-background detail">
-                                <div class="user-container">
-                                    <img [src]="user?.profilePhoto" class="user-img" alt="">
-                                </div>
-                                {{user.name}}
-                            </div>  
-                            <div class="delivery-align info-background detail">
-                                <i class="fas fa-phone" style="color: green;"></i>
-                                <p style="text-align: center;">{{user.phoneNumber}}</p>
-                            </div>    
-                            <div class="delivery-align info-background detail">
-                                <i class="fas fa-flag"></i>
-                                <p style="text-align: center;">{{order.address}}</p>
-                            </div>       
-                        </div>
-                        <div class="comment-align user-information" >
-                            <div class="form-group">
-                                <label for="" style="display: flex; gap: 20px; color: white;" >კომენტარი <p style="color: gray;">{{comment.length}}/300</p> </label>
-                                <textarea [(ngModel)]="comment" disabled="true" class="form-control"  maxlength="300" style="min-height: 100px;"></textarea>
-                            </div>
-                        </div> 
-                        <div class="product-details-align user-information">
                             <div class="detail-align " (click)="openModal(1)">
                                 <div class="detail info-background" *ngIf="!order.isPaid" [ngClass]="{'to-payed':!order.isPaid}">
                                     <p class="" >გადასახდელი</p>
@@ -59,34 +37,45 @@
                                     <i class="fas fa-credit-card" ></i>
                                 </div>
                             </div>
+                            <div class="detail info-background" (click)="openModal(2)">
+                                {{getStatusName(order.statusId)}}
+                                <!-- <i class="fas fa-spinner topay" *ngIf="!order.isPaid"></i> -->
+                                <p class="" *ngIf="order.isPaid"></p>
+                                <p *ngIf="order.statusId ==3">✅</p>
+                            </div>   
+                        </div>
+                        <div class="product-details-align user-information">
+                            <div class="delivery-align info-background detail user-profile">
+                                <div class="user-container">
+                                    <img [src]="user?.profilePhoto" class="user-img" alt="">
+                                </div>
+                                <p style="word-break: break-all;">
+                                    {{user.name}}
+                                </p>
+                            </div>  
+                            <div class="delivery-align info-background detail">
+                                <i class="fas fa-phone" style="color: green;"></i>
+                                <p >{{user.phoneNumber}}</p>
+                            </div>    
+                            <div class="delivery-align info-background detail">
+                                <p >{{user.email}}</p>
+                            </div>       
+                            <div class="delivery-align info-background detail">
+                                <i class="fas fa-flag"></i>
+                                <p >{{order.address}}</p>
+                            </div>  
                             <div class="info-background date detail">
                                 <i class="fas fa-calendar"></i>
                                 {{ order.createDate | date : 'dd MMM yyyy' }} 
                             </div> 
                             <div class="delivery-align info-background detail">
-                                <p class="">რაოდენობა :</p>
-                                <p>{{order.productQuantity}}</p>   
+                                <p class="">რაოდენობა :{{order.productQuantity}}</p>
                             </div>
-                            <div class="delivery-align info-background detail">
-                                <p style="text-align: center;">{{order.deliveryType}}</p>
-                            </div>     
                         </div>
-                    </div>
-
-                    <div class="user-information" >
-                        <div class="rules-align">
-                            <div class="rulessss" >
-                                <div class="title"><b>შეკვეთის სტატუსი<i class="fas fa-file-alt"></i></b></div>
-                                <div class="rules">
-                                    <div class="detail-align">
-                                        <div class="detail info-background" (click)="openModal(2)">
-                                            {{getStatusName(order.statusId)}}
-                                            <!-- <i class="fas fa-spinner topay" *ngIf="!order.isPaid"></i> -->
-                                            <p class="" *ngIf="order.isPaid"></p>
-                                            <p *ngIf="order.statusId ==3">✅</p>
-                                        </div>
-                                    </div>
-                                </div>
+                        <div class="comment-align user-information" >
+                            <div class="form-group">
+                                <label for="" style="display: flex; gap: 20px; color: white;" >კომენტარი <p style="color: gray;">{{comment.length}}/300</p> </label>
+                                <textarea [(ngModel)]="comment" disabled="true" class="form-control"  maxlength="300" style="min-height: 100px;"></textarea>
                             </div>
                         </div> 
                     </div>

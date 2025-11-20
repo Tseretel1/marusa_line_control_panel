@@ -173,12 +173,8 @@ export class OrdersComponent implements OnInit{
 isOlderThan1Day(dateString: string | Date): boolean {
   const inputDate = new Date(dateString);
   const today = new Date();
-  inputDate.setHours(0, 0, 0, 0);
-  today.setHours(0, 0, 0, 0);
-
   const diffInMs = today.getTime() - inputDate.getTime();
   const diffInDays = diffInMs / 86400000;
-
   return diffInDays > 1;
 }
 
@@ -197,24 +193,22 @@ isOlderThan1Day(dateString: string | Date): boolean {
     unpaidOrdersCount:0,
   }
 
-  dateBulilder(){
-    var startsMontstring = '';
-    if(this.startMonthNum<9){
-      startsMontstring = '0' +this.startMonthNum;
+ dateBulilder() {
+  const startMonthString = this.startMonthNum.toString().padStart(2, '0');
+  const endMonthString = this.endMonthNum.toString().padStart(2, '0');
+  this.startDate = `${this.currentYear}-${startMonthString}-01`;
+
+  const currentMonth = new Date().getMonth() + 1; 
+
+  if (this.endMonthNum === currentMonth) {
+    const today = new Date().getDate();
+    this.endDate = `${this.currentYear}-${endMonthString}-${today}`;
+  } else {
+    const lastDay = new Date(this.currentYear, this.endMonthNum, 0).getDate();
+    this.endDate = `${this.currentYear}-${endMonthString}-${lastDay}`;
     }
-    else{
-      startsMontstring = this.startMonthNum.toString(); 
-    }
-    var endMontstring = '';
-    if(this.endMonthNum<9){
-      endMontstring = '0'+this.endMonthNum;
-    }
-    else{
-      endMontstring = this.endMonthNum.toString(); 
-    }
-    this.startDate = this.currentYear + '-'+ startsMontstring + '-' + '01';
-    this.endDate = this.currentYear + '-'+ endMontstring + '-' + new Date().getDate();
   }
+
   getDashboardStats(){
     this.dateBulilder();
     const dashboard:StartEndDate={
@@ -259,6 +253,11 @@ isOlderThan1Day(dateString: string | Date): boolean {
     this.endMonthNum = monthNum;
     setTimeout(() => {
       this.dateHide();
+    if (this.endMonthNum === new Date().getMonth()+1) {
+      this.thisLastDay = new Date().getDate();
+    } else {
+      this.thisLastDay =new Date(this.currentYear, this.endMonthNum, 0).getDate(); 
+    }
     }, 100);
   }
 
@@ -273,6 +272,7 @@ isOlderThan1Day(dateString: string | Date): boolean {
   }
   setEndMonth() {
      this.endMonthNum = new Date().getMonth() + 1;
+     this.getEndDay();
   }
   getStartMothName(): string | undefined {
     const found = this.MonthsList.find(m => m.id === this.startMonthNum);
@@ -282,8 +282,13 @@ isOlderThan1Day(dateString: string | Date): boolean {
     const found = this.MonthsList.find(m => m.id === this.endMonthNum);
     return found?.MonthName;
   }
-  getDate(){
-    return new Date().getDate() 
+  thisLastDay:number = 0;
+  getEndDay(){
+    if (this.endMonthNum === new Date().getMonth()+1) {
+      this.thisLastDay = new Date().getDate();
+    } else {
+      this.thisLastDay =new Date(this.currentYear, this.endMonthNum, 0).getDate(); 
+    }
   }
   Years:number[]=[]
   currentYear:number = 0;
