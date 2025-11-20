@@ -282,6 +282,9 @@ isOlderThan1Day(dateString: string | Date): boolean {
     const found = this.MonthsList.find(m => m.id === this.endMonthNum);
     return found?.MonthName;
   }
+  getDate(){
+    return new Date().getDate() 
+  }
   Years:number[]=[]
   currentYear:number = 0;
   generateYearsList() {

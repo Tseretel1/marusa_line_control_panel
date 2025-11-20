@@ -89,15 +89,19 @@ button{
                     cursor: pointer;
                 }
                 .dates{
+                    display: flex;
+                    align-items: center;
+                    text-wrap: nowrap;
                 }
             }
             .search-date{
                 padding: 5px 10px;
                 border-radius: 5px;
-                background-color: rgba(0, 0, 0, 0.397);
-                color: white;
-                border: 1px solid rgba(128, 128, 128, 0.527);
+                background-color: white;
+                color: black;
+                border: 1px solid black;
                 cursor: pointer;
+                font-weight: bolder;
             }
             .stats-align{
                 display: flex;
