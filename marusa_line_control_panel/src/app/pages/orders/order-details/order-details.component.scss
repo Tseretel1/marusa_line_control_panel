@@ -154,6 +154,8 @@
             }
         }
     }
+        
+
     .photo-container{
         border-radius: 5px;
         width: 100%;
@@ -471,6 +473,11 @@ textarea{
     background-color: green;
 }
 
+@media screen and (max-width: 600px) {
+    #map {
+        height: 300px;
+    }
+}
 
 
 

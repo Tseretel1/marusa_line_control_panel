@@ -7,12 +7,12 @@
                     <th (click)="getActivePosts()">
                         აქტიური
                         <i class="fas fa-camera"></i>
-                        <b style="color: green; padding: 0px 10px;">{{posts[0].totalActiveProducts}}</b>
+                        <b style="color: green; padding: 0px 10px;">{{posts[0]?.totalActiveProducts}}</b>
                     </th>
                     <th (click)="getDeletedPosts()">
                         დამალული
                         <i class="fas fa-camera"></i>
-                        <b style="color: orange; padding: 0px 10px;">{{posts[0].totalDeletedProducts}}</b>
+                        <b style="color: orange; padding: 0px 10px;">{{posts[0]?.totalDeletedProducts}}</b>
                     </th>
                     <th>
                         ლაიქები 

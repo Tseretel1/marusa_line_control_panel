@@ -1,19 +1,20 @@
-import { Component, HostListener, OnInit } from '@angular/core';
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { AfterViewInit, Component, HostListener, OnInit } from '@angular/core';
+import { ActivatedRoute, Router, RouterLink, ɵEmptyOutletComponent } from '@angular/router';
 import { CommonModule, DatePipe, NgFor } from '@angular/common';
 import * as  AOS from 'aos';
 import Swal from 'sweetalert2';
 import { FormsModule, ɵInternalFormsSharedModule } from "@angular/forms";
 import { PostService } from '../../../shared/services/post.service';
 import { AppRoutes } from '../../../shared/AppRoutes/AppRoutes';
+import * as L from 'leaflet';
 
 @Component({
   selector: 'app-order-details',
-  imports: [CommonModule,FormsModule,DatePipe],
+  imports: [CommonModule, FormsModule, DatePipe, ɵEmptyOutletComponent],
   templateUrl: './order-details.component.html',
   styleUrl: './order-details.component.scss'
 })
-export class OrderDetailsComponent {
+export class OrderDetailsComponent implements OnInit{
  
   AppRoutes = AppRoutes;
 
@@ -33,6 +34,8 @@ export class OrderDetailsComponent {
       (resp)=>{
         this.posts = resp.product;
         this.order = resp.orders;
+        this.Map.lat = this.order.lat;
+        this.Map.lng = this.order.lng;
         this.comment = this.order.comment;
         this.user = this.order.user;
         this.posts.photos.forEach(item => {
@@ -40,6 +43,7 @@ export class OrderDetailsComponent {
         });
         this.productPrice = this.order.finalPrice;
         this.postsLoaded = true;
+        this.initMap();
       }
     );
   }
@@ -130,6 +134,59 @@ export class OrderDetailsComponent {
   modalcancel(){
     this.modalGroupNum = 0;
   }
+  Map: Lnglat = {
+    lat: '',
+    lng: '',
+  };
+
+  map!: L.Map;
+  marker!: L.Marker;
+  location: Lnglat = {
+    lat: '',
+    lng: '',
+  };
+
+
+
+  initMap(): void {
+    delete (L.Icon.Default.prototype as any)._getIconUrl;
+    L.Icon.Default.mergeOptions({
+      iconRetinaUrl: 'assets/leaflet/marker-icon-2x.png',
+      iconUrl: 'assets/leaflet/marker-icon.png',
+      shadowUrl: 'assets/leaflet/marker-shadow.png',
+      iconSize: [20, 30],
+    });
+
+    let lat = Number(this.Map.lat);
+    let lng = Number(this.Map.lng);
+    this.map = L.map('map').setView([lat, lng], 14);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '© OpenStreetMap contributors',
+    }).addTo(this.map);
+
+    if (!isNaN(lat) && !isNaN(lng)) {
+      this.marker = L.marker([lat, lng]).addTo(this.map);
+      this.location = { lat: lat.toString(), lng: lng.toString() };
+    }
+
+    this.map.on('click', (e: L.LeafletMouseEvent) => {
+      const { lat, lng } = e.latlng;
+
+      if (this.marker) {
+        this.marker.setLatLng(e.latlng);
+      } else {
+        this.marker = L.marker(e.latlng).addTo(this.map);
+      }
+
+      this.location = { lat: lat.toString(), lng: lng.toString() };
+    });
+  }
+}
+
+export interface Lnglat {
+  lat: string;
+  lng: string;
 }
 
  interface Photo {
