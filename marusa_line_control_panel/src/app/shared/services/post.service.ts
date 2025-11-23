@@ -12,7 +12,7 @@ import { GetUserFilteredDto, GetusersDto } from '../../pages/users/users.compone
 })
 export class PostService {
 
-  private apiUrl = 'https://localhost:7173/';
+  private apiUrl = 'https://192.168.1.10:7174/';
   constructor(private http:HttpClient)
   {
 

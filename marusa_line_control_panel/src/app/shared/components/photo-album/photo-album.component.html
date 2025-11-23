@@ -1,5 +1,16 @@
-<div class="photo-container">
-    <div class="information-align" [routerLink]="AppRoutes.editPosts+posts.id" [ngClass]="{'deleted-mark':posts.dateDeleted!=null}" >
+<div class="photo-container" *ngIf="posts.dateDeleted==null">
+    <div class="information-align" [routerLink]="AppRoutes.editPosts+posts.id">
+        <div class="text-align">
+            <b class="title">
+                {{posts.title}}
+            </b>
+        </div>
+    </div>
+    <img *ngIf="posts.photoUrl==null"  [src]="posts.photos[0]?.photoUrl" alt="" class="photo">
+    <img *ngIf="posts.photoUrl" [src]="posts.photoUrl" alt="" class="photo">
+</div>
+<div class="photo-container deleted" *ngIf="posts.dateDeleted!=null">
+    <div class="information-align" [routerLink]="AppRoutes.editPosts+posts.id">
         <div class="text-align">
             <b class="title">
                 {{posts.title}}
