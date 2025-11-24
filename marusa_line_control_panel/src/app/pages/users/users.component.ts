@@ -103,6 +103,8 @@ export interface GetusersDto {
   phoneNumber: string;
   role: string;
   totalCount:number;
+  paidOrdersCount: number,
+  unPaidOrdersCount: number,
 }
 
 export interface GetUserFilteredDto {

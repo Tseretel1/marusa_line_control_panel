@@ -30,6 +30,16 @@
                     <p class="info">{{u.email}}</p>
                     <button class="copy-btn"><i class="fas fa-copy"></i></button>
                 </div>
+                <div class="info-align" style="cursor: pointer;">
+                  <div class="order-count">
+                    <i class="fas fa-credit-card"></i>
+                    {{u.unPaidOrdersCount}}
+                  </div>
+                  <div class="order-count paid">
+                    <i class="fas fa-credit-card"></i>
+                    {{u.paidOrdersCount}}
+                  </div>
+                </div>
             </div>
         </div>
     </div>
