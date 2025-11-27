@@ -35,6 +35,7 @@ export class OrdersComponent implements OnInit{
   totalCount:number = 0;
   orders:OrderProduct []=[]
   getOrderDto:GetOrderDto={
+    UserId : null,
     IsPaid : false,
     OrderId : null,
     PageNumber : 1,
@@ -114,16 +115,17 @@ export class OrdersComponent implements OnInit{
 
   orderSearchNum !:number;
   OrderSearch(){
+    this.getOrderDto.UserId  = null;
     this.getOrderDto.OrderId = this.orderSearchNum;
     this.getOrders();
   }
-
-  @HostListener('window:keydown', ['$event'])
-  handleKeyboardEvent(event: KeyboardEvent) {
-    if (event.key === 'Enter') {
-      this.OrderSearch();
-    }
+  UserIdSearch !:number;
+  UserIdOrderSearch(){
+    this.getOrderDto.OrderId = null;
+    this.getOrderDto.UserId = this.UserIdSearch;
+    this.getOrders();
   }
+
   orderStatuses:orderStatuses[]= [];
   getOrderStatuses(){
     this.service.getOrderStatuses().subscribe(
@@ -177,10 +179,19 @@ isOlderThan1Day(dateString: string | Date): boolean {
   const diffInDays = diffInMs / 86400000;
   return diffInDays > 1;
 }
+isOlderThan7Day(dateString: string | Date): boolean {
+  const inputDate = new Date(dateString);
+  const today = new Date();
+  const diffInMs = today.getTime() - inputDate.getTime();
+  const day7 = 7 * 86400000;
+  const diffInDays = diffInMs / day7;
+  return diffInDays > 1;
+}
+
 
  scrollTotop(){
      window.scrollTo({ top: 0, behavior: 'smooth' });
-  }
+ }
 
 
   startDate:string= '';

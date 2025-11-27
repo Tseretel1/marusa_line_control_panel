@@ -94,6 +94,29 @@
                     background-color: rgba(0, 0, 0, 0.247);
                     border-radius: 5px;
                     gap: 10px;
+                    position: relative;
+                    .copied-span{
+                        display: flex;
+                        position: absolute;
+                        top: -30px;
+                        right: -30px;
+                        padding: 5px;
+                        border-radius: 5px;
+                        background-color: rgba(0, 0, 0, 0.589);
+                        animation: popupcopy 0.3s ;
+                    }
+                    @keyframes popupcopy {
+                        0%{
+                            scale: 0.7;
+                        }
+                        50%{
+                            scale: 1.2;
+                        }
+                        100%{
+                            scale: 1;
+                        }
+                    }
+                    cursor: pointer;
                     .info{
                         color: white;
                         max-width: 250px;

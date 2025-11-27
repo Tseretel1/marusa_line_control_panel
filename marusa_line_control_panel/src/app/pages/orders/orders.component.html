@@ -47,7 +47,14 @@
             <div class="filters">
                 <div class="filter">
                     <label for=""></label>
-                    <input type="number" class="search-input"[(ngModel)]="orderSearchNum" (change)="OrderSearch()">
+                    <input type="number" class="search-input"[(ngModel)]="UserIdSearch" (change)="UserIdOrderSearch()" placeholder="UserId">
+                    <div class="searchbutton" (click)="UserIdOrderSearch()">
+                        <i class="fas fa-search"></i>
+                    </div>
+                </div>
+                <div class="filter">
+                    <label for=""></label>
+                    <input type="number" class="search-input"[(ngModel)]="orderSearchNum" (change)="OrderSearch()" placeholder="OrderId">
                     <div class="searchbutton" (click)="OrderSearch()">
                         <i class="fas fa-search"></i>
                     </div>
@@ -57,7 +64,7 @@
             </div>
         </div>
         <div class="order-card-align" >
-            <div class="order-card"  *ngFor="let o of orders" [routerLink]="AppRoutes.orderDetails + o.orderId"  [ngClass]="{'to-delete': isOlderThan1Day(o.createDate)&& !o.isPaid,'finished-order': o.statusId ==5,'topay':!getOrderDto.IsPaid,'ispayed':getOrderDto.IsPaid}">
+            <div class="order-card"  *ngFor="let o of orders" [routerLink]="AppRoutes.orderDetails + o.orderId"  [ngClass]="{'to-delete': isOlderThan1Day(o.createDate) && !o.isPaid,'to-delete-7': isOlderThan7Day(o.createDate) && !o.isPaid,'finished-order': o.statusId ==5,'topay':!getOrderDto.IsPaid,'ispayed':getOrderDto.IsPaid}">
                 <div class="pay-align">
                     <span class="pay-span" [ngClass]="{'payed-span': o.isPaid,'unpayed-span': !o.isPaid}">No.{{o.orderId}}</span>
                     <span class="pay-span" >{{o.finalPrice}}₾</span>

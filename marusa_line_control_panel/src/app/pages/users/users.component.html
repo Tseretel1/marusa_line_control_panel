@@ -22,13 +22,15 @@
                     <img [src]="u.profilePhoto" class="user-img" alt="">
                 </div>
                 <p class="username">{{u.name}}</p>
-                <div class="info-align">
+                <div class="info-align" (click)="copyToClipboard(u.phoneNumber,u.id,1)">
                     <p class="info">{{u.phoneNumber}} </p>
                     <button class="copy-btn"><i class="fas fa-copy"></i></button>
+                    <span class="copied-span" *ngIf="copiedNumber ==u.id && spanId ==1">✅</span>
                 </div>
-                <div class="info-align">
+                <div class="info-align" (click)="copyToClipboard(u.email,u.id,2)">
                     <p class="info">{{u.email}}</p>
                     <button class="copy-btn"><i class="fas fa-copy"></i></button>
+                    <span class="copied-span" *ngIf="copiedNumber ==u.id && spanId ==2">✅</span>
                 </div>
                 <div class="info-align" style="cursor: pointer;">
                   <div class="order-count">

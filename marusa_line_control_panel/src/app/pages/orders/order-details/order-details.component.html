@@ -86,11 +86,11 @@
 <div class="map-align"style="width: 100%; display:flex; justify-content:center;">
     <div class="map-wrap" style="width: 45%; border-radius: 10px; background-color: rgba(0, 0, 0, 0.432);padding: 20px; display: flex; flex-direction: column; gap: 10px;">
         <div style="display: flex; flex-direction: column; gap: 10px;">
-            <div style="display: flex; align-items: center; gap: 5px;">
-                <div >მისამართი</div>
+            <div style="display: flex; align-items: center; gap: 5px;" (click)="copyToClipboard(order.address)">
+                <div>მისამართი</div>
                 <div style="padding: 5px 10px; border-radius: 5px; background-color: rgba(0, 0, 0, 0.493); border: 1px solid rgba(128, 128, 128, 0.459); cursor: pointer;">{{order.address}}</div>
             </div>
-            <div style="display: flex; align-items: center; gap: 5px;">
+            <div style="display: flex; align-items: center; gap: 5px;" (click)="copyToClipboard(`${order.lat},${order.lng}`)">
                 <div>გრძედი / განედი</div>
                 <div style="padding: 5px 10px; border-radius: 5px; background-color: rgba(0, 0, 0, 0.493); border: 1px solid rgba(128, 128, 128, 0.459); cursor: pointer;">{{order.lat}},{{order.lng}}</div>
             </div>

@@ -182,6 +182,15 @@ export class OrderDetailsComponent implements OnInit{
       this.location = { lat: lat.toString(), lng: lng.toString() };
     });
   }
+    copyToClipboard(text: string): void {
+    navigator.clipboard.writeText(text)
+    .then(() => {
+    })
+    .catch(err => {
+    });
+    setTimeout(() => {
+    }, 3000);
+  }
 }
 
 export interface Lnglat {

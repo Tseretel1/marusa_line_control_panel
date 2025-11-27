@@ -194,6 +194,7 @@ export interface user{
 
 
 export interface GetOrderDto{
+  UserId:number|null;
   OrderId:number|null;
   IsPaid:boolean|null;
   PageSize:number;

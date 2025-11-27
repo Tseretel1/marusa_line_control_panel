@@ -92,6 +92,22 @@ export class UsersComponent implements OnInit{
     this.getUsers();
   }
   totalPages:number =0;
+
+  copiedNumber:number = 0;
+  spanId:number =0;
+  copyToClipboard(text: string,numebr:number, spanId:number): void {
+    this.copiedNumber = numebr;
+    this.spanId = spanId;
+    navigator.clipboard.writeText(text)
+    .then(() => {
+    })
+    .catch(err => {
+    });
+    setTimeout(() => {
+      this.copiedNumber = 0;
+      this.spanId = 0;
+    }, 3000);
+  }
 }
 
 export interface GetusersDto {

@@ -291,8 +291,12 @@ button{
             //     border: 2px  solid green;
             // }
             .to-delete{
-                background-color: rgba(139, 0, 0, 0.336);
-                border:2px solid red;
+                background-color: rgba(255, 145, 0, 0.726);
+                border:2px solid rgba(255, 166, 0, 0.404);
+            }
+            .to-delete-7{
+                background-color: red;
+                border: 2px solid red;
             }
             .finished-order{
                 border:2px solid green;
