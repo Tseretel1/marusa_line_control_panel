@@ -1,30 +1,33 @@
-<div class="center-dashboard">
-    <div class="dashboard">
-        <div class="date">
-            <div class="form-group" (click)="dateOpen(1)">
-                <div class="dates" >{{currentYear}}</div>
-            </div>
-            <div class="form-group" (click)="dateOpen(2)">
-                <div class="dates" >{{this.getStartMothName()}} - 01</div>
-            </div>
-            <div class="form-group" (click)="dateOpen(3)">
-                <div class="dates" >{{this.getEndMonthName()}} {{thisLastDay}}</div>
-            </div>
-            <button class="search-date" (click)="getDashboardStats()">ძებნა</button>
-        </div>
-        <div class="stats-align">
-            <div class="stat unpaid" >
-                შეკვეთა<p class="money ">{{dashboardStats.unpaidOrdersCount}}</p> 
-            </div>
-            <div class="stat unpaid">
-                ჯამი <p class="money">{{dashboardStats.totalUnPaidAmount}}₾</p> 
-            </div>
-            <div class="stat paid" >
-                შეკვეთა <p class="money">{{dashboardStats.paidOrdersCount}} </p> 
-            </div>
-            <div class="stat paid" >
-                ჯამი <p class="money">{{dashboardStats.totalPaidAmount}}₾ </p> 
+
+<div class="date-modal-align" >
+    <div class="date-modal">
+        <div class="months-grid">
+            <div class="month" [ngClass]="{'selected-month':i ==currentYear}" *ngFor="let i of Years" (click)="changeYear(i)">{{i}}</div>
+        </div>  
+        <div class="full-year">
+            <p>{{this.currentYear}} წლის ჯამი</p>
+            <div class="year-stats-align">
+                <div class="year-stats"><i class="fas fa-shopping-cart"></i> {{dashboard.yearStat.orderCount}}</div>
+                <div class="year-stats">{{dashboard.yearStat.totalAmount}} ₾</div>
             </div>
         </div>
+        <div class="months-grid">
+            <div class="month" [ngClass]="{'selected-month':i.monthNumber == currentMonth}" *ngFor="let i of dashboard.statsByMonth" (click)="changeMonth(i.monthNumber)">
+                <div class="month-name">
+                    {{getmonthName(i.monthNumber)}}
+                </div>
+                <div class="stat-align">
+                    <div class="month-stats">
+                        <i class="fas fa-shopping-cart"></i> {{i.orderCount}}
+                    </div>
+                    <div class="month-stats">
+                       {{i.totalAmount}} ₾
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="date-modal">
+        
     </div>
 </div>

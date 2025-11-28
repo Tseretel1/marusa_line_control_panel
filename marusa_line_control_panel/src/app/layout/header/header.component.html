@@ -8,14 +8,14 @@
             <p class="header-title">კონტროლ პანელი</p>
         </div> 
         <div class="navigation-align">
-            <span class="nav-link" [routerLink]="AppRoutes.posts" routerLinkActive="active-link" >
-                <i class="fas fa-camera"></i>
-                <b>პოსტები</b> </span>
+            <div class="nav-link"  routerLinkActive="active-link" [routerLink]="AppRoutes.posts">
+                <i class="fas fa-address-book"></i>
+                <b>პოსტები</b> </div>
             <span class="nav-link" routerLinkActive="active-link"  [routerLink]="AppRoutes.orders">
-                <i class="fas fa-address-book"></i> 
+                <i class="fas fa-shopping-cart"></i> 
                 <b>შეკვეთები</b> 
             </span>
-             <span class="nav-link" routerLinkActive="active-link"  [routerLink]="AppRoutes.orders">
+             <span class="nav-link" routerLinkActive="active-link"  >
                 <i class="fas fa-envelope"></i> 
                 <b>მეილები</b> 
             </span>
@@ -43,11 +43,11 @@
             <i class="fas fa-times" (click)="hideSidenav()"></i>
         </div>
         <div class="nav-center">
-            <span class="nav-link" routerLinkActive="active-link" [routerLink]="AppRoutes.posts" (click)="hideSidenav()"><i class="fas fa-shopping-cart" ></i><b>პოსტები</b> </span>
-            <span class="nav-link" routerLinkActive="active-link"  [routerLink]="AppRoutes.orders" (click)="hideSidenav()"> <i class="fas fa-address-book"></i>  <b>შეკვეთები</b>  </span>
-            <span class="nav-link" routerLinkActive="active-link"  [routerLink]="AppRoutes.orders" (click)="hideSidenav()"> <i class="fas fa-envelope"></i>  <b>მეილები</b>  </span>
+            <span class="nav-link" routerLinkActive="active-link" [routerLink]="AppRoutes.posts" (click)="hideSidenav()"><i class="fas fa-address-book" ></i><b>პოსტები</b> </span>
+            <span class="nav-link" routerLinkActive="active-link"  [routerLink]="AppRoutes.orders" (click)="hideSidenav()"> <i class="fas fa-shopping-cart"></i>  <b>შეკვეთები</b>  </span>
+            <span class="nav-link" routerLinkActive="active-link"   (click)="hideSidenav()"> <i class="fas fa-envelope"></i>  <b>მეილები</b>  </span>
             <span class="nav-link" routerLinkActive="active-link"  [routerLink]="AppRoutes.users" (click)="hideSidenav()"> <i class="fas fa-user"></i>  <b>მომხმარებლები</b>  </span>
-            <span class="nav-link" routerLinkActive="active-link"  [routerLink]="AppRoutes.dashboard" (click)="hideSidenav()"> <i class="fas fa-cahrt-pie"></i>  <b>დეშბორდი</b>  </span>
+            <span class="nav-link" routerLinkActive="active-link"  [routerLink]="AppRoutes.dashboard" (click)="hideSidenav()"> <i class="fas fa-chart-pie"></i>  <b>დეშბორდი</b>  </span>
         </div>
     </div>
 </div>

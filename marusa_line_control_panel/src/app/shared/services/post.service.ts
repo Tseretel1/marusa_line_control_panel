@@ -7,6 +7,7 @@ import { orderStatuses, User } from '../../pages/orders/order-details/order-deta
 import { innerFrom } from 'rxjs/internal/observable/innerFrom';
 import { getPosts } from '../../pages/posts/posts.component';
 import { GetUserFilteredDto, GetusersDto } from '../../pages/users/users.component';
+import { DashboardStatsByYear } from '../../pages/dashboard/dashboard.component';
 @Injectable({
   providedIn: 'root'
 })
@@ -79,6 +80,9 @@ export class PostService {
   }
   GetDahsboardStatistics(date:StartEndDate): Observable<any> {
     return this.http.post<any>(this.apiUrl+`ControlPanel/get-statistics`,date);
+  }
+  GetDahsboardByYear(year:number): Observable<DashboardStatsByYear> {
+    return this.http.get<DashboardStatsByYear>(this.apiUrl+`ControlPanel/get-dashboard-by-year?year=${year}`,);
   }
   getProductTypes(): Observable<ProductTypes[]> {
     return this.http.get<ProductTypes[]>(this.apiUrl+'ControlPanel/get-product-types');

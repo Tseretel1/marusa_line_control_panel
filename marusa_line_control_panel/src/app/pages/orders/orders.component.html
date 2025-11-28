@@ -16,7 +16,7 @@
 <div class="center-container">
     <div class="container">
         <div class="dashboard">
-            <div class="date">
+            <!-- <div class="date">
                 <div class="form-group" (click)="dateOpen(1)">
                     <div class="dates" >{{currentYear}}</div>
                 </div>
@@ -27,18 +27,18 @@
                     <div class="dates" >{{this.getEndMonthName()}} {{thisLastDay}}</div>
                 </div>
                 <button class="search-date" (click)="getDashboardStats()">ძებნა</button>
-            </div>
+            </div> -->
             <div class="stats-align">
-                <div class="stat unpaid" >
+                <div class="stat unpaid" (click)="getPaidOrUnpaidOrders(false)">
                    შეკვეთა<p class="money ">{{dashboardStats.unpaidOrdersCount}}</p> 
                 </div>
-                <div class="stat unpaid">
+                <div class="stat unpaid" (click)="getPaidOrUnpaidOrders(false)">
                    ჯამი <p class="money">{{dashboardStats.totalUnPaidAmount}}₾</p> 
                 </div>
-                <div class="stat paid" >
+                <div class="stat paid" (click)="getPaidOrUnpaidOrders(true)" >
                    შეკვეთა <p class="money">{{dashboardStats.paidOrdersCount}} </p> 
                 </div>
-                <div class="stat paid" >
+                <div class="stat paid"  (click)="getPaidOrUnpaidOrders(true)">
                    ჯამი <p class="money">{{dashboardStats.totalPaidAmount}}₾ </p> 
                 </div>
             </div>
