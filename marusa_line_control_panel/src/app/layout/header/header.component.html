@@ -23,6 +23,11 @@
                 <i class="fas fa-user"></i> 
                 <b>მომხმარებლები</b> 
             </span>
+            <span class="nav-link" routerLinkActive="active-link"  [routerLink]="AppRoutes.dashboard">
+                <i class="fas fa-chart-pie" aria-hidden="true"></i>
+
+                <b>დეშბორდი</b> 
+            </span>
         </div>
         <div class="burger-icon-align" >
             <span class="nav-link" routerLinkActive="active-link" (click)="openSidenav()"><i class="fas fa-bars"></i></span>
@@ -42,6 +47,7 @@
             <span class="nav-link" routerLinkActive="active-link"  [routerLink]="AppRoutes.orders" (click)="hideSidenav()"> <i class="fas fa-address-book"></i>  <b>შეკვეთები</b>  </span>
             <span class="nav-link" routerLinkActive="active-link"  [routerLink]="AppRoutes.orders" (click)="hideSidenav()"> <i class="fas fa-envelope"></i>  <b>მეილები</b>  </span>
             <span class="nav-link" routerLinkActive="active-link"  [routerLink]="AppRoutes.users" (click)="hideSidenav()"> <i class="fas fa-user"></i>  <b>მომხმარებლები</b>  </span>
+            <span class="nav-link" routerLinkActive="active-link"  [routerLink]="AppRoutes.dashboard" (click)="hideSidenav()"> <i class="fas fa-cahrt-pie"></i>  <b>დეშბორდი</b>  </span>
         </div>
     </div>
 </div>

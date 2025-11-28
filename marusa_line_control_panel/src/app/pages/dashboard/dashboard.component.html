@@ -1,0 +1,30 @@
+<div class="center-dashboard">
+    <div class="dashboard">
+        <div class="date">
+            <div class="form-group" (click)="dateOpen(1)">
+                <div class="dates" >{{currentYear}}</div>
+            </div>
+            <div class="form-group" (click)="dateOpen(2)">
+                <div class="dates" >{{this.getStartMothName()}} - 01</div>
+            </div>
+            <div class="form-group" (click)="dateOpen(3)">
+                <div class="dates" >{{this.getEndMonthName()}} {{thisLastDay}}</div>
+            </div>
+            <button class="search-date" (click)="getDashboardStats()">ძებნა</button>
+        </div>
+        <div class="stats-align">
+            <div class="stat unpaid" >
+                შეკვეთა<p class="money ">{{dashboardStats.unpaidOrdersCount}}</p> 
+            </div>
+            <div class="stat unpaid">
+                ჯამი <p class="money">{{dashboardStats.totalUnPaidAmount}}₾</p> 
+            </div>
+            <div class="stat paid" >
+                შეკვეთა <p class="money">{{dashboardStats.paidOrdersCount}} </p> 
+            </div>
+            <div class="stat paid" >
+                ჯამი <p class="money">{{dashboardStats.totalPaidAmount}}₾ </p> 
+            </div>
+        </div>
+    </div>
+</div>

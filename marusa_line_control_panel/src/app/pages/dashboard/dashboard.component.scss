@@ -1,0 +1,85 @@
+.center-dashboard{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .dashboard{
+            display: flex;
+            background-color: rgba(0, 0, 0, 0.432);
+            color: white;
+            border-radius: 5px;
+            padding: 10px 20px;
+            flex-direction: column;
+            gap: 10px;
+            align-items: flex-start;
+            .date{
+                display:flex;
+                width: 100%;
+                justify-content: space-between;
+                cursor: pointer;
+                gap: 10px;
+                .form-group{
+                    display: flex;
+                    flex-direction: column;
+                    width: 100%;
+                    position: relative;
+                    padding: 5px 10px;
+                    border-radius: 5px;
+                    background-color: rgba(0, 0, 0, 0.397);  align-items: center;
+                    border: 1px solid rgba(128, 128, 128, 0.527);
+                    input{
+                        width: 100%;
+                    }
+                    .datepicker{
+                        opacity: 0;
+                    }
+                    cursor: pointer;
+                }
+                .dates{
+                    display: flex;
+                    align-items: center;
+                    text-wrap: nowrap;
+                }
+            }
+            .search-date{
+                padding: 5px 10px;
+                border-radius: 5px;
+                background-color: white;
+                color: black;
+                border: 1px solid black;
+                cursor: pointer;
+                font-weight: bolder;
+            }
+            .stats-align{
+                display: flex;
+                gap: 5px;
+                overflow-x: scroll;
+                .stat{
+                    background-color: rgba(0, 0, 0, 0.445);
+                    padding: 5px 10px;
+                    border-radius:5px;
+                    display: flex;
+                    align-items: center;
+                    border: 1px solid rgba(128, 128, 128, 0.527);
+                    .money{
+                        border-radius: 5px;
+                        padding: 5px;
+                        box-shadow: 0px 0px 10px black;
+                    }
+                    p{
+                        font-weight: bolder;
+                    }
+                }
+                .paid{
+                    border: 1px solid green;
+                }
+                .unpaid{
+                    border: 1px solid rgba(255, 166, 0, 0.63);
+                }
+            }
+            .stats-align::-webkit-scrollbar{
+                display: none;
+            }
+    }
+}

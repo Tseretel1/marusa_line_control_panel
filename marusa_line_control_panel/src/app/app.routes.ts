@@ -5,6 +5,7 @@ import { AddPostComponent } from './pages/add-post/add-post.component';
 import { OrdersComponent } from './pages/orders/orders.component';
 import { OrderDetailsComponent } from './pages/orders/order-details/order-details.component';
 import { UsersComponent } from './pages/users/users.component';
+import { DashboardComponent } from './pages/dashboard/dashboard.component';
 
 export const routes: Routes = [
     { path:'posts', component: PostsComponent},
@@ -13,6 +14,7 @@ export const routes: Routes = [
     { path:'order-details/:id', component: OrderDetailsComponent},
     { path:'orders', component: OrdersComponent},
     { path:'users', component: UsersComponent},
+    { path:'dashboard', component: DashboardComponent},
     { path: '', component: PostsComponent }, 
     { path: '**', component: PostsComponent }  
 ];
