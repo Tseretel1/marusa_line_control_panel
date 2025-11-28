@@ -48,7 +48,7 @@
                             </div>   
                         </div>
                         <div class="product-details-align user-information">
-                            <div class="delivery-align info-background detail user-profile">
+                            <div class="delivery-align info-background detail user-profile" (click)="copyToClipboard(user.name)">
                                 <div class="user-container">
                                     <img [src]="user?.profilePhoto" class="user-img" alt="">
                                 </div>
@@ -56,11 +56,11 @@
                                     {{user.name}}
                                 </p>
                             </div>  
-                            <div class="delivery-align info-background detail">
+                            <div class="delivery-align info-background detail" (click)="copyToClipboard(user.phoneNumber)">
                                 <i class="fas fa-phone" style="color: green;"></i>
                                 <p >{{user.phoneNumber}}</p>
                             </div>    
-                            <div class="delivery-align info-background detail">
+                            <div class="delivery-align info-background detail" (click)="copyToClipboard(user.email)">
                                 <p >{{user.email}}</p>
                             </div>       
                             <div class="info-background date detail">
