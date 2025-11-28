@@ -29,10 +29,13 @@ export class UsersComponent implements OnInit{
   getUsers(){
     this.service.GetUsersList(this.getuserFitler).subscribe((resp)=>{
       this.users = resp;
-      this.totalCount = this.users[0].totalCount;
-      this.totalPages = Math.ceil(this.totalCount / this.getuserFitler.pageSize);
-      this.lastPage = Math.ceil(this.totalCount / this.getuserFitler.pageSize);
+      this.CreatePagenation(this.users[0].totalCount)
     })
+  }
+  CreatePagenation(totalcount:number){
+    this.totalCount = totalcount; 
+    this.totalPages = Math.ceil(this.totalCount / this.getuserFitler.pageSize);
+    this.lastPage = Math.ceil(this.totalCount / this.getuserFitler.pageSize);
   }
   blockModalNum:number = 0;
   isBlocked :boolean = false;
@@ -107,6 +110,24 @@ export class UsersComponent implements OnInit{
       this.copiedNumber = 0;
       this.spanId = 0;
     }, 3000);
+  }
+
+  NameSearch:string = '';
+  EmailSearch:string = '';
+  getUserByName(){
+    this.service.GetUsersByName(this.NameSearch).subscribe(
+      (resp)=>{
+         this.users = resp;
+      }
+    )
+  }
+  getUserByEmail(){
+    this.service.GetUsersByEmail(this.EmailSearch).subscribe(
+      (resp)=>{
+         this.users = resp;
+         this.CreatePagenation(this.users[0].totalCount)
+      }
+    )
   }
 }
 

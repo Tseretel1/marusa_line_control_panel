@@ -79,6 +79,7 @@ export class DashboardComponent implements OnInit{
     const found = this.MonthsList.find(m => m.id === monthNum);
     return found?.MonthName;
   }
+  
   Years:number[]=[]
   generateYearsList() {
     this.Years = []; 
@@ -86,15 +87,16 @@ export class DashboardComponent implements OnInit{
       this.Years.push(this.currentYear - i);
     }
   }
+
   changeYear(num:number){
     this.currentYear = num;
     this.getYearlyOudit();
   }
+
   changeMonth(num:number){
     this.currentMonth = num;
     this.getsoldProductStatistics ();
   }
-
 }
 
 

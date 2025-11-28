@@ -105,6 +105,12 @@ export class PostService {
   GetUsersById(id:number): Observable<GetusersDto> {
     return this.http.get<GetusersDto>(this.apiUrl+`ControlPanel/get-user-by-id?id=${id}`);
   }
+  GetUsersByName(search:string): Observable<GetusersDto[]> {
+    return this.http.get<GetusersDto[]>(this.apiUrl+`ControlPanel/get-user-by-name?search=${search}`);
+  }
+  GetUsersByEmail(search:string): Observable<GetusersDto[]> {
+    return this.http.get<GetusersDto[]>(this.apiUrl+`ControlPanel/get-user-by-email?search=${search}`);
+  }
   BlockOrUnblockUser(id:number, role:string): Observable<any> {
     return this.http.put<any>(this.apiUrl+`ControlPanel/update-user-role?id=${id}&role=${role}`,{});
   }
