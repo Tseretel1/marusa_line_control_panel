@@ -84,6 +84,9 @@ export class PostService {
   GetDahsboardByYear(year:number): Observable<DashboardStatsByYear> {
     return this.http.get<DashboardStatsByYear>(this.apiUrl+`ControlPanel/get-dashboard-by-year?year=${year}`,);
   }
+  GetSoldProductTypes(year:number,month:number|null): Observable<SoldProductTypes[]> {
+    return this.http.get<SoldProductTypes[]>(this.apiUrl+`ControlPanel/get-sold-producttypes?year=${year}&month=${month}`,);
+  }
   getProductTypes(): Observable<ProductTypes[]> {
     return this.http.get<ProductTypes[]>(this.apiUrl+'ControlPanel/get-product-types');
   }
@@ -203,4 +206,9 @@ export interface GetOrderDto{
   IsPaid:boolean|null;
   PageSize:number;
   PageNumber:number;
+}
+
+export interface SoldProductTypes{
+    productTypeId:number,
+    soldCount: number
 }

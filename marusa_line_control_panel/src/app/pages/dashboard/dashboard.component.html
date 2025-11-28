@@ -28,6 +28,17 @@
         </div>
     </div>
     <div class="date-modal">
-        
+           <div class="months-grid">
+            <div class="month selected-month" *ngFor="let i of soldProductTypes">
+                <div class="month-name">
+                    {{getProductTypeName(i.productTypeId)}}
+                </div>
+                <div class="stat-align">
+                    <div class="month-stats">
+                        {{i.soldCount}}
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

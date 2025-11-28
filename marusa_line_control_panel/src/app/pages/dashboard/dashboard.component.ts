@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, numberAttribute, OnInit } from '@angular/core';
 import { Dashboard, Months } from '../orders/orders.component';
-import { PostService, StartEndDate } from '../../shared/services/post.service';
+import { PostService, ProductTypes, SoldProductTypes, StartEndDate } from '../../shared/services/post.service';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -12,7 +12,7 @@ import { CommonModule } from '@angular/common';
 export class DashboardComponent implements OnInit{
   currentYear:number =  new Date().getFullYear();
   currentMonth:number =  new Date().getMonth()+1;
-
+  
   ngOnInit(): void {
     this.setStats();
   }
@@ -20,9 +20,11 @@ export class DashboardComponent implements OnInit{
     this.generateMonthsList();
     this.generateYearsList();
     this.getYearlyOudit();
+    this.getProductTypes();
+    this.getsoldProductStatistics();
   }
   constructor(private service:PostService){
-
+    
   }
   dashboard!:DashboardStatsByYear;
   getYearlyOudit(){
@@ -33,37 +35,43 @@ export class DashboardComponent implements OnInit{
       }
     )
   }
-    startDate:string= '';
-    endDate: string = '';
-  
-    dashboardStats:Dashboard={
-      totalPaidAmount : 0,
-      totalUnPaidAmount : 0,
-      paidOrdersCount:0,
-      unpaidOrdersCount:0,
+
+  soldProductTypes:SoldProductTypes[]=[];
+  getsoldProductStatistics(){
+    this.service.GetSoldProductTypes(this.currentYear, this.currentMonth).subscribe(
+      (resp)=>{
+        this.soldProductTypes = resp;
+      }
+    )
+  }
+  productTypesList :ProductTypes[]= [];
+  getProductTypes(){
+    this.service.getProductTypes().subscribe(
+      (resp)=>{
+        this.productTypesList = resp;
+      }
+  )}
+  getProductTypeName(id:number) : string {
+    const productName = this.productTypesList.find(x=>x.id==id);
+    if(productName){
+      return productName.productType;
     }
-  
-    dateOpened:number = 0;
-    dateOpen(num:number){
-      this.dateOpened = num;
-    }
-    dateHide(){
-      this.dateOpened= 0;
-    }
-    MonthsList: Months[] = [];
-    generateMonthsList() {
-      const names = [
-        'იანვარი', 'თებერვალი', 'მარტი', 'აპრილი', 'მაისი', 'ივნისი',
-        'ივლისი', 'აგვისტო', 'სექტემბერი', 'ოქტომბერი', 'ნოემბერი', 'დეკემბერი'
-      ];
-      names.forEach((element, index) => {
-        const insertMonth: Months = {
-          id: index + 1,
-          MonthName: element,
-        };
-        this.MonthsList.push(insertMonth);
-      });
-    }
+    return '';
+  }
+  MonthsList: Months[] = [];
+  generateMonthsList() {
+    const names = [
+      'იანვარი', 'თებერვალი', 'მარტი', 'აპრილი', 'მაისი', 'ივნისი',
+      'ივლისი', 'აგვისტო', 'სექტემბერი', 'ოქტომბერი', 'ნოემბერი', 'დეკემბერი'
+    ];
+    names.forEach((element, index) => {
+      const insertMonth: Months = {
+        id: index + 1,
+        MonthName: element,
+      };
+      this.MonthsList.push(insertMonth);
+    });
+  }
 
   
 
@@ -84,7 +92,9 @@ export class DashboardComponent implements OnInit{
   }
   changeMonth(num:number){
     this.currentMonth = num;
+    this.getsoldProductStatistics ();
   }
+
 }
 
 
