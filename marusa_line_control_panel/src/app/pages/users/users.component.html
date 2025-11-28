@@ -5,11 +5,11 @@
            <button class="search-button" (click)="getUserById()"> <i class="fas fa-search"></i></button>
         </div>
         <div class="search-align">
-           <input class="user-search" type="text" [(ngModel)]="NameSearch" (change)="getUserByName()" placeholder="სახელი">
+           <input class="user-search" type="text" [(ngModel)]="NameSearch" (change)="getUserByName()" placeholder="Name">
            <button class="search-button" (click)="getUserByName()"> <i class="fas fa-search"></i></button>
         </div>
         <div class="search-align">
-           <input class="user-search" type="text" [(ngModel)]="EmailSearch" (change)="getUserByEmail()" placeholder="იმეილი">
+           <input class="user-search" type="text" [(ngModel)]="EmailSearch" (change)="getUserByEmail()" placeholder="Email">
            <button class="search-button" (click)="getUserByEmail()" > <i class="fas fa-search"></i></button>
         </div>
         <div class="filter">{{totalCount}}</div>
