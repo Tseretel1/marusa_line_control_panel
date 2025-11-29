@@ -164,6 +164,7 @@ export class AddPostComponent implements OnInit{
           photo.file = null;
           photo.preview = null;
         }
+        this.uploadPhotos = this.uploadPhotos.filter(x=>x.id===id);
       }
     });
   }

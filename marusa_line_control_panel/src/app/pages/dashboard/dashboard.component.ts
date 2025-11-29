@@ -26,12 +26,14 @@ export class DashboardComponent implements OnInit{
   constructor(private service:PostService){
     
   }
-  dashboard!:DashboardStatsByYear;
+  dashboard:DashboardStatsByYear={
+    statsByMonth :[],
+    yearStat : null,
+  };
   getYearlyOudit(){
     this.service.GetDahsboardByYear(this.currentYear).subscribe(
       (resp)=>{
         this.dashboard = resp;
-        console.log(resp)
       }
     )
   }
@@ -79,18 +81,28 @@ export class DashboardComponent implements OnInit{
     const found = this.MonthsList.find(m => m.id === monthNum);
     return found?.MonthName;
   }
-  
-  Years:number[]=[]
+    
+  Years: number[] = [];
+
   generateYearsList() {
-    this.Years = []; 
-    for (let i = 0; i <= 3; i++) {
+    this.Years = [];
+    for (let i = 0; i <= 10; i++) {
       this.Years.push(this.currentYear - i);
     }
+  }
+  yearmodalVisible :boolean= false;
+  showYearsModal(){
+    this.yearmodalVisible = true;
+  }
+  hideYearsModal(){
+    this.yearmodalVisible = false;
   }
 
   changeYear(num:number){
     this.currentYear = num;
     this.getYearlyOudit();
+    this.hideYearsModal();
+    this.getsoldProductStatistics();
   }
 
   changeMonth(num:number){
@@ -112,5 +124,5 @@ export interface DashboardYearSum {
 }
 export interface DashboardStatsByYear {
   statsByMonth: DashboardStatsByMonths[];
-  yearStat: DashboardYearSum;
+  yearStat: DashboardYearSum|null;
 }

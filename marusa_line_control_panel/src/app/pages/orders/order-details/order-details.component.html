@@ -84,18 +84,18 @@
     </div>
 </div>
 <div class="map-align"style="width: 100%; display:flex; justify-content:center;">
-    <div class="map-wrap" style="width: 45%; border-radius: 10px; background-color: rgba(0, 0, 0, 0.432);padding: 20px; display: flex; flex-direction: column; gap: 10px;">
+    <div class="map-wrap" style="width: 90%; max-width: 1000px; border-radius: 10px; background-color: rgba(0, 0, 0, 0.432);padding: 20px; display: flex; flex-direction: column; gap: 10px;">
         <div style="display: flex; flex-direction: column; gap: 10px;">
-            <div style="display: flex; align-items: center; gap: 5px;" (click)="copyToClipboard(order.address)">
+            <div style="display: flex; align-items: center; gap: 5px; flex-wrap: wrap;" (click)="copyToClipboard(order.address)">
                 <div>მისამართი</div>
                 <div style="padding: 5px 10px; border-radius: 5px; background-color: rgba(0, 0, 0, 0.493); border: 1px solid rgba(128, 128, 128, 0.459); cursor: pointer;">{{order.address}}</div>
             </div>
-            <div style="display: flex; align-items: center; gap: 5px;" (click)="copyToClipboard(`${order.lat},${order.lng}`)">
+            <div style="display: flex; align-items: center; gap: 5px; flex-wrap: wrap;" (click)="copyToClipboard(`${order.lat},${order.lng}`)">
                 <div>გრძედი / განედი</div>
-                <div style="padding: 5px 10px; border-radius: 5px; background-color: rgba(0, 0, 0, 0.493); border: 1px solid rgba(128, 128, 128, 0.459); cursor: pointer;">{{order.lat}},{{order.lng}}</div>
+                <div style="padding: 5px 10px; border-radius: 5px; background-color: rgba(0, 0, 0, 0.493); border: 1px solid rgba(128, 128, 128, 0.459); cursor: pointer;word-break: break-all;">{{order.lat}},{{order.lng}}</div>
             </div>
         </div>
-        <div id="map" style="width: 100%; height: 400px; border-radius: 5px;"></div>
+        <div id="map" style="width: 100%; height: 500px; border-radius: 5px;"></div>
     </div>
 </div>
 

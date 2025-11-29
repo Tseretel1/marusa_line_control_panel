@@ -13,7 +13,7 @@ import { DashboardStatsByYear } from '../../pages/dashboard/dashboard.component'
 })
 export class PostService {
 
-  private apiUrl = 'https://localhost:7173/';
+  private apiUrl = 'https://192.168.1.13:7174/';
   constructor(private http:HttpClient)
   {
 

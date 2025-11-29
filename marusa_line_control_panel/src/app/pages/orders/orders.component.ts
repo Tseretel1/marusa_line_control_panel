@@ -22,8 +22,6 @@ export class OrdersComponent implements OnInit{
   }
 
   setStats(){
-    this.setStartMonth();
-    this.setEndMonth();
     this.generateYearsList();
     this.getDashboardStats();
   }
@@ -233,13 +231,6 @@ isOlderThan7Day(dateString: string | Date): boolean {
       }
     )
   }
-  dateOpened:number = 0;
-  dateOpen(num:number){
-    this.dateOpened = num;
-  }
-  dateHide(){
-    this.dateOpened= 0;
-  }
   MonthsList: Months[] = [];
   generateMonthsList() {
     const names = [
@@ -254,37 +245,9 @@ isOlderThan7Day(dateString: string | Date): boolean {
       this.MonthsList.push(insertMonth);
     });
   }
-  changeStartMonth(monthNum:number){
-    this.startMonthNum = monthNum;
-    setTimeout(() => {
-      this.dateHide();
-    }, 100);
-  }
-  changeEndMonth(monthNum:number){
-    this.endMonthNum = monthNum;
-    setTimeout(() => {
-      this.dateHide();
-    if (this.endMonthNum === new Date().getMonth()+1) {
-      this.thisLastDay = new Date().getDate();
-    } else {
-      this.thisLastDay =new Date(this.currentYear, this.endMonthNum, 0).getDate(); 
-    }
-    }, 100);
-  }
 
-
-
-
-
-  startMonthNum:number = 1;
-  endMonthNum:number = 1;
-  setStartMonth() {
-     this.startMonthNum = new Date().getMonth()+ 1;
-  }
-  setEndMonth() {
-     this.endMonthNum = new Date().getMonth() + 1;
-     this.getEndDay();
-  }
+  startMonthNum:number = new Date().getMonth()+ 1;
+  endMonthNum:number =new Date().getMonth() + 1;
   getStartMothName(): string | undefined {
     const found = this.MonthsList.find(m => m.id === this.startMonthNum);
     return found?.MonthName;
@@ -311,12 +274,7 @@ isOlderThan7Day(dateString: string | Date): boolean {
       this.Years.push(currentYear - i);
     }
   }
-  changeYear(num:number){
-    this.currentYear = num;
-    setTimeout(() => {
-      this.dateHide();
-    }, 100);
-  }
+
 }
 export interface orderStatuses{
  id:number;

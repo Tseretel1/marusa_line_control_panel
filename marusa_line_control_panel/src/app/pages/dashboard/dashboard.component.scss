@@ -33,7 +33,7 @@
                 gap: 20px;
                 align-items: center;
                 justify-content: center;
-                color: grey;
+                color: white;
                 .month-name{
                     font-size: 20px;
                     font-weight: bolder;
@@ -47,8 +47,7 @@
                         border-radius: 5px;
                         background-color: rgba(0, 0, 0, 0.342);
                         padding: 5px 10px;
-                        color: rgb(219, 218, 218);
-                        color: grey;
+                        color: white;
                         border: 1px solid rgba(128, 128, 128, 0.541);
                         font-weight: bolder;
                     }
@@ -56,9 +55,11 @@
             }
             .selected-month{
                 border: 1px solid white;
+                background-color: white;
+                font-family: bolder;
                 color: white;
                 .month-name{
-                    color: white;
+                    color: black;
                     text-wrap: nowrap;
                 }
                  .stat-align{
@@ -81,6 +82,7 @@
             padding: 20px;
             border: 1px solid white;
             font-size: 20px;
+            cursor: pointer;
             cursor: pointer; 
             p{
                 color: white;
@@ -103,8 +105,108 @@
         }
     }
 }
-
-
+.year-modal-align{
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 0;
+    left: 0;
+    z-index: 5;
+    .close-year-modal{
+        width: 100%;
+        height: 100%;
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 1;
+        backdrop-filter: blur(5px);
+    }
+    .year-modal{
+        z-index: 2;
+        display: flex;
+        width: 90%;
+        max-width: 500px;
+        backdrop-filter: blur(50px);
+        flex-direction: column;
+        height: 300px;
+        overflow-y: scroll;
+        padding: 20px;
+        border-radius: 5px;
+        gap: 20px;
+        border: 1px solid grey;
+        align-items: center;
+        animation: 0.5s showyearsModal;
+        .month{
+            padding: 10px 20px;
+            border-radius: 5px;
+            background-color: rgba(0, 0, 0, 0.493);
+            cursor: pointer;
+            border: 1px solid grey;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            width: 150px;
+            .month-name{
+                font-size: 20px;
+                font-weight: bolder;
+                font-family: bolder;
+            }
+            .stat-align{
+                display: flex;
+                gap: 10px;
+                align-items: center;
+                .month-stats{
+                    border-radius: 5px;
+                    background-color: rgba(0, 0, 0, 0.342);
+                    padding: 5px 10px;
+                    color: rgb(219, 218, 218);
+                    color: grey;
+                    border: 1px solid rgba(128, 128, 128, 0.541);
+                    font-weight: bolder;
+                }
+            }
+        }
+        .selected-month{
+          border: 1px solid white;
+          color: white;
+          background-color: white;
+          color: black;
+          .month-name{
+              color: white;
+              text-wrap: nowrap;
+          }
+           .stat-align{
+              .month-stats{
+                  border: 1px solid green;
+                  background-color: green;
+                  color: white;
+              }
+          }
+      }
+    }
+    .year-modal::-webkit-scrollbar{
+        display: none;
+    }
+}
+@keyframes showyearsModal {
+    0%{
+        opacity: 0;
+        scale: 0.7;
+    }
+    50%{
+        opacity: 1;
+        scale: 1.2;
+    }
+    100%{
+        scale: 1;
+    }
+}
 @media screen and (max-width:1200px){
     .date-modal-align{
         .date-modal{

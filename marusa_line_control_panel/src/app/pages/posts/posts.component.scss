@@ -233,8 +233,13 @@
 @media screen and (max-width:400px){
     .gallery-align{
         .photo-align{
-            grid-template-columns: repeat(1,1fr);
             gap: 15px;
+            .album{
+                height: 200px;
+            }
+            .add-new-post{
+                height: 200px;
+            }
         }
     }
 }

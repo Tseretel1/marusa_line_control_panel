@@ -1,14 +1,17 @@
 
-<div class="date-modal-align" >
+<div class="year-modal-align " *ngIf="yearmodalVisible">
+    <div class="close-year-modal" (click)="hideYearsModal()"></div>
+    <div class="year-modal">
+        <div class="month" [ngClass]="{'selected-month':i ==currentYear}" *ngFor="let i of Years" (click)="changeYear(i)">{{i}}</div>
+    </div>
+</div>  
+<div class="date-modal-align">
     <div class="date-modal">
-        <div class="months-grid">
-            <div class="month" [ngClass]="{'selected-month':i ==currentYear}" *ngFor="let i of Years" (click)="changeYear(i)">{{i}}</div>
-        </div>  
-        <div class="full-year">
+        <div class="full-year" (click)="showYearsModal()">
             <p>{{this.currentYear}} წლის ჯამი</p>
             <div class="year-stats-align">
-                <div class="year-stats"><i class="fas fa-shopping-cart"></i> {{dashboard.yearStat.orderCount}}</div>
-                <div class="year-stats">{{dashboard.yearStat.totalAmount}} ₾</div>
+                <div class="year-stats"><i class="fas fa-shopping-cart"></i> {{dashboard.yearStat?.orderCount}}</div>
+                <div class="year-stats">{{dashboard.yearStat?.totalAmount}} ₾</div>
             </div>
         </div>
         <div class="months-grid">

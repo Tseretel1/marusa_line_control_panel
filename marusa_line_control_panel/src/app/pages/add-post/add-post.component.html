@@ -5,7 +5,7 @@
                 <button class="remove-photo" *ngIf="p.preview" (click)="removePhoto(p.id)">
                     <i class="fas fa-times"></i>
                 </button>
-                <div class="photo-container">
+                <div class="photo-container" *ngIf="p">
                     <img *ngIf="p.preview" [src]="p.preview" class="photo">
                 </div>
             </div>

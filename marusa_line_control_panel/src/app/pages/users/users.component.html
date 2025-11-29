@@ -1,23 +1,26 @@
 <div class="user-component">
     <div class="filters-align">
-        <div class="search-align">
-           <input class="user-search" type="number" [(ngModel)]="userId" (change)="getUserById()"  placeholder="Id">
-           <button class="search-button" (click)="getUserById()"> <i class="fas fa-search"></i></button>
+      <div class="inputs-align">
+          <div class="search-align">
+            <input class="user-search" type="number" [(ngModel)]="userId" (change)="getUserById()"  placeholder="Id">
+            <button class="search-button" (click)="getUserById()"> <i class="fas fa-search"></i></button>
+          </div>
+          <div class="search-align">
+            <input class="user-search" type="text" [(ngModel)]="NameSearch" (change)="getUserByName()" placeholder="Name">
+            <button class="search-button" (click)="getUserByName()"> <i class="fas fa-search"></i></button>
+          </div>
+          <div class="search-align">
+             <input class="user-search" type="text" [(ngModel)]="EmailSearch" (change)="getUserByEmail()" placeholder="Email">
+             <button class="search-button" (click)="getUserByEmail()" > <i class="fas fa-search"></i></button>
+          </div>   
+      </div>
+        <div class="filter-button-align">
+          <div class="filter">{{totalCount}}</div>
+          <div class="filter" [ngClass]="{'active-filter':getuserFitler.isBlocked==null}" (click)="getEveryUser()" >ყველა</div>
+          <div class="filter" [ngClass]="{'active-filter':getuserFitler.isBlocked==false}" (click)="getUserByBlocked(false)">ნებადართული</div>
+          <div class="filter" [ngClass]="{'active-filter':getuserFitler.isBlocked}" (click)="getUserByBlocked(true)">დაბლოკილი</div>
         </div>
-        <div class="search-align">
-           <input class="user-search" type="text" [(ngModel)]="NameSearch" (change)="getUserByName()" placeholder="Name">
-           <button class="search-button" (click)="getUserByName()"> <i class="fas fa-search"></i></button>
-        </div>
-        <div class="search-align">
-           <input class="user-search" type="text" [(ngModel)]="EmailSearch" (change)="getUserByEmail()" placeholder="Email">
-           <button class="search-button" (click)="getUserByEmail()" > <i class="fas fa-search"></i></button>
-        </div>
-        <div class="filter">{{totalCount}}</div>
-        <div class="filter" [ngClass]="{'active-filter':getuserFitler.isBlocked==null}" (click)="getEveryUser()" >ყველა</div>
-        <div class="filter" [ngClass]="{'active-filter':getuserFitler.isBlocked==false}" (click)="getUserByBlocked(false)">ნებადართული</div>
-        <div class="filter" [ngClass]="{'active-filter':getuserFitler.isBlocked}" (click)="getUserByBlocked(true)">დაბლოკილი</div>
-         
-    </div>
+      </div>
     <div class="user-align">
         <div class="user" *ngFor="let u of users">
             <div class="status-align">
