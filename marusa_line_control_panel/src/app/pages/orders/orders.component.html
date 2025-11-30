@@ -7,16 +7,16 @@
                 <div class="filter">
                     <label for=""></label>
                     <input type="number" class="search-input"[(ngModel)]="UserIdSearch" (change)="UserIdOrderSearch()" placeholder="UserId">
-                    <div class="searchbutton" (click)="UserIdOrderSearch()">
+                    <!-- <div class="searchbutton" (click)="UserIdOrderSearch()">
                         <i class="fas fa-search"></i>
-                    </div>
+                    </div> -->
                 </div>
                 <div class="filter">
                     <label for=""></label>
                     <input type="number" class="search-input"[(ngModel)]="orderSearchNum" (change)="OrderSearch()" placeholder="OrderId">
-                    <div class="searchbutton" (click)="OrderSearch()">
+                    <!-- <div class="searchbutton" (click)="OrderSearch()">
                         <i class="fas fa-search"></i>
-                    </div>
+                    </div> -->
                 </div>
                 <div class="filter pay-filter" [ngClass]="{'topay':!getOrderDto.IsPaid}" (click)="getPaidOrUnpaidOrders(false)">
                     გადასახდელი

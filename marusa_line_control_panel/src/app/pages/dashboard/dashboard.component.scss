@@ -34,6 +34,7 @@
                 align-items: center;
                 justify-content: center;
                 color: white;
+                text-align: center;
                 .month-name{
                     font-size: 20px;
                     font-weight: bolder;
@@ -45,11 +46,11 @@
                     align-items: center;
                     .month-stats{
                         border-radius: 5px;
-                        background-color: rgba(0, 0, 0, 0.342);
                         padding: 5px 10px;
                         color: white;
-                        border: 1px solid rgba(128, 128, 128, 0.541);
                         font-weight: bolder;
+                        border: 1px solid rgba(0, 128, 0, 0.281);
+                        background-color: rgba(0, 128, 0, 0.19);
                     }
                 }
             }
@@ -80,7 +81,7 @@
             background-color: rgba(0, 0, 0, 0.418);
             border-radius: 5px;
             padding: 20px;
-            border: 1px solid white;
+            border: 1px solid grey;
             font-size: 20px;
             cursor: pointer;
             cursor: pointer; 

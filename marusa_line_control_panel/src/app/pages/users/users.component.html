@@ -3,15 +3,15 @@
       <div class="inputs-align">
           <div class="search-align">
             <input class="user-search" type="number" [(ngModel)]="userId" (change)="getUserById()"  placeholder="Id">
-            <button class="search-button" (click)="getUserById()"> <i class="fas fa-search"></i></button>
+            <!-- <button class="search-button" (click)="getUserById()"> <i class="fas fa-search"></i></button> -->
           </div>
           <div class="search-align">
             <input class="user-search" type="text" [(ngModel)]="NameSearch" (change)="getUserByName()" placeholder="Name">
-            <button class="search-button" (click)="getUserByName()"> <i class="fas fa-search"></i></button>
+            <!-- <button class="search-button" (click)="getUserByName()"> <i class="fas fa-search"></i></button> -->
           </div>
           <div class="search-align">
              <input class="user-search" type="text" [(ngModel)]="EmailSearch" (change)="getUserByEmail()" placeholder="Email">
-             <button class="search-button" (click)="getUserByEmail()" > <i class="fas fa-search"></i></button>
+             <!-- <button class="search-button" (click)="getUserByEmail()" > <i class="fas fa-search"></i></button> -->
           </div>   
       </div>
         <div class="filter-button-align">
@@ -23,13 +23,14 @@
       </div>
     <div class="user-align">
         <div class="user" *ngFor="let u of users">
+          <div class="copy-user-id"(click)="copyToClipboard(u.id.toString(),0,0)" ></div>
             <div class="status-align">
                 <button class="role userid" >{{u.id}}</button>
                 <button class="role" *ngIf="u.role=='User'" (click)="openBlockModal(u.id,true)" >{{u.role}}</button>
                 <button class="role block" *ngIf="u.role=='Blocked'" (click)="openBlockModal(u.id,false)">{{u.role}}</button>
             </div>
             <div class="user-profile">
-                <div class="user-profile-container">
+                <div class="user-profile-container" (click)="copyToClipboard(u.name,0,0)">
                     <img [src]="u.profilePhoto" class="user-img" alt="">
                 </div>
                 <p class="username">{{u.name}}</p>
