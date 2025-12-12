@@ -6,13 +6,11 @@
                 <tr>
                     <th (click)="getActivePosts()">
                         აქტიური
-                        <i class="fas fa-camera"></i>
-                        <b style="color: green; padding: 0px 10px;">{{posts[0]?.totalActiveProducts}}</b>
+                        <b>{{posts[0]?.totalActiveProducts}}</b>
                     </th>
                     <th (click)="getDeletedPosts()">
                         დამალული
-                        <i class="fas fa-camera"></i>
-                        <b style="color: orange; padding: 0px 10px;">{{posts[0]?.totalDeletedProducts}}</b>
+                        <b >{{posts[0]?.totalDeletedProducts}}</b>
                     </th>
                     <th>
                         ლაიქები 
@@ -71,6 +69,9 @@
 
 
 <div class="type-management-component" >
+    <p style="width: 90%;">
+       კატეგორიები
+    </p>
     <div class="type-management-align">
         <div class="type-container">
             <input type="text" class="type-input" [(ngModel)]="AddType">
