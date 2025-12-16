@@ -169,18 +169,6 @@ export class OrderDetailsComponent implements OnInit{
       this.marker = L.marker([lat, lng]).addTo(this.map);
       this.location = { lat: lat.toString(), lng: lng.toString() };
     }
-
-    this.map.on('click', (e: L.LeafletMouseEvent) => {
-      const { lat, lng } = e.latlng;
-
-      if (this.marker) {
-        this.marker.setLatLng(e.latlng);
-      } else {
-        this.marker = L.marker(e.latlng).addTo(this.map);
-      }
-
-      this.location = { lat: lat.toString(), lng: lng.toString() };
-    });
   }
     copyToClipboard(text: string): void {
     navigator.clipboard.writeText(text)

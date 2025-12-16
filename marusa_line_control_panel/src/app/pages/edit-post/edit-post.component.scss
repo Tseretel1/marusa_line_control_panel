@@ -1,3 +1,4 @@
+
 .center-component{
     width: 100%;
     display: flex;
@@ -60,8 +61,6 @@
                         height: 100%;
                         object-fit: cover;
                     }
-                    .fa-plus-square{
-                    }
                 }
                 .remove-photo{
                     position: absolute;
@@ -107,9 +106,10 @@
                 display: flex;
                 justify-content: center;
                 align-items: center;
+
             }
             .hide{
-                background-color: rgb(255, 94, 0);
+                background-color: orangered;
                 color: white;
                 font-weight: bolder;
             }
@@ -147,6 +147,30 @@
                 flex-direction: column;
                 gap: 10px;
                 width: 100%;
+                .order-allowed-align{
+                    display: flex;
+                    justify-content: center;
+                    gap: 10px;
+                    background-color: green;
+                    height: 100%;
+                    align-items: center;
+                    border-radius: 5px;
+                    padding: 10px 0px;
+                    cursor: pointer;
+                    label{
+                        cursor: pointer;
+                    }
+                }
+                .order-not-allowed{
+                    background-color: orangered;
+                }
+                .btn{
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    color: white;
+                    font-family: bolder;
+                }
                 .form-control{
                     background-color: transparent;
                     background:none;
@@ -308,7 +332,16 @@
         display: none;
     }
 }
-
+.insert{
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.2s;
+}
+.insert:hover{
+    background-color: greenyellow;
+}
 @media screen and (max-width:1500px) {
     .center-component{
         .component{
@@ -347,10 +380,6 @@
                 }
                 .ng-container{
                     height: 150px;
-                }
-            }
-            .form-align{
-                .input-group{
                 }
             }
         }

@@ -63,6 +63,7 @@ export class EditPostComponent {
         preview: item.photoUrl ?? null, 
         file: null
       }));
+      console.log(this.posts)
       this.quantity = this.posts.quantity;
       if (this.posts.discountedPrice != null &&this.posts.discountedPrice > 0) {
         this.discountAmountChangeDetection();
@@ -159,7 +160,6 @@ private submitPost() {
           confirmButtonColor: 'green',
           title: 'პოსტი წარმატებით რედაქტირდა!',
         });
-        window.location.reload();
       }
     },
     (error) => {
@@ -294,6 +294,16 @@ private submitPost() {
     });
   }
 
+
+  orderAllowedToggle(allowed:boolean){
+    this.posts.orderNotAllowed = allowed;
+    if(allowed){
+      this.postService.UpdateProductOrderAllowed(this.posts.id,allowed).subscribe()
+    }
+    else{
+      this.postService.UpdateProductOrderAllowed(this.posts.id,allowed).subscribe()
+    }
+  }
 }
 
 export interface InsertPost {

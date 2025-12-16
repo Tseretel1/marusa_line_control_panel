@@ -202,7 +202,7 @@ isOlderThan7Day(dateString: string | Date): boolean {
     unpaidOrdersCount:0,
   }
 
- dateBulilder() {
+dateBulilder() {
   const startMonthString = this.startMonthNum.toString().padStart(2, '0');
   const endMonthString = this.endMonthNum.toString().padStart(2, '0');
   this.startDate = `${this.currentYear}-${startMonthString}-01`;
@@ -210,19 +210,24 @@ isOlderThan7Day(dateString: string | Date): boolean {
   const currentMonth = new Date().getMonth() + 1; 
 
   if (this.endMonthNum === currentMonth) {
-    const today = new Date().getDate();
+    const today = new Date().getDate().toString().padStart(2, '0');  
     this.endDate = `${this.currentYear}-${endMonthString}-${today}`;
   } else {
-    const lastDay = new Date(this.currentYear, this.endMonthNum, 0).getDate();
+    const lastDay = new Date(this.currentYear, this.endMonthNum, 0)
+      .getDate()
+      .toString()
+      .padStart(2, '0');  
+
     this.endDate = `${this.currentYear}-${endMonthString}-${lastDay}`;
-    }
   }
+}
+
 
   getDashboardStats(){
     this.dateBulilder();
     const dashboard:StartEndDate={
       startDate :this.startDate,
-      EndDate :this.endDate,
+      endDate :this.endDate,
     }
     console.log(dashboard)
     this.service.GetDahsboardStatistics(dashboard).subscribe(

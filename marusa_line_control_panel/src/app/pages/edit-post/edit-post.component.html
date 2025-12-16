@@ -47,16 +47,22 @@
                     <label class="form-control-label">რაოდენობა მარაგში</label>
                     <input type="number" class="form-control" placeholder="" [(ngModel)]="quantity">
                 </div>
+                <div class="form-control-group">
+                    <label class="form-control-label">შეკვეთა მარაგის ამოწურვის შემდეგ</label>
+                    <div class="order-allowed-align" *ngIf="!posts.orderNotAllowed" (click)="orderAllowedToggle(true)"> 
+                        <label for="orderallowes">დაშვებული</label>
+                    </div>
+                    <div class="order-allowed-align order-not-allowed" *ngIf="posts.orderNotAllowed" (click)="orderAllowedToggle(false)"> 
+                        <label for="orderallowes">შეზღუდული</label>
+                    </div>
+                </div>
             </div>
             <div class="description-group">
                 <label class="form-control-label">პროდუქტის აღწერა</label>
                 <textarea name="" id="" class="description" [(ngModel)]="description"></textarea>
             </div>
-            <button class="noselect" (click)="sendApplicationtoBackend()">
-                <span class="text">რედაქტირება </span>
-                <span class="icon">
-                <i class="fas fa-cloud-upload-alt"></i>
-                </span>
+            <button class="insert" (click)="sendApplicationtoBackend()">
+                რედაქტირება 
             </button>
         </div>
     </div>

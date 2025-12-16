@@ -114,10 +114,13 @@ export class PostService {
   BlockOrUnblockUser(id:number, role:string): Observable<any> {
     return this.http.put<any>(this.apiUrl+`ControlPanel/update-user-role?id=${id}&role=${role}`,{});
   }
+  UpdateProductOrderAllowed(productid:number, allowed:boolean): Observable<any> {
+    return this.http.put<any>(this.apiUrl+`ControlPanel/update-product-order-allowed?productID=${productid}&allowed=${allowed}`,{});
+  }
 }
 export interface StartEndDate{
   startDate :string;
-  EndDate :string;
+  endDate :string;
 }
 export interface UserOptionalFields{
   id:number;
@@ -147,6 +150,7 @@ export interface GetPost {
   dateDeleted:string|null;
   totalActiveProducts:number;
   totalDeletedProducts:number;
+  orderNotAllowed:boolean;
 }
 
 export interface ProductTypes{

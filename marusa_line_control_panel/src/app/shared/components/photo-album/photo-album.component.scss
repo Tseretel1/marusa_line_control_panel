@@ -1,10 +1,30 @@
  .photo-container{
     width: 100%;
-    border-radius: 0px;
+    border-radius: 5px;
     overflow: hidden;
     height: 100%;
     cursor: pointer;
     position: relative;
+     .discount-price-mobile {
+        display: flex;
+        gap: 6px;
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        background-color: rgba(0, 0, 0, 0.726);
+        color: white;
+        padding: 1px 5px;
+        border-radius: 5px;
+        font-size: 13px;
+        align-items: center;
+        z-index: 12;
+        .discounted-price {
+            font-size: 10px;
+            color: rgb(255, 89, 89);
+            text-decoration:line-through;
+            font-style:italic;
+        }
+   }
     .information-align{
         position: absolute;
         z-index: 1;
@@ -29,7 +49,7 @@
 }
 .deleted{
     border: 2px solid red;
-    border-radius: 10px;
+    border-radius: 5px;
     .information-align{
         background-color: rgba(255, 0, 0, 0.325);
     }

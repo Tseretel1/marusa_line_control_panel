@@ -23,7 +23,7 @@
             grid-template-columns: repeat(4,1fr);
             gap: 10px;
             .month{
-                padding: 10px 20px;
+                padding: 10px;
                 border-radius: 5px;
                 background-color: rgba(0, 0, 0, 0.493);
                 cursor: pointer;
@@ -49,8 +49,9 @@
                         padding: 5px 10px;
                         color: white;
                         font-weight: bolder;
-                        border: 1px solid rgba(0, 128, 0, 0.281);
-                        background-color: rgba(0, 128, 0, 0.19);
+                        border: 1px solid green;
+                        background-color: green;
+                        color: white;
                     }
                 }
             }
@@ -65,9 +66,7 @@
                 }
                  .stat-align{
                     .month-stats{
-                        border: 1px solid green;
-                        background-color: green;
-                        color: white;
+                   
                     }
                 }
             }
@@ -221,7 +220,7 @@
     .date-modal-align{
         .date-modal{
             .months-grid{
-                grid-template-columns: repeat(2,1fr);
+                // grid-template-columns: repeat(2,1fr);
             }
         }
     }
@@ -230,7 +229,13 @@
     .date-modal-align{
         .date-modal{
             .months-grid{
-                grid-template-columns: repeat(1,1fr);
+                // grid-template-columns: repeat(1,1fr);
+                .month{
+                    padding: 5px;
+                    .stat-align{
+                        flex-direction: column;
+                    }
+                }
             }
         }
     }
