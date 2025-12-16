@@ -73,17 +73,21 @@
        კატეგორიები
     </p>
     <div class="type-management-align">
-        <div class="type-container">
-            <input type="text" class="type-input" [(ngModel)]="AddType">
+        <div class="type-container flex-container">
+            <input type="text" class="type-input" [(ngModel)]="AddType" maxlength="50">
+            <p>{{AddType.length}}/50</p>
             <button class="delete accept"  (click)="insertProductTypes()"><i class="fas fa-plus" ></i></button>
         </div>
         <div class="type-container" *ngFor="let p of productTypesList">
             <p class="" style="color: white; text-wrap: nowrap;" *ngIf="TypeToeditNum != p.id">{{p.productType}}</p>
             <input type="text" class="type-input" [value]="p.productType"  *ngIf="TypeToeditNum == p.id" [(ngModel)]="TypeString">
-            <button class="delete edit" (click)="openTypeToEdit(p.id)" *ngIf="TypeToeditNum != p.id" ><i class="fas fa-edit"></i></button>
-            <button class="delete accept" (click)="editProductTypes()" *ngIf="TypeToeditNum == p.id"><i class="fas fa-check" ></i></button>
-            <button class="delete"  *ngIf="TypeToeditNum == p.id" (click)="hideTypeToEdit()"><i class="fas fa-close"></i></button>
-            <button class="delete"  *ngIf="TypeToeditNum != p.id"(click)="removeTypeCompletely(p.id)">წაშლა</button>
+            <div class="type-buttons-align">
+                <button class="delete edit" (click)="openTypeToEdit(p.id)" *ngIf="TypeToeditNum != p.id" ><i class="fas fa-edit"></i></button>
+                <button class="delete accept" (click)="editProductTypes()" *ngIf="TypeToeditNum == p.id"><i class="fas fa-check" ></i></button>
+                <button class="delete"  *ngIf="TypeToeditNum == p.id" (click)="hideTypeToEdit()"><i class="fas fa-close"></i></button>
+                <button class="delete"  *ngIf="TypeToeditNum != p.id"(click)="removeTypeCompletely(p.id)">წაშლა</button>
+            </div>
+         
         </div>
     </div>
 </div> 

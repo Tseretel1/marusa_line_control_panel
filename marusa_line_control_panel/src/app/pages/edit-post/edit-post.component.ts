@@ -111,8 +111,25 @@ export class EditPostComponent {
 
 
 sendApplicationtoBackend() {
-  if (!(this.title && this.productTypeId && this.price > 0)) {
-    console.warn('Validation failed!');
+  const validations = [
+    { condition: !!this.title, message: 'შეიყვანეთ დასახელება' },
+    { condition: !!this.productTypeId, message: 'აირჩიეთ პროდუქტის ტიპი' },
+    { condition: this.price > 0, message: 'ფასი უნდა აღემატებოდეს ნულს' },
+    { condition: this.uploadPhotos.length > 0, message: 'ატვირთეთ მინიმუმ 1 ფოტო' },
+  ];
+
+  const failed = validations.find(v => !v.condition);
+
+  if (failed) {
+    Swal.fire({
+      icon: 'error',
+      timer: 3000,
+      showConfirmButton: false,
+      confirmButtonColor: 'green',
+      background:'rgb(25, 26, 25)',
+      color: '#ffffff',    
+      title:failed.message,
+    });
     return;
   }
   const newFilesExist = this.uploadPhotos.some(p => p.file);
@@ -155,10 +172,11 @@ private submitPost() {
         Swal.fire({
           icon: 'success',
           timer: 3000,
-          showConfirmButton: true,
-          confirmButtonText: 'ოქეი',
+          showConfirmButton: false,
           confirmButtonColor: 'green',
-          title: 'პოსტი წარმატებით რედაქტირდა!',
+          background:'rgb(25, 26, 25)',
+          color: '#ffffff',
+          title:'პროდუქტი წარმატებით რედაქტირდა',
         });
       }
     },
@@ -212,6 +230,8 @@ private submitPost() {
       cancelButtonText: 'არა',
       cancelButtonColor: 'red',
       confirmButtonText: 'დიახ',
+      background:'rgb(25, 26, 25)',
+      color: '#ffffff',      
       confirmButtonColor: 'green',
       title: 'ნამდვილად გსურთ ფოტოს წაშლა?',
     }).then((results) => {
@@ -243,58 +263,6 @@ private submitPost() {
       }
     )
   }
-
-  TypeString :string = '';
-  AddType :string = '';
-  TypeToeditNum:number = 0;
-  openTypeToEdit(num:number){
-    this.TypeToeditNum = num;
-    const typeName = this.productTypesList.find(x=>x.id == num);
-    if(typeName){
-      this.TypeString = typeName.productType;
-    }
-  }
-  hideTypeToEdit(){
-    this.TypeToeditNum = 0;
-  }
-  insertProductTypes(){
-  this.postService.InsertProductTypes(this.AddType).subscribe(
-    (resp)=>{
-      this.productTypesList =resp.productTypes;
-      this.AddType = '';
-    })
-  }
-  editProductTypes(){
-  if(this.TypeString!=''){
-    this.postService.EditProductTypes(this.TypeToeditNum,this.TypeString).subscribe(
-      (resp)=>{
-         const typeName = this.productTypesList.find(x=>x.id == this.TypeToeditNum);
-         if(typeName){
-          typeName.productType = this.TypeString;
-          this.hideTypeToEdit()
-         }
-      })
-    }
-  }
-  removeTypeCompletely(id: number) {
-    Swal.fire({
-      showConfirmButton: true,
-      showCancelButton: true,
-      cancelButtonText: 'არა',
-      cancelButtonColor: 'red',
-      confirmButtonText: 'დიახ',
-      confirmButtonColor: 'green',
-      title: 'ნამდვილად გსურთ ფოტოს წაშლა?',
-    }).then((results) => {
-      if (results.isConfirmed) {
-        this.postService.DeleteProductTypes(id).subscribe((resp) => {
-         this.productTypesList = resp.productTypes;
-        });
-      }
-    });
-  }
-
-
   orderAllowedToggle(allowed:boolean){
     this.posts.orderNotAllowed = allowed;
     if(allowed){

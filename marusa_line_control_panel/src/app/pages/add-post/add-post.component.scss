@@ -127,6 +127,23 @@
                 flex-direction: column;
                 gap: 10px;
                 width: 100%;
+                 .order-allowed-align{
+                    display: flex;
+                    justify-content: center;
+                    gap: 10px;
+                    background-color: green;
+                    height: 100%;
+                    align-items: center;
+                    border-radius: 5px;
+                    padding: 10px 0px;
+                    cursor: pointer;
+                    label{
+                        cursor: pointer;
+                    }
+                }
+                .order-not-allowed{
+                    background-color: orangered;
+                }
                 .form-control{
                     background-color: transparent;
                     background:none;

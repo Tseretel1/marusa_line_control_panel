@@ -46,24 +46,31 @@ export class AddPostComponent implements OnInit{
   photos: Insertphoto[] = [];
   InsertPhotos: Insertphoto[] = [];
 
-  validatedata(): any {
-    if (this.title != '' && this.productTypeId != 0 && this.price != 0) {
-      const InsertPost: InsertPost = {
-        title: this.title,
-        productTypeId: this.productTypeId,
-        price: this.price,
-        discountedPrice: this.discountedPrice,
-        description: this.description,
-        quantity: this.quantity,
-        photos: [],
-      };
-      return InsertPost;
-    }
-    return null;
-  }
+
 
   sendApplicationtoBackend() {
-    if (this.title && this.productTypeId && this.price > 0) {
+      const validations = [
+        { condition: !!this.title, message: 'შეიყვანეთ დასახელება' },
+        { condition: !!this.productTypeId, message: 'აირჩიეთ პროდუქტის ტიპი' },
+        { condition: this.price > 0, message: 'ფასი უნდა აღემატებოდეს ნულს' },
+        { condition: this.uploadPhotos.length > 0, message: 'ატვირთეთ მინიმუმ 1 ფოტო' },
+      ];
+    
+      const failed = validations.find(v => !v.condition);
+    
+      if (failed) {
+        Swal.fire({
+          icon: 'error',
+          timer: 3000,
+          showConfirmButton: false,
+          confirmButtonColor: 'green',
+          background:'rgb(25, 26, 25)',
+          color: '#ffffff',    
+          title:failed.message,
+        });
+        return;
+      }
+
       this.uploadAllImages().subscribe({
         next: (results) => {
           const InsertPost: InsertPost = {
@@ -74,6 +81,7 @@ export class AddPostComponent implements OnInit{
             description: this.description,
             quantity: this.quantity,
             photos: this.InsertPhotos,
+            orderNotAllowed: this.orderNotAllowed,
           };
           console.log(InsertPost);
           this.postService.addPost(InsertPost).subscribe(
@@ -84,14 +92,13 @@ export class AddPostComponent implements OnInit{
                   timer: 3000,
                   showConfirmButton: true,
                   confirmButtonText: 'ოქეი',
+                  background:'rgb(25, 26, 25)',
+                  color: '#ffffff',    
                   confirmButtonColor: 'green',
-                  title: 'პოსტი წარმატებით დაემატა!',
+                  title: 'პროდუქტი წარმატებით დაემატა!',
                 }).then((results) => {
                   this.router.navigate([this.AppRoutes.posts])
                 });
-                setTimeout(() => {
-                  // window.location.reload();
-                }, 3000);
               }
             },
             (error) => {
@@ -103,9 +110,6 @@ export class AddPostComponent implements OnInit{
           console.error('Upload failed:', err);
         },
       });
-    } else {
-      console.warn('Validation failed!');
-    }
   }
 
   uploadPhotos: {
@@ -186,6 +190,12 @@ export class AddPostComponent implements OnInit{
     });
     return forkJoin(uploads);
   }
+
+
+  orderNotAllowed:boolean = true;
+  ToggleorderNotAllowed(allowed:boolean){
+    this.orderNotAllowed = allowed;
+  }
 }
 
 export interface InsertPost {
@@ -195,6 +205,7 @@ export interface InsertPost {
   price: number;
   discountedPrice: number;
   quantity: number;
+  orderNotAllowed:boolean;
   photos: Insertphoto[];
 }
 export interface Insertphoto {
