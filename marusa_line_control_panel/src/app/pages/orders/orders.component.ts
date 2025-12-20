@@ -97,6 +97,7 @@ export class OrdersComponent implements OnInit{
 
   getPaidOrUnpaidOrders(IsPaid:boolean){
     this.getOrderDto.OrderId = null;
+    this.getOrderDto.UserId = null
     if(IsPaid){
       localStorage.setItem('orderIdPaid', 'true');
       this.getOrderDto.IsPaid = true;

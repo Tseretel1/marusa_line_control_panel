@@ -29,6 +29,7 @@ export class UsersComponent implements OnInit{
   getUsers(){
     this.service.GetUsersList(this.getuserFitler).subscribe((resp)=>{
       this.users = resp;
+      this.hideInputsModal();
       this.CreatePagenation(this.users[0].totalCount)
     })
   }
@@ -118,6 +119,7 @@ export class UsersComponent implements OnInit{
     this.service.GetUsersByName(this.NameSearch).subscribe(
       (resp)=>{
          this.users = resp;
+         this.hideInputsModal();
       }
     )
   }
@@ -125,10 +127,20 @@ export class UsersComponent implements OnInit{
     this.service.GetUsersByEmail(this.EmailSearch).subscribe(
       (resp)=>{
          this.users = resp;
+         this.hideInputsModal();
          this.CreatePagenation(this.users[0].totalCount)
       }
     )
   }
+
+  inputsModalVisible:boolean = false;
+  openInputsModal(){
+    this.inputsModalVisible = true;
+  }
+  hideInputsModal(){
+    this.inputsModalVisible = false;
+  }
+
 }
 
 export interface GetusersDto {

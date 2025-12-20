@@ -5,26 +5,57 @@
     flex-direction: column;
     align-items: center;
     gap: 20px;
+    .inputs-moadl-align{
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 5;
+        backdrop-filter: blur(20px);
+    }
+    .clse-inputs-modal{
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+    }
     .filters-align{
-        width: 80%;
+        width: 90%;
         display: flex;
         gap: 20px;
         align-items:center;
         flex-direction: column;
+        z-index: 10;
         .inputs-align{
             display: flex;
             gap: 20px;
+            padding: 30px; 
+            border-radius: 10px;
+            background-color: rgb(44, 44, 44);
+            filter: drop-shadow( 0px 0px 50px black);
+            width: 90%;
+            border: 1px solid rgba(128, 128, 128, 0.295);
+            max-width: 500px;
             .search-align{
                 display: flex;
-                gap: 10px;
+                gap: 5px;
                 .user-search{
                     background-color: transparent;
                     color: white;
                     padding: 10px 20px;
-                    border: 1px solid white;
+                    border: 1px solid grey;
                     border-radius: 5px;
                     outline: none;
                     width: 100%;
+                }
+                .user-search::placeholder{
+                    color: white;
                 }
                 .search-button{
                     padding: 10px 20px;
@@ -40,7 +71,8 @@
         }
         .filter-button-align{
             display: flex;
-            gap: 20px;
+            gap: 6px;
+            width: 100%;
             .filter{
                 color: white;
                 padding: 10px 20px;
@@ -59,9 +91,9 @@
         display: none;
     }
     .user-align{
-        width: 80%;
+        width: 90%;
         display: grid;
-        grid-template-columns: repeat(3,1fr);
+        grid-template-columns: repeat(4,1fr);
         gap: 10px;
         .user{
             padding: 10px 20px;
@@ -69,7 +101,6 @@
             background-color: rgba(0, 0, 0, 0.247);
             border-radius: 5px;
             display: flex;
-            justify-content: space-between;
             flex-direction: column;
             position: relative;
             .copy-user-id{
@@ -109,7 +140,7 @@
                     display: flex;
                     align-items: center;
                     justify-content: space-between;
-                    padding: 5px 10px;
+                    padding: 5px;
                     border: 1px solid rgba(128, 128, 128, 0.349);
                     background-color: rgba(0, 0, 0, 0.247);
                     border-radius: 5px;
@@ -140,8 +171,8 @@
                     cursor: pointer;
                     .info{
                         color: white;
-                        max-width: 250px;
-                        word-break: break-all;
+                        max-width: 100px;
+                        overflow: hidden;
                     }
                     .copy-btn{
                         cursor: pointer;
@@ -168,7 +199,6 @@
                 display: flex;
                 justify-content: space-between;
                 gap: 10px;
-                height: 100%;
                 z-index: 2;
                 .role{
                     color: white;
@@ -177,7 +207,6 @@
                     border-radius: 5px;
                     padding: 10px;   
                     cursor: pointer;
-                    height: 30px;
                     display: flex;
                     align-items: center;
                 }
@@ -305,24 +334,18 @@
     .user-component{
         .user-align{
             width: 90%;
+            grid-template-columns: repeat(3,1fr);
+        }
+   }
+}
+@media screen and (max-width:900px){
+   .user-component{
+        .user-align{
             grid-template-columns: repeat(2,1fr);
         }
-   }
-}
-@media screen and (max-width:600px){
-    .user-component{
-        .user-align{
-            grid-template-columns: repeat(1,1fr);
-        }
-   }
-}
-@media screen and (max-width:800px){
-   .user-component{
        .filters-align{
-        width: 90%;
             .inputs-align{
                 flex-direction: column;
-                width: 100%;
                 .search-align{
                     width: 100%;
                 }
@@ -334,4 +357,11 @@
             }
        }
     }
+}
+@media screen and (max-width:600px){
+    .user-component{
+        .user-align{
+            grid-template-columns: repeat(1,1fr);
+        }
+   }
 }
