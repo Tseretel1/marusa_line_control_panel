@@ -160,13 +160,13 @@ export class OrdersComponent implements OnInit{
   const minutes = Math.floor((diffInMs / (1000 * 60)) % 60);
 
   if (days > 0) {
-    return `${days} დღის${days > 1 ? '' : ''} ${hours} საათის${hours !== 1 ? '' : ''} წინ`;
+    return `${days}d${days > 1 ? '' : ''} ${hours}h${hours !== 1 ? '' : ''} ago`;
   } else if (hours > 0) {
-    return `${hours} საათის${hours > 1 ? '' : ''} ${minutes} წუთის${minutes !== 1 ? '' : ''} წინ`;
+    return `${hours}h${hours > 1 ? '' : ''} ${minutes}m${minutes !== 1 ? '' : ''} ago`;
   } else if (minutes > 0) {
-    return `${minutes} წუთის${minutes > 1 ? '' : ''} წინ`;
+    return `${minutes}m${minutes > 1 ? '' : ''} ago`;
   } else {
-    return 'ახლახანს';
+    return 'just now';
   }
 }
 

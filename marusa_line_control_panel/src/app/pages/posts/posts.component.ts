@@ -83,9 +83,12 @@ export class PostsComponent implements OnInit{
   }
 
 
+ activeFilterNum: number = 0;
 
-
-  
+  typeManagementVisible:boolean = false;
+  toggleTypemnagement(b:boolean){
+    this.typeManagementVisible = b;
+  }
 
   lastPage: number = 0; 
   selectedPage: number = 1;

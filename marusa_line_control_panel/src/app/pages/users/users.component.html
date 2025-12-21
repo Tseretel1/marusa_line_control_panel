@@ -5,15 +5,12 @@
         <div class="inputs-align">
             <div class="search-align">
               <input class="user-search" type="number" [(ngModel)]="userId" (change)="getUserById()"  placeholder="#">
-              <!-- <button class="search-button" (click)="getUserById()"> <i class="fas fa-search"></i></button> -->
             </div>
             <div class="search-align">
               <input class="user-search" type="text" [(ngModel)]="NameSearch" (change)="getUserByName()" placeholder="სახელი">
-              <!-- <button class="search-button" (click)="getUserByName()"> <i class="fas fa-search"></i></button> -->
             </div>
             <div class="search-align">
                <input class="user-search" type="text" [(ngModel)]="EmailSearch" (change)="getUserByEmail()" placeholder="მეილი">
-               <!-- <button class="search-button" (click)="getUserByEmail()" > <i class="fas fa-search"></i></button> -->
             </div>   
         </div>
       </div>

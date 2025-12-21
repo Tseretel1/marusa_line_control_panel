@@ -11,22 +11,33 @@
         color: white;
         display: flex;
         justify-content: center;
-        table{
+        align-items: center;
+        gap: 10px;
+        flex-direction: column;
+        .align-post-filters{
+            display: flex;
+            gap: 20px;
+            align-items: center;
             cursor: pointer;
-            th{
+            .post-filter{
                 padding: 10px;
-                border-bottom: 1px solid white;
-                color: rgb(216, 214, 214);
+                border: 1px solid white;
+                border-radius: 5px;
+                color: white;
                 .fas{
                     color: white;
                 }
               
             }
-            td{
-                padding: 10px;
-                text-align: center;
-                font-weight: bolder;
-                text-shadow :0px 0px 2px black;
+            .active-post{
+                background-color:green;
+                border: 1px solid green;
+                color: white;
+            }
+            .deleted-post{
+                background-color:orangered;
+                color: white;
+                border: 1px solid orangered;
             }
         }
     }
@@ -38,6 +49,35 @@
     width: 100%;
     display: flex;
     justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    .filters-align{
+        width: 90%;
+        display: flex;
+        gap: 10px;
+        padding: 10px 0px;
+        flex-wrap: wrap;
+        .filters{
+        padding: 4px 16px;
+        border-radius: 5px;
+        color: white;
+        background-color: rgba(0, 0, 0, 0.192);
+        border: 1px solid rgba(128, 128, 128, 0.514);
+        cursor: pointer;
+        text-wrap: nowrap;
+        }
+        .active-filter{
+        background-color: white;
+        color: black; 
+        }
+        .edit-filter{
+            background-color: orange;
+            color: black;
+        }
+    }
+ .filters-align::-webkit-scrollbar{
+        display: flex;
+    }
     .photo-align{
         width: 90%;
         display: grid;
@@ -136,30 +176,45 @@
 }
 .type-management-component{
     width: 100%;
+    height: 100%;
     display: flex;
     align-items: center;
+    justify-content: center;
     padding: 30px 0px;
     color: white;
     flex-direction: column;
     gap: 20px;
+    position: fixed;
+    z-index: 62;
+    top: 0;
+    left: 0;
+    .type-management-background{
+        width: 100%;
+        height: 100%;
+        backdrop-filter: blur(20px);
+        position: fixed;
+        z-index: 7;
+        top: 0;
+        left: 0;
+    }
     .type-management-align{
         width: 90%;
         display: flex;
-        flex-wrap: wrap;
+        flex-direction: column;
+        z-index: 8;
         gap: 10px;
         padding: 30px 20px;
         border-radius: 10px;
-        background-color: rgba(0, 0, 0, 0.452);
+        max-width: 600px;
+        background-color: rgb(29, 28, 28);
         .type-container{
             display: flex;
-            align-items: center;
             flex-direction: column;
             gap: 5px;
             padding: 10px 5px;
-            border: 1px solid grey;
             border-radius: 5px;
-            background-color: rgba(0, 0, 0, 0.527);
             flex:1;
+            box-shadow: 0px 0px 1px grey;
             .type-buttons-align{
                 display: flex;
                 gap:10px;
@@ -172,6 +227,7 @@
                 padding: 10px;
                 color: white;
                 outline: none;
+                width: 100%;
             }
             .delete{
                 padding: 10px 20px;

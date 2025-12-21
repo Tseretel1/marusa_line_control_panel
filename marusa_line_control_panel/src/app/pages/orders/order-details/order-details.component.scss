@@ -543,7 +543,7 @@ textarea{
     position: fixed;
     top: 0;
     left: 0;
-    backdrop-filter: blur(5px);
+    background-color: rgba(0, 0, 0, 0.151);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -560,9 +560,9 @@ textarea{
         max-width: 500px;
         padding: 50px;
         border-radius: 10px;
-        backdrop-filter: blur(50px);
         background-color: rgba(0, 0, 0, 0.533);
-        border: 1px solid grey;        
+        border: 1px solid grey;   
+        backdrop-filter: blur(20px);     
         color: white;
         display: flex;
         flex-direction: column;
@@ -582,14 +582,14 @@ textarea{
                 border: none;
                 cursor: pointer;
                 width: 200px;
-                border: 1px solid white;
+                border: 1px solid grey;
                 background-color: rgba(0, 0, 0, 0.521);     
             }
             .order-status{
                 background-color: transparent;
                 color: white;
                 padding: 20px; 
-                border: 1px solid white;
+                border: 1px solid grey;
                 background-color: rgba(0, 0, 0, 0.521);           
             }
             .selected-status{
