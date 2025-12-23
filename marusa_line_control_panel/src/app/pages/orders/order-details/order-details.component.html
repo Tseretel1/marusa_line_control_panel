@@ -63,6 +63,9 @@
                             <div class="delivery-align info-background detail" (click)="copyToClipboard(user.email)">
                                 <p >{{user.email}}</p>
                             </div>       
+                            <div class="delivery-align info-background detail" (click)="copyToClipboard(order.address)" *ngIf="order.address">
+                                <p class="" ><b>მისამართი :</b> {{order.address}}</p>
+                            </div>
                             <div class="info-background date detail">
                                 <i class="fas fa-calendar"></i>
                                 {{ order.createDate | date : 'dd MMM yyyy' }} 
@@ -83,19 +86,15 @@
         </div>
     </div>
 </div>
-<div class="map-align"style="width: 100%; display:flex; justify-content:center;">
+<div class="map-align"style="width: 100%; display:flex; justify-content:center;" *ngIf="location.lat!='0'&&location.lng!='0'">
     <div class="map-wrap" style="width: 90%; max-width: 1000px; border-radius: 10px; background-color: rgba(0, 0, 0, 0.432);padding: 20px; display: flex; flex-direction: column; gap: 10px;">
         <div style="display: flex; flex-direction: column; gap: 10px;">
-            <div style="display: flex; align-items: center; gap: 5px; flex-wrap: wrap;" (click)="copyToClipboard(order.address)">
-                <div>მისამართი</div>
-                <div style="padding: 5px 10px; border-radius: 5px; background-color: rgba(0, 0, 0, 0.493); border: 1px solid rgba(128, 128, 128, 0.459); cursor: pointer;">{{order.address}}</div>
-            </div>
             <div style="display: flex; align-items: center; gap: 5px; flex-wrap: wrap;" (click)="copyToClipboard(`${order.lat},${order.lng}`)">
                 <div>პინი</div>
                 <div style="padding: 5px 10px; border-radius: 5px; background-color: rgba(0, 0, 0, 0.493); border: 1px solid rgba(128, 128, 128, 0.459); cursor: pointer;word-break: break-all;">{{order.lat}},{{order.lng}}</div>
             </div>
         </div>
-        <div id="map" style="width: 100%; height: 500px; border-radius: 5px;"></div>
+        <div id="map" style="width: 100%; height: 500px; border-radius: 10px;"></div>
     </div>
 </div>
 
