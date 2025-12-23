@@ -1,7 +1,4 @@
 
-<div class="delete-order" *ngIf="order.orderId && !order.isPaid">
-    <button class="delete-order-button" (click)="deleteOrder(order.orderId)">წაშლა</button>
-</div>
 
 <div class="center-component" >
     <div  class="body-align" *ngIf="postsLoaded">
@@ -9,43 +6,54 @@
             <div class="header-grid">
                 <div class="card-information" >
                     <div class="photo-align" >
-                        <div class="order-num-align">
-                            <div class="order-box" [ngClass]="{'paid-order':order.isPaid,'unpaid-order':!order.isPaid}">
-                                <p class="order-status">შეკვეთა </p>
-                                <p class="order-id" >
-                                    {{order.orderId}}
-                                </p>    
+                        <div class="user-information">
+                            <div class="order-num-align">
+                                <div class="order-box" [ngClass]="{'paid-order':order.isPaid,'unpaid-order':!order.isPaid}">
+                                    <p class="order-status">შეკვეთა </p>
+                                    <p class="order-id" >
+                                        {{order.orderId}}
+                                    </p>    
+                                </div>
+                                <div class="delete-order" *ngIf="order.orderId && !order.isPaid">
+                                    <button class="delete-order-button" (click)="deleteOrder(order.orderId)">წაშლა</button>
+                                </div>
                             </div>
-                        </div>
-                        <div class="title-price-align">
-                            <p>
-                                {{posts.title}}
-                            </p>
-                        </div> 
-                        <div class="photo-container"  data-aos="fade-in">
-                             <div *ngFor="let p of photosArray; let i = index" >
-                                 <img [src]="p.photoUrl" *ngIf="i==0" alt="" class="photo">
-                             </div>
                         </div>
                         <div class="product-details-align user-information">
-                            <div class="detail-align " (click)="openModal(1)">
-                                <div class="detail info-background" *ngIf="!order.isPaid" [ngClass]="{'to-payed':!order.isPaid}">
-                                    <p class="" >გადასახდელი</p>
-                                    <b> {{order.finalPrice}}₾</b>
-                                    <i class="fas fa-credit-card" ></i>
+                            <div style="display: flex; flex-direction: column; justify-content: space-evenly; gap: 10px;">
+                                <div class="detail-align" (click)="openModal(1)">
+                                    <div class="detail info-background" *ngIf="!order.isPaid" [ngClass]="{'to-payed':!order.isPaid}">
+                                        <p class="" >გადასახდელი:</p>
+                                        <b class="price-bold"> {{order.finalPrice}}₾</b>
+                                    </div>
+                                    <div class="detail info-background payed-container" *ngIf="order.isPaid" [ngClass]="{'is-payed':order.isPaid }">
+                                        <p class="" >გადახდილი</p>
+                                        <b class="price-bold"> {{order.finalPrice}}₾</b>
+                                    </div>
                                 </div>
-                                <div class="detail info-background payed-container" *ngIf="order.isPaid" [ngClass]="{'is-payed':order.isPaid }">
-                                    <p class="" >გადახდილი</p>
-                                    <b> {{order.finalPrice}}₾</b>
-                                    <i class="fas fa-credit-card" ></i>
+                                <div class="detail-align" *ngIf="order.isPaid">
+                                    <div class="detail info-background" (click)="openModal(2)">
+                                        სტატუსი: 
+                                        <b>{{getStatusName(order.statusId)}}</b>
+                                        
+                                        <i class="fas fa-spinner topay" *ngIf="!order.isPaid"></i>
+                                        <p class="" *ngIf="order.isPaid"></p>
+                                    </div>   
+                                </div>
+                                <div class="info-background date detail">
+                                    <p>თარიღი:</p>
+                                    <b>{{ order.createDate | date : 'dd MMM yyyy' }}</b>
+                                </div> 
+                            </div>
+                            <div style="display: flex; flex-direction: column; gap: 10px;">
+                                <div class="photo-container"  data-aos="fade-in">
+                                    <p class="quantity"> <i class="fas fa-close "></i>{{order.productQuantity}}</p>
+                                    <div *ngFor="let p of photosArray; let i = index" >
+                                        <img [src]="p.photoUrl" *ngIf="i==0" alt="" class="photo">
+                                    </div>
+                                    <p class="product-title">{{posts.title}}</p>
                                 </div>
                             </div>
-                            <div class="detail info-background" (click)="openModal(2)">
-                                {{getStatusName(order.statusId)}}
-                                <!-- <i class="fas fa-spinner topay" *ngIf="!order.isPaid"></i> -->
-                                <p class="" *ngIf="order.isPaid"></p>
-                                <p *ngIf="order.statusId ==3">✅</p>
-                            </div>   
                         </div>
                         <div class="product-details-align user-information">
                             <div class="delivery-align info-background detail user-profile" (click)="copyToClipboard(user.name)">
@@ -66,15 +74,8 @@
                             <div class="delivery-align info-background detail" (click)="copyToClipboard(order.address)" *ngIf="order.address">
                                 <p class="" ><b>მისამართი :</b> {{order.address}}</p>
                             </div>
-                            <div class="info-background date detail">
-                                <i class="fas fa-calendar"></i>
-                                {{ order.createDate | date : 'dd MMM yyyy' }} 
-                            </div> 
-                            <div class="delivery-align info-background detail">
-                                <p class="">რაოდენობა :{{order.productQuantity}}</p>
-                            </div>
                         </div>
-                        <div class="comment-align user-information" >
+                        <div class="comment-align user-information" *ngIf="comment">
                             <div class="form-group">
                                 <label for="" style="display: flex; gap: 20px; color: white;" >კომენტარი <p style="color: gray;">{{comment.length}}/300</p> </label>
                                 <textarea [(ngModel)]="comment" disabled="true" class="form-control"  maxlength="300" style="min-height: 100px;"></textarea>
@@ -86,15 +87,15 @@
         </div>
     </div>
 </div>
-<div class="map-align"style="width: 100%; display:flex; justify-content:center;" *ngIf="location.lat!='0'&&location.lng!='0'">
-    <div class="map-wrap" style="width: 90%; max-width: 1000px; border-radius: 10px; background-color: rgba(0, 0, 0, 0.432);padding: 20px; display: flex; flex-direction: column; gap: 10px;">
+<div class="user-information map-align"style="display:flex; justify-content:center;" *ngIf="location.lat!='0'&&location.lng!='0'">
+    <div class="map-wrap" style="border-radius: 5px;border: 1px solid rgba(128, 128, 128, 0.459); background-color: rgba(0, 0, 0, 0.342);padding: 20px; display: flex; flex-direction: column; gap: 10px;">
         <div style="display: flex; flex-direction: column; gap: 10px;">
             <div style="display: flex; align-items: center; gap: 5px; flex-wrap: wrap;" (click)="copyToClipboard(`${order.lat},${order.lng}`)">
                 <div>პინი</div>
                 <div style="padding: 5px 10px; border-radius: 5px; background-color: rgba(0, 0, 0, 0.493); border: 1px solid rgba(128, 128, 128, 0.459); cursor: pointer;word-break: break-all;">{{order.lat}},{{order.lng}}</div>
             </div>
         </div>
-        <div id="map" style="width: 100%; height: 500px; border-radius: 10px;"></div>
+        <div id="map" style="width: 100%;border-radius: 10px;"></div>
     </div>
 </div>
 

@@ -20,12 +20,8 @@
         display: grid;
         justify-content: center;
         grid-template-columns: repeat(1,1fr);
-        width: 45%;
+        width: 60%;
         position: relative;
-        padding:20px;
-        border-radius: 10px;
-        background-color: rgba(0, 0, 0, 0.185);
-        background-color: rgba(0, 0, 0, 0.418);
         gap: 10px;
         .component{
             width: 100%;
@@ -166,6 +162,30 @@
         position: relative;
         height: 300px;
         border: 1px solid rgba(128, 128, 128, 0.356);
+        .quantity{
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            z-index: 2;
+            background-color: rgba(22, 22, 22, 0.89);
+            border-radius: 5px;
+            padding: 2px 5px;
+            transform: rotate(25deg);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .product-title{
+            position: absolute;
+            width: 100%;
+            bottom: 0px;
+            left: 0px;
+            background-color: rgba(22, 22, 22, 0.89);
+            padding: 2px 5px; 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
         .photo{
             width: 100%;
             height: 100%;
@@ -189,15 +209,16 @@
         grid-template-columns: repeat(2,1fr);
         color: white;
         padding: 20px;
-        gap: 20px;
+        gap: 10px;
         border-radius: 5px;
-        box-shadow:  0px 0px 10px black;
+        background-color: rgba(0, 0, 0, 0.295);
         .delivery-align{
             display: flex;
             align-items: center;
             gap: 10px;
             width: 100%;
             flex-direction: column;
+            min-height: 60px;
             p {
                 text-align: center; 
                 word-break: break-all;
@@ -267,12 +288,10 @@
     width: 100%;
     display: flex;
     flex-direction: column;
-    gap: 25px;
-    border-radius: 10px;
-    padding: 10px;
+    border-radius: 5px;
+    padding: 5px;
     animation:fadeIn 0.5s;
-    box-shadow:  0px 0px 10px black;
-    background-color: rgba(29, 28, 28, 0.226);
+    background-color: rgba(0, 0, 0, 0.295); 
     border: 1px solid rgba(128, 128, 128, 0.356);
     .flex-columns{
         width: 100%;
@@ -415,13 +434,18 @@ textarea{
 }
 .detail-align{
     width: 100%;
+    height: 100%;
 }
 .detail{
     display: flex;
     align-items: center;
     gap: 5px;
     cursor: pointer;
-    min-height: 80px;
+    height: 100%;
+    flex-wrap: wrap;
+    .price-bold{
+        font-size: 20px;
+    }
 }
 .info-background{
     padding: 10px ;
@@ -447,7 +471,7 @@ textarea{
 .order-num-align{
     width: 100%;
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
     .order-box{
         display: flex;
         align-items: center;
@@ -548,6 +572,7 @@ textarea{
     align-items: center;
     justify-content: center;
     animation:0.3s popupModalBack;
+        backdrop-filter: blur(10px);
     .modal-cancel{
         width: 100%;
         height: 100%;
@@ -630,7 +655,17 @@ textarea{
     }
 }
 
-
+.map-align{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    .map-wrap{
+        width: 60%;
+    }
+    #map{
+        height: 500px;
+    }
+}
 
 
 @media screen and (max-width:1200px) {
@@ -651,30 +686,32 @@ textarea{
                     width: 100%;
                     .photo-align{
                         align-items: center;
-                        .product-details-align{
-                            align-items: center;
-                        }
-                        .photo-container{
-                            height: 250px;
-                        }
                     }
                 }
             }
+        }
+    }
+    .map-align{
+        width: 100%;
+        .map-wrap{
+            width: 70%;
+        }
+        #map{
+            height: 500px;
         }
     }
 }
 
 
 .delete-order{
-    width: 100%;
     display: flex;
     justify-content: center;
     .delete-order-button{
         background-color: transparent;
         color: red;
         border: 1px solid red;
-        padding: 20px 100px;
-        border-radius: 20px;
+        padding: 10px 20px;
+        border-radius: 5px;
         cursor: pointer;
         transition: 0.3s all ease-in-out;
         font-weight: bolder;
@@ -708,15 +745,17 @@ textarea{
             width: 90%;
         }
           .component{
-                    padding: 0;
-                .header-grid{
-                    .photo-align{
-                        .product-details-align{
-                            gap: 5px;
-                        }
-                    }
-                }
+            padding: 0;
             }
+    }
+    .map-align{
+        width: 100%;
+        .map-wrap{
+            width: 90%;
+        }
+        #map{
+            height: 400px;
+        }
     }
 }
 @media screen and (max-width:600px) {
@@ -734,9 +773,7 @@ textarea{
                     .photo-align{
                         align-items: center;
                         .product-details-align{
-                            align-items: center;
                             grid-template-columns: repeat(1,1fr);
-                            gap: 10px;
                         }
                         .photo-container{
                             height: 250px;

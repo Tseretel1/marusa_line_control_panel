@@ -33,6 +33,8 @@ export class OrderDetailsComponent implements OnInit{
     this.postService.getOrderById(this.productId).subscribe(
       (resp)=>{
         this.posts = resp.product;
+        console.log(resp)
+
         this.order = resp.orders;
         this.Map.lat = this.order.lat;
         this.Map.lng = this.order.lng;

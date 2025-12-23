@@ -230,7 +230,6 @@ dateBulilder() {
       startDate :this.startDate,
       endDate :this.endDate,
     }
-    console.log(dashboard)
     this.service.GetDahsboardStatistics(dashboard).subscribe(
       (resp)=>{
         this.dashboardStats = resp.statistics;
