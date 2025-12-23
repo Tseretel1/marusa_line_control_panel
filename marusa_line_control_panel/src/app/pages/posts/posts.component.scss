@@ -1,50 +1,3 @@
-.statistics-align{
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    padding: 30px 0px;
-    .statistics-component{
-        width: 90%;
-        padding: 50px 10px;
-        background-color: rgba(0, 0, 0, 0.582);
-        backdrop-filter: blur(2px);
-        color: white;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 10px;
-        flex-direction: column;
-        .align-post-filters{
-            display: flex;
-            gap: 20px;
-            align-items: center;
-            cursor: pointer;
-            .post-filter{
-                padding: 10px;
-                border: 1px solid white;
-                border-radius: 5px;
-                color: white;
-                .fas{
-                    color: white;
-                }
-              
-            }
-            .active-post{
-                background-color:green;
-                border: 1px solid green;
-                color: white;
-            }
-            .deleted-post{
-                background-color:orangered;
-                color: white;
-                border: 1px solid orangered;
-            }
-        }
-    }
-}
-
-
-
 .gallery-align{
     width: 100%;
     display: flex;
@@ -73,6 +26,27 @@
         .edit-filter{
             background-color: orange;
             color: black;
+        }
+        
+        .post-filter{
+            padding: 10px;
+            border: 1px solid white;
+            border-radius: 5px;
+            color: white;
+            .fas{
+                color: white;
+            }
+            
+        }
+        .active-post{
+            background-color:green;
+            border: 1px solid green;
+            color: white;
+        }
+        .deleted-post{
+            background-color:orangered;
+            color: white;
+            border: 1px solid orangered;
         }
     }
  .filters-align::-webkit-scrollbar{

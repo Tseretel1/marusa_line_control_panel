@@ -1,27 +1,17 @@
 
-<div class="statistics-align">
-    <div class="statistics-component">
-        <div class="align-post-filters">
-            <div class="post-filter" (click)="getActivePosts()" [ngClass]="{'active-post': !getPostsDto.IsDeleted}">
-                აქტიური
-                <b>{{posts[0]?.totalActiveProducts}}</b>
-            </div>
-            <div class="post-filter" (click)="getDeletedPosts()"[ngClass]="{'deleted-post': getPostsDto.IsDeleted}">
-                დამალული
-                <b >{{posts[0]?.totalDeletedProducts}}</b>
-            </div>
-        </div>
-        <!-- <div >
-            ლაიქები 
-            {{likeCount}}
-            <i class="fas fa-heart" style="color: red;"></i>
-        </div> -->
-        
-    </div>
-</div>
 <div class="gallery-align">
      <div class="filters-align" >
          <div class="filters edit-filter" [attr.data-id]="0" (click)="toggleTypemnagement(true)">რედაქტირება <i class="fas fa-edit"></i></div>
+     </div>
+     <div class="filters-align" >
+         <div class="post-filter" (click)="getActivePosts()" [ngClass]="{'active-post': !getPostsDto.IsDeleted}">
+             აქტიური
+             <b>{{posts[0]?.totalActiveProducts}}</b>
+         </div>
+         <div class="post-filter" (click)="getDeletedPosts()"[ngClass]="{'deleted-post': getPostsDto.IsDeleted}">
+             დამალული
+             <b >{{posts[0]?.totalDeletedProducts}}</b>
+         </div>
      </div>
      <div class="filters-align" >
         <div class="filters" [ngClass]="{'active-filter': activeFilterNum == 0}"    [attr.data-id]="0">ყველა</div>

@@ -143,6 +143,9 @@
                 cursor: pointer;
                 border-radius: 5px;
                 padding: 5px 10px;
+                .link-inner-text{
+                    font-size: 16px;
+                }
             }
              .active-link{
                     background-color: white;

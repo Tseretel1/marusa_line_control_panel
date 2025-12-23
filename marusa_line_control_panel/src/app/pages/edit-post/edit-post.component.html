@@ -29,7 +29,7 @@
                     <input type="text" class="form-control" maxlength="50" placeholder="მაგ: ჭადრაკი" [(ngModel)]="title">
                 </div>
                 <div class="form-control-group">
-                    <label class="form-control-label">პროდუქტის ტიპი</label>
+                    <label class="form-control-label">კატეგორია</label>
                     <select name=""  class="form-control select-control" id=""  [(ngModel)]="productTypeId">
                         <option value="0" disabled></option>
                         <option *ngFor="let i of productTypesList" [value]="i.id">{{i.productType}}</option>
