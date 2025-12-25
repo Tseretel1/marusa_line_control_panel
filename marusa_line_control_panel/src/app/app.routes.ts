@@ -7,10 +7,12 @@ import { OrderDetailsComponent } from './pages/orders/order-details/order-detail
 import { UsersComponent } from './pages/users/users.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { ProfileComponent } from './pages/profile/profile.component';
+import { SubscriptionsComponent } from './pages/subscriptions/subscriptions.component';
 
 export const routes: Routes = [
     { path:'posts', component: PostsComponent},
     { path:'profile', component: ProfileComponent},
+    { path:'subscription-plans', component: SubscriptionsComponent},
     { path:'add-posts', component: AddPostComponent},
     { path:'edit-posts/:id', component: EditPostComponent},
     { path:'order-details/:id', component: OrderDetailsComponent},

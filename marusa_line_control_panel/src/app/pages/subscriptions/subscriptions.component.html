@@ -1,0 +1,37 @@
+   <div class="plans-container">
+      <div class="plans-header">
+        <h1>პაკეტები</h1>
+        <p>აირჩიე შენზე მორგებული პაკეტი</p>
+      </div>
+
+      <div class="plans-grid">
+        <div 
+          *ngFor="let plan of subscriptionPlans; let i = index"
+          class="plan-card"
+          [class.selected]="selectedPlan === i"
+          (click)="selectPlan(i)"
+        >
+          <div class="plan-header">
+            <h2>{{ plan.SubName }}</h2>
+            <div class="price">
+              <span class="currency">₾</span>
+              <span class="amount">{{ plan.SubPrice }}</span>
+              <span class="period">/თვეში</span>
+            </div>
+          </div>
+
+          <div class="plan-details">
+            <ul>
+              <li *ngFor="let detail of plan.SubDetails">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+                {{ detail }}
+              </li>
+            </ul>
+          </div>
+
+
+        </div>
+      </div>
+    </div>

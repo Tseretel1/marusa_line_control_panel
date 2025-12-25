@@ -5,14 +5,18 @@ import { PostService, Shop } from '../../shared/services/post.service';
 import { forkJoin, Observable, tap } from 'rxjs';
 import { Insertphoto } from '../edit-post/edit-post.component';
 import Swal from 'sweetalert2';
-
+import { AppRoutes } from '../../shared/AppRoutes/AppRoutes';
+import { RouterLink } from '@angular/router';
+import { AuthReloadService } from '../../shared/AuthReloadServise/AuthReloadService';
 @Component({
   selector: 'app-profile',
-  imports: [CommonModule,FormsModule],
+  imports: [CommonModule,FormsModule,RouterLink],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.scss'
 })
 export class ProfileComponent implements OnInit{
+
+  AppRoutes=AppRoutes;
   shop: Shop = {
     id: 0,
     name: '',
@@ -31,7 +35,7 @@ export class ProfileComponent implements OnInit{
   };
   oldShopObject!:Shop;
    
-    constructor(private service:PostService){
+    constructor(private service:PostService,private AuthReloadService:AuthReloadService){
   
       this.loadShop(1);
       this.getShopStats(1);
@@ -160,6 +164,25 @@ export class ProfileComponent implements OnInit{
   cancelFields(){
     this.fieldseditPermission = false;
     this.RollBack();
+  }
+
+  logout(){
+    Swal.fire({
+      showConfirmButton: true,
+      showCancelButton: true,
+      cancelButtonText: 'არა',
+      cancelButtonColor: 'red',
+      confirmButtonText: 'დიახ',
+      background:'rgb(25, 26, 25)',
+      color: '#ffffff',      
+      confirmButtonColor: 'green',
+      title: 'ნამდვილად გსურთ აქაუნთიდან გასვლა?',
+    }).then((results) => {
+      if (results.isConfirmed) {
+        localStorage.removeItem('token');
+        this.AuthReloadService.reafresh();
+      }
+    });
   }
 }
 export interface ShopStats{
