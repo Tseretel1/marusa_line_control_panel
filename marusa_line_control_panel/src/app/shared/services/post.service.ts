@@ -13,7 +13,7 @@ import { DashboardStatsByYear } from '../../pages/dashboard/dashboard.component'
 })
 export class PostService {
 
-  private apiUrl = 'https://192.168.1.11:7174/';
+  private apiUrl = 'https://localhost:7173/';
   constructor(private http:HttpClient)
   {
 
@@ -117,6 +117,16 @@ export class PostService {
   UpdateProductOrderAllowed(productid:number, allowed:boolean): Observable<any> {
     return this.http.put<any>(this.apiUrl+`ControlPanel/update-product-order-allowed?productID=${productid}&allowed=${allowed}`,{});
   }
+  getShopStats(shopId:number): Observable<any> {
+    return this.http.get<any>(this.apiUrl+`ControlPanel/get-shop-stats?shopId=${shopId}`);
+  }
+  getShopById(shopId:number): Observable<any> {
+    return this.http.get<any>(this.apiUrl+`ControlPanel/get-shop-by-id?shopId=${shopId}`);
+  }
+  UpdateShop(Newshop:Shop): Observable<any> {
+    return this.http.put<any>(this.apiUrl+`ControlPanel/update-shop`,Newshop);
+  }
+  
 }
 export interface StartEndDate{
   startDate :string;
@@ -221,4 +231,17 @@ export interface GetOrderDto{
 export interface SoldProductTypes{
     productTypeId:number,
     soldCount: number
+}
+
+
+export interface Shop {
+  id: number;
+  name: string;
+  logo: string | null;
+  location: string | null;
+  gmail: string;
+  subscription: number;
+  instagram: string | null;
+  facebook: string | null;
+  titkok: string | null;
 }

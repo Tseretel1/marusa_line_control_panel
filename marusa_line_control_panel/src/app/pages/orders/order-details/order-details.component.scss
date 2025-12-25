@@ -20,9 +20,10 @@
         display: grid;
         justify-content: center;
         grid-template-columns: repeat(1,1fr);
-        width: 60%;
+        width: 50%;
         position: relative;
         gap: 10px;
+        max-width: 900px;
         .component{
             width: 100%;
             display: flex;
@@ -660,7 +661,8 @@ textarea{
     display: flex;
     justify-content: center;
     .map-wrap{
-        width: 60%;
+        width: 50%;
+        max-width: 900px;
     }
     #map{
         height: 500px;
@@ -671,7 +673,7 @@ textarea{
 @media screen and (max-width:1200px) {
     .center-component{
         .body-align{
-            width: 60%;
+            width: 50%;
         }
     }
 }

@@ -32,6 +32,7 @@
             padding: 10px;
             border: 1px solid white;
             border-radius: 5px;
+            cursor: pointer;
             color: white;
             .fas{
                 color: white;
@@ -181,6 +182,8 @@
         border-radius: 10px;
         max-width: 600px;
         background-color: rgb(29, 28, 28);
+        max-height: 600px;
+        overflow: scroll;
         .type-container{
             display: flex;
             flex-direction: column;

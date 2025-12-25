@@ -15,6 +15,7 @@
             position: relative;
             width: 90%;
             display: flex;
+            align-items: center;
             .float-logo{
                 position: absolute;
                 display: flex;
@@ -80,11 +81,35 @@
                 width: 100%;
                 display: none;
                 justify-content: flex-end;
+                align-items: center;
                 .nav-link{
                     cursor: pointer;
                 }
             }
         }
+    }
+}
+.shop-profile{
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    cursor: pointer;
+    .shop-profile-container{
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .shop-img{
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+    .shop-title{
+        color: white;
     }
 }
 .sidenav-align{
@@ -116,7 +141,7 @@
         flex-direction: column;
         align-items: center;
         height: 100%;
-        gap: 30px;
+        gap: 20px;
         transform: translate(0%);
         animation :sidenavAnimation 0.5s;
         .cancel-icon-align{
@@ -191,11 +216,10 @@
 }
 
 
-@media screen and (max-width: 700px){
+@media screen and (max-width: 1000px){
 .component{
     .header{
         .header-align{
-            padding: 15px 0px;
             .float-logo{
                 top: 0px;
                  .logo-container{

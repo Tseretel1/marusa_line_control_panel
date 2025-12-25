@@ -213,7 +213,7 @@ private submitPost() {
       this.uploadPhotosTobackend.push(newPhoto);
     };
     reader.readAsDataURL(file);
-  }
+   }
   }
 
 

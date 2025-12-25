@@ -96,7 +96,7 @@
         grid-template-columns: repeat(4,1fr);
         gap: 10px;
         .user{
-            padding: 10px 20px;
+            padding: 10px;
             border: 1px solid rgba(128, 128, 128, 0.349);
             background-color: rgba(0, 0, 0, 0.247);
             border-radius: 5px;
@@ -147,6 +147,8 @@
                     gap: 10px;
                     position: relative;
                     z-index: 2;
+                    flex-wrap: wrap;
+                    justify-content: center;
                     .copied-span{
                         display: flex;
                         position: absolute;
@@ -171,8 +173,10 @@
                     cursor: pointer;
                     .info{
                         color: white;
-                        max-width: 100px;
                         overflow: hidden;
+                        display: flex;
+                        gap: 5px;
+                        word-break: break-all;
                     }
                     .copy-btn{
                         cursor: pointer;
@@ -185,7 +189,7 @@
                         }
                     }
                     .order-count{
-                        padding: 5px 20px;
+                        padding: 5px;
                         border-radius: 5px;
                         background-color: orangered;
                         color: white;
@@ -205,7 +209,7 @@
                     border: none;
                     background-color: green;
                     border-radius: 5px;
-                    padding: 10px;   
+                    padding: 5px;   
                     cursor: pointer;
                     display: flex;
                     align-items: center;
@@ -274,7 +278,7 @@
     width: 100%;
     justify-content: center;
 .pageination-align{
-    width: 80%;
+    width: 90%;
     display: flex;
     justify-content: flex-start;
     padding: 20px 0px 50px 0px;
@@ -360,8 +364,36 @@
 }
 @media screen and (max-width:600px){
     .user-component{
+        width: 100%;
+        .filters-align{
+            width: 95%;
+        }
         .user-align{
-            grid-template-columns: repeat(1,1fr);
+            gap: 5px;
+            width: 95%;
+            grid-template-columns: repeat(2,1fr);
+        }
+        .center-pagenation{
+            .pageination-align{
+                width: 95%;
+            }
         }
    }
+}
+@media screen and (max-width:400px){
+    .user-component{
+        width: 100%;
+        .filters-align{
+            width: 100%;
+        }
+        .user-align{
+            gap: 0px;
+            width: 100%;
+        }
+    }
+    .center-pagenation{
+        .pageination-align{
+            width: 100%;
+        }
+    }
 }

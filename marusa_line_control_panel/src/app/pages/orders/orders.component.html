@@ -21,14 +21,14 @@
                 </div>
                 </div>
            
-                <div class="filter pay-filter" [ngClass]="{'topay':!getOrderDto.IsPaid}" (click)="getPaidOrUnpaidOrders(false)">
+                <div class="filter pay-filter topay" [ngClass]="{'topay':!getOrderDto.IsPaid}" (click)="getPaidOrUnpaidOrders(false)">
                     გადასახდელი
                     <div class="data-align">
                         <p class="unpaid"><i class="fas fa-shopping-cart"></i> {{dashboardStats.unpaidOrdersCount}}</p>
                         <p class="unpaid">{{dashboardStats.totalUnPaidAmount}}₾</p>
                     </div>
                 </div>
-                <div class="filter pay-filter" [ngClass]="{'ispayed':getOrderDto.IsPaid}" (click)="getPaidOrUnpaidOrders(true)">
+                <div class="filter pay-filter ispayed" [ngClass]="{'ispayed':getOrderDto.IsPaid}" (click)="getPaidOrUnpaidOrders(true)">
                     გადახდილი
                     <div class="data-align">
                         <p class="paid"><i class="fas fa-shopping-cart"></i> {{dashboardStats.paidOrdersCount}}</p>
@@ -61,6 +61,7 @@
                         <p class="order-count"> <i class="fas fa-close"></i> {{o.productQuantity}}</p>               
                         <div class="order-photo-container">
                             <img [src]="o.photos[0].photoUrl" class="order-photo" alt="">
+                            <div class="order-title-absolute"><p>{{o.title}}</p></div>
                         </div>
                     </div>
                 </div>

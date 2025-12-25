@@ -1,0 +1,230 @@
+.profile-container {
+      max-width: 800px;
+      margin: 0 auto;
+      background: #1a1a1a;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+      overflow: hidden;
+      width: 90%;
+    }
+
+    .profile-header {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background-color: rgb(29, 28, 28);
+      padding: 30px;
+      text-align: center;
+      position: relative;
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .profile-picture-wrapper {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      width: 200px;
+    }
+
+    .profile-picture {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      border: 5px solid transparent;
+      object-fit: cover;
+      background: linear-gradient(#fff, #fff) padding-box, linear-gradient(45deg, #ffeb3b 18%, #ff0065, #f900ff) border-box;
+    }
+
+    .edit-photo-btn {
+    position: absolute;
+      top: 5px;
+      right: 5px;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: #2a2a2a;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+      transition: all 0.3s ease;
+    }
+
+    .edit-photo-btn:hover {
+      background: #333;
+      transform: scale(1.05);
+    }
+
+    .edit-photo-btn svg {
+      color: #667eea;
+    }
+
+    .profile-content {
+      padding: 40px;
+    }
+
+    .form-group {
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 600;
+      color: #e0e0e0;
+      font-size: 14px;
+      max-width: 120px;
+    }
+    .social-label{
+        border-radius: 5px;
+        transition: 0.3s;
+        padding: 10px;
+    }
+
+  .facebook{
+    background: #0087ff66;
+  }
+  .tiktok{
+    background: white;
+    color: black;
+  }
+  .instagram {
+    background: #f09433;
+    background: -moz-linear-gradient(
+      45deg,
+      #f09433 0%,
+      #e6683c 25%,
+      #dc2743 50%,
+      #cc2366 75%,
+      #bc1888 100%
+    );
+    background: -webkit-linear-gradient(
+      45deg,
+      #f09433 0%,
+      #e6683c 25%,
+      #dc2743 50%,
+      #cc2366 75%,
+      #bc1888 100%
+    );
+    background: linear-gradient(
+      45deg,
+      #f09433 0%,
+      #e6683c 25%,
+      #dc2743 50%,
+      #cc2366 75%,
+      #bc1888 100%
+    );
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f09433', endColorstr='#bc1888',GradientType=1 );
+  }
+
+
+    .form-input {
+      width: 100%;
+      padding: 12px 16px;
+      border: 2px solid #333;
+      border-radius: 8px;
+      font-size: 15px;
+      transition: all 0.3s ease;
+      box-sizing: border-box;
+      background: #2a2a2a;
+      color: #e0e0e0;
+    }
+
+    .form-input:focus {
+      outline: none;
+      border-color: #667eea;
+      box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
+    }
+
+    .display-field {
+      padding: 12px 16px;
+      background: #2a2a2a;
+      border-radius: 8px;
+      color: #999;
+      font-size: 15px;
+    }
+
+    .social-links {
+      margin-top: 32px;
+      padding-top: 32px;
+      border-top: 2px solid #333;
+    }
+
+    .social-links h3 {
+      font-size: 18px;
+      color: #e0e0e0;
+      margin-bottom: 20px;
+    }
+
+    .actions {
+      margin-top: 32px;
+      padding-top: 32px;
+      border-top: 2px solid #333;
+      display: flex;
+      gap: 12px;
+    }
+
+    .btn-save,
+    .btn-cancel {
+      padding: 12px 32px;
+      border: none;
+      border-radius: 8px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .btn-save {
+      background: #667eea;
+      color: #fff;
+    }
+
+    .btn-save:hover {
+      background: #5568d3;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+    }
+    .btn-edit{
+        background-color: white;
+        color: black;
+    }
+    .btn-edit:hover{
+        background-color: white;
+        transform: translateY(0px);
+    }
+
+    .btn-cancel {
+      background: #2a2a2a;
+      color: #999;
+    }
+
+    .btn-cancel:hover {
+      background: #333;
+    }
+
+    @media (max-width: 600px) {
+      .profile-header {
+        padding: 10px;
+      }
+
+      .profile-content {
+        padding: 24px 20px;
+      }
+
+      .profile-picture {
+        width: 150px;
+        height: 150px;
+      }
+
+      .actions {
+        flex-direction: column;
+      }
+    }

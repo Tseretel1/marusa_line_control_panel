@@ -87,7 +87,7 @@
         </div>
     </div>
 </div>
-<div class="user-information map-align"style="display:flex; justify-content:center;" *ngIf="location.lat!='0'&&location.lng!='0'">
+<div class="user-information map-align"style="display:flex; justify-content:center; " *ngIf="location.lat!='0'&&location.lng!='0'">
     <div class="map-wrap" style="border-radius: 5px;border: 1px solid rgba(128, 128, 128, 0.459); background-color: rgba(0, 0, 0, 0.342);padding: 20px; display: flex; flex-direction: column; gap: 10px;">
         <div style="display: flex; flex-direction: column; gap: 10px;">
             <div style="display: flex; align-items: center; gap: 5px; flex-wrap: wrap;" (click)="copyToClipboard(`${order.lat},${order.lng}`)">
@@ -95,7 +95,7 @@
                 <div style="padding: 5px 10px; border-radius: 5px; background-color: rgba(0, 0, 0, 0.493); border: 1px solid rgba(128, 128, 128, 0.459); cursor: pointer;word-break: break-all;">{{order.lat}},{{order.lng}}</div>
             </div>
         </div>
-        <div id="map" style="width: 100%;border-radius: 10px;"></div>
+        <div id="map" style="width: 100%;border-radius: 10px; z-index: 0;"></div>
     </div>
 </div>
 

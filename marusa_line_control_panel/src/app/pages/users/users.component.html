@@ -9,9 +9,9 @@
             <div class="search-align">
               <input class="user-search" type="text" [(ngModel)]="NameSearch" (change)="getUserByName()" placeholder="სახელი">
             </div>
-            <div class="search-align">
+            <!-- <div class="search-align">
                <input class="user-search" type="text" [(ngModel)]="EmailSearch" (change)="getUserByEmail()" placeholder="მეილი">
-            </div>   
+            </div>    -->
         </div>
       </div>
         <div class="filter-button-align">
@@ -27,7 +27,7 @@
     <div class="user-align">
         <div class="user" *ngFor="let u of users">
           <div class="copy-user-id"(click)="copyToClipboard(u.id.toString(),0,0)" ></div>
-            <div class="status-align">
+            <div class="status-align"> 
                 <button class="role userid" ># {{u.id}}</button>
                 <button class="role" *ngIf="u.role=='User'" (click)="openBlockModal(u.id,true)" >{{u.role}}</button>
                 <button class="role block" *ngIf="u.role=='Blocked'" (click)="openBlockModal(u.id,false)">{{u.role}}</button>
@@ -37,16 +37,21 @@
                     <img [src]="u.profilePhoto" class="user-img" alt="">
                 </div>
                 <p class="username">{{u.name}}</p>
-                <div class="info-align" (click)="copyToClipboard(u.phoneNumber,u.id,1)">
-                    <p class="info">{{u.phoneNumber}} </p>
-                    <button class="copy-btn"><i class="fas fa-copy"></i></button>
-                    <span class="copied-span" *ngIf="copiedNumber ==u.id && spanId ==1">✅</span>
+                <div class="info-align" *ngIf="u.phoneNumber"(click)="copyToClipboard(u.phoneNumber,u.id,1)">
+                    <p class="info"  *ngIf="u.phoneNumber" ><i class="fas fa-phone"> </i> {{u.phoneNumber}} </p>
+                    <button class="copy-btn" *ngIf="u.phoneNumber"><i class="fas fa-copy"></i></button>
+                    <span class="copied-span" *ngIf="copiedNumber ==u.id && spanId ==1 &&u.phoneNumber" >✅</span>
                 </div>
-                <div class="info-align" (click)="copyToClipboard(u.email,u.id,2)">
-                    <p class="info">{{u.email}}</p>
+                 <div class="info-align"*ngIf="!u.phoneNumber" >
+                    <p class="info"  ><i class="fas fa-phone"> </i>--- -- -- --</p>
+                    <button class="copy-btn" *ngIf="u.phoneNumber"><i class="fas fa-copy"></i></button>
+                    <span class="copied-span" *ngIf="copiedNumber ==u.id && spanId ==1 &&u.phoneNumber" >✅</span>
+                </div>
+                <!-- <div class="info-align" (click)="copyToClipboard(u.email,u.id,2)">
+                    <p class="info"><i class="fas fa-envelope"> </i> {{u.email}}</p>
                     <button class="copy-btn"><i class="fas fa-copy"></i></button>
                     <span class="copied-span" *ngIf="copiedNumber ==u.id && spanId ==2">✅</span>
-                </div>
+                </div> -->
                 <div class="info-align" style="cursor: pointer;">
                   <div class="order-count">
                     <i class="fas fa-credit-card"></i>
