@@ -4,7 +4,7 @@
     <div class="container">
         <div class="order-filter-align">
             <div class="filters">
-                <div style="display: flex; gap: 10px; width: 100%;">
+                <div style="display: flex; gap: 10px; flex-direction: column;">
                 <div class="filter">
                     <label for=""></label>
                     <input type="number" class="search-input"[(ngModel)]="UserIdSearch" (change)="UserIdOrderSearch()" placeholder="მომხმარებლის ნომერი">
@@ -21,14 +21,14 @@
                 </div>
                 </div>
            
-                <div class="filter pay-filter topay" [ngClass]="{'topay':!getOrderDto.IsPaid}" (click)="getPaidOrUnpaidOrders(false)">
+                <div class="filter pay-filter topay"  (click)="getPaidOrUnpaidOrders(false)">
                     გადასახდელი
                     <div class="data-align">
                         <p class="unpaid"><i class="fas fa-shopping-cart"></i> {{dashboardStats.unpaidOrdersCount}}</p>
                         <p class="unpaid">{{dashboardStats.totalUnPaidAmount}}₾</p>
                     </div>
                 </div>
-                <div class="filter pay-filter ispayed" [ngClass]="{'ispayed':getOrderDto.IsPaid}" (click)="getPaidOrUnpaidOrders(true)">
+                <div class="filter pay-filter ispayed"  (click)="getPaidOrUnpaidOrders(true)">
                     გადახდილი
                     <div class="data-align">
                         <p class="paid"><i class="fas fa-shopping-cart"></i> {{dashboardStats.paidOrdersCount}}</p>
@@ -48,13 +48,13 @@
                     </div>
                 </div>
                 <div class="order-details">
-                    <div class="order" *ngIf="o.isPaid">
+                    <div class="order order-details-back" *ngIf="o.isPaid">
                         <p>{{o.createDate| date:'dd MMM yyy'}} </p>
                     </div>
-                    <div class="order" *ngIf="!o.isPaid">
+                    <div class="order order-details-back" *ngIf="!o.isPaid">
                         <p>{{getTimeAgo(o.createDate)}} </p>
                     </div>
-                    <div class="order" *ngIf="o.isPaid">
+                    <div class="order order-details-back" *ngIf="o.isPaid">
                         <p>{{getStatusName(o.statusId)}} </p>
                     </div>
                     <div class="order" style="padding: 0; border: none;">
