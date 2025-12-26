@@ -157,7 +157,10 @@ export class PostsComponent implements OnInit{
       cancelButtonColor: 'red',
       confirmButtonText: 'დიახ',
       confirmButtonColor: 'green',
+      background:'rgb(25, 26, 25)',
+      color: '#ffffff',  
       title: 'ნამდვილად გსურთ კატეგორიის წაშლა?',
+      
     }).then((results) => {
       if (results.isConfirmed) {
         this.postService.DeleteProductTypes(id).subscribe((resp) => {

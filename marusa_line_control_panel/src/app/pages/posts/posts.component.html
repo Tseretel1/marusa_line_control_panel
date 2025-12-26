@@ -64,10 +64,10 @@
 
 <div class="type-management-component " *ngIf="typeManagementVisible">
     <div class="type-management-background" (click)="toggleTypemnagement(false)"></div>
-    <p style="width: 90%;">
-       კატეგორიები
-    </p>
     <div class="type-management-align">
+        <p style="width: 90%;">
+           კატეგორიები
+        </p>
         <div class="type-container flex-container">
             <input type="text" class="type-input" [(ngModel)]="AddType" maxlength="50">
             <p>{{AddType.length}}/50</p>
