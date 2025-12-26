@@ -206,12 +206,11 @@ button{
 
 /* Finished Orders */
 .order-card.finished-order {
-  border-color: green;
-  background: linear-gradient(to bottom, green 0%, green 100%);
+  background: linear-gradient(to bottom, #22c55e 0%, black 100%);
 }
 
 .order-card.finished-order::before {
-  background: green;
+  background:  #22c55e;
 }
 
 /* Payment Status Section */
@@ -286,6 +285,10 @@ button{
     background-color: black;
     background-color: rgb(39, 38, 38);
     border-radius: 5px;
+    border:  1px solid #f97316;
+}
+.paid-order-details-back{
+    border:  1px solid #22c55e;
 }
 .order p {
   margin: 0;

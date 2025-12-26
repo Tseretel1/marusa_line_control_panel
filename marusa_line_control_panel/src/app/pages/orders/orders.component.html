@@ -48,13 +48,13 @@
                     </div>
                 </div>
                 <div class="order-details">
-                    <div class="order order-details-back" *ngIf="o.isPaid">
+                    <div class="order order-details-back" [ngClass]="{'paid-order-details-back': o.isPaid}" *ngIf="o.isPaid">
                         <p>{{o.createDate| date:'dd MMM yyy'}} </p>
                     </div>
-                    <div class="order order-details-back" *ngIf="!o.isPaid">
+                    <div class="order order-details-back"[ngClass]="{'paid-order-details-back': o.isPaid}" *ngIf="!o.isPaid">
                         <p>{{getTimeAgo(o.createDate)}} </p>
                     </div>
-                    <div class="order order-details-back" *ngIf="o.isPaid">
+                    <div class="order order-details-back"[ngClass]="{'paid-order-details-back': o.isPaid}" *ngIf="o.isPaid">
                         <p>{{getStatusName(o.statusId)}} </p>
                     </div>
                     <div class="order" style="padding: 0; border: none;">
