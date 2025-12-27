@@ -345,6 +345,7 @@
 @media screen and (max-width:900px){
    .user-component{
         .user-align{
+            gap: 10px;
             grid-template-columns: repeat(2,1fr);
         }
        .filters-align{
@@ -361,15 +362,17 @@
             }
        }
     }
+
 }
 @media screen and (max-width:600px){
     .user-component{
         width: 100%;
+        scale: 0.9;
         .filters-align{
             width: 95%;
         }
         .user-align{
-            gap: 5px;
+            gap: 10px;
             width: 95%;
             grid-template-columns: repeat(2,1fr);
         }
@@ -379,6 +382,11 @@
             }
         }
    }
+       .center-pagenation{
+        .pageination-align{
+            scale: 0.9;
+        }
+    }
 }
 @media screen and (max-width:400px){
     .user-component{
@@ -387,7 +395,6 @@
             width: 100%;
         }
         .user-align{
-            gap: 0px;
             width: 100%;
         }
     }

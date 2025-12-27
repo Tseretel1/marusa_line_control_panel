@@ -310,11 +310,15 @@ button{
   right: -5px;
   transform: rotate(25deg);
   z-index: 2;
+  border: 1px solid #f97316;
 }
 
 .order-count i {
   color: #9ca3af;
   font-size: 12px;
+}
+.paid-order-count{
+    border:  1px solid #22c55e;
 }
 
 /* Product Photo */

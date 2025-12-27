@@ -1,10 +1,7 @@
 
 <div class="gallery-align">
-     <div class="filters-align" >
-         <div class="filters edit-filter" [attr.data-id]="0" (click)="toggleTypemnagement(true)">რედაქტირება <i class="fas fa-edit"></i></div>
-     </div>
-     <div class="filters-align" >
-         <div class="post-filter" (click)="getActivePosts()" [ngClass]="{'active-post': !getPostsDto.IsDeleted}">
+    <div class="filters-align" >
+        <div class="post-filter" (click)="getActivePosts()" [ngClass]="{'active-post': !getPostsDto.IsDeleted}">
              აქტიური
              <b>{{posts[0]?.totalActiveProducts}}</b>
          </div>
@@ -13,12 +10,18 @@
              <b >{{posts[0]?.totalDeletedProducts}}</b>
          </div>
      </div>
-     <div class="filters-align" >
-        <div class="filters" [ngClass]="{'active-filter': activeFilterNum == 0}"    [attr.data-id]="0">ყველა</div>
-        <div class="filters" [ngClass]="{'active-filter': activeFilterNum == i.id}"  *ngFor="let i of productTypesList"  >
-            {{i.productType}}
+     <div  class="filters-back">
+        <div style="width: 100%; display: flex; justify-content: center;">
+            <p style="color: white;">კატეგორიები</p>
         </div>
-    </div> 
+        <div class="filters-align" >
+             <div class="filters edit-filter" [attr.data-id]="0" (click)="toggleTypemnagement(true)">რედაქტირება <i class="fas fa-edit"></i></div>
+             <div class="filters" [ngClass]="{'active-filter': activeFilterNum == 0}"    [attr.data-id]="0">ყველა</div>
+            <div class="filters" [ngClass]="{'active-filter': activeFilterNum == i.id}"  *ngFor="let i of productTypesList"  >
+                {{i.productType}}
+            </div>
+        </div> 
+     </div>
     <div class="photo-align">
         <ng-container *ngFor="let p of posts;let i = index" >
             <div *ngIf="i==0" class="add-new-post" [routerLink]="AppRoutes.addPosts" >

@@ -58,7 +58,7 @@
                         <p>{{getStatusName(o.statusId)}} </p>
                     </div>
                     <div class="order" style="padding: 0; border: none;">
-                        <p class="order-count"> <i class="fas fa-close"></i> {{o.productQuantity}}</p>               
+                        <p class="order-count" [ngClass]="{'paid-order-count': o.isPaid}"> <i class="fas fa-close"></i> {{o.productQuantity}}</p>               
                         <div class="order-photo-container">
                             <img [src]="o.photos[0].photoUrl" class="order-photo" alt="">
                             <div class="order-title-absolute"><p>{{o.title}}</p></div>
