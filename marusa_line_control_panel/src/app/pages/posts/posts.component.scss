@@ -126,7 +126,7 @@
     .photo-align {
         width: 90%;
         display: grid;
-        grid-template-columns: repeat(6, 1fr);
+        grid-template-columns: repeat(5, 1fr);
         gap: 16px;
         margin-top: 12px;
         
@@ -691,7 +691,7 @@
         }
     }
 }
-@media screen and (max-width:850px){
+@media screen and (max-width:1000px){
     .gallery-align{
        .photo-align{
         grid-template-columns: repeat(4,1fr);

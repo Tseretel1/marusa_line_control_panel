@@ -51,7 +51,7 @@ export class AddPostComponent implements OnInit{
   sendApplicationtoBackend() {
       const validations = [
         { condition: !!this.title, message: 'შეიყვანეთ დასახელება' },
-        { condition: !!this.productTypeId, message: 'აირჩიეთ პროდუქტის ტიპი' },
+        { condition: !!this.productTypeId && this.productTypeId!=0, message: 'აირჩიეთ პროდუქტის ტიპი' },
         { condition: this.price > 0, message: 'ფასი უნდა აღემატებოდეს ნულს' },
         { condition: this.uploadPhotos.length > 0, message: 'ატვირთეთ მინიმუმ 1 ფოტო' },
       ];
@@ -152,12 +152,25 @@ export class AddPostComponent implements OnInit{
     this.discountedPercentage = Math.round(this.discountedPercentage);
   }
   removePhoto(id: number) {
-    const photo = this.uploadPhotos.find((p) => p.id === id);
-    if (photo) {
-      photo.file = null;
-      photo.preview = null;
-    }
-    this.uploadPhotos = this.uploadPhotos.filter(x=>x.id===id);
+    console.log(id);
+    Swal.fire({
+      showConfirmButton: true,
+      showCancelButton: true,
+      cancelButtonText: 'არა',
+      cancelButtonColor: 'red',
+      confirmButtonText: 'დიახ',
+      confirmButtonColor: 'green',
+      title: 'ნამდვილად გსურთ ფოტოს წაშლა?',
+    }).then((results) => {
+      if (results.isConfirmed) {
+        const photo = this.uploadPhotos.find((p) => p.id === id);
+        if (photo) {
+          photo.file = null;
+          photo.preview = null;
+        }
+        this.uploadPhotos = this.uploadPhotos.filter(x=>x.id===id);
+      }
+    });
   }
 
   uploadAllImages(): Observable<any[]> {

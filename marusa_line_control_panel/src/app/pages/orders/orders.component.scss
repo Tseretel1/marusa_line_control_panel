@@ -73,8 +73,8 @@ button{
 
 .pay-filter.topay {
   background: linear-gradient(135deg, #312e2e 0%, #3f2020 100%);
-  color: #fca5a5;
-  border-color: #7f1d1d;
+  color: white;
+  border-color: #f9741688;
 }
 
 .pay-filter.topay:hover {
@@ -85,7 +85,7 @@ button{
 
 .pay-filter.ispayed {
   background: linear-gradient(135deg, #1e332e 0%, #1a3f2a 100%);
-  color: #86efac;
+  color: white;
   border-color: #166534;
 }
 
@@ -131,7 +131,7 @@ button{
 .order-card {
   background: #1e293b;
   border-radius: 12px;
-  padding: 16px;
+  padding: 5px;
   cursor: pointer;
   transition: all 0.3s ease;
   border: 2px solid #334155;
@@ -155,27 +155,13 @@ button{
 }
 
 /* Unpaid Orders (Default State) */
-.order-card.topay {
-  border-color: #f97316;
-  background: linear-gradient(to bottom, #1e293b 0%, #2d1a1a 100%);
-}
 
-.order-card.topay::before {
-  background: #f97316;
-}
 
-.order-card.topay:hover {
-  box-shadow: 0 8px 24px rgba(239, 68, 68, 0.3);
-}
 
 /* Paid Orders */
 .order-card.ispayed {
   border-color: #22c55e;
   background: linear-gradient(to bottom, #1e293b 0%, #1a2e23 100%);
-}
-
-.order-card.ispayed::before {
-  background: #22c55e;
 }
 
 .order-card.ispayed:hover {
@@ -186,12 +172,7 @@ button{
 /* Warning States for Old Unpaid Orders */
 .order-card.to-delete {
   border-color: #f97316;
-  background: linear-gradient(to bottom, #f97316 0%, #f97316 100%);
   animation: pulse-warning 2s ease-in-out infinite;
-}
-
-.order-card.to-delete::before {
-    background: #f97316;
 }
 
 .order-card.to-delete-7 {
@@ -205,13 +186,7 @@ button{
 }
 
 /* Finished Orders */
-.order-card.finished-order {
-  background: linear-gradient(to bottom, #22c55e 0%, black 100%);
-}
 
-.order-card.finished-order::before {
-  background:  #22c55e;
-}
 
 /* Payment Status Section */
 .pay-align {
@@ -227,12 +202,16 @@ button{
   font-size: 13px;
   font-weight: 700;
   letter-spacing: 0.5px;
+  background-color: rgba(0, 0, 0, 0.308);
+  color: white;
+  border: 2px solid #334155;
 }
 
 .payed-span {
-  background: #166534;
+  background: #22c55e;
   color: white;
   border: 1px solid #15803d;
+  
 }
 
 .unpayed-span {
@@ -240,7 +219,6 @@ button{
   color: white;
   border: 1px solid #991b1b;
 }
-
 /* User Details */
 .user-details {
   display: flex;
@@ -282,13 +260,24 @@ button{
 }
 .order-details-back{
     padding: 10px;
-    background-color: black;
-    background-color: rgb(39, 38, 38);
+    background-color: rgba(0, 0, 0, 0.308);
     border-radius: 5px;
-    border:  1px solid #f97316;
+    border: 2px solid #334155;
 }
 .paid-order-details-back{
-    border:  1px solid #22c55e;
+    border:  2px solid #22c55e;
+}
+.old-one-day{
+    background-color: #f97316;
+    border:  2px solid #f97316;
+}
+.old-seven-day{
+    background-color:red;
+    border:  2px solid red;
+}
+.finished-order {
+    border:  2px solid #22c55e;
+    background-color: #22c55e98;
 }
 .order p {
   margin: 0;
@@ -310,7 +299,7 @@ button{
   right: -5px;
   transform: rotate(25deg);
   z-index: 2;
-  border: 1px solid #f97316;
+  border: 1px solid grey;
 }
 
 .order-count i {

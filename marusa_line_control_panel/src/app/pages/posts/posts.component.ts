@@ -8,6 +8,7 @@ import * as AOS from 'aos'
 import { GetPost, PostService, ProductTypes } from '../../shared/services/post.service';
 import Swal from 'sweetalert2';
 import { FormsModule } from '@angular/forms';
+import { ReturnStatement } from '@angular/compiler';
 @Component({
   selector: 'app-posts',
   imports: [CommonModule, PhotoAlbumComponent, RouterLink, FormsModule],
@@ -30,6 +31,7 @@ export class PostsComponent implements OnInit{
   getPostsDto:getPosts={
     IsDeleted : false,
     PageNumber : 1,
+    ProductTypeId : null,
     PageSize : 10,
   }
 
@@ -49,14 +51,20 @@ export class PostsComponent implements OnInit{
     this.postService.getPosts(this.getPostsDto).subscribe(
       (resp)=>{
         this.posts = resp;
-        if(!this.getPostsDto.IsDeleted){
-          this.totalCount = this.posts[0].totalActiveProducts;
+        if(!resp){
+          this.posts=[];
+          return;
         }
         else{
-          this.totalCount = this.posts[0].totalDeletedProducts;
+          if(!this.getPostsDto.IsDeleted){
+            this.totalCount = this.posts[0].totalActiveProducts;
+          }
+          else{
+            this.totalCount = this.posts[0].totalDeletedProducts;
+          }
+          this.totalPages = Math.ceil(this.totalCount / this.getPostsDto.PageSize);
+          this.lastPage = Math.ceil(this.totalCount / this.getPostsDto.PageSize);
         }
-        this.totalPages = Math.ceil(this.totalCount / this.getPostsDto.PageSize);
-        this.lastPage = Math.ceil(this.totalCount / this.getPostsDto.PageSize);
       }
     )
   }
@@ -72,6 +80,18 @@ export class PostsComponent implements OnInit{
     this.getPostsDto.PageNumber = 1;
     this.selectedPage = 1;
     this.pageNumber = 1;
+    this.getPosts();
+  }
+
+  GetByCategorie(id:number|null){
+    if(id==null){
+      this.getPostsDto.ProductTypeId = null;
+      this.activeFilterNum = 0;
+    }
+    else{
+      this.getPostsDto.ProductTypeId= id;
+      this.activeFilterNum = id;
+    }
     this.getPosts();
   }
 
@@ -172,6 +192,7 @@ export class PostsComponent implements OnInit{
 }
 
 export interface getPosts{
+  ProductTypeId:number|null;
   IsDeleted:boolean;
   PageNumber:number;
   PageSize:number;

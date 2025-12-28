@@ -16,15 +16,15 @@
         </div>
         <div class="filters-align" >
              <div class="filters edit-filter" [attr.data-id]="0" (click)="toggleTypemnagement(true)">რედაქტირება <i class="fas fa-edit"></i></div>
-             <div class="filters" [ngClass]="{'active-filter': activeFilterNum == 0}"    [attr.data-id]="0">ყველა</div>
-            <div class="filters" [ngClass]="{'active-filter': activeFilterNum == i.id}"  *ngFor="let i of productTypesList"  >
+             <div class="filters" [ngClass]="{'active-filter': activeFilterNum == 0}" (click)="GetByCategorie(null)"   [attr.data-id]="0">ყველა</div>
+            <div class="filters" [ngClass]="{'active-filter': activeFilterNum == i.id}"  *ngFor="let i of productTypesList" (click)="GetByCategorie(i.id)" >
                 {{i.productType}}
             </div>
         </div> 
      </div>
     <div class="photo-align">
         <ng-container *ngFor="let p of posts;let i = index" >
-            <div *ngIf="i==0" class="add-new-post" [routerLink]="AppRoutes.addPosts" >
+            <div *ngIf="i==0 &&!getPostsDto.IsDeleted" class="add-new-post" [routerLink]="AppRoutes.addPosts" >
                 <i class="fas fa-plus-square"></i>
             </div>
             <app-photo-album [posts]="p" class="album"></app-photo-album>

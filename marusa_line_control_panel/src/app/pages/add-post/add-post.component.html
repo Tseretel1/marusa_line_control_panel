@@ -15,10 +15,6 @@
             </div>
         </div>
         <div class="form-align">
-            <div class="discount-top" [ngClass]="{'green-background':discountedPercentage>0,'red-background':discountedPercentage<0}">
-                <p *ngIf="discountedPercentage>0">-</p>
-                {{discountedPercentage}}%
-            </div>
             <div class="input-group">
                 <div class="form-control-group">
                     <label class="form-control-label">სახელი</label>
@@ -31,13 +27,21 @@
                         <option *ngFor="let i of productTypesList" [value]="i.id">{{i.productType}}</option>
                     </select>
                 </div>
-                <div class="form-control-group">
-                    <label class="form-control-label">ფასი</label>
-                    <input type="number" class="form-control" placeholder="₾" (input)="discountAmountChangeDetection()" [(ngModel)]="price">
-                </div>
-                <div class="form-control-group">
-                    <label class="form-control-label">ფასდაკლებული ფასი</label>
-                    <input type="number" class="form-control" placeholder="₾" (input)="discountAmountChangeDetection()" [(ngModel)]="discountedPrice">
+                <div  class="price-group-align" style="display: flex; flex-direction: column; gap: 15px;">
+                    <div class="form-control-group price-group"  >
+                        <label class="form-control-label">ფასი</label>
+                        <input type="number" class="form-control" placeholder="₾" (input)="discountAmountChangeDetection()" [(ngModel)]="price">
+                    </div>
+                    <div class="form-control-group price-group">
+                        <div style="display: flex; gap: 5px;">   
+                            ფასდაკლებული ფასი
+                            <div class="discount-top" *ngIf="discountedPrice" [ngClass]="{'green-background':discountedPercentage>0,'red-background':discountedPercentage<0}">
+                                <p *ngIf="discountedPercentage>0">-</p>
+                                {{discountedPercentage}}%
+                            </div> 
+                        </div>
+                        <input type="number" class="form-control" placeholder="₾" (input)="discountAmountChangeDetection()" [(ngModel)]="discountedPrice">
+                    </div>
                 </div>
                 <div class="form-control-group">
                     <label class="form-control-label">რაოდენობა მარაგში</label>

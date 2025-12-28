@@ -4,43 +4,37 @@
     <div class="container">
         <div class="order-filter-align">
             <div class="filters">
-                <div style="display: flex; gap: 10px; flex-direction: column;">
-                <div class="filter">
-                    <label for=""></label>
-                    <input type="number" class="search-input"[(ngModel)]="UserIdSearch" (change)="UserIdOrderSearch()" placeholder="მომხმარებლის ნომერი">
-                    <!-- <div class="searchbutton" (click)="UserIdOrderSearch()">
-                        <i class="fas fa-search"></i>
-                    </div> -->
-                </div>
-                <div class="filter">
-                    <label for=""></label>
-                    <input type="number" class="search-input"[(ngModel)]="orderSearchNum" (change)="OrderSearch()" placeholder="შეკვეთის ნომერი">
-                    <!-- <div class="searchbutton" (click)="OrderSearch()">
-                        <i class="fas fa-search"></i>
-                    </div> -->
-                </div>
-                </div>
+                <!-- <div style="display: flex; gap: 10px; flex-direction: column;">
+                    <div class="filter">
+                        <label for=""></label>
+                        <input type="number" class="search-input"[(ngModel)]="UserIdSearch" (change)="UserIdOrderSearch()" placeholder="მომხმარებლის ნომერი">
+                    </div>
+                    <div class="filter">
+                        <label for=""></label>
+                        <input type="number" class="search-input"[(ngModel)]="orderSearchNum" (change)="OrderSearch()" placeholder="შეკვეთის ნომერი">
+                    </div>
+                </div> -->
            
                 <div class="filter pay-filter topay"  (click)="getPaidOrUnpaidOrders(false)">
                     გადასახდელი
                     <div class="data-align">
-                        <p class="unpaid"><i class="fas fa-shopping-cart"></i> {{dashboardStats.unpaidOrdersCount}}</p>
-                        <p class="unpaid">{{dashboardStats.totalUnPaidAmount}}₾</p>
+                        <p><i class="fas fa-shopping-cart"></i> {{dashboardStats.unpaidOrdersCount}}</p>
+                        <p >{{dashboardStats.totalUnPaidAmount}}₾</p>
                     </div>
                 </div>
                 <div class="filter pay-filter ispayed"  (click)="getPaidOrUnpaidOrders(true)">
                     გადახდილი
                     <div class="data-align">
-                        <p class="paid"><i class="fas fa-shopping-cart"></i> {{dashboardStats.paidOrdersCount}}</p>
-                        <p class="paid">{{dashboardStats.totalPaidAmount}}₾</p>
+                        <p ><i class="fas fa-shopping-cart"></i> {{dashboardStats.paidOrdersCount}}</p>
+                        <p >{{dashboardStats.totalPaidAmount}}₾</p>
                     </div>
                 </div>
             </div>
         </div>
         <div class="order-card-align" >
-            <div class="order-card"  *ngFor="let o of orders" [routerLink]="AppRoutes.orderDetails + o.orderId"  [ngClass]="{'to-delete': isOlderThan1Day(o.createDate) && !o.isPaid,'to-delete-7': isOlderThan7Day(o.createDate) && !o.isPaid,'finished-order': o.statusId ==5,'topay':!getOrderDto.IsPaid,'ispayed':getOrderDto.IsPaid}">
+            <div class="order-card" [ngClass]="{'finished-order': o.statusId ==5}"  *ngFor="let o of orders" [routerLink]="AppRoutes.orderDetails + o.orderId">
                 <div class="pay-align">
-                    <span class="pay-span" [ngClass]="{'payed-span': o.isPaid,'unpayed-span': !o.isPaid}">No.{{o.orderId}}</span>
+                    <span class="pay-span" [ngClass]="{'payed-span': o.isPaid,}">No.{{o.orderId}}</span>
                     <div class="user-details">
                         <div class="user-container">
                             <img [src]="o.user.profilePhoto" class="user-img" alt="">
@@ -48,17 +42,17 @@
                     </div>
                 </div>
                 <div class="order-details">
-                    <div class="order order-details-back" [ngClass]="{'paid-order-details-back': o.isPaid}" *ngIf="o.isPaid">
+                    <div class="order order-details-back"  *ngIf="o.isPaid">
                         <p>{{o.createDate| date:'dd MMM yyy'}} </p>
                     </div>
-                    <div class="order order-details-back"[ngClass]="{'paid-order-details-back': o.isPaid}" *ngIf="!o.isPaid">
+                    <div class="order order-details-back"[ngClass]="{'old-one-day': isOlderThan1Day(o.createDate) && !o.isPaid,'old-seven-day': isOlderThan7Day(o.createDate) && !o.isPaid,}" *ngIf="!o.isPaid">
                         <p>{{getTimeAgo(o.createDate)}} </p>
                     </div>
-                    <div class="order order-details-back"[ngClass]="{'paid-order-details-back': o.isPaid}" *ngIf="o.isPaid">
+                    <div class="order order-details-back" *ngIf="o.isPaid">
                         <p>{{getStatusName(o.statusId)}} </p>
                     </div>
                     <div class="order" style="padding: 0; border: none;">
-                        <p class="order-count" [ngClass]="{'paid-order-count': o.isPaid}"> <i class="fas fa-close"></i> {{o.productQuantity}}</p>               
+                        <p class="order-count"> <i class="fas fa-close"></i> {{o.productQuantity}}</p>               
                         <div class="order-photo-container">
                             <img [src]="o.photos[0].photoUrl" class="order-photo" alt="">
                             <div class="order-title-absolute"><p>{{o.title}}</p></div>
