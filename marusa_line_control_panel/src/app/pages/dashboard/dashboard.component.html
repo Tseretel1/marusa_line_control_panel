@@ -30,7 +30,7 @@
             </div>
         </div>
     </div>
-    <div class="date-modal">
+    <div class="date-modal" *ngIf="soldProductTypes.length>0">
            <div class="months-grid type-display">
             <div class="month" *ngFor="let i of soldProductTypes">
                 <div class="month-name">
