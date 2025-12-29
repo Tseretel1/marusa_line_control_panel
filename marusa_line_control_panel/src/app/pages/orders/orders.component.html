@@ -45,8 +45,8 @@
                     <div class="order order-details-back"  *ngIf="o.isPaid">
                         <p style="display: flex; justify-content: space-between;">{{o.createDate| date:'dd MMM yyy'}}  <b style="font-size: 14px;">{{o.finalPrice}}₾</b> </p>
                     </div>
-                    <div class="order order-details-back"[ngClass]="{'old-one-day': isOlderThan1Day(o.createDate) && !o.isPaid,'old-seven-day': isOlderThan7Day(o.createDate) && !o.isPaid,}" *ngIf="!o.isPaid">
-                        <p style="display: flex; justify-content: space-between;">{{getTimeAgo(o.createDate)}} <b style="font-size: 14px;">{{o.finalPrice}}₾</b> </p>
+                    <div class="order order-details-back"[ngClass]="{'old-one-day': isOlderThan1Day(o.createDate) && !o.isPaid,'old-seven-day': isOlderThan7Day(o.createDate) && !o.isPaid,'just-now-border':getTimeAgo(o.createDate)==='just now'}" *ngIf="!o.isPaid">
+                        <p style="display: flex; justify-content: space-between;" [ngClass]="{'just-now':getTimeAgo(o.createDate)==='just now'}">{{getTimeAgo(o.createDate)}} <b style="font-size: 14px;">{{o.finalPrice}}₾</b> </p>
                     </div>
                     <div class="order order-details-back" *ngIf="o.isPaid">
                         <p>{{getStatusName(o.statusId)}} </p>

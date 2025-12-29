@@ -72,8 +72,8 @@
            კატეგორიები
         </p>
         <div class="type-container flex-container">
-            <input type="text" class="type-input" [(ngModel)]="AddType" maxlength="50">
-            <p>{{AddType.length}}/50</p>
+            <input type="text" class="type-input" [(ngModel)]="AddType" maxlength="30">
+            <p>{{AddType.length}}/30</p>
             <button class="delete accept"  (click)="insertProductTypes()"><i class="fas fa-plus" ></i></button>
         </div>
         <div class="type-container" *ngFor="let p of productTypesList">

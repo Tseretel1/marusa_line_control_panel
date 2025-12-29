@@ -151,27 +151,11 @@ export class AddPostComponent implements OnInit{
       ((this.price - this.discountedPrice) / this.price) * 100;
     this.discountedPercentage = Math.round(this.discountedPercentage);
   }
-  removePhoto(id: number) {
-    console.log(id);
-    Swal.fire({
-      showConfirmButton: true,
-      showCancelButton: true,
-      cancelButtonText: 'არა',
-      cancelButtonColor: 'red',
-      confirmButtonText: 'დიახ',
-      confirmButtonColor: 'green',
-      title: 'ნამდვილად გსურთ ფოტოს წაშლა?',
-    }).then((results) => {
-      if (results.isConfirmed) {
-        const photo = this.uploadPhotos.find((p) => p.id === id);
-        if (photo) {
-          photo.file = null;
-          photo.preview = null;
-        }
-        this.uploadPhotos = this.uploadPhotos.filter(x=>x.id===id);
-      }
-    });
-  }
+removePhoto(id: number) {
+  if (!this.uploadPhotos.some(p => p.id === id)) return;
+  this.uploadPhotos = this.uploadPhotos.filter(p => p.id !== id);
+}
+
 
   uploadAllImages(): Observable<any[]> {
     const uploads: Observable<any>[] = [];

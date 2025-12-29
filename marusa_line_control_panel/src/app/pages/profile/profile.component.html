@@ -28,19 +28,19 @@
              <button class="btn-save" [routerLink]="AppRoutes.subscriptionPlans">პაკეტები | პრემიუმი</button>
          </div> -->
         <div class="form-group" style="display: flex; flex-direction: column; align-items: flex-start;">
-          <label for="shop-name">სახელი <p style="font-size: 12px; color: grey;">({{shop.name.length}}/50)</p></label>
+          <label for="shop-name">სახელი <p style="font-size: 12px; color: grey;">({{shop.name.length}}/30)</p></label>
           <input 
               [disabled]="!fieldseditPermission"
             id="shop-name"
             type="text" 
             [(ngModel)]="shop.name"
             class="form-input"
-            maxlength="50"
+            maxlength="30"
           />
         </div>
 
         <div class="form-group" style="display: flex; flex-direction: column; align-items: flex-start;">
-          <label for="shop-name">მისამართი <p style="font-size: 12px; color: grey;">({{shop.location?.length}}/300)</p></label>
+          <label for="shop-name">მისამართი <p style="font-size: 12px; color: grey;">({{shop.location?.length}}/150)</p></label>
           <input 
               [disabled]="!fieldseditPermission"
             id="location"
