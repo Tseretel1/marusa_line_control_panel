@@ -26,8 +26,8 @@
           <div class="copy-user-id"(click)="copyToClipboard(u.id.toString(),0,0)" ></div>
             <div class="status-align"> 
                 <button class="role userid" ># {{u.id}}</button>
-                <button class="role" *ngIf="!u.isBlocked" (click)="openBlockModal(u.id,true)" >{{u.role}}</button>
-                <button class="role block" *ngIf="u.isBlocked" (click)="openBlockModal(u.id,false)">{{u.role}}</button>
+                <button class="role" *ngIf="!u.isBlocked" (click)="openBlockModal(u.id,true)" >Follower</button>
+                <button class="role block" *ngIf="u.isBlocked" (click)="openBlockModal(u.id,false)">Blocked</button>
             </div>
             <div class="user-profile">
                 <div class="user-profile-container" (click)="copyToClipboard(u.name,0,0)">
