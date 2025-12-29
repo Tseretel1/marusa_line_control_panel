@@ -28,7 +28,10 @@ export class HeaderComponent implements OnInit{
   subscription: 0,
   instagram: null,
   facebook: null,
-  titkok: null
+  titkok: null,
+  bog:null,
+  tbc:null,
+  receiver:null,
 };
 
   

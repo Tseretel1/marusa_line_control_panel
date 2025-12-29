@@ -44,3 +44,84 @@ input[type=number]::-webkit-outer-spin-button {
 input[type=number] {
     -moz-appearance: textfield;
 }
+
+.center-pagenation {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    margin-top: 24px;
+    
+    .pageination-align {
+        width: 90%;
+        display: flex;
+        justify-content: flex-start;
+        padding: 20px 0 50px 0;
+        
+        .buttons-align {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            justify-content: center;
+            
+            .next-button {
+                padding: 12px 16px;
+                border-radius: 8px;
+                border: none;
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                color: white;
+                display: flex;
+                align-items: center;
+                cursor: pointer;
+                justify-content: center;
+                transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+                
+                
+                &:active {
+                    transform: translateY(0);
+                }
+            }
+            
+            .icon-rotate-left {
+                transform: rotate(180deg);
+            }
+            
+            .btn {
+                transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+                margin: 0;
+                
+                &:hover {
+                    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                    color: white;
+                }
+            }
+            
+            .page-numbers-align {
+                display: flex;
+                gap: 6px;
+                
+                .pageination-buttons {
+                    border: none;
+                    padding: 8px 14px;
+                    border-radius: 8px;
+                    font-size: 14px;
+                    font-weight: 500;
+                    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+                    cursor: pointer;
+                    background-color: rgba(255, 255, 255, 0.1);
+                    color: rgba(255, 255, 255, 0.8);
+                    
+                    &:hover {
+                        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                        color: white;
+                        transform: translateY(-2px);
+                    }
+                }
+                
+                .selected {
+                    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+                    color: white !important;
+                }
+            }
+        }
+    }
+}

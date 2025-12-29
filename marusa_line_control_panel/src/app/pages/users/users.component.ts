@@ -133,6 +133,14 @@ export class UsersComponent implements OnInit{
     )
   }
 
+  getUsersBlockedNumber(): number {
+    return this.users.filter(u => u.role === 'Blocked').length;
+  }
+  getUsersNotBlockedNumber(): number {
+    return this.users.filter(u => u.role === 'User').length;
+  }
+
+
   inputsModalVisible:boolean = false;
   openInputsModal(){
     this.inputsModalVisible = true;

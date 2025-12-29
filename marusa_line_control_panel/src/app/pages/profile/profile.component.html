@@ -24,9 +24,9 @@
       </div>
 
       <div class="profile-content">
-        <div class="form-group">
+        <!-- <div class="form-group">
              <button class="btn-save" [routerLink]="AppRoutes.subscriptionPlans">პაკეტები | პრემიუმი</button>
-         </div>
+         </div> -->
         <div class="form-group">
           <label for="shop-name">სახელი</label>
           <input 
@@ -61,6 +61,52 @@
             {{ shop.subscription === 1 ? 'Basic' : shop.subscription === 2 ? 'Premium' : 'Enterprise' }}
           </div>
         </div> -->
+
+          <div class="social-links">
+          <h3>საბანკო ანგარიშები</h3>
+          
+          <div class="form-group">
+            <label for="instagram" class="bog social-label">
+              <img src="assets/img/bog.png" alt="" width="23px" style="border-radius: 50%;" height="23px">
+              BOG
+            </label>
+            <input 
+                [disabled]="!fieldseditPermission"
+              id="instagram"
+              type="text" 
+              [(ngModel)]="shop.bog"
+              class="form-input"
+              placeholder="https://instagram.com/yourshop"
+            />
+          </div>
+
+          <div class="form-group ">
+            <label for="facebook" class="facebook social-label">
+              <img src="assets/img/tbc.jpg" alt="" width="23px" style="border-radius: 50%;" height="23px">
+              TBC
+            </label>
+            <input 
+            [disabled]="!fieldseditPermission"
+              id="facebook"
+              type="text" 
+              [(ngModel)]="shop.tbc"
+              class="form-input"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="" class="" style="text-wrap: nowrap;">
+              მიმღები
+            </label>
+            <input 
+            [disabled]="!fieldseditPermission"
+              id="tiktok"
+              type="text" 
+              [(ngModel)]="shop.receiver"
+              class="form-input"
+            />
+          </div>
+        </div>
 
         <div class="social-links">
           <h3>სოც ქსელების მისამართები</h3>

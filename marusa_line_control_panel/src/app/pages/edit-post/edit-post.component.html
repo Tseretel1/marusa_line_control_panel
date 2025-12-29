@@ -16,8 +16,8 @@
         </div>
         <div class="form-align">
             <div class="remove-revert-align">
-              <button class="hide btn" *ngIf="posts.dateDeleted==null" (click)="removePost()">დამალვა</button>
-              <button class="revert btn" *ngIf="posts.dateDeleted" (click)="revertPost()">აღდგენა</button>
+              <button class="revert btn" *ngIf="posts.dateDeleted==null" (click)="removePost()">აღდგენილი</button>
+              <button class="hide btn" *ngIf="posts.dateDeleted" (click)="revertPost()">დამალული</button>
             </div>
             <div class="input-group">
                 <div class="form-control-group">

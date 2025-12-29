@@ -15,13 +15,10 @@
 <div class="user-component">
     <div class="filters-align" >
         <div class="filter-button-align">
-          <div class="filter" [ngClass]="{'active-filter':getuserFitler.isBlocked==null}" (click)="getEveryUser()" >ყველა</div>
-          <div class="filter" [ngClass]="{'active-filter':getuserFitler.isBlocked==false}" (click)="getUserByBlocked(false)">ნებადართული</div>
-          <div class="filter" [ngClass]="{'active-filter':getuserFitler.isBlocked}" (click)="getUserByBlocked(true)">დაბლოკილი</div>
+          <div class="filter" [ngClass]="{'active-filter':getuserFitler.isBlocked==null}" (click)="getEveryUser()" >ყველა {{users.length}} </div>
+          <div class="filter" [ngClass]="{'active-filter':getuserFitler.isBlocked==false}" (click)="getUserByBlocked(false)">ნებადართული {{getUsersNotBlockedNumber()}}</div>
+          <div class="filter" [ngClass]="{'active-filter':getuserFitler.isBlocked}" (click)="getUserByBlocked(true)">დაბლოკილი {{getUsersBlockedNumber()}}</div>
           <div class="filter" (click)="openInputsModal()">ძებნა <i class="fas fa-search"></i> </div>
-        </div>
-        <div style="width: 100%; display: flex; align-items: flex-start;">
-          <div class="filter" style="border: 1px solid rgba(128, 128, 128, 0.582); color:white; background-color: rgba(0, 0, 0, 0.247);border-radius: 10px; padding: 5px 10px;">სულ  {{totalCount}}</div>
         </div>
       </div>
     <div class="user-align">
@@ -54,11 +51,11 @@
                 </div> -->
                 <div class="info-align" style="cursor: pointer;">
                   <div class="order-count">
-                    <i class="fas fa-credit-card"></i>
+                    <i class="fas fa-shopping-cart"></i>
                     {{u.unPaidOrdersCount}}
                   </div>
                   <div class="order-count paid">
-                    <i class="fas fa-credit-card"></i>
+                    <i class="fas fa-shopping-cart"></i>
                     {{u.paidOrdersCount}}
                   </div>
                 </div>

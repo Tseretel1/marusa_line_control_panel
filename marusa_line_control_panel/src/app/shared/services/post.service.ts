@@ -13,8 +13,8 @@ import { DashboardStatsByYear } from '../../pages/dashboard/dashboard.component'
 })
 export class PostService {
 
-  private apiUrl = 'https://192.168.1.11:7174/';
-  // private apiUrl = 'https://localhost:7173/';
+  //private apiUrl = 'https://192.168.1.11:7174/';
+  private apiUrl = 'https://localhost:7173/';
   constructor(private http:HttpClient)
   {
 
@@ -245,4 +245,7 @@ export interface Shop {
   instagram: string | null;
   facebook: string | null;
   titkok: string | null;
+  bog: string|null,
+  tbc: string|null,
+  receiver: string|null,
 }
