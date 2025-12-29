@@ -4,6 +4,8 @@ import { FormsModule } from '@angular/forms';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { AppRoutes } from '../../shared/AppRoutes/AppRoutes';
 import { PostService, Shop } from '../../shared/services/post.service';
+import { AuthReloadService } from '../../shared/AuthReloadServise/AuthReloadService';
+import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-header',
   imports: [CommonModule, RouterLink, FormsModule, RouterLinkActive],
@@ -12,12 +14,17 @@ import { PostService, Shop } from '../../shared/services/post.service';
 })
 export class HeaderComponent implements OnInit{
   
-  constructor(private service:PostService){
+  constructor(private service:PostService, private ReloadService :AuthReloadService){
 
   }
-  
+  ReloadSub!:Subscription;
   ngOnInit(): void {
     this.loadShop(1);
+      this.ReloadSub= this.ReloadService.alert$.subscribe(
+      (e)=>{
+        this.loadShop(1);
+      }
+    )
   }
  shop: Shop = {
   id: 0,

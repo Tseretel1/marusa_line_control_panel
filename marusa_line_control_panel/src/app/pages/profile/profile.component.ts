@@ -39,7 +39,6 @@ export class ProfileComponent implements OnInit{
   oldShopObject!:Shop;
    
     constructor(private service:PostService,private AuthReloadService:AuthReloadService){
-  
       this.loadShop(1);
       this.getShopStats(1);
     }
@@ -158,6 +157,7 @@ uploadPhotoToServer() {
       (resp)=>{
         if(resp){
           this.uploadMessage('პროფილი წარმატებით რედაქტირდა');
+          this.AuthReloadService.reafresh();
         }
       }
     )
