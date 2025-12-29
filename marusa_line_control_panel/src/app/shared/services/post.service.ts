@@ -103,6 +103,9 @@ export class PostService {
   GetUsersList(filter:GetUserFilteredDto): Observable<GetusersDto[]> {
     return this.http.post<GetusersDto[]>(this.apiUrl+`ControlPanel/get-users`,filter);
   }
+  GetFollowersList(filter:GetUserFilteredDto): Observable<GetusersDto[]> {
+    return this.http.post<GetusersDto[]>(this.apiUrl+`ControlPanel/get-shop-followers`,filter);
+  }
   GetUsersById(id:number): Observable<GetusersDto> {
     return this.http.get<GetusersDto>(this.apiUrl+`ControlPanel/get-user-by-id?id=${id}`);
   }
@@ -112,8 +115,8 @@ export class PostService {
   GetUsersByEmail(search:string): Observable<GetusersDto[]> {
     return this.http.get<GetusersDto[]>(this.apiUrl+`ControlPanel/get-user-by-email?search=${search}`);
   }
-  BlockOrUnblockUser(id:number, role:string): Observable<any> {
-    return this.http.put<any>(this.apiUrl+`ControlPanel/update-user-role?id=${id}&role=${role}`,{});
+  BlockOrUnblockUser(id:number, ShopId:number): Observable<any> {
+    return this.http.post<any>(this.apiUrl+`ControlPanel/block-user?userId=${id}&shopId=${ShopId}`,{});
   }
   UpdateProductOrderAllowed(productid:number, allowed:boolean): Observable<any> {
     return this.http.put<any>(this.apiUrl+`ControlPanel/update-product-order-allowed?productID=${productid}&allowed=${allowed}`,{});

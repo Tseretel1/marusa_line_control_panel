@@ -24,7 +24,7 @@
      </div>
     <div class="photo-align">
         <ng-container *ngFor="let p of posts;let i = index" >
-            <div *ngIf="i==0 &&!getPostsDto.IsDeleted" class="add-new-post" [routerLink]="AppRoutes.addPosts" >
+            <div *ngIf="i==0 &&!getPostsDto.IsDeleted && getPostsDto.PageNumber==1" class="add-new-post" [routerLink]="AppRoutes.addPosts" >
                 <i class="fas fa-plus-square"></i>
             </div>
             <app-photo-album [posts]="p" class="album"></app-photo-album>

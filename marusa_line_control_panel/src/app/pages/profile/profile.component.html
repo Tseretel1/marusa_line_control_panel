@@ -18,7 +18,7 @@
             <p style="color: white; font-size: 16px;">  <b style="color: white;  font-size: 20px;">{{shopStats.followerCount}}</b> followers</p>
         </div>
         <div style="display: flex; gap: 10px; justify-content: center;" *ngIf="savePhotoVisible">
-            <button class="btn-save" (click)="uploadMessage('ფოტო წარმატებით შეიცვალა!')">შენახვა</button>
+            <button class="btn-save" (click)="uploadPhotoToServer()">შენახვა</button>
             <button class="btn-cancel" (click)="hideSavePhoto()">გაუქმება</button>
         </div>
       </div>

@@ -15,9 +15,9 @@
 <div class="user-component">
     <div class="filters-align" >
         <div class="filter-button-align">
-          <div class="filter" [ngClass]="{'active-filter':getuserFitler.isBlocked==null}" (click)="getEveryUser()" >ყველა {{users.length}} </div>
-          <div class="filter" [ngClass]="{'active-filter':getuserFitler.isBlocked==false}" (click)="getUserByBlocked(false)">ნებადართული {{getUsersNotBlockedNumber()}}</div>
-          <div class="filter" [ngClass]="{'active-filter':getuserFitler.isBlocked}" (click)="getUserByBlocked(true)">დაბლოკილი {{getUsersBlockedNumber()}}</div>
+          <div class="filter" [ngClass]="{'active-filter':getuserFitler.isBlocked==null}" (click)="getEveryUser()" >ყველა {{totalUserCount}} </div>
+          <div class="filter" [ngClass]="{'active-filter':getuserFitler.isBlocked==false}" (click)="getUserByBlocked(false)">ნებადართული {{NotblockedCount}}</div>
+          <div class="filter" [ngClass]="{'active-filter':getuserFitler.isBlocked}" (click)="getUserByBlocked(true)">დაბლოკილი {{blockedCount}}</div>
           <div class="filter" (click)="openInputsModal()">ძებნა <i class="fas fa-search"></i> </div>
         </div>
       </div>
@@ -26,8 +26,8 @@
           <div class="copy-user-id"(click)="copyToClipboard(u.id.toString(),0,0)" ></div>
             <div class="status-align"> 
                 <button class="role userid" ># {{u.id}}</button>
-                <button class="role" *ngIf="u.role=='User'" (click)="openBlockModal(u.id,true)" >{{u.role}}</button>
-                <button class="role block" *ngIf="u.role=='Blocked'" (click)="openBlockModal(u.id,false)">{{u.role}}</button>
+                <button class="role" *ngIf="!u.isBlocked" (click)="openBlockModal(u.id,true)" >{{u.role}}</button>
+                <button class="role block" *ngIf="u.isBlocked" (click)="openBlockModal(u.id,false)">{{u.role}}</button>
             </div>
             <div class="user-profile">
                 <div class="user-profile-container" (click)="copyToClipboard(u.name,0,0)">
@@ -64,11 +64,11 @@
     </div>
 </div>
 
-<div class="block-modal-align" *ngIf="blockModalNum!=0">
+<div class="block-modal-align" *ngIf="UserId!=0">
     <div class="block-modal-back" (click)="hideBlockModal()"></div>
     <div class="block-modal">
-        <button class="button green" *ngIf="!isBlocked" (click)="blockOrUnblockUser('User')">განბლოკვა</button>
-        <button class="button red" *ngIf="isBlocked" (click)="blockOrUnblockUser('Blocked')">დაბლოკვა</button>
+        <button class="button green" *ngIf="!isBlocked" (click)="blockOrUnblockUser(UserId)">განბლოკვა</button>
+        <button class="button red" *ngIf="isBlocked" (click)="blockOrUnblockUser(UserId)">დაბლოკვა</button>
     </div>
 </div>
 

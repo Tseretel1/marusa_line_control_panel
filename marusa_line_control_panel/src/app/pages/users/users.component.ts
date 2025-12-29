@@ -19,6 +19,7 @@ export class UsersComponent implements OnInit{
   
   userId:number |null= null;
   getuserFitler:GetUserFilteredDto={
+    shopId:1,
     userId: null,
     isBlocked :null,
     pageNumber:1,
@@ -27,10 +28,13 @@ export class UsersComponent implements OnInit{
   users:GetusersDto[]= [];
   totalCount:number = 0;
   getUsers(){
-    this.service.GetUsersList(this.getuserFitler).subscribe((resp)=>{
+    this.service.GetFollowersList(this.getuserFitler).subscribe((resp)=>{
       this.users = resp;
       this.hideInputsModal();
-      this.CreatePagenation(this.users[0].totalCount)
+      this.CreatePagenation(this.users[0].totalCount);
+      if(this.totalUserCount==0){
+        this.getUserStats();
+      }
     })
   }
   CreatePagenation(totalcount:number){
@@ -38,27 +42,37 @@ export class UsersComponent implements OnInit{
     this.totalPages = Math.ceil(this.totalCount / this.getuserFitler.pageSize);
     this.lastPage = Math.ceil(this.totalCount / this.getuserFitler.pageSize);
   }
-  blockModalNum:number = 0;
+  UserId:number = 0;
   isBlocked :boolean = false;
   openBlockModal(num:number, block :boolean){
-    this.blockModalNum = num;
+    this.UserId = num;
     this.isBlocked = block;
   }
   hideBlockModal(){
-    this.blockModalNum = 0;
+    this.UserId = 0;
   }
 
-  blockOrUnblockUser(role:string){
-    this.service.BlockOrUnblockUser(this.blockModalNum,role).subscribe((resp)=>{
-      if(resp!=null){
-        const user = this.users.find(x => x.id === this.blockModalNum);
+  blockOrUnblockUser(id: number) {
+    this.service.BlockOrUnblockUser(id, 1).subscribe((resp) => {
+      if (resp != null) {
+        const user = this.users.find(x => x.id === id);
         if (user) {
-          user.role = role;
+          user.isBlocked = !user.isBlocked;
+          if(user.isBlocked){
+            this.blockedCount ++;
+            this.NotblockedCount --;
+          }
+          else{
+            this.blockedCount --;
+            this.NotblockedCount ++;
+          }
         }
         this.hideBlockModal();
       }
-    })
+    });
   }
+
+
   getUserByBlocked(blocked:boolean){
     if(blocked){
       this.getuserFitler.isBlocked = true;
@@ -133,12 +147,15 @@ export class UsersComponent implements OnInit{
     )
   }
 
-  getUsersBlockedNumber(): number {
-    return this.users.filter(u => u.role === 'Blocked').length;
+  blockedCount:number = 0;
+  NotblockedCount:number = 0;
+  totalUserCount:number = 0;
+  getUserStats() {
+    this.blockedCount  =this.users.filter(u => u.isBlocked).length;
+    this.NotblockedCount = this.users.filter(u => !u.isBlocked).length;
+    this.totalUserCount = this.users.length;
   }
-  getUsersNotBlockedNumber(): number {
-    return this.users.filter(u => u.role === 'User').length;
-  }
+
 
 
   inputsModalVisible:boolean = false;
@@ -162,11 +179,13 @@ export interface GetusersDto {
   totalCount:number;
   paidOrdersCount: number,
   unPaidOrdersCount: number,
+  isBlocked: boolean,
 }
 
 export interface GetUserFilteredDto {
   userId: number|null;      
   isBlocked: boolean|null; 
   pageNumber: number;   
-  pageSize: number;     
+  pageSize: number;
+  shopId:number;     
 }

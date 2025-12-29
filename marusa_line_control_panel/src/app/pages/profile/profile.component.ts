@@ -119,19 +119,26 @@ export class ProfileComponent implements OnInit{
     }
   }
 
-  uploadPhotoToServer(): Observable<Insertphoto> {
-    if (!this.uploadPhoto?.file) {
-      throw new Error('No photo selected!');
-    }
-
-    return this.service.uploadImage(this.uploadPhoto.file).pipe(
-      tap((response: any) => {
-        this.insertPhoto = {
-          photoUrl: response.secure_url
-        };
-      })
-    );
+uploadPhotoToServer() {
+  if (!this.uploadPhoto?.file) {
+    throw new Error('No photo selected!');
   }
+
+  this.service.uploadImage(this.uploadPhoto.file).subscribe({
+    next: (response: any) => {
+      this.insertPhoto = {
+        photoUrl: response.secure_url
+      };
+      this.shop.logo = this.insertPhoto.photoUrl;
+      this.UpdateShop();
+      this.hideSavePhoto();
+    },
+    error: (err) => {
+      console.error('Upload failed', err);
+    }
+  });
+}
+
 
   uploadMessage(message: string){
     Swal.fire({
