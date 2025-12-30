@@ -34,7 +34,7 @@
         <div class="order-card-align" >
             <div class="order-card" [ngClass]="{'finished-order': o.statusId ==5}"  *ngFor="let o of orders" [routerLink]="AppRoutes.orderDetails + o.orderId">
                 <div class="pay-align">
-                    <span class="pay-span" [ngClass]="{'payed-span': o.isPaid,}">No.{{o.orderId}}</span>
+                    <span class="pay-span" [ngClass]="{'payed-span': o.isPaid,}"> No.{{o.orderId}}</span>
                     <div class="user-details">
                         <div class="user-container">
                             <img [src]="o.user.profilePhoto" class="user-img" alt="">

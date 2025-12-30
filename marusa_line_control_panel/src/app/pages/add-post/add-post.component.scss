@@ -260,7 +260,7 @@
             
             .description {
                 width: 100%;
-                height: 140px;
+                height: 200px;
                 resize: vertical;
                 min-height: 80px;
                 max-height: 300px;
@@ -415,13 +415,6 @@
                     left: 16px;
                     font-size: 13px;
                 }
-                
-                .description-group {
-                    .description {
-                        height: 120px;
-                    }
-                }
-                
                 button {
                     width: 100%;
                 }

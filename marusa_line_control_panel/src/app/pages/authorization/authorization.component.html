@@ -1,13 +1,36 @@
+<!-- HTML -->
 <div class="center-component">
     <div class="modal">
-        <div class="form-group">
-            <label for="" class="label">მომხმარებელი</label>
-            <input type="text" class="form-control" [(ngModel)]="username">
+        <div class="modal-header">
+            <h2 class="modal-title">შესვლა</h2>
+            <p class="modal-subtitle">შეიყვანეთ თქვენი მონაცემები</p>
         </div>
+        
         <div class="form-group">
-            <label for="" class="label">პაროლი</label>
-            <input type="password" class="form-control" [(ngModel)]="password">
+            <label for="gmail" class="label">მომხმარებელი</label>
+            <input 
+                type="text" 
+                id="gmail"
+                class="form-control" 
+                [(ngModel)]="gmail"
+                placeholder="example@email.com">
         </div>
-        <button class="atuthorize" (click)="Authorize()">ავტორიზაცია</button>
+        
+        <div class="form-group">
+            <label for="password" class="label">პაროლი</label>
+            <input 
+                type="password" 
+                id="password"
+                class="form-control" 
+                [(ngModel)]="password"
+                placeholder="••••••••">
+        </div>
+        
+        <button class="authorize-btn" (click)="Authorize()">
+            <span class="btn-text">ავტორიზაცია</span>
+            <svg class="btn-icon" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                <path d="M4 10H16M16 10L11 5M16 10L11 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        </button>
     </div>
 </div>

@@ -3,6 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { AuthService } from '../../shared/services/auth.service';
 import { StringToken } from '@angular/compiler';
 import { AuthReloadService } from '../../shared/AuthReloadServise/AuthReloadService';
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-authorization',
   imports: [FormsModule],
@@ -14,26 +15,37 @@ export class AuthorizationComponent {
 
   }
 
+  
+  gmail:string='';
+  password:string='';
   Authorize(){
     const user :Auth={
-      username : this.username,
+      gmail : this.gmail,
       password :this.password
     };
     this.authService.Login(user).subscribe(
-      (resp)=>{
-        if(resp.token!=null){
+      (resp)=>{ 
+        if(resp.succeeded){
           localStorage.setItem('token',resp.token);
           this.AuthReloadService.reafresh();
         }
+        else{
+          Swal.fire({
+            icon: 'error',
+            timer: 3000,
+            showConfirmButton: false,
+            confirmButtonColor: 'green',
+            background:'rgb(25, 26, 25)',
+            color: '#ffffff',
+            title:'იმეილი ან პაროლი არასწორია',
+          });
+        }
       }
-      )
+    )
   }
-
-  username:string='';
-  password:string='';
 }
 
 export interface Auth{
-  username:string;
+  gmail:string;
   password:string;
 }

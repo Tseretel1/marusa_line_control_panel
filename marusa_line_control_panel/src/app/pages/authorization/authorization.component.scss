@@ -1,52 +1,150 @@
 
-:host{
+:host {
     height: 100%;
 }
-.center-component{
+
+.center-component {
     width: 100%;
     height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
-    .modal{
+    .modal {
         width: 90%;
-        max-width: 500px;
-        border-radius: 10px;
-        background-color: rgb(43, 42, 42);
+        max-width: 440px;
+        border-radius: 16px;
+        background: rgba(30, 30, 45, 0.95);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
         display: flex;
         flex-direction: column;
-        gap: 20px;
-        padding: 20px;
-        align-items: center;
-        box-shadow: 0px 0px 5px black;
-        .form-group{
-            display:flex;
-            flex-direction: column;
-            gap: 5px;
-            color: white;
-            width: 100%;
-            .form-control{
-                padding: 20px;
-                background-color: transparent;
-                border: 1px solid white;
-                border-radius: 5px;
-                color: white;
-                width: 100%;
+        gap: 24px;
+        padding: 40px 32px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        transition: transform 0.3s ease;
+        
+        &:hover {
+            transform: translateY(-2px);
+        }
+        
+        .modal-header {
+            text-align: center;
+            margin-bottom: 8px;
+            
+            .modal-title {
+                font-size: 28px;
+                font-weight: 600;
+                color: #ffffff;
+                margin: 0 0 8px 0;
+                letter-spacing: -0.5px;
+            }
+            
+            .modal-subtitle {
+                font-size: 14px;
+                color: rgba(255, 255, 255, 0.6);
+                margin: 0;
             }
         }
-        .atuthorize{
+        
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
             width: 100%;
-            height: 20px;
-            border-radius: 5px;
-            background-color: green;
+            
+            .label {
+                font-size: 14px;
+                font-weight: 500;
+                color: rgba(255, 255, 255, 0.9);
+                letter-spacing: 0.2px;
+            }
+            
+            .form-control {
+                padding: 14px 16px;
+                background: rgba(255, 255, 255, 0.05);
+                border: 1.5px solid rgba(255, 255, 255, 0.1);
+                border-radius: 10px;
+                color: #ffffff;
+                font-size: 15px;
+                width: 100%;
+                transition: all 0.3s ease;
+                outline: none;
+                
+                &::placeholder {
+                    color: rgba(255, 255, 255, 0.3);
+                }
+                
+                &:hover {
+                    background: rgba(255, 255, 255, 0.08);
+                    border-color: rgba(255, 255, 255, 0.2);
+                }
+                
+                &:focus {
+                    background: rgba(255, 255, 255, 0.08);
+                    border-color: #4a9eff;
+                    box-shadow: 0 0 0 3px rgba(74, 158, 255, 0.1);
+                }
+            }
+        }
+        
+        .authorize-btn {
+            width: 100%;
+            height: 50px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, #667eea 0%, #4a9eff 100%);
             border: none;
             outline: none;
-            color: white;
-            padding: 20px;
+            color: #ffffff;
+            font-size: 16px;
+            font-weight: 600;
             display: flex;
             align-items: center;
             justify-content: center;
+            gap: 8px;
             cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 8px;
+            position: relative;
+            overflow: hidden;
+            
+            &::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+                opacity: 0;
+                transition: opacity 0.3s ease;
+            }
+            
+            .btn-text,
+            .btn-icon {
+                position: relative;
+                z-index: 1;
+            }
+            
+            .btn-icon {
+                transition: transform 0.3s ease;
+            }
+            
+            &:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 10px 25px rgba(74, 158, 255, 0.3);
+                
+                &::before {
+                    opacity: 1;
+                }
+                
+                .btn-icon {
+                    transform: translateX(4px);
+                }
+            }
+            
+            &:active {
+                transform: translateY(0);
+            }
         }
     }
 }

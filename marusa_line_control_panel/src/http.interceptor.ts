@@ -5,7 +5,6 @@ import { catchError, finalize, throwError } from 'rxjs';
 import { AppRoutes } from './app/shared/AppRoutes/AppRoutes';
 
 export const httpInterceptor: HttpInterceptorFn = (request, next) => {
- const authService = inject(AuthService);
   const token = localStorage.getItem("token");
 
   if (token) {
@@ -33,6 +32,4 @@ export const httpInterceptor: HttpInterceptorFn = (request, next) => {
       });
     })
   );
-  function redirectToLogin(): void {
-  }
 };
