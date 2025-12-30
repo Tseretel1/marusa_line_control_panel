@@ -23,13 +23,10 @@
         </div> 
      </div>
     <div class="photo-align">
-        <div *ngIf="posts.length<=0" class="add-new-post" [routerLink]="AppRoutes.addPosts" >
-                <i class="fas fa-plus-square"></i>
-            </div>
+        <div *ngIf="!getPostsDto.IsDeleted && getPostsDto.PageNumber==1" class="add-new-post" [routerLink]="AppRoutes.addPosts" >
+            <i class="fas fa-plus-square"></i>
+        </div>
         <ng-container *ngFor="let p of posts;let i = index" >
-            <div *ngIf="i==0 &&!getPostsDto.IsDeleted && getPostsDto.PageNumber==1" class="add-new-post" [routerLink]="AppRoutes.addPosts" >
-                <i class="fas fa-plus-square"></i>
-            </div>
             <app-photo-album [posts]="p" class="album" [ngClass]="{'deleted':p.dateDeleted!=null}"></app-photo-album>
         </ng-container>
     </div>

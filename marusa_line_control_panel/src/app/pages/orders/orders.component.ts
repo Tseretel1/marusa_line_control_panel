@@ -40,6 +40,7 @@ export class OrdersComponent implements OnInit{
     PageSize : 25,
   }
 
+  today: Date = new Date();
 
 
   lastPage: number = 0; 
