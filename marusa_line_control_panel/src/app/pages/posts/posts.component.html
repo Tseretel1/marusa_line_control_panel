@@ -23,6 +23,9 @@
         </div> 
      </div>
     <div class="photo-align">
+        <div *ngIf="posts.length<=0" class="add-new-post" [routerLink]="AppRoutes.addPosts" >
+                <i class="fas fa-plus-square"></i>
+            </div>
         <ng-container *ngFor="let p of posts;let i = index" >
             <div *ngIf="i==0 &&!getPostsDto.IsDeleted && getPostsDto.PageNumber==1" class="add-new-post" [routerLink]="AppRoutes.addPosts" >
                 <i class="fas fa-plus-square"></i>
@@ -34,7 +37,7 @@
 
 
 
-<div class="center-pagenation">
+<div class="center-pagenation" *ngIf="totalCount>0">
      <div class="pageination-align">
     <div class="buttons-align">
        <button class="next-button" type="button" (click)="changePage(selectedPage - 1)">

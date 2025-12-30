@@ -65,7 +65,7 @@ export class PostService {
     return this.http.get<orderStatuses[]>(this.apiUrl+'Product/get-order-statuses');
   }
   getOrderById(orderId:number): Observable<any> {
-    return this.http.get<any>(this.apiUrl+`Product/get-order-details?orderId=${orderId}`);
+    return this.http.get<any>(this.apiUrl+`ControlPanel/get-order-details?orderId=${orderId}`);
   }
   getuserOptionalFields(userId:number): Observable<UserOptionalFields> {
     return this.http.get<UserOptionalFields>(this.apiUrl+`Product/get-users-optional?id=${userId}`);
@@ -121,11 +121,11 @@ export class PostService {
   UpdateProductOrderAllowed(productid:number, allowed:boolean): Observable<any> {
     return this.http.put<any>(this.apiUrl+`ControlPanel/update-product-order-allowed?productID=${productid}&allowed=${allowed}`,{});
   }
-  getShopStats(shopId:number): Observable<any> {
-    return this.http.get<any>(this.apiUrl+`ControlPanel/get-shop-stats?shopId=${shopId}`);
+  getShopStats(): Observable<any> {
+    return this.http.get<any>(this.apiUrl+`ControlPanel/get-shop-stats`);
   }
-  getShopById(shopId:number): Observable<any> {
-    return this.http.get<any>(this.apiUrl+`ControlPanel/get-shop-by-id?shopId=${shopId}`);
+  getShopById(): Observable<any> {
+    return this.http.get<any>(this.apiUrl+`ControlPanel/get-shop-by-id`);
   }
   UpdateShop(Newshop:Shop): Observable<any> {
     return this.http.put<any>(this.apiUrl+`ControlPanel/update-shop`,Newshop);

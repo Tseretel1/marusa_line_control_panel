@@ -39,15 +39,15 @@ export class ProfileComponent implements OnInit{
   oldShopObject!:Shop;
    
     constructor(private service:PostService,private AuthReloadService:AuthReloadService){
-      this.loadShop(1);
-      this.getShopStats(1);
+      this.loadShop();
+      this.getShopStats();
     }
 
   ngOnInit(): void {
   }
   
-  loadShop(shopId: number): void {
-    this.service.getShopById(shopId).subscribe({
+  loadShop(): void {
+    this.service.getShopById().subscribe({
       next: (data: Shop) => {
         this.shop = { ...data };        
         this.oldShopObject = { ...data }; 
@@ -58,8 +58,8 @@ export class ProfileComponent implements OnInit{
     });
   }
 
-  getShopStats(shopId: number): void {
-    this.service.getShopStats(shopId).subscribe(
+  getShopStats(): void {
+    this.service.getShopStats().subscribe(
      (resp) => {
         this.shopStats = resp;
       },

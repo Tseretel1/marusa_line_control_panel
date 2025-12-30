@@ -19,10 +19,10 @@ export class HeaderComponent implements OnInit{
   }
   ReloadSub!:Subscription;
   ngOnInit(): void {
-    this.loadShop(1);
+    this.loadShop();
       this.ReloadSub= this.ReloadService.alert$.subscribe(
       (e)=>{
-        this.loadShop(1);
+        this.loadShop();
       }
     )
   }
@@ -42,8 +42,8 @@ export class HeaderComponent implements OnInit{
 };
 
   
-  loadShop(shopId: number): void {
-    this.service.getShopById(shopId).subscribe({
+  loadShop(): void {
+    this.service.getShopById().subscribe({
       next: (data: Shop) => {
         this.shop = data;
       },

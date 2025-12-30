@@ -69,11 +69,15 @@ export class OrdersComponent implements OnInit{
     }
     this.service.getUserOrders(this.getOrderDto).subscribe(
       (resp)=>{
-        if(resp==null){
-          localStorage.setItem('PageNumber','1');
-          this.getPaidOrUnpaidOrders(false);
-          return;
-        }
+       if (!resp) {
+  this.orders = [];
+  this.totalCount = 0;
+  this.totalPages = 0;
+  this.lastPage = 0;
+  return;
+}
+
+        console.log('from orders')
         this.orders = resp.orders;
         this.totalCount = resp.totalCount;
         this.totalPages = Math.ceil(this.totalCount / this.getOrderDto.PageSize);
@@ -133,6 +137,8 @@ export class OrdersComponent implements OnInit{
       }
     )
   }
+
+
   getStatusName(statusid:number){
     const name  = this.orderStatuses.find((x)=> x.id == statusid);
     return name?.statusName;
