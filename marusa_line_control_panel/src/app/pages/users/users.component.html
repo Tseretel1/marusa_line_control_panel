@@ -1,11 +1,12 @@
 <div class="inputs-moadl-align" *ngIf="inputsModalVisible">
   <div class="clse-inputs-modal"  (click)="hideInputsModal()"></div>
   <div class="inputs-align">
-      <div class="search-align">
+      <!-- <div class="search-align">
         <input class="user-search" type="number" [(ngModel)]="userId" (change)="getUserById()"  placeholder="#">
-      </div>
+      </div> -->
       <div class="search-align">
-        <input class="user-search" type="text" [(ngModel)]="NameSearch" (change)="getUserByName()" placeholder="სახელი">
+        <input class="user-search" type="text" [(ngModel)]="NameSearch"placeholder="სახელი">
+        <button class="search-button" (click)="getUserByName()">ძებნა</button>
       </div>
       <!-- <div class="search-align">
          <input class="user-search" type="text" [(ngModel)]="EmailSearch" (change)="getUserByEmail()" placeholder="მეილი">

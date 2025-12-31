@@ -50,6 +50,16 @@
                 color: rgba(255, 255, 255, 0.5);
             }
         }
+        .search-button{
+            background: rgba(255, 255, 255, 0.05);
+            color: white;
+            padding: 12px 20px;
+            border: 1px solid rgba(99, 102, 241, 0.3); 
+            border-color: #6366f1;
+            background: rgba(99, 102, 241, 0.1);
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+            border-radius: 8px;
+        }
     }
 }
 
