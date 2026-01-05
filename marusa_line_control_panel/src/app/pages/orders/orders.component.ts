@@ -62,6 +62,11 @@ export class OrdersComponent implements OnInit{
   }
  
   totalPages:number =0;
+  groupedOrders: {
+  monthLabel: string;
+  orders: OrderProduct[];
+  }[] = [];
+
   getOrders(){
     const pageNum= localStorage.getItem('PageNumber');
     if(pageNum){
@@ -70,28 +75,66 @@ export class OrdersComponent implements OnInit{
     }
     this.service.getUserOrders(this.getOrderDto).subscribe(
       (resp)=>{
-       if (!resp) {
-  this.orders = [];
-  this.totalCount = 0;
-  this.totalPages = 0;
-  this.lastPage = 0;
-  return;
-}
-
-        console.log('from orders')
+        if (!resp) {
+          this.orders = [];
+          this.totalCount = 0;
+          this.totalPages = 0;
+          this.lastPage = 0;
+          localStorage.removeItem('PageNumber');
+          this.getOrderDto.PageNumber = 1;
+          this.getOrdersLocalstorage();
+          console.log(resp)
+          return;
+        }
+          console.log(resp)
         this.orders = resp.orders;
         this.totalCount = resp.totalCount;
         this.totalPages = Math.ceil(this.totalCount / this.getOrderDto.PageSize);
         this.lastPage = Math.ceil(this.totalCount / this.getOrderDto.PageSize);
+        this.groupOrdersByMonth();
       }
     )
   }
+
+groupOrdersByMonth() {
+  const map = new Map<string, OrderProduct[]>();
+
+  for (const order of this.orders) {
+    const date = new Date(order.createDate);
+    const monthIndex = date.getMonth(); // 0–11
+    const year = date.getFullYear();
+    const key = `${year}-${monthIndex}`;
+
+    if (!map.has(key)) {
+      map.set(key, []);
+    }
+
+    map.get(key)!.push(order);
+  }
+
+  this.groupedOrders = Array.from(map.entries())
+    .map(([key, orders]) => {
+      const [year, monthIndex] = key.split('-').map(Number);
+
+      const georgianMonth =
+        this.MonthsList.find(m => m.id === monthIndex + 1)?.MonthName
+        ?? '';
+
+      return {
+        monthLabel: `${georgianMonth} ${year}`,
+        orders
+      };
+    })
+    .sort((a, b) =>
+      new Date(b.orders[0].createDate).getTime() -
+      new Date(a.orders[0].createDate).getTime()
+    );
+}
 
 
   getOrdersLocalstorage(){
     const ispaid = localStorage.getItem('orderIdPaid');
     if(ispaid =='true'){
-      localStorage.removeItem('PageNumber')
       this.getPaidOrUnpaidOrders(true);
       return;
     }

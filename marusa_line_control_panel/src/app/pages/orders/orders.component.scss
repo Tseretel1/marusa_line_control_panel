@@ -120,11 +120,28 @@ button{
   font-weight: 600;
 }
 
-/* Orders Grid */
+.orders-grouped{
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+}
 .order-card-align {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  padding: 50px 20px;
   gap: 20px;
+  border-radius: 10px;
+  position: relative;
+  background-color: rgba(20, 20, 20, 0.425);
+  border: 2px solid #334155;
+  .month-header{
+    position: absolute;
+    top: 10px;
+    left: 20px;
+    color: white;
+    font-weight: bolder;
+    font-size: 20px;
+  }
 }
 
 /* Order Card Base */
