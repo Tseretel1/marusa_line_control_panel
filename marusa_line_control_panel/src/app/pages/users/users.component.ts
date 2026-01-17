@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { PostService } from '../../shared/services/post.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { NavigationEnd, Router } from '@angular/router';
+import { AppRoutes } from '../../shared/AppRoutes/AppRoutes';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-users',
@@ -10,7 +13,7 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './users.component.scss'
 })
 export class UsersComponent implements OnInit{
-  constructor (private service:PostService){
+  constructor (private service:PostService,private router: Router){
 
   }
   ngOnInit(): void {
@@ -156,6 +159,23 @@ export class UsersComponent implements OnInit{
     this.totalUserCount = this.users.length;
   }
 
+  getOrdersbyUserId(num:number,paidorders:number,unpaidorders:number){
+    if(paidorders>0|| unpaidorders>0){
+      localStorage.setItem('userIdToGetOrders',num.toString());
+      this.router.navigate([AppRoutes.orders])
+    }
+    else{
+      Swal.fire({
+          icon: 'error',
+          timer: 3000,
+          showConfirmButton: false,
+          confirmButtonColor: 'green',
+          background:'rgb(25, 26, 25)',
+          color: '#ffffff',
+          title:'მომხმარებელს არ აქვს შეკვეთები',
+      });
+    }
+  }
 
 
   inputsModalVisible:boolean = false;

@@ -23,8 +23,8 @@
         </div>
       </div>
     <div class="user-align">
-        <div class="user" *ngFor="let u of users">
-          <div class="copy-user-id"(click)="copyToClipboard(u.id.toString(),0,0)" ></div>
+        <div class="user" *ngFor="let u of users" >
+          <div class="copy-user-id" ></div>
             <div class="status-align"> 
                 <button class="role userid" ># {{u.id}}</button>
                 <button class="role" *ngIf="!u.isBlocked" (click)="openBlockModal(u.id,true)" >Follower</button>
@@ -50,7 +50,7 @@
                     <button class="copy-btn"><i class="fas fa-copy"></i></button>
                     <span class="copied-span" *ngIf="copiedNumber ==u.id && spanId ==2">✅</span>
                 </div> -->
-                <div class="info-align" style="cursor: pointer;">
+                <div class="info-align" style="cursor: pointer;" (click)="getOrdersbyUserId(u.id,u.paidOrdersCount,u.unPaidOrdersCount)">
                   <div class="order-count">
                     <i class="fas fa-shopping-cart"></i>
                     {{u.unPaidOrdersCount}}
@@ -74,7 +74,7 @@
 </div>
 
 
-<div class="center-pagenation">
+<div class="center-pagenation" *ngIf="users.length>0">
      <div class="pageination-align">
     <div class="buttons-align">
        <button class="next-button" type="button" (click)="changePage(selectedPage - 1)">

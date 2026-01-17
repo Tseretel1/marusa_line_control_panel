@@ -15,10 +15,25 @@ import { dateTimestampProvider } from 'rxjs/internal/scheduler/dateTimestampProv
 })
 export class OrdersComponent implements OnInit{
   ngOnInit(): void {
-    this.getOrdersLocalstorage();
-    this.getOrderStatuses();
-    this.generateMonthsList();
-    this.setStats();
+    this.getOrdersMainMethod();
+  }
+
+  getOrdersMainMethod(){
+    const userId = localStorage.getItem('userIdToGetOrders');
+    if(userId){
+      this.getOrderDto.UserId =Number(userId);
+      this.UserIdOrderSearch();
+      localStorage.removeItem('userIdToGetOrders');
+      this.getOrderStatuses();
+      this.generateMonthsList();
+      this.setStats();
+    }
+    else{
+      this.getOrdersLocalstorage();
+      this.getOrderStatuses();
+      this.generateMonthsList();
+      this.setStats();
+    }
   }
 
   setStats(){
@@ -169,7 +184,7 @@ groupOrdersByMonth() {
   UserIdSearch !:number;
   UserIdOrderSearch(){
     this.getOrderDto.OrderId = null;
-    this.getOrderDto.UserId = this.UserIdSearch;
+    // this.getOrderDto.UserId = this.UserIdSearch;
     this.getOrders();
   }
 
