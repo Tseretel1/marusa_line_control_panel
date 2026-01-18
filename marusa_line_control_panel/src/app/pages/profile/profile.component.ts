@@ -46,10 +46,12 @@ export class ProfileComponent implements OnInit{
   ngOnInit(): void {
   }
   
+  shopId:number = 0;
   loadShop(): void {
     this.service.getShopById().subscribe({
       next: (data: Shop) => {
         this.shop = { ...data };        
+        this.shopId = this.shop.id;
         this.oldShopObject = { ...data }; 
         if(this.shop.logo){
           this.preview = this.shop.logo;

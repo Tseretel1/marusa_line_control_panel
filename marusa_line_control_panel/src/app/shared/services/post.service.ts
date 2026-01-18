@@ -130,7 +130,6 @@ export class PostService {
   UpdateShop(Newshop:Shop): Observable<any> {
     return this.http.put<any>(this.apiUrl+`ControlPanel/update-shop`,Newshop);
   }
-  
 }
 export interface StartEndDate{
   startDate :string;

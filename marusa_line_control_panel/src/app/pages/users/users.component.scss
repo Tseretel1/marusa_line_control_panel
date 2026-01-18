@@ -415,7 +415,6 @@
     align-items: center;
     justify-content: center;
     z-index: 13;
-    animation: fadeIn 0.3s ease;
     
     .block-modal-back {
         width: 100%;
@@ -424,6 +423,7 @@
         top: 0;
         left: 0;
         z-index: 1;
+        animation: fadeIn 0.3s ease;
         backdrop-filter: blur(10px);
         background-color: rgba(0, 0, 0, 0.5);
     }
@@ -493,9 +493,11 @@
 
 @keyframes fadeIn {
     from {
+        backdrop-filter: blur(0px);
         opacity: 0;
     }
     to {
+        backdrop-filter: blur(10px);
         opacity: 1;
     }
 }
@@ -523,7 +525,19 @@
         grid-template-columns: repeat(2, 1fr);
         gap: 15px;
     }
-    
+    .user-component .filters-align .filter-button-align {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+
+        .filter {
+            width: 100%;
+            text-align: center;
+            p{
+                display: flex;
+                flex-direction: column;
+            }
+        }
+    }
     .inputs-moadl-align .inputs-align {
         flex-direction: column;
         padding: 25px;
@@ -533,16 +547,7 @@
 @media (max-width: 480px) {
     .user-component .user-align {
         grid-template-columns: 1fr;
-    }
-    
-    .user-component .filters-align .filter-button-align {
-        flex-direction: column;
-        
-        .filter {
-            width: 100%;
-            text-align: center;
-        }
-    }
+    } 
 }
 .center-pagenation{
     display: flex;

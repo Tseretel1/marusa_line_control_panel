@@ -16,9 +16,9 @@
 <div class="user-component">
     <div class="filters-align" >
         <div class="filter-button-align">
-          <div class="filter" [ngClass]="{'active-filter':getuserFitler.isBlocked==null}" (click)="getEveryUser()" >ყველა {{totalUserCount}} </div>
-          <div class="filter" [ngClass]="{'active-filter':getuserFitler.isBlocked==false}" (click)="getUserByBlocked(false)">ნებადართული {{NotblockedCount}}</div>
-          <div class="filter" [ngClass]="{'active-filter':getuserFitler.isBlocked}" (click)="getUserByBlocked(true)">დაბლოკილი {{blockedCount}}</div>
+          <div class="filter" [ngClass]="{'active-filter':getuserFitler.isBlocked==null}" (click)="getEveryUser()" ><p> ყველა <b>{{totalUserCount}}</b></p> </div>
+          <div class="filter" [ngClass]="{'active-filter':getuserFitler.isBlocked==false}" (click)="getUserByBlocked(false)"><p> ნებადართული <b>{{NotblockedCount}}</b></p> </div>
+          <div class="filter" [ngClass]="{'active-filter':getuserFitler.isBlocked}" (click)="getUserByBlocked(true)"><p> დაბლოკილი <b>{{blockedCount}}</b></p> </div>
           <div class="filter" (click)="openInputsModal()">ძებნა <i class="fas fa-search"></i> </div>
         </div>
       </div>
