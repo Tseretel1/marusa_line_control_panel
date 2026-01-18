@@ -172,7 +172,7 @@ export class OrderDetailsComponent implements OnInit{
       this.location = { lat: lat.toString(), lng: lng.toString() };
     }
   }
-    copyToClipboard(text: string): void {
+  copyToClipboard(text: string): void {
     navigator.clipboard.writeText(text)
     .then(() => {
     })

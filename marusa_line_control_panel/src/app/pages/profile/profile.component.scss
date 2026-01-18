@@ -201,6 +201,15 @@
       transform: translateY(-2px);
       box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
     }
+    .btn-no-sub{
+      border:1px solid red;
+      background-color: transparent;
+    }
+    .btn-no-sub:hover{
+      background-color: transparent;
+      box-shadow: 0px 0px 0px transparent;
+      transform: translateY(0px);
+    }
     .exit{
         padding: 10px;
         background-color: darkred;

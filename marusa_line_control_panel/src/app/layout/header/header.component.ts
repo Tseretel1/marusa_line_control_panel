@@ -32,7 +32,7 @@ export class HeaderComponent implements OnInit{
   logo: null,
   location: null,
   gmail: '',
-  subscription: 0,
+  subscription: '',
   instagram: null,
   facebook: null,
   titkok: null,

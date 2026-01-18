@@ -8,8 +8,14 @@ import { Component } from '@angular/core';
   styleUrl: './subscriptions.component.scss'
 })
 export class SubscriptionsComponent {
- selectedPlan: number = 1;
-
+  selectedPlan: string = '';
+  constructor(){
+    const sub = localStorage.getItem('subPlan')
+    if(sub){
+      this.selectedPlan = sub;
+      console.log(this.selectedPlan)
+    }
+  }
   subscriptionPlans: Subscription[] = [
     {
       SubName: 'მინიმალური',
@@ -48,9 +54,6 @@ export class SubscriptionsComponent {
     // }
   ];
 
-  selectPlan(index: number): void {
-    this.selectedPlan = index;
-  }
 }
 export interface Subscription {
   SubName: string;

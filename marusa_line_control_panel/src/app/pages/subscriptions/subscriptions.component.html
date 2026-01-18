@@ -1,17 +1,14 @@
    <div class="plans-container">
-      <div class="plans-header">
-        <h1>პაკეტები</h1>
-      </div>
-
       <div class="plans-grid">
         <div 
           *ngFor="let plan of subscriptionPlans; let i = index"
           class="plan-card"
-          [class.selected]="selectedPlan === i"
-          (click)="selectPlan(i)"
+          [ngClass]="{'selected-plan':plan.SubName === selectedPlan}"
         >
           <div class="plan-header">
-            <h2>{{ plan.SubName }}</h2>
+            <h2>{{ plan.SubName }}
+                <i class="fas fa-crown" style="color: orange;" *ngIf="plan.SubName =='პრემიუმი'"> </i>
+            </h2>
             <div class="price">
               <span class="currency">₾</span>
               <span class="amount">{{ plan.SubPrice }}</span>
@@ -29,8 +26,6 @@
               </li>
             </ul>
           </div>
-
-
         </div>
       </div>
     </div>

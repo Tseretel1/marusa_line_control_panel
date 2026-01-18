@@ -19,6 +19,7 @@ export class PostService {
   {
 
   }
+  
   private cloudName = 'ds1q7oiea';
   private uploadPreset = 'cloudinary_Upload_Preset';
 
@@ -243,7 +244,7 @@ export interface Shop {
   logo: string | null;
   location: string | null;
   gmail: string;
-  subscription: number;
+  subscription: string;
   instagram: string | null;
   facebook: string | null;
   titkok: string | null;

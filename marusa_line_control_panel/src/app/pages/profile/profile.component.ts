@@ -23,7 +23,7 @@ export class ProfileComponent implements OnInit{
     logo: null,
     location: null,
     gmail: '',
-    subscription: 0,
+    subscription: '',
     instagram: null,
     facebook: null,
     titkok: null,
@@ -56,6 +56,7 @@ export class ProfileComponent implements OnInit{
         if(this.shop.logo){
           this.preview = this.shop.logo;
         }
+        localStorage.setItem('subPlan',this.shop.subscription)
       },
     });
   }
