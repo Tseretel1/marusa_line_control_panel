@@ -26,7 +26,7 @@ export class ProfileComponent implements OnInit{
     subscription: '',
     instagram: null,
     facebook: null,
-    titkok: null,
+    tiktok: null,
     bog: null,
     tbc: null,
     receiver: null,
@@ -156,6 +156,7 @@ uploadPhotoToServer() {
   }
 
   UpdateShop(){
+    console.log(this.shop)
     this.service.UpdateShop(this.shop).subscribe(
       (resp)=>{
         if(resp){
