@@ -156,7 +156,6 @@ uploadPhotoToServer() {
   }
 
   UpdateShop(){
-    console.log(this.shop)
     this.service.UpdateShop(this.shop).subscribe(
       (resp)=>{
         if(resp){

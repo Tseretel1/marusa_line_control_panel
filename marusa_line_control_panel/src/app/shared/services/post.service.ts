@@ -13,8 +13,8 @@ import { DashboardStatsByYear } from '../../pages/dashboard/dashboard.component'
 })
 export class PostService {
 
-   private apiUrl = 'https://localhost:7173/';
- //private apiUrl = 'https://192.168.1.11:7174/';
+   //private apiUrl = 'https://localhost:7173/';
+ private apiUrl = 'https://192.168.1.11:7174/';
   constructor(private http:HttpClient)
   {
 
@@ -116,8 +116,8 @@ export class PostService {
   GetUsersByEmail(search:string): Observable<GetusersDto[]> {
     return this.http.get<GetusersDto[]>(this.apiUrl+`ControlPanel/get-user-by-email?search=${search}`);
   }
-  BlockOrUnblockUser(id:number, ShopId:number): Observable<any> {
-    return this.http.post<any>(this.apiUrl+`ControlPanel/block-user?userId=${id}&shopId=${ShopId}`,{});
+  BlockOrUnblockUser(id:number,): Observable<any> {
+    return this.http.post<any>(this.apiUrl+`ControlPanel/block-user?userId=${id}`,{});
   }
   UpdateProductOrderAllowed(productid:number, allowed:boolean): Observable<any> {
     return this.http.put<any>(this.apiUrl+`ControlPanel/update-product-order-allowed?productID=${productid}&allowed=${allowed}`,{});

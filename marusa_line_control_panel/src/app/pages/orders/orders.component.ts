@@ -22,8 +22,9 @@ export class OrdersComponent implements OnInit{
     const userId = localStorage.getItem('userIdToGetOrders');
     if(userId){
       this.getOrderDto.UserId =Number(userId);
+      this.getOrderDto.IsPaid = null;
+      console.log(userId)
       this.UserIdOrderSearch();
-      localStorage.removeItem('userIdToGetOrders');
       this.getOrderStatuses();
       this.generateMonthsList();
       this.setStats();
@@ -98,15 +99,15 @@ export class OrdersComponent implements OnInit{
           localStorage.removeItem('PageNumber');
           this.getOrderDto.PageNumber = 1;
           this.getOrdersLocalstorage();
-          console.log(resp)
           return;
         }
-          console.log(resp)
+
         this.orders = resp.orders;
         this.totalCount = resp.totalCount;
         this.totalPages = Math.ceil(this.totalCount / this.getOrderDto.PageSize);
         this.lastPage = Math.ceil(this.totalCount / this.getOrderDto.PageSize);
         this.groupOrdersByMonth();
+        localStorage.removeItem('userIdToGetOrders');
       }
     )
   }
@@ -344,6 +345,11 @@ dateBulilder() {
       this.Years.push(currentYear - i);
     }
   }
+
+  orderPrices(order: OrderProduct[]): number {
+    return order.reduce((total, x) => total + x.finalPrice, 0);
+  }
+
 
 }
 export interface orderStatuses{

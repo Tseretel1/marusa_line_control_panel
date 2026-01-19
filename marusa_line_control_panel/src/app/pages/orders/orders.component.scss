@@ -14,25 +14,25 @@ button{
   margin: 0 auto;
 }
 
-/* Filter Section */
 .order-filter-align {
-  margin-bottom: 30px;
   background: #1e293b;
-  padding: 20px;
   border-radius: 12px;
+  padding: 5px 10px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
 .filters {
   display: flex;
   gap: 15px;
+  align-items: center;
 }
 
 .filter {
-  position: relative;
   display: flex;
   align-items: center;
   gap: 10px;
+  height: 100%;
+  text-align: center;
 }
 
 /* Search Input */
@@ -123,25 +123,35 @@ button{
 .orders-grouped{
   display: flex;
   flex-direction: column;
-  gap: 50px;
+}
+.month-header{
+  color: white;
+  font-weight: bolder;
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  margin-top: 30px;
+  border-radius: 10px;
+  padding: 20px;
+  background: #1e293b;
+  .month-stat{
+    padding: 5px 10px;
+    display: flex;
+    align-items: center; 
+    gap: 20px;
+    border-radius: 5px;
+    background-color: rgb(25, 27, 49);
+  }
 }
 .order-card-align {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  padding: 50px 20px;
+  padding: 10px 0px;
   gap: 20px;
   border-radius: 10px;
   position: relative;
-  background-color: rgba(20, 20, 20, 0.425);
-  border: 2px solid #334155;
-  .month-header{
-    position: absolute;
-    top: 10px;
-    left: 20px;
-    color: white;
-    font-weight: bolder;
-    font-size: 20px;
-  }
+  // background-color: rgba(20, 20, 20, 0.425);
+  // border: 2px solid #334155;
 }
 
 /* Order Card Base */
@@ -416,17 +426,8 @@ button{
   .center-container {
     padding: 10px;
   }
-
-  .order-filter-align {
-    padding: 15px;
-  }
-
   .order-card-align {
     grid-template-columns: 1fr;
-  }
-
-  .filters > div[style] {
-    flex-direction: column !important;
   }
 }
 
@@ -450,30 +451,6 @@ button{
             .order-card-align{
                 grid-template-columns: repeat(2,1fr);
                 gap: 5px;
-            }
-            .order-filter-align{
-                width: 100%;
-                display: flex;
-                .filters{
-                    flex-wrap: wrap;
-                }
-            }
-        }
-    }
-    .center-container{
-        .container{
-            .order-filter-align{
-                .filters{
-                    display: grid;
-                    grid-template-columns: repeat(1,1fr);
-                    width: 100%;
-                    gap: 5px;
-                    .filter{
-                        gap: 5px;
-                        padding: 5px;
-                    }
-                    
-                }
             }
         }
     }

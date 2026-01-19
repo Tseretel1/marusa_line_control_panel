@@ -9,7 +9,7 @@
     <div class="date-modal">
         <div class="full-year" (click)="showYearsModal()">
             <p>{{this.currentYear}} წლის ჯამი</p>
-            <div class="year-stats-align">
+            <div class="year-stats-align" style="display: flex; flex-direction: row;">
                 <div class="year-stats"><i class="fas fa-shopping-cart"></i> {{dashboard.yearStat?.orderCount}}</div>
                 <div class="year-stats">{{dashboard.yearStat?.totalAmount}} ₾</div>
             </div>

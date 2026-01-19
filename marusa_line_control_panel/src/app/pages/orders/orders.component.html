@@ -7,38 +7,33 @@
                 <!-- <div style="display: flex; gap: 10px; flex-direction: column;">
                     <div class="filter">
                         <label for=""></label>
-                        <input type="number" class="search-input"[(ngModel)]="UserIdSearch" (change)="UserIdOrderSearch()" placeholder="მომხმარებლის ნომერი">
-                    </div>
-                    <div class="filter">
-                        <label for=""></label>
                         <input type="number" class="search-input"[(ngModel)]="orderSearchNum" (change)="OrderSearch()" placeholder="შეკვეთის ნომერი">
                     </div>
                 </div> -->
            
                 <div class="filter pay-filter topay"  (click)="getPaidOrUnpaidOrders(false)">
                     გადასახდელი
-                    <div class="data-align">
-                        <p><i class="fas fa-shopping-cart"></i> {{dashboardStats.unpaidOrdersCount}}</p>
-                        <p >{{dashboardStats.totalUnPaidAmount}}₾</p>
-                    </div>
                 </div>
                 <div class="filter pay-filter ispayed"  (click)="getPaidOrUnpaidOrders(true)">
-                    
-                    <p style="position: absolute; top: 3px; right:  3px; font-size: 10px; color: rgb(173, 172, 172);">ამ თვეში</p>
                     გადახდილი
-                    <!-- <p style="font-size: 10px; color: rgb(173, 172, 172);">({{today|date:'MMMM' }})</p> -->
-                    <div class="data-align">
-                        <p ><i class="fas fa-shopping-cart"></i> {{dashboardStats.paidOrdersCount}}</p>
-                        <p >{{dashboardStats.totalPaidAmount}}₾</p>
-                    </div>
                 </div>
             </div>
         </div>
         <div class="orders-grouped">
-            <div class="order-card-align" *ngFor="let i of groupedOrders">
-                <div class="month-header">
-                    {{ i.monthLabel }}
-                </div> 
+            <ng-container *ngFor="let i of groupedOrders">
+            <!-- <div class="month-header">
+               <p>სულ</p>
+               <p style="font-size: 18px;"><i class="fas fa-shopping-cart"></i> {{dashboardStats.unpaidOrdersCount}}</p>
+               <p style="font-size: 18px;">{{dashboardStats.totalUnPaidAmount}}₾</p>
+           </div>  -->
+           <div class="month-header">
+               {{ i.monthLabel }}
+              <!-- <div class="month-stat">
+                  <p style="font-size: 16px;"><i class="fas fa-shopping-cart"></i> {{i.orders.length}}</p>
+                  <p style="font-size: 16px;">{{orderPrices(i.orders)}}₾</p>
+              </div> -->
+           </div> 
+            <div class="order-card-align" >
                 <div class="order-card" [ngClass]="{'finished-order': o.statusId ==5}"  *ngFor="let o of i.orders" [routerLink]="AppRoutes.orderDetails + o.orderId">
                     <div class="pay-align">
                         <span class="pay-span" [ngClass]="{'payed-span': o.isPaid,}"> No.{{o.orderId}}</span>
@@ -68,6 +63,7 @@
                     </div>
                 </div>
             </div>
+            </ng-container>
         </div>
     </div>
 </div>

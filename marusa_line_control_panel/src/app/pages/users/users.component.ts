@@ -56,7 +56,7 @@ export class UsersComponent implements OnInit{
   }
 
   blockOrUnblockUser(id: number) {
-    this.service.BlockOrUnblockUser(id, 1).subscribe((resp) => {
+    this.service.BlockOrUnblockUser(id).subscribe((resp) => {
       if (resp != null) {
         const user = this.users.find(x => x.id === id);
         if (user) {
