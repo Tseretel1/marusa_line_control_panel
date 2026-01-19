@@ -277,7 +277,7 @@ private submitPost() {
 export interface InsertPost {
   Id?:number;
   title: string;
-  productTypeId: number;
+  productTypeId: number|null;
   description: string;
   price: number;
   discountedPrice: number;

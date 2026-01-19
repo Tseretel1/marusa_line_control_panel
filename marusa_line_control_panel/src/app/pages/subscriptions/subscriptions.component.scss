@@ -49,6 +49,11 @@
       border: 2px solid #667eea;
       box-shadow: 0 8px 32px rgba(102, 126, 234, 0.3);
     }
+    // .premium{
+    //   background: linear-gradient(135deg, rgba(102, 234, 109, 0.15) 0%, rgba(53, 138, 14, 0.63) 100%);
+    //      border: 2px solid green;
+    //   box-shadow: 0 8px 32px rgba(0, 128, 0, 0.308);
+    //  }
     .plan-card.selected::before {
       content: 'ACTIVE';
       position: absolute;

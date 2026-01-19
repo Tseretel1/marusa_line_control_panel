@@ -38,7 +38,7 @@ export class AddPostComponent implements OnInit{
     )
   }
   title: string = '';
-  productTypeId: number = 0;
+  productTypeId: number|null = null;
   price!: number;
   discountedPrice!: number;
   description: string = '';
@@ -49,15 +49,19 @@ export class AddPostComponent implements OnInit{
 
 
   sendApplicationtoBackend() {
-      const validations = [
-        { condition: !!this.title, message: 'შეიყვანეთ დასახელება' },
-        { condition: !!this.productTypeId && this.productTypeId!=0, message: 'აირჩიეთ პროდუქტის ტიპი' },
-        { condition: this.price > 0, message: 'ფასი უნდა აღემატებოდეს ნულს' },
-        { condition: this.uploadPhotos.length > 0, message: 'ატვირთეთ მინიმუმ 1 ფოტო' },
-      ];
+    var validations = [
+      { condition: !!this.title, message: 'შეიყვანეთ დასახელება' },
+      { condition: this.price > 0, message: 'ფასი უნდა აღემატებოდეს ნულს' },
+      { condition: this.uploadPhotos.length > 0, message: 'ატვირთეთ მინიმუმ 1 ფოტო' },
+    ];
     
-      const failed = validations.find(v => !v.condition);
-    
+    if(this.productTypesList){
+      const validation={
+         condition: !!this.productTypeId && this.productTypeId!=0, message: 'აირჩიეთ კატეგორია' ,
+      }
+      validations.push(validation);
+    }
+    const failed = validations.find(v => !v.condition);
       if (failed) {
         Swal.fire({
           icon: 'error',
@@ -75,7 +79,7 @@ export class AddPostComponent implements OnInit{
         next: (results) => {
           const InsertPost: InsertPost = {
             title: this.title,
-            productTypeId:Number(this.productTypeId),
+            productTypeId:this.productTypeId,
             price: this.price,
             discountedPrice: this.discountedPrice,
             description: this.description,
@@ -184,7 +188,7 @@ removePhoto(id: number) {
 
 export interface InsertPost {
   title: string;
-  productTypeId: number;
+  productTypeId: number|null;
   description: string;
   price: number;
   discountedPrice: number;

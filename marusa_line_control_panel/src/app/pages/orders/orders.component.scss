@@ -4,7 +4,6 @@ button{
 /* Main Container */
 .center-container {
   width: 100%;
-  min-height: 100vh;
   background: #0f172a;
   padding: 20px 0px;
 }
@@ -33,6 +32,7 @@ button{
   gap: 10px;
   height: 100%;
   text-align: center;
+  color: white;
 }
 
 /* Search Input */
@@ -68,33 +68,18 @@ button{
   transition: all 0.3s ease;
   font-weight: 600;
   font-size: 15px;
-  border: 2px solid transparent;
+  border: 1px solid white;
 }
 
-.pay-filter.topay {
-  background: linear-gradient(135deg, #312e2e 0%, #3f2020 100%);
+.paid-filter{
+  border: 2px solid green;
+  background-color: green;
   color: white;
-  border-color: #f9741688;
 }
-
-.pay-filter.topay:hover {
-  background: linear-gradient(135deg, #3f2020 0%, #4a1a1a 100%);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+.not-paid{
+  border: 2px solid orange;
+  background-color: orange;
 }
-
-.pay-filter.ispayed {
-  background: linear-gradient(135deg, #1e332e 0%, #1a3f2a 100%);
-  color: white;
-  border-color: #166534;
-}
-
-.pay-filter.ispayed:hover {
-  background: linear-gradient(135deg, #1a3f2a 0%, #165a30 100%);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(34, 197, 94, 0.3);
-}
-
 .data-align {
   display: flex;
   justify-content: space-between;

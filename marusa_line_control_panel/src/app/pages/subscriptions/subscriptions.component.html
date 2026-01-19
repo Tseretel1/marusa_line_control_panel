@@ -3,7 +3,7 @@
         <div 
           *ngFor="let plan of subscriptionPlans; let i = index"
           class="plan-card"
-          [ngClass]="{'selected-plan':plan.SubName === selectedPlan}"
+          [ngClass]="{'selected-plan':plan.SubName === selectedPlan,'premium':plan.SubName === 'პრემიუმი'&& plan.SubName== selectedPlan}"
         >
           <div class="plan-header">
             <h2>{{ plan.SubName }}

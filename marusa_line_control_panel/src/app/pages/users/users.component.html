@@ -73,6 +73,12 @@
     </div>
 </div>
 
+<div style="width: 100%;padding: 100px; display: flex; justify-content: center; align-items: center;" *ngIf="users.length<=0">
+    <div style="display: flex; flex-direction: column; align-items: center; gap: 50px;">
+        <i class="far fa-user" style="color: white; scale: 5;"></i>
+        <b style="color: white; text-wrap: nowrap;">No followers Yet!</b>
+    </div>
+</div>
 
 <div class="center-pagenation" *ngIf="users.length>0">
      <div class="pageination-align">

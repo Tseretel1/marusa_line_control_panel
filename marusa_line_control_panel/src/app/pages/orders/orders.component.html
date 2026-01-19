@@ -11,15 +11,15 @@
                     </div>
                 </div> -->
            
-                <div class="filter pay-filter topay"  (click)="getPaidOrUnpaidOrders(false)">
+                <div class="filter pay-filter " [ngClass]="{'not-paid':selectedFilter ==0}" (click)="getPaidOrUnpaidOrders(false)">
                     გადასახდელი
                 </div>
-                <div class="filter pay-filter ispayed"  (click)="getPaidOrUnpaidOrders(true)">
+                <div class="filter pay-filter " [ngClass]="{'paid-filter':selectedFilter ==1}" (click)="getPaidOrUnpaidOrders(true)">
                     გადახდილი
                 </div>
             </div>
         </div>
-        <div class="orders-grouped">
+        <div class="orders-grouped" *ngIf="groupedOrders.length>0">
             <ng-container *ngFor="let i of groupedOrders">
             <!-- <div class="month-header">
                <p>სულ</p>
@@ -67,9 +67,14 @@
         </div>
     </div>
 </div>
+<div style="width: 100%;padding: 200px; display: flex; justify-content: center; align-items: center;" *ngIf="groupedOrders.length<=0">
+    <div style="display: flex; flex-direction: column; align-items: center; gap: 50px;">
+        <i class="fas fa-shopping-cart" style="color: white; scale: 5;"></i>
+        <b style="color: white; text-wrap: nowrap;">No orders Yet!</b>
+    </div>
+</div>
 
-
-<div class="center-pagenation">
+<div class="center-pagenation" *ngIf="groupedOrders.length>0">
      <div class="pageination-align">
     <div class="buttons-align">
        <button class="next-button" type="button" (click)="changePage(selectedPage - 1)">

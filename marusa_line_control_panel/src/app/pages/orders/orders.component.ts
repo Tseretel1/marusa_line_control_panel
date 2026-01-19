@@ -92,16 +92,15 @@ export class OrdersComponent implements OnInit{
     this.service.getUserOrders(this.getOrderDto).subscribe(
       (resp)=>{
         if (!resp) {
-          this.orders = [];
           this.totalCount = 0;
           this.totalPages = 0;
           this.lastPage = 0;
           localStorage.removeItem('PageNumber');
           this.getOrderDto.PageNumber = 1;
-          this.getOrdersLocalstorage();
+          this.orders = [];
+          this.groupedOrders = [];
           return;
         }
-
         this.orders = resp.orders;
         this.totalCount = resp.totalCount;
         this.totalPages = Math.ceil(this.totalCount / this.getOrderDto.PageSize);
@@ -148,6 +147,7 @@ groupOrdersByMonth() {
 }
 
 
+  selectedFilter:number = 1;
   getOrdersLocalstorage(){
     const ispaid = localStorage.getItem('orderIdPaid');
     if(ispaid =='true'){
@@ -163,12 +163,14 @@ groupOrdersByMonth() {
     this.getOrderDto.OrderId = null;
     this.getOrderDto.UserId = null
     if(IsPaid){
+      this.selectedFilter = 1;
       localStorage.setItem('orderIdPaid', 'true');
       this.getOrderDto.IsPaid = true;
       this.getOrders();
       return
     }
     else{
+      this.selectedFilter = 0;
       localStorage.setItem('orderIdPaid', 'false');
       this.getOrderDto.IsPaid = false;
       this.getOrders();

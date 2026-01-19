@@ -194,6 +194,7 @@
     .btn-save {
       background: #667eea;
       color: #fff;
+      text-shadow: 0px 0px 1px black;
     }
 
     .btn-save:hover {
@@ -201,9 +202,13 @@
       transform: translateY(-2px);
       box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
     }
+    .premium{
+      // background: #00f2ea;
+        background: #1a9a25;
+    }
     .btn-no-sub{
-      border:1px solid red;
-      background-color: transparent;
+      border:1px solid black;
+      background-color: black;
     }
     .btn-no-sub:hover{
       background-color: transparent;

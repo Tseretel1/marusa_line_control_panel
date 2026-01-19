@@ -25,9 +25,9 @@
 
       <div class="profile-content">
         <div class="form-group">
-             <button class="btn-save" [routerLink]="AppRoutes.subscriptionPlans" *ngIf="shop.subscription!=''">
+             <button class="btn-save " [ngClass]="{'premium': shop.subscription =='პრემიუმი'}" [routerLink]="AppRoutes.subscriptionPlans" *ngIf="shop.subscription!=''">
                {{shop.subscription}}
-                <i class="fas fa-crown" style="color: orange;" *ngIf="shop.subscription=='პრემიუმი'"> </i>
+                <i class="fas fa-crown" style="color: yellow; text-shadow: 0px 0px 1px black;" *ngIf="shop.subscription=='პრემიუმი'"> </i>
              </button>
             <button class="btn-save btn-no-sub" [routerLink]="AppRoutes.subscriptionPlans" *ngIf="shop.subscription==''">
               პაკეტი
