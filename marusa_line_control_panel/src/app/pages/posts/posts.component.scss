@@ -4,7 +4,6 @@
     justify-content: center;
     flex-direction: column;
     align-items: center;
-    padding: 20px 0;
     .filters-back{
         width: 90%; 
         display: flex;
@@ -112,11 +111,9 @@
         width: 90%;
         display: flex;
         gap: 12px;
-        padding: 16px 0;
-        flex-wrap: wrap;
+        padding: 6px 0;
         align-items: center;
-        
-        
+        overflow-x: scroll;
     }
     
     .filters-align::-webkit-scrollbar {

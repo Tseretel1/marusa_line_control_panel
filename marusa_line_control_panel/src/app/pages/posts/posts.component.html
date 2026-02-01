@@ -14,7 +14,7 @@
         <div style="width: 100%; display: flex; justify-content: center;">
             <p style="color: white;">კატეგორიები</p>
         </div>
-        <div class="filters-align" >
+        <div class="filters-align" style="width: 100%;">
              <div class="filters edit-filter" [attr.data-id]="0" (click)="toggleTypemnagement(true)">რედაქტირება <i class="fas fa-edit"></i></div>
              <div class="filters" [ngClass]="{'active-filter': activeFilterNum == 0}" (click)="GetByCategorie(null)"   [attr.data-id]="0">ყველა</div>
             <div class="filters" [ngClass]="{'active-filter': activeFilterNum == i.id}"  *ngFor="let i of productTypesList" (click)="GetByCategorie(i.id)" >

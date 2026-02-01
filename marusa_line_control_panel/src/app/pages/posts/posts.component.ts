@@ -91,6 +91,8 @@ export class PostsComponent implements OnInit{
     else{
       this.getPostsDto.ProductTypeId= id;
       this.activeFilterNum = id;
+      this.getPostsDto.PageNumber=1;
+      this.selectedPage = 1;
     }
     this.getPosts();
   }

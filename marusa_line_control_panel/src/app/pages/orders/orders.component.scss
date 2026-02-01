@@ -356,19 +356,20 @@ button{
   left: 0;
   right: 0;
   background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, transparent 100%);
-  padding: 12px;
+  padding: 5px;
   color: white;
 }
 
 .order-title-absolute p {
-  margin: 0;
-  font-size: 14px;
-  font-weight: 600;
-  line-height: 1.4;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
+    background-color: rgba(0, 0, 0, 0.418); 
+    border-radius: 5px; 
+    padding: 2px 10px; 
+    backdrop-filter: blur(10px);
+    text-wrap: nowrap;
+    overflow-x: scroll;
+}
+.order-title-absolute p::-webkit-scrollbar{
+  display: none;
 }
 
 /* Animations */
