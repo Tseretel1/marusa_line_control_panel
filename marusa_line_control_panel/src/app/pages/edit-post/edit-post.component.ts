@@ -109,7 +109,23 @@ export class EditPostComponent {
     return forkJoin(uploads);
   }
 
-
+uploadImages(){
+  const newFilesExist = this.uploadPhotos.some(p => p.file);
+  if (newFilesExist) {
+    this.InsertPhotos = [];
+    this.uploadAllImages().subscribe({
+      next: () => {
+       this.submitPost();
+      },
+      error: (err) => {
+        console.error('Upload failed:', err);
+      }
+    });
+  } 
+}
+ photosChanged():boolean{
+  return this.uploadPhotos.some(p => p.file);
+}
 sendApplicationtoBackend() {
   const validations = [
     { condition: !!this.title, message: 'შეიყვანეთ დასახელება' },
@@ -132,21 +148,7 @@ sendApplicationtoBackend() {
     });
     return;
   }
-  const newFilesExist = this.uploadPhotos.some(p => p.file);
-
-  if (newFilesExist) {
-    this.InsertPhotos = [];
-    this.uploadAllImages().subscribe({
-      next: () => {
-        this.submitPost();
-      },
-      error: (err) => {
-        console.error('Upload failed:', err);
-      }
-    });
-  } else {
-    this.submitPost();
-  }
+  this.submitPost();
 }
 private submitPost() {
   const photosToSend = this.InsertPhotos.length

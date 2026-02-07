@@ -22,7 +22,24 @@
             width: 100%;
             gap: 16px;
             height: fit-content;
-            
+            padding: 0px 0px 30px 0px;
+            position: relative;
+            .upload-photos-align{
+                position:absolute;
+                bottom: -20px;
+                left: 50%;
+                transform: translateX(-50%);
+                .save-photos-button{
+                    width: 250px;
+                    padding: 5px 20px;
+                    background-color: green;
+                    border: none;
+                    border-radius: 5px;
+                    color: white;
+                    cursor: pointer;
+                    font-weight: bolder;
+                }
+            }
             .square-container {
                 width: 100%;
                 aspect-ratio: 1;

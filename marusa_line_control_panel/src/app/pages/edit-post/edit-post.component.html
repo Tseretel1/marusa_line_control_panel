@@ -13,6 +13,7 @@
                 <i class="fas fa-plus-square"></i>
             </div>
             <input id="photoinput" type="file" (change)="onFileChange($event)" accept="image/*" hidden>
+            <div class="upload-photos-align" *ngIf="photosChanged()"><button class="save-photos-button" (click)="uploadImages()">შენახვა</button></div>
         </div>
         <div class="form-align">
             <div class="remove-revert-align">
