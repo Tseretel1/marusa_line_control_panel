@@ -300,14 +300,14 @@ button{
 }
 .order p {
   margin: 0;
-  font-weight: 500;
+  font-weight: bolder;
 }
 
 .order-count {
   display: flex;
   align-items: center;
   gap: 6px;
-  font-weight: 600;
+  font-weight: bolder;
   color: white;
   font-size: 14px;
   background-color: rgb(39, 38, 38);
@@ -318,7 +318,7 @@ button{
   right: -5px;
   transform: rotate(25deg);
   z-index: 2;
-  border: 1px solid grey;
+  box-shadow: 0px 0px 2px whitesmoke;
 }
 
 .order-count i {

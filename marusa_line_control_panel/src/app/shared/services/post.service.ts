@@ -247,7 +247,7 @@ export interface Shop {
   subscription: string;
   instagram: string | null;
   facebook: string | null;
-  tiktok: string | null;
+  titkok: string | null;
   bog: string|null,
   tbc: string|null,
   receiver: string|null,

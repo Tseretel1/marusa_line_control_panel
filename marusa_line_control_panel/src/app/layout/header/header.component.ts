@@ -35,7 +35,7 @@ export class HeaderComponent implements OnInit{
   subscription: '',
   instagram: null,
   facebook: null,
-  tiktok: null,
+  titkok: null,
   bog:null,
   tbc:null,
   receiver:null,
