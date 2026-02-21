@@ -1,21 +1,50 @@
 .center-component {
     width: 100%;
     display: flex;
+    flex-direction: column;
     justify-content: center;
+    align-items: center;
     color: #e8e8e8;
     padding: 40px 0;
-    
-    .component {
+    gap: 20px;
+    .remove-revert-align{
         width: 90%;
+        display: flex;
+        justify-content: flex-start;
+        .remove-comp{
+            background-color: #1a1a1a;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            padding: 20px;
+            border-radius: 10px;
+            .btn{
+                color: white;
+                border: none;
+                padding: 10px 20px;
+                border-radius: 5px;
+                cursor: pointer;
+                width: 200px;
+            }
+            .hide{
+                background-color: red;
+            }
+            .revert{
+                background-color: green;
+            }
+        }
+    }
+    .component {
+        width: 100%;
         max-width: 1600px;
-        padding: 40px;
+        padding: 10px;
         background-color: #1a1a1a;
         border: 1px solid #2a2a2a;
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 40px;
-        border-radius: 4px;
-        
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        border-radius: 10px;
+        position: relative;
         .photo-align {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -120,21 +149,18 @@
             }
         }
     }
-    
     .form-align {
         width: 100%;
         display: flex;
         flex-direction: column;
         background-color: #0f0f0f;
         border: 1px solid #2a2a2a;
-        padding: 32px 24px;
-        gap: 32px;
-        position: relative;        
-        .hide{
-            background-color: red;
-        }
-        .revert{
-            background-color: green;
+        padding:10px;
+        position: relative;
+        gap: 10px; 
+        border-radius: 10px;       
+        .insert{
+            width: 100%;
         }
         .input-group {
             display: grid;
@@ -236,40 +262,32 @@
                 }
             }
         }
-        .price-group-align{
-            display: grid;
-            grid-template-columns: repeat(1,1fr);
-            position: relative;
-            gap: 10px;        
-            .price-group{
-                width: 100%;
-            } 
-             .discount-top {
-                padding: 5px 10px;
-                display: flex;
-                align-items: center;
-                gap: 4px;
-                font-size: 14px;
-                font-weight: 600;
-                letter-spacing: 0.5px;
-                border: 1px solid;
-                p {
-                    margin: 0;
-                }
-            }
-            
-            .green-background {
-                background-color: #1a4d2e;
-                border-color: #2d5f3f;
-                color: #4ade80;
-            }
-            
-            .red-background {
-                background-color: #4d1a1a;
-                border-color: #5f2d2d;
-                color: #f87171;
-            }
-        }
+        .discount-top {
+           padding: 5px 10px;
+           display: flex;
+           align-items: center;
+           gap: 4px;
+           font-size: 14px;
+           font-weight: 600;
+           letter-spacing: 0.5px;
+           border: 1px solid;
+           p {
+               margin: 0;
+           }
+       }
+       
+       .green-background {
+           background-color: #1a4d2e;
+           border-color: #2d5f3f;
+           color: #4ade80;
+       }
+       
+       .red-background {
+           background-color: #4d1a1a;
+           border-color: #5f2d2d;
+           color: #f87171;
+       }
+
         
         .description-group {
             width: 100%;
@@ -288,10 +306,10 @@
             
             .description {
                 width: 100%;
-                height: 200px;
-                resize: vertical;
-                min-height: 80px;
+                height: auto;
+                min-height: 100px;
                 max-height: 300px;
+                resize: vertical;
                 padding: 12px 16px;
                 outline: none;
                 border: 1px solid #2a2a2a;
@@ -393,8 +411,6 @@
 @media screen and (max-width: 1000px) {
     .center-component {
         .component {
-            padding: 32px 24px;
-            
             .photo-align {
                 grid-template-columns: repeat(2, 1fr);
                 gap: 12px;
@@ -415,10 +431,8 @@
 
 @media screen and (max-width: 600px) {
     .center-component {
-        padding: 20px 0;
-        
         .component {
-            padding: 24px 16px;
+            padding: 60px 16px;
             
             .photo-align {
                 gap: 10px;
@@ -436,12 +450,6 @@
                 .discount-top {
                     font-size: 13px;
                 }
-                
-                .description-group {
-                    .description {
-                    }
-                }
-                
                 button {
                     width: 100%;
                 }

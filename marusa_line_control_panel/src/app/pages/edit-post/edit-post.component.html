@@ -1,76 +1,91 @@
 <div class="center-component">
-    <div class="component">
-        <div class="photo-align" > 
-            <div *ngFor="let p of uploadPhotos; let i = index" class="ng-container" data-aos="fade-in">
-                <button class="remove-photo"  (click)="removePhoto(p.id)">
-                    <i class="fas fa-times"></i>
-                </button>
-                <div class="photo-container">
-                    <img [src]="p.preview" class="photo">
-                </div>
-            </div>
-            <div class="square-container"  (click)="triggerFileInput()">
-                <i class="fas fa-plus-square"></i>
-            </div>
-            <input id="photoinput" type="file" (change)="onFileChange($event)" accept="image/*" hidden>
-            <div class="upload-photos-align" *ngIf="photosChanged()"><button class="save-photos-button" (click)="uploadImages()">შენახვა</button></div>
-        </div>
-        <div class="form-align">
-            <div class="remove-revert-align">
-              <button class="revert btn" *ngIf="posts.dateDeleted==null" (click)="removePost()">აღდგენილი</button>
-              <button class="hide btn" *ngIf="posts.dateDeleted" (click)="revertPost()">დამალული</button>
-            </div>
-            <div class="input-group">
-                <div class="form-control-group">
-                    <label class="form-control-label">დასახელება</label>
-                    <input type="text" class="form-control" maxlength="50" placeholder="მაგ: ჭადრაკი" [(ngModel)]="title">
-                </div>
-                <div class="form-control-group">
-                    <label class="form-control-label">კატეგორია</label>
-                    <select name=""  class="form-control select-control" id=""  [(ngModel)]="productTypeId">
-                        <option value="0" disabled></option>
-                        <option *ngFor="let i of productTypesList" [value]="i.id">{{i.productType}}</option>
-                    </select>
-                </div>
-                <div  class="price-group-align">
-                    <div class="form-control-group price-group"  >
-                        <label class="form-control-label">ფასი</label>
-                        <input type="number" class="form-control" placeholder="₾" (input)="discountAmountChangeDetection()" [(ngModel)]="price">
-                    </div>
-                    <div class="form-control-group price-group">
-                        <div style="display: flex; gap: 5px;">   
-                            ფასდაკლებული ფასი
-                            <div class="discount-top" *ngIf="discountedPrice"[ngClass]="{'green-background':discountedPercentage>0,'red-background':discountedPercentage<0}">
-                                <p *ngIf="discountedPercentage>0">-</p>
-                                {{discountedPercentage}}%
-                            </div> 
-                        </div>
-                        <input type="number" class="form-control" placeholder="₾" (input)="discountAmountChangeDetection()" [(ngModel)]="discountedPrice">
-                    </div>
-                </div>
-                <div class="form-control-group">
-                    <label class="form-control-label">რაოდენობა მარაგში</label>
-                    <input type="number" class="form-control" placeholder="" [(ngModel)]="quantity">
-                </div>
-                <div class="form-control-group">
-                    <label class="form-control-label">შეკვეთა მარაგის ამოწურვის შემდეგ</label>
-                    <div class="order-allowed-align" *ngIf="!posts.orderNotAllowed" (click)="orderAllowedToggle(true)"> 
-                        <label for="orderallowes">დაშვებული</label>
-                    </div>
-                    <div class="order-allowed-align order-not-allowed" *ngIf="posts.orderNotAllowed" (click)="orderAllowedToggle(false)"> 
-                        <label for="orderallowes">შეზღუდული</label>
-                    </div>
-                </div>
-            </div>
-            <div class="description-group">
-                <label class="form-control-label">პროდუქტის აღწერა</label>
-                <textarea name="" id="" class="description" [(ngModel)]="description"></textarea>
-            </div>
-            <button class="insert" (click)="sendApplicationtoBackend()">
-                რედაქტირება 
-            </button>
+    <div class="remove-revert-align">
+        <div class="remove-comp">
+            <b>პოსტის ხილვადობა </b>
+           <button class="revert btn" *ngIf="posts.dateDeleted==null" (click)="removePost()"><i class="fas fa-eye"></i> აღდგენილი</button>
+           <button class="hide btn" *ngIf="posts.dateDeleted" (click)="revertPost()"><i class="fas fa-eye-slash"></i> დამალული</button>
         </div>
     </div>
+    <div style="width: 90%; display: flex ; gap:20px;">
+        <div class="component">
+            <b style="color: white;">ფოტოები</b>
+            <div class="photo-align" > 
+                <div *ngFor="let p of uploadPhotos; let i = index" class="ng-container" data-aos="fade-in">
+                    <button class="remove-photo"  (click)="removePhoto(p.id)">
+                        <i class="fas fa-times"></i>
+                    </button>
+                    <div class="photo-container">
+                        <img [src]="p.preview" class="photo">
+                    </div>
+                </div>
+                <div class="square-container"  (click)="triggerFileInput()">
+                    <i class="fas fa-plus-square"></i>
+                </div>
+                <input id="photoinput" type="file" (change)="onFileChange($event)" accept="image/*" hidden>
+                <div class="upload-photos-align" *ngIf="photosChanged()"><button class="save-photos-button" (click)="uploadImages()">შენახვა</button></div>
+            </div>
+        </div>
+        <div class="component">
+            <b style="color: white;">პოსტის დეტალები</b>
+            <div class="form-align">
+                <div class="input-group">
+                    <div class="form-control-group">
+                        <label class="form-control-label">დასახელება</label>
+                        <input type="text" class="form-control" maxlength="50" placeholder="მაგ: ჭადრაკი" [(ngModel)]="title">
+                    </div>
+                    <div class="form-control-group">
+                        <label class="form-control-label">კატეგორია</label>
+                        <select name=""  class="form-control select-control" id=""  [(ngModel)]="productTypeId">
+                            <option value="0" disabled></option>
+                            <option *ngFor="let i of productTypesList" [value]="i.id">{{i.productType}}</option>
+                        </select>
+                    </div>
+                        <div class="form-control-group price-group"  >
+                            <label class="form-control-label">ფასი</label>
+                            <input type="number" class="form-control" placeholder="₾" (input)="discountAmountChangeDetection()" [(ngModel)]="price">
+                        </div>
+                        <div class="form-control-group price-group">
+                            <div style="display: flex; gap: 5px;">   
+                                ფასდაკლებული ფასი
+                                <div class="discount-top" *ngIf="discountedPrice"[ngClass]="{'green-background':discountedPercentage>0,'red-background':discountedPercentage<0}">
+                                    <p *ngIf="discountedPercentage>0">-</p>
+                                    {{discountedPercentage}}%
+                                </div> 
+                            </div>
+                            <input type="number" class="form-control" placeholder="₾" (input)="discountAmountChangeDetection()" [(ngModel)]="discountedPrice">
+                        </div>
+                </div>
+                <div class="description-group">
+                    <label class="form-control-label">პროდუქტის აღწერა</label>
+                    <textarea name="" id="" class="description" [(ngModel)]="description"></textarea>
+                </div>
+                <button class="insert" (click)="sendApplicationtoBackend()">
+                    რედაქტირება 
+                </button>
+            </div>
+            <b style="color: white;">მარაგის კონტროლი</b>
+            <div class="form-align">
+                <div class="input-group">
+                         <div class="input-group">
+                    <div class="form-control-group">
+                        <label class="form-control-label">რაოდენობა მარაგში</label>
+                        <input type="number" class="form-control" placeholder="" [(ngModel)]="quantity">
+                    </div>
+                    <div class="form-control-group">
+                        <label class="form-control-label">შეკვეთა მარაგის ამოწურვის შემდეგ</label>
+                        <div class="order-allowed-align" *ngIf="!posts.orderNotAllowed" (click)="orderAllowedToggle(true)"> 
+                            <label for="orderallowes">დაშვებული</label>
+                        </div>
+                        <div class="order-allowed-align order-not-allowed" *ngIf="posts.orderNotAllowed" (click)="orderAllowedToggle(false)"> 
+                            <label for="orderallowes">შეზღუდული</label>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div> 
 
 

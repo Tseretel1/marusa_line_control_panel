@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, ɵEmptyOutletComponent } from '@angular/router';
 import * as AOS from 'aos';
 import { forkJoin, Observable, tap } from 'rxjs';
 import {
@@ -14,7 +14,7 @@ import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-edit-post',
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, ɵEmptyOutletComponent],
   templateUrl: './edit-post.component.html',
   styleUrl: './edit-post.component.scss',
 })
