@@ -5,7 +5,25 @@
            <button class="revert btn" *ngIf="posts.dateDeleted==null" (click)="removePost()"><i class="fas fa-eye"></i> აღდგენილი</button>
            <button class="hide btn" *ngIf="posts.dateDeleted" (click)="revertPost()"><i class="fas fa-eye-slash"></i> დამალული</button>
         </div>
+        <div class="form-align" >
+            <b>მარაგი</b>
+            <div class="input-group" style="grid-template-columns: repeat(1,1fr);">
+                <div class="form-control-group">
+                    <input type="number" class="form-control" [(ngModel)]="quantity">
+                </div>
+            </div>
+        </div>
+           <div class="form-align" >
+            <b>შეკვეთა მარაგის <br> ამოწურვის შემდეგ</b>
+            <div class="input-group" style="grid-template-columns: repeat(1,1fr);">
+                <div class="form-control-group">
+                    <button *ngIf="posts.orderNotAllowed" (click)="orderAllowedToggle(true)">✅️</button>
+                    <button *ngIf="!posts.orderNotAllowed" (click)="orderAllowedToggle(false)">❌</button>
+                </div>
+            </div>
+        </div>
     </div>
+    
     <div style="width: 90%; display: flex ; gap:20px;">
         <div class="component">
             <b style="color: white;">ფოტოები</b>
@@ -63,29 +81,8 @@
                     რედაქტირება 
                 </button>
             </div>
-            <b style="color: white;">მარაგის კონტროლი</b>
-            <div class="form-align">
-                <div class="input-group">
-                         <div class="input-group">
-                    <div class="form-control-group">
-                        <label class="form-control-label">რაოდენობა მარაგში</label>
-                        <input type="number" class="form-control" placeholder="" [(ngModel)]="quantity">
-                    </div>
-                    <div class="form-control-group">
-                        <label class="form-control-label">შეკვეთა მარაგის ამოწურვის შემდეგ</label>
-                        <div class="order-allowed-align" *ngIf="!posts.orderNotAllowed" (click)="orderAllowedToggle(true)"> 
-                            <label for="orderallowes">დაშვებული</label>
-                        </div>
-                        <div class="order-allowed-align order-not-allowed" *ngIf="posts.orderNotAllowed" (click)="orderAllowedToggle(false)"> 
-                            <label for="orderallowes">შეზღუდული</label>
-                        </div>
-                    </div>
-                </div>
-                </div>
-            </div>
         </div>
     </div>
-
 </div> 
 
 
