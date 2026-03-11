@@ -94,6 +94,7 @@ $transition:  .2s cubic-bezier(.4,0,.2,1);
   font-weight: 700;
   letter-spacing: .5px;
   color: $text-primary;
+    
 }
 
 .od-date {
@@ -110,27 +111,26 @@ $transition:  .2s cubic-bezier(.4,0,.2,1);
   align-items: center;
   gap: 7px;
   padding: 5px 13px;
-  border-radius: 999px;
+  border-radius: 10px;
   font-size: 12px;
   font-weight: 600;
   letter-spacing: .4px;
   text-transform: uppercase;
-
   &__dot {
     width: 7px;
     height: 7px;
     border-radius: 50%;
     animation: pulse 2s infinite;
   }
-
+  
   &--paid {
-    background: $paid-bg;
+    background-color: green;
     color: $paid-color;
     border: 1px solid rgba($paid-color, .2);
     .od-badge__dot { background: $paid-color; }
   }
   &--unpaid {
-    background: $unpaid-bg;
+    background-color: #e18000;
     color: $unpaid-color;
     border: 1px solid rgba($unpaid-color, .2);
     .od-badge__dot { background: $unpaid-color; }
@@ -262,33 +262,36 @@ $transition:  .2s cubic-bezier(.4,0,.2,1);
     font-weight: 500;
     text-transform: uppercase;
     letter-spacing: .6px;
-    color: $text-muted;
+    color: white;
     flex: 1;
   }
 
   &__value {
     font-size: 15px;
     font-weight: 600;
-    color: $text-primary;
+    color: white;
 
     &--price { font-size: 22px; font-weight: 700; }
   }
 
   &__arrow {
-    color: $text-muted;
+    color: white;
     flex-shrink: 0;
     transition: transform $transition;
   }
   &:hover &__arrow { transform: translateX(3px); }
 
   &--price {
-    background: var(--price-bg, $unpaid-bg);
+    background-color: green;
     border-color: var(--price-border, rgba($unpaid-color, .3));
-    .od-financial-item__value--price { color: var(--price-color, $unpaid-color); }
+    .od-financial-item__value--price { color: white}
     &:hover { border-color: var(--price-border-hover, rgba($unpaid-color, .5)); }
   }
 }
-
+.od-financial-unpaid{
+  background-color: #e18000;
+  border: 1px solid #e18000;;
+}
 // ── Section title ────────────────────────────
 .od-section-title {
   font-size: 11px;
