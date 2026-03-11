@@ -1,831 +1,582 @@
-.fa-check{
-    color:green;
+// ─────────────────────────────────────────────
+//  ORDER DETAILS  –  Luxury Dark Theme
+// ─────────────────────────────────────────────
+
+// ── Tokens ──────────────────────────────────
+$bg:          #0a0b0e;
+$surface:     #111318;
+$surface-2:   #181b22;
+$border:      rgba(255,255,255,.07);
+$border-hover:rgba(255,255,255,.15);
+$text-primary:#e8eaf0;
+$text-muted:  #b4b7be;
+$accent:      #a78bfa;        // violet
+$accent-dim:  rgba(167,139,250,.12);
+$paid-color:  #4ade80;
+$paid-bg:     rgba(74,222,128,.1);
+$unpaid-color:#fb923c;
+$unpaid-bg:   rgba(255, 115, 0, 0.1);
+$radius:      14px;
+$radius-sm:   8px;
+$transition:  .2s cubic-bezier(.4,0,.2,1);
+
+// ── Reset ────────────────────────────────────
+*,*::before,*::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+// ── Page shell ──────────────────────────────
+.od-page {
+  min-height: 100vh;
+  padding: 32px 16px 80px;
+  position: relative;
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  color: $text-primary;
 }
 
-.primary-text{
-    font-size: 20px;
-}
-*{
-    color: white;
-}
-.center-component{
-    width: 100%;
-    display: flex;
-    grid-template-columns: repeat(2,1fr);
-    padding: 30px 0px;
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
-    .body-align{
-        display: grid;
-        justify-content: center;
-        grid-template-columns: repeat(1,1fr);
-        width: 50%;
-        position: relative;
-        gap: 10px;
-        max-width: 900px;
-        .component{
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            .user-container{
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                width: 50px;
-                height: 50px;
-                overflow: hidden;
-                border-radius: 50%;
-                border: 1px solid white;
-                .user-img{
-                    width: 100%;
-                    height: 100%;
-                    object-fit: cover;
-                }
-            }
-            .header-grid{
-                width: 100%;
-                display: grid;
-                grid-template-columns: repeat(1,1fr);
-                .title{
-                    display: flex;
-                    align-items: center;
-                    width: 100%;
-                    justify-content: center;
-                    color: white;
-                    padding: 5px;
-                }
-                .card-information{
-                    display: flex;
-                    flex-direction: column;
-                    width: 100%;
-                    height: 100%;
-                    border-radius: 5px;
-                    position: relative;
-                    justify-content: space-between;
-                    gap: 20px;
-                    .price-tag-align{
-                        display: flex;
-                        justify-content: center;
-                        flex-direction: column;
-                        .price-align{
-                            display: flex;
-                            gap: 10px;
-                            align-items: center;
-                            padding:2px 20px;
-                            border-radius: 10px;
-                            .bold-price{
-                                font-size: 20px;
-                            }
-                            .red-price{
-                                color: red;  
-                                font-size: 16px;
-                                text-decoration: line-through; 
-                                font-style: italic;
-                            }
-                        }
-                        .discount-procent{
-                            padding:2px 2px;
-                            border-radius: 5px 5px 0px 0px;
-                            width: 50px;
-                            font-size: 12px;
-                            text-align: center;
-                            margin-left: 10px;
-                            color: white;
-                        }
-                    }
-                    .order-button{
-                        width: 100%;
-                        padding: 5px;
-                        border-radius: 10px;
-                        background-color: green;
-                        cursor: pointer;
-                        color: white;
-                        border: none;
-                        outline: none;
-                        transition: 0.3s;
-                        margin-top: 10px;
-                    }
-                    .order-button:hover{
-                        background-color: rgb(13, 175, 13);
-                    }
-                    // .next-button{
-                    //     background-color: transparent;
-                    // }
-                    // .next-button:hover{
-                    //     background-color: rgba(0, 0, 0, 0.39);   
-                    // }
-                }
-            }
-        }
-.photo-align{
-    display: flex;
-    gap: 10px;
-    flex-direction: column;
-    width: 100%;
-    .title-price-align{
-        display: flex;
-        justify-content: center;
-        color: white;
-        font-size: 18px;
-    }
-    .comment-align{
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-        padding: 20px;
-        .form-group{
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            .form-control{
-                width: 100%;
-                background-color: rgba(0, 0, 0, 0.397);
-                color: white;
-                padding: 10px;
-                border-radius: 5px;
-                border: 1px solid rgba(128, 128, 128, 0.356);
-                border: none;
-            }
-        }
-    }
-        
-
-    .photo-container{
-        border-radius: 5px;
-        width: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        overflow: hidden;
-        position: relative;
-        height: 300px;
-        border: 1px solid rgba(128, 128, 128, 0.356);
-        .quantity{
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            z-index: 2;
-            background-color: rgba(22, 22, 22, 0.89);
-            border-radius: 5px;
-            padding: 2px 5px;
-            transform: rotate(25deg);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        .product-title{
-            position: absolute;
-            width: 100%;
-            bottom: 0px;
-            left: 0px;
-            background-color: rgba(22, 22, 22, 0.89);
-            padding: 2px 5px; 
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        .photo{
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        .pop-up{
-            animation: 0.3s animPopUp;
-        }
-        @keyframes animPopUp {
-            0%{
-                scale: 0.9;
-            }
-            100%{
-                scale: 1;
-            }
-        }
-    }
-    .product-details-align{
-        width: 100%;
-        display: grid;
-        grid-template-columns: repeat(2,1fr);
-        color: white;
-        padding: 20px;
-        gap: 10px;
-        border-radius: 5px;
-        background-color: rgba(0, 0, 0, 0.295);
-        .delivery-align{
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            width: 100%;
-            flex-direction: column;
-            min-height: 60px;
-            p {
-                text-align: center; 
-                word-break: break-all;
-            };
-            .form-control{
-                border: none;
-                border-radius: 5px;
-                padding: 5px 10px;
-                outline: none;
-                color: white;
-                border: 1px solid grey;
-                background-color:transparent;
-                cursor: pointer;
-            }
-            .form-control:focus{
-                background-color: rgb(31, 30, 30);
-            }
-        }
-        .user-profile{
-            flex-direction: column;
-        }
-        .quantity-align{
-            display: flex;
-            gap: 5px;
-            align-items: center;
-            .quantity-button{
-                padding: 10px;
-                border-radius: 5px;
-                background-color: rgba(25, 26, 25, 0);
-                border: 1px solid grey;
-                margin:0px 10px;
-                color: white;
-                cursor: pointer;
-            }
-        }
-        
-        .price{
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            width: 100%;
-            b{
-                font-weight: bolder;
-                font-size: 18px;
-                display: flex;
-                align-items: center;
-                p{
-                    color: green;
-                }
-            }
-        }
-        .center-price{
-            justify-content: center;
-            border-radius: 5px;
-            box-shadow: 0px 0px 5px black;
-            padding: 3px 0px;
-        }
-        .card-background{
-            box-shadow: 0px 0px 5px black;
-            padding: 10px;
-            width: 100%;
-            border-radius: 5px;
-        }
-    }
-}
-.user-information{
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    border-radius: 5px;
-    padding: 5px;
-    animation:fadeIn 0.5s;
-    background-color: rgba(0, 0, 0, 0.295); 
-    border: 1px solid rgba(128, 128, 128, 0.356);
-    .flex-columns{
-        width: 100%;
-        display: flex;
-        gap: 15px;
-    }
-    .form-group{
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-        .form-control{
-            color: white;
-            padding: 10px;
-            border-radius: 5px;
-            width: 100%;
-            border: 1px solid grey;
-            background-color: transparent;
-        }
-    }
-    .rules-align{
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        gap: 15px;
-        color: white;
-        .title{
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 10px;
-            align-items: center;
-            p{
-                color: rgb(214, 26, 26);
-                scale: 2;
-                margin: 0;
-            }
-        }
-        .checkbox-align{
-            display: flex;
-            gap:5px;
-            align-items: center;
-            .checkbox{
-                cursor: pointer;
-            }
-        }
-        ul{
-            display: flex;
-            flex-direction: column;
-            width: 100%;
-            gap: 10px;
-            li{
-                display: flex;
-                align-items: center;
-                div{
-                    display: flex;
-                    align-items: center;
-                    color: rgb(183, 116, 238);
-                    grid-area: 10px;
-                }
-            }
-        }
-        .rulessss{
-            display: flex;
-            flex-direction: column;
-            padding:10px 30px;
-            gap: 20px;
-            .rules{
-                display: flex;
-                align-items: center;
-                width: 100%;
-                padding: 5px 0px;
-                gap: 5px;
-                .to-pay-text{
-                    color: orange;
-                    display: flex;
-                    align-items: center;
-                    text-wrap: nowrap;
-                    gap: 5px;
-                }
-                .email{
-                    padding: 10px;
-                    border-radius: 5px;
-                    background-color: rgba(0, 0, 0, 0.267);
-                }
-            }
-            .rules-text-align{
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                gap: 10px;
-                flex-wrap: wrap;
-                background-color: rgba(0, 0, 0, 0.445);
-                padding: 10px;
-                border-radius: 5px;
-                p{
-                    font-size: 18px;
-                }
-                .price{
-                    text-shadow: 0px 0px 2px black;
-                    scale: 1.1;
-                }
-                .copy-button{
-                    display: flex;
-                    align-items: center;
-                    color: white;
-                    padding:5px 10px;
-                    border-radius: 5px;
-                    background-color: rgb(25, 26, 25);
-                    box-shadow: 0px 0px 5px black;
-                    border:none;
-                    cursor: pointer;
-                }
-            }
-        }
-    }
-}
-textarea::-webkit-scrollbar{
-    display: none;
-    resize: vertical;
-}
-textarea{
-    resize: vertical;
-    max-height: 200px;
+.od-ambient {
+  position: fixed;
+  top: -200px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 600px;
+  height: 400px;
+  background: radial-gradient(ellipse, rgba(167,139,250,.08) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
 }
 
+.od-container {
+  position: relative;
+  z-index: 1;
+  max-width: 860px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
-.payed{
-    color: green;
+// ── Shared card ──────────────────────────────
+.od-card {
+  background: $surface;
+  border: 1px solid $border;
+  border-radius: $radius;
+  padding: 24px;
+  animation: fadeSlideIn .4s both;
 }
-.topay{
-    color: rgba(255, 136, 0, 0.774);
-}
-.fa-spinner{
-    animation: spinner 5.5s infinite;
-}
-.secondary-text{
-    color: rgba(212, 208, 208, 0.87);
-}
-.detail-align{
-    width: 100%;
-    height: 100%;
-}
-.detail{
+
+// ── Header bar ──────────────────────────────
+.od-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding: 18px 24px;
+  background: $surface;
+  border: 1px solid $border;
+  border-radius: $radius;
+  animation: fadeSlideIn .3s both;
+
+  &__left {
     display: flex;
     align-items: center;
-    gap: 5px;
-    cursor: pointer;
-    height: 100%;
+    gap: 14px;
+  }
+  &__right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
     flex-wrap: wrap;
-    .price-bold{
-        font-size: 20px;
-    }
+  }
 }
-.info-background{
-    padding: 10px ;
-    border-radius: 5px;
-    background-color: rgba(0, 0, 0, 0.397);
-    border: 1px solid rgba(128, 128, 128, 0.356);
-    color: white;
-    text-align: center;
+
+.od-order-id {
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: .5px;
+  color: $text-primary;
+}
+
+.od-date {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: $text-muted;
+}
+
+// ── Badge ────────────────────────────────────
+.od-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 5px 13px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: .4px;
+  text-transform: uppercase;
+
+  &__dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+
+  &--paid {
+    background: $paid-bg;
+    color: $paid-color;
+    border: 1px solid rgba($paid-color, .2);
+    .od-badge__dot { background: $paid-color; }
+  }
+  &--unpaid {
+    background: $unpaid-bg;
+    color: $unpaid-color;
+    border: 1px solid rgba($unpaid-color, .2);
+    .od-badge__dot { background: $unpaid-color; }
+  }
+}
+
+// ── Delete button ────────────────────────────
+.od-delete-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: $radius-sm;
+  background: transparent;
+  border: 1px solid rgba(239,68,68,.3);
+  color: #ef4444;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: $transition;
+
+  &:hover {
+    background: rgba(239,68,68,.1);
+    border-color: #ef4444;
+  }
+}
+
+// ── Main grid ────────────────────────────────
+.od-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+
+  @media (max-width: 620px) { grid-template-columns: 1fr; }
+}
+
+// ── Product card ─────────────────────────────
+.od-product {
+  padding: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+
+  &__image-wrap {
+    position: relative;
+    width: 100%;
+    height: 220px;
+    overflow: hidden;
+    background: $surface-2;
     display: flex;
     justify-content: center;
-}
-.date{
-    display: flex;
-    width: 100%;
-    gap: 10px;
-}
-.to-payed{
-    background-color: rgba(255, 136, 0, 0.774);
-}
-.is-payed{
-    background-color: #15803d;
-}
-.order-num-align{
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    .order-box{
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        font-weight: bolder;
-        padding: 5px;
-        border-radius: 5px;
-        .order-status{
-            color: white;
-            font-weight: bolder;
-        }
-        .order-id{
-            color: white;
-            font-size: 18px;
-            font-weight: bolder;
-        }
-    }
-}
-.unpaid-order{
-    background-color: rgba(255, 136, 0, 0.774);
-}
-.paid-order{
-    background-color: #15803d;
-}
+    align-items: center;
+  }
 
-@media screen and (max-width: 600px) {
-    #map {
-        height: 300px;
-    }
-}
-
-
-
-
-@keyframes spinner {
-    0%{
-    transform: rotate(0deg);
-    }
-    50%{
-    transform: rotate(360deg);
-    }
-    100%{
-    transform: rotate(-360deg);
-    }
-}
-
-
-
-
-
-
-    .body-align::-webkit-scrollbar {
-        width: 8px; 
-        height: 8px;
-    }
-    .body-align::-webkit-scrollbar-track {
-       background: transparent;
-       border-radius: 10px;
-    }
-    .body-align::-webkit-scrollbar-thumb {
-       background: rgba(0,0,0,0.4); 
-       border-radius: 10px;
-    }
-    .body-align::-webkit-scrollbar-button {
-       display: none;
-    }
-}
-
-
-
-@keyframes fadeIn {
-    0%{
-        opacity: 0;
-        scale: 0.7;
-    }
-    50%{
-        opacity: 1;
-    }
-    100%{
-        scale: 1;
-    }
-}
-
-
-
-
-
-
-.modal-align{
+  &__img {
     width: 100%;
     height: 100%;
-    z-index: 52;
-    position: fixed;
-    top: 0;
-    left: 0;
-    background-color: rgba(0, 0, 0, 0.151);
+    object-fit: cover;
+    transition: transform .5s ease;
+  }
+  &:hover &__img { transform: scale(1.03); }
+
+  &__qty {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    background: rgba(0,0,0,.75);
+    backdrop-filter: blur(8px);
+    border: 1px solid $border;
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 700;
+    color: $text-primary;
+  }
+
+  &__info {
+    padding: 18px 20px;
+    flex: 1;
+  }
+
+  &__title {
+    font-size: 16px;
+    font-weight: 600;
+    color: $text-primary;
+    line-height: 1.4;
+  }
+
+  &__label {
+    font-size: 12px;
+    color: $text-muted;
+    margin-top: 4px;
+  }
+}
+
+// ── Financials card ──────────────────────────
+.od-financials {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 20px;
+}
+
+.od-financial-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: $surface-2;
+  border: 1px solid $border;
+  border-radius: $radius-sm;
+  padding: 16px 18px;
+  cursor: pointer;
+  transition: $transition;
+  text-align: left;
+  color: $text-primary;
+  flex: 1;
+
+  &:hover {
+    border-color: $border-hover;
+    background: lighten($surface-2, 2%);
+  }
+
+  &__label {
+    display: block;
+    font-size: 11px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: .6px;
+    color: $text-muted;
+    flex: 1;
+  }
+
+  &__value {
+    font-size: 15px;
+    font-weight: 600;
+    color: $text-primary;
+
+    &--price { font-size: 22px; font-weight: 700; }
+  }
+
+  &__arrow {
+    color: $text-muted;
+    flex-shrink: 0;
+    transition: transform $transition;
+  }
+  &:hover &__arrow { transform: translateX(3px); }
+
+  &--price {
+    background: var(--price-bg, $unpaid-bg);
+    border-color: var(--price-border, rgba($unpaid-color, .3));
+    .od-financial-item__value--price { color: var(--price-color, $unpaid-color); }
+    &:hover { border-color: var(--price-border-hover, rgba($unpaid-color, .5)); }
+  }
+}
+
+// ── Section title ────────────────────────────
+.od-section-title {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  color: $text-muted;
+  margin-bottom: 18px;
+}
+
+// ── Customer card ────────────────────────────
+.od-customer {
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+
+    @media (max-width: 500px) { grid-template-columns: 1fr; }
+  }
+}
+
+// ── Info tile ────────────────────────────────
+.od-info-tile {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: $surface-2;
+  border: 1px solid $border;
+  border-radius: $radius-sm;
+  padding: 14px 16px;
+  cursor: pointer;
+  transition: $transition;
+  text-align: left;
+  color: $text-primary;
+  position: relative;
+  overflow: hidden;
+
+  &:hover {
+    border-color: $border-hover;
+    .od-copy-hint { opacity: 1; transform: translateX(0); }
+  }
+
+  &--avatar { grid-column: span 2;
+    @media (max-width: 500px) { grid-column: span 1; }
+  }
+
+  &__text {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+  }
+  &__label {
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .6px;
+    color: $text-muted;
+  }
+  &__value {
+    font-size: 14px;
+    font-weight: 500;
+    color: $text-primary;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 260px;
+  }
+}
+
+.od-copy-hint {
+  position: absolute;
+  right: 14px;
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .5px;
+  color: $accent;
+  opacity: 0;
+  transform: translateX(6px);
+  transition: $transition;
+}
+
+// ── Avatar ───────────────────────────────────
+.od-avatar {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid $border;
+  flex-shrink: 0;
+  background: $surface-2;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+// ── Comment card ─────────────────────────────
+.od-comment {
+  &__body {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  &__icon {
+    color: $text-muted;
+  }
+  &__textarea {
+    width: 100%;
+    min-height: 100px;
+    max-height: 200px;
+    resize: vertical;
+    background: $surface-2;
+    border: 1px solid $border;
+    border-radius: $radius-sm;
+    padding: 14px 16px;
+    color: $text-primary;
+    font-size: 14px;
+    line-height: 1.6;
+    outline: none;
+
+    &::-webkit-scrollbar { width: 4px; }
+    &::-webkit-scrollbar-thumb { background: rgba(255,255,255,.1); border-radius: 99px; }
+    &::-webkit-scrollbar-track { background: transparent; }
+  }
+  &__count {
+    align-self: flex-end;
+    font-size: 11px;
+    color: $text-muted;
+  }
+}
+
+// ── Map card ─────────────────────────────────
+.od-map-card {}
+
+.od-coords {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: $surface-2;
+  border: 1px solid $border;
+  border-radius: $radius-sm;
+  padding: 8px 14px;
+  font-size: 12px;
+  font-family: 'Courier New', monospace;
+  color: $text-muted;
+  cursor: pointer;
+  transition: $transition;
+  margin-bottom: 16px;
+  position: relative;
+
+  .od-copy-hint { position: static; opacity: 0; transform: translateX(4px); }
+  &:hover {
+    border-color: $border-hover;
+    color: $text-primary;
+    .od-copy-hint { opacity: 1; transform: translateX(0); }
+  }
+}
+
+.od-map {
+  width: 100%;
+  height: 360px;
+  border-radius: $radius-sm;
+  overflow: hidden;
+  border: 1px solid $border;
+
+  @media (max-width: 600px) { height: 260px; }
+}
+
+// ── Modal ────────────────────────────────────
+.od-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: rgba(0,0,0,.6);
+  backdrop-filter: blur(12px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  animation: fadeIn .2s both;
+}
+
+.od-modal {
+  position: relative;
+  width: 100%;
+  max-width: 460px;
+  background: $surface;
+  border: 1px solid $border;
+  border-radius: $radius;
+  padding: 40px 32px 32px;
+  animation: popIn .35s cubic-bezier(.34,1.56,.64,1) both;
+
+  &__close {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    background: $surface-2;
+    border: 1px solid $border;
+    border-radius: $radius-sm;
+    color: $text-muted;
+    padding: 6px;
+    cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    animation:0.3s popupModalBack;
-        backdrop-filter: blur(10px);
-    .modal-cancel{
-        width: 100%;
-        height: 100%;
-        position: absolute;
-        top: 0;
-        left: 0;
-    }
-    .modal{
-        width: 90%;
-        max-width: 500px;
-        padding: 50px;
-        border-radius: 10px;
-        background-color: rgba(0, 0, 0, 0.533);
-        border: 1px solid grey;   
-        backdrop-filter: blur(20px);     
-        color: white;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        animation:0.5s popupModal;
-        z-index: 2;
-        .button-group{
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            flex-wrap: wrap;
-            justify-content: center;
-            .ispaidbutton{
-                color: white;
-                padding: 20px;
-                border-radius: 5px;
-                border: none;
-                cursor: pointer;
-                width: 200px;
-                border: 1px solid grey;
-                background-color: rgba(0, 0, 0, 0.521);     
-            }
-            .order-status{
-                background-color: transparent;
-                color: white;
-                padding: 20px; 
-                border: 1px solid grey;
-                background-color: rgba(0, 0, 0, 0.521);           
-            }
-            .selected-status{
-                background-color: rgba(0, 128, 0, 0.634);
-                border: 1px solid green;
-            }
-            .is-paid{
-                background-color: rgba(0, 128, 0, 0.651);
-                border: 1px solid green;
-            }
-            .is-not-paid{
-                background-color: rgba(255, 166, 0, 0.651);
-                border: 1px solid orange;
-            }
-        }
-    }
-}
+    transition: $transition;
+    &:hover { color: $text-primary; border-color: $border-hover; }
+  }
 
-@keyframes popupModalBack {
-    0%{
-        backdrop-filter: blur(0px);
-    }
-    100%{
-        backdrop-filter: blur(10px);
-    }
-}
-@keyframes popupModal{
-    0%{
-        opacity: 0;
-        scale: 0.7;
-    }
-    50%{
-        scale: 1.2;
-        opacity: 1;
-    }
-    100%{
-        scale: 1;
-    }
-}
+  &__title {
+    font-size: 15px;
+    font-weight: 600;
+    color: $text-primary;
+    margin-bottom: 24px;
+    text-align: center;
+    
+  }
 
-.map-align{
-    width: 100%;
+  &__options {
     display: flex;
-    justify-content: center;
-    .map-wrap{
-        width: 50%;
-        max-width: 900px;
-    }
-    #map{
-        height: 500px;
-    }
-}
+    gap: 10px;
 
+    &--wrap { flex-wrap: wrap; justify-content: center; }
+  }
 
-@media screen and (max-width:1200px) {
-    .center-component{
-        .body-align{
-            width: 50%;
-        }
-    }
-}
-@media screen and (max-width:1000px) {
-    .center-component{
-        .body-align{
-            width: 70%;
-            .component{
-                    padding: 0;
-                .header-grid{
-                    padding: 0;
-                    width: 100%;
-                    .photo-align{
-                        align-items: center;
-                    }
-                }
-            }
-        }
-    }
-    .map-align{
-        width: 100%;
-        .map-wrap{
-            width: 70%;
-        }
-        #map{
-            height: 500px;
-        }
-    }
-}
-
-
-.delete-order{
+  &__option {
+    flex: 1;
     display: flex;
+    flex-direction: column;
+    align-items: center;
     justify-content: center;
-    .delete-order-button{
-        background-color: transparent;
-        color: red;
-        border: 1px solid red;
-        padding: 10px 20px;
-        border-radius: 5px;
-        cursor: pointer;
-        transition: 0.3s all ease-in-out;
-        font-weight: bolder;
+    gap: 10px;
+    padding: 22px 16px;
+    background: $surface-2;
+    border: 1px solid $border;
+    border-radius: $radius-sm;
+    color: $text-muted;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: $transition;
+    min-width: 120px;
+
+    &:hover { border-color: $border-hover; color: $text-primary; }
+
+    &--paid {
+      background: $paid-bg;
+      border-color: rgba($paid-color, .3);
+      color: $paid-color;
     }
-    .delete-order-button:hover{
-        background-color: red;
-        color: white;
-        border: 1px solid transparent;
+    &--unpaid {
+      background: $unpaid-bg;
+      border-color: rgba($unpaid-color, .3);
+      color: $unpaid-color;
     }
+    &--status {
+      flex: none;
+      width: calc(50% - 5px);
+      padding: 16px 12px;
+    }
+    &--selected {
+      background: $paid-bg;
+      border-color: rgba($paid-color, .4);
+      color: $paid-color;
+    }
+  }
 }
 
-@media screen and (max-width:1000px) {
-     .center-component{
-        .body-align{
-            width: 70%;
-            .component{
-                .user-information{
-                    .rules-align{
-                        .rulessss{
-                            padding: 5px;
-                        }
-                    }
-                }
-            }
-        }
-    }
+// ── Animations ───────────────────────────────
+@keyframes fadeSlideIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
-@media screen and (max-width:700px) {
-    .center-component{
-        .body-align{
-            width: 90%;
-        }
-          .component{
-            padding: 0;
-            }
-    }
-    .map-align{
-        width: 100%;
-        .map-wrap{
-            width: 90%;
-        }
-        #map{
-            height: 400px;
-        }
-    }
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
 }
-@media screen and (max-width:600px) {
-    .center-component{
-        .body-align{
-            width: 90%;
-            grid-template-columns: repeat(1,1fr);
-            height: 100%;
-            gap: 30px;
-            .component{
-                    padding: 0;
-                .header-grid{
-                    padding: 0;
-                    width: 100%;
-                    .photo-align{
-                        align-items: center;
-                        .product-details-align{
-                            grid-template-columns: repeat(1,1fr);
-                        }
-                        .photo-container{
-                            height: 250px;
-                        }
-                    }
-                }
-                .user-information{
-                    .rules-align{
-                        .rulessss{
-                            .rules{
-                                flex-direction: column;
-                                align-items: flex-start;
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
+@keyframes popIn {
+  from { opacity: 0; transform: scale(.88); }
+  to   { opacity: 1; transform: scale(1); }
 }
-@media screen and (max-width:700px) {
-    .center-component{
-        .component{
-            width: 90%;
-        }
-    }
-}
-@media screen and (max-width:400px) {
-    .center-component{
-        .component{
-            .header-grid{
-                gap: 50px;
-                .photo-align{
-                    .photo-container{
-                        height: 200px;
-                    }
-                }
-                .card-information{
-                    .user-information{
-                        .form-group{
-                            font-size: 13px;
-                        }
-                    }
-                    .header-title{
-                        .discount-mark{
-                            left: 20px;
-                        }
-                    }
-                }
-            }
-        }
-    }
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: .4; }
 }

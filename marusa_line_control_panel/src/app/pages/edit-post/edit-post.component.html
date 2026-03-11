@@ -24,7 +24,7 @@
             <div class="upload-photos-align" *ngIf="this.changeNum!=0"><button class="save-photos-button" (click)="uploadImages()">შენახვა</button></div>
         </div>
         <div class="component">
-            <button class="edit-product" *ngIf="!editProductVisible" style="width: 50px;" (click)="editProduct()"><i class="fas fa-edit"></i></button>
+            <button class="edit-product" *ngIf="!editProductVisible"(click)="editProduct()"> <b>რედაქტირება</b> <i class="fas fa-edit"></i></button>
             <div class="form-align">
                 <div class="input-group">
                     <div class="form-control-group">

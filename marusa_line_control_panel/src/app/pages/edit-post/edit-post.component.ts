@@ -11,10 +11,11 @@ import {
   ProductTypes,
 } from '../../shared/services/post.service';
 import Swal from 'sweetalert2';
+import { AddPostComponent } from "../add-post/add-post.component";
 
 @Component({
   selector: 'app-edit-post',
-  imports: [CommonModule, FormsModule, ɵEmptyOutletComponent],
+  imports: [CommonModule, FormsModule, ɵEmptyOutletComponent, AddPostComponent],
   templateUrl: './edit-post.component.html',
   styleUrl: './edit-post.component.scss',
 })

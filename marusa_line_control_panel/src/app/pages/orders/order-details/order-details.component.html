@@ -1,118 +1,162 @@
+<div class="od-page" *ngIf="postsLoaded">
 
+  <div class="od-ambient"></div>
 
-<div class="center-component">
-    <div  class="body-align" *ngIf="postsLoaded">
-        <div class="component">
-            <div class="header-grid">
-                <div class="card-information" >
-                    <div class="photo-align" >
-                        <div class="user-information">
-                            <div class="order-num-align">
-                                <div class="order-box" [ngClass]="{'paid-order':order.isPaid,'unpaid-order':!order.isPaid}">
-                                    <p class="order-status">შეკვეთა </p>
-                                    <p class="order-id" >
-                                        {{order.orderId}}
-                                    </p>    
-                                </div>
-                                <div class="delete-order" *ngIf="order.orderId && !order.isPaid">
-                                    <button class="delete-order-button" (click)="deleteOrder(order.orderId)">წაშლა</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="product-details-align user-information">
-                            <div style="display: flex; flex-direction: column; justify-content: space-evenly; gap: 10px;">
-                                <div class="detail-align" (click)="openModal(1)">
-                                    <div class="detail info-background" *ngIf="!order.isPaid" [ngClass]="{'to-payed':!order.isPaid}">
-                                        <p class="" >გადასახდელი:</p>
-                                        <b class="price-bold"> {{order.finalPrice}}₾</b>
-                                    </div>
-                                    <div class="detail info-background payed-container" *ngIf="order.isPaid" [ngClass]="{'is-payed':order.isPaid }">
-                                        <p class="" >გადახდილი</p>
-                                        <b class="price-bold"> {{order.finalPrice}}₾</b>
-                                    </div>
-                                </div>
-                                <div class="detail-align" *ngIf="order.isPaid">
-                                    <div class="detail info-background" (click)="openModal(2)">
-                                        სტატუსი: 
-                                        <b>{{getStatusName(order.statusId)}}</b>
-                                        
-                                        <i class="fas fa-spinner topay" *ngIf="!order.isPaid"></i>
-                                        <p class="" *ngIf="order.isPaid"></p>
-                                    </div>   
-                                </div>
-                                <div class="info-background date detail">
-                                    <p>თარიღი:</p>
-                                    <b>{{ order.createDate | date : 'dd MMM yyyy' }}</b>
-                                </div> 
-                            </div>
-                            <div style="display: flex; flex-direction: column; gap: 10px;">
-                                <div class="photo-container"  data-aos="fade-in">
-                                    <p class="quantity"> <i class="fas fa-close "></i>{{order.productQuantity}}</p>
-                                    <div *ngFor="let p of photosArray; let i = index" >
-                                        <img [src]="p.photoUrl" *ngIf="i==0" alt="" class="photo">
-                                    </div>
-                                    <p class="product-title">{{posts.title}}</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="product-details-align user-information">
-                            <div class="delivery-align info-background detail user-profile" (click)="copyToClipboard(user.name)">
-                                <div class="user-container">
-                                    <img [src]="user?.profilePhoto" class="user-img" alt="">
-                                </div>
-                                <p style="word-break: break-all;">
-                                    {{user.name}}
-                                </p>
-                            </div>  
-                            <div class="delivery-align info-background detail" (click)="copyToClipboard(user.phoneNumber)">
-                                <i class="fas fa-phone" style="color: green;"></i>
-                                <p >{{user.phoneNumber}}</p>
-                            </div>    
-                            <div class="delivery-align info-background detail" (click)="copyToClipboard(user.email)">
-                                <p >{{user.email}}</p>
-                            </div>       
-                            <div class="delivery-align info-background detail" (click)="copyToClipboard(order.address)" *ngIf="order.address">
-                                <p class="" ><b>მისამართი :</b> {{order.address}}</p>
-                            </div>
-                        </div>
-                        <div class="comment-align user-information" *ngIf="comment">
-                            <div class="form-group">
-                                <label for="" style="display: flex; gap: 20px; color: white;" >კომენტარი <p style="color: gray;">{{comment.length}}/300</p> </label>
-                                <textarea [(ngModel)]="comment" disabled="true" class="form-control"  maxlength="300" style="min-height: 100px;"></textarea>
-                            </div>
-                        </div> 
-                    </div>
-                </div>
-            </div>
+  <div class="od-container">
+    <header class="od-header">
+      <div class="od-header__left">
+        <span class="od-badge" [class.od-badge--paid]="order.isPaid" [class.od-badge--unpaid]="!order.isPaid">
+          <span class="od-badge__dot"></span>
+          <span class="od-order-id">#{{ order.orderId }}</span>
+        </span>
+      </div>
+      <div class="od-header__right">
+        <span class="od-date">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          {{ order.createDate | date : 'dd MMM yyyy' }}
+        </span>
+        <button class="od-delete-btn" *ngIf="order.orderId && !order.isPaid" (click)="deleteOrder(order.orderId)">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4h6v2"/></svg>
+          წაშლა
+        </button>
+      </div>
+    </header>
+
+    <div class="od-grid">
+      <div class="od-card od-product">
+        <div class="od-product__image-wrap">
+          <div *ngFor="let p of photosArray; let i = index">
+            <img [src]="p.photoUrl" *ngIf="i==0" alt="" class="od-product__img" />
+          </div>
+          <div class="od-product__qty">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            {{ order.productQuantity }}
+          </div>
         </div>
+        <div class="od-product__info">
+          <h2 class="od-product__title">{{ posts.title }}</h2>
+          <p class="od-product__label">პროდუქტი</p>
+        </div>
+      </div>
+
+      <div class="od-card od-financials">
+        <button class="od-financial-item od-financial-item--price"
+          [style.--price-bg]="order.isPaid ? 'rgba(74,222,128,.13)' : 'rgba(251,146,60,.13)'"
+          [style.--price-border]="order.isPaid ? 'rgba(74,222,128,.3)' : 'rgba(251,146,60,.3)'"
+          [style.--price-border-hover]="order.isPaid ? 'rgba(74,222,128,.55)' : 'rgba(251,146,60,.55)'"
+          [style.--price-color]="order.isPaid ? '#4ade80' : '#fb923c'"
+          (click)="openModal(1)">
+          <span class="od-financial-item__label">{{ order.isPaid ? 'გადახდილი' : 'გადასახდელი' }}</span>
+          <span class="od-financial-item__value od-financial-item__value--price">{{ order.finalPrice }}₾</span>
+          <svg class="od-financial-item__arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+        </button>
+
+        <button class="od-financial-item" *ngIf="order.isPaid" (click)="openModal(2)">
+          <span class="od-financial-item__label">სტატუსი</span>
+          <span class="od-financial-item__value">{{ getStatusName(order.statusId) }}</span>
+          <svg class="od-financial-item__arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+        </button>
+      </div>
+
     </div>
-</div>
-<div class="user-information map-align"style="display:flex; justify-content:center; " *ngIf="location.lat!='0'&&location.lng!='0'">
-    <div class="map-wrap" style="border-radius: 5px;border: 1px solid rgba(128, 128, 128, 0.459); background-color: rgba(0, 0, 0, 0.342);padding: 20px; display: flex; flex-direction: column; gap: 10px;">
-        <div style="display: flex; flex-direction: column; gap: 10px;">
-            <div style="display: flex; align-items: center; gap: 5px; flex-wrap: wrap;" (click)="copyToClipboard(`${order.lat},${order.lng}`)">
-                <div>პინი</div>
-                <div style="padding: 5px 10px; border-radius: 5px; background-color: rgba(0, 0, 0, 0.493); border: 1px solid rgba(128, 128, 128, 0.459); cursor: pointer;word-break: break-all;">{{order.lat}},{{order.lng}}</div>
-            </div>
-        </div>
-        <div id="map" style="width: 100%;border-radius: 10px; z-index: 0;"></div>
+    <div class="od-card od-customer">
+      <h3 class="od-section-title">მომხმარებელი</h3>
+      <div class="od-customer__grid">
+
+        <button class="od-info-tile od-info-tile--avatar" (click)="copyToClipboard(user.name)">
+          <div class="od-avatar">
+            <img [src]="user?.profilePhoto" alt="" />
+          </div>
+          <div class="od-info-tile__text">
+            <span class="od-info-tile__label">სახელი</span>
+            <span class="od-info-tile__value">{{ user.name }}</span>
+          </div>
+          <span class="od-copy-hint">copy</span>
+        </button>
+
+        <button class="od-info-tile" (click)="copyToClipboard(user.phoneNumber)">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#4ade80" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.21 1.22 2 2 0 012.22 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.09a16 16 0 006 6l.56-.56a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg>
+          <div class="od-info-tile__text">
+            <span class="od-info-tile__label">ტელეფონი</span>
+            <span class="od-info-tile__value">{{ user.phoneNumber }}</span>
+          </div>
+          <span class="od-copy-hint">copy</span>
+        </button>
+
+        <button class="od-info-tile" (click)="copyToClipboard(user.email)">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,12 2,6"/></svg>
+          <div class="od-info-tile__text">
+            <span class="od-info-tile__label">ელ-ფოსტა</span>
+            <span class="od-info-tile__value">{{ user.email }}</span>
+          </div>
+          <span class="od-copy-hint">copy</span>
+        </button>
+
+        <button class="od-info-tile" *ngIf="order.address" (click)="copyToClipboard(order.address)">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#f472b6" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <div class="od-info-tile__text">
+            <span class="od-info-tile__label">მისამართი</span>
+            <span class="od-info-tile__value">{{ order.address }}</span>
+          </div>
+          <span class="od-copy-hint">copy</span>
+        </button>
+
+      </div>
     </div>
-</div>
 
-
-
-
-
-<div class="modal-align" *ngIf="modalGroupNum!=0">
-    <div class="modal-cancel" (click)="modalcancel()"></div>
-    <div class="modal">
-        <div class="button-group" *ngIf="modalGroupNum ==1 ">
-            <button class="ispaidbutton" [ngClass]="{'is-not-paid':!order.isPaid}" (click)="changeOrderIsPaid(false)">გადასახდელი</button>
-            <button class="ispaidbutton" [ngClass]="{'is-paid':order.isPaid}" (click)="changeOrderIsPaid(true)">გადახდილი</button>
-        </div>
-        <div class="button-group" *ngIf="modalGroupNum ==2 ">
-            <button class="ispaidbutton order-status"  [ngClass]="{'selected-status': order.statusId == o.id}" *ngFor="let o of orderStatuses" (click)="changeOrderStatusId(o.id)">{{o.statusName}}</button>
-        </div>
+    <div class="od-card od-comment" *ngIf="comment">
+      <h3 class="od-section-title">კომენტარი</h3>
+      <div class="od-comment__body">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="od-comment__icon"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+        <textarea [(ngModel)]="comment" disabled="true" class="od-comment__textarea" maxlength="300"></textarea>
+        <span class="od-comment__count">{{ comment.length }}/300</span>
+      </div>
     </div>
+
+    <div class="od-card od-map-card" *ngIf="location.lat!=''">
+      <h3 class="od-section-title">მდებარეობა</h3>
+      <button class="od-coords" (click)="copyToClipboard(`${order.lat},${order.lng}`)">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
+        {{ order.lat }}, {{ order.lng }}
+        <span class="od-copy-hint">copy</span>
+      </button>
+      <div id="map" class="od-map"></div>
+    </div>
+
+  </div>
 </div>
 
+
+<div class="od-modal-overlay" *ngIf="modalGroupNum!=0" (click)="modalcancel()">
+  <div class="od-modal" (click)="$event.stopPropagation()">
+    <button class="od-modal__close" (click)="modalcancel()">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+
+    <div *ngIf="modalGroupNum == 1">
+      <h3 class="od-modal__title">გადახდის სტატუსი</h3>
+      <div class="od-modal__options">
+        <button class="od-modal__option" [class.od-modal__option--unpaid]="!order.isPaid" (click)="changeOrderIsPaid(false)">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          გადასახდელი
+        </button>
+        <button class="od-modal__option" [class.od-modal__option--paid]="order.isPaid" (click)="changeOrderIsPaid(true)">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+          გადახდილი
+        </button>
+      </div>
+    </div>
+
+    <div *ngIf="modalGroupNum == 2">
+      <h3 class="od-modal__title">შეკვეთის სტატუსი</h3>
+      <div class="od-modal__options od-modal__options--wrap">
+        <button class="od-modal__option od-modal__option--status"
+          [class.od-modal__option--selected]="order.statusId == o.id"
+          *ngFor="let o of orderStatuses"
+          (click)="changeOrderStatusId(o.id)">
+          {{ o.statusName }}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
