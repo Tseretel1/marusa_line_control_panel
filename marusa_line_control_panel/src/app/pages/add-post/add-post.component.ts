@@ -94,7 +94,7 @@ export class AddPostComponent implements OnInit{
                 Swal.fire({
                   icon: 'success',
                   timer: 3000,
-                  showConfirmButton: true,
+                  showConfirmButton: false,
                   confirmButtonText: 'ოქეი',
                   background:'rgb(25, 26, 25)',
                   color: '#ffffff',    
