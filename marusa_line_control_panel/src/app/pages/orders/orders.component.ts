@@ -101,6 +101,7 @@ export class OrdersComponent implements OnInit{
           return;
         }
         this.orders = resp.orders;
+        console.log(resp)
         this.totalCount = resp.totalCount;
         this.totalPages = Math.ceil(this.totalCount / this.getOrderDto.PageSize);
         this.lastPage = Math.ceil(this.totalCount / this.getOrderDto.PageSize);

@@ -226,6 +226,7 @@ export interface OrderDetailsDto {
   address:string;
   lng:string;
   lat:string;
+  orderNumber:number;
 }
 
 

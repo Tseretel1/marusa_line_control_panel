@@ -13,8 +13,8 @@ import { DashboardStatsByYear } from '../../pages/dashboard/dashboard.component'
 })
 export class PostService {
 
-   private apiUrl = 'https://localhost:7173/';
- //private apiUrl = 'https://192.168.1.15:7174/';
+   //private apiUrl = 'https://localhost:7173/';
+ private apiUrl = 'https://192.168.1.15:7174/';
   constructor(private http:HttpClient)
   {
 
@@ -207,6 +207,7 @@ export interface OrderProduct {
   comment:string;
   deliveryType:string;
   productQuantity:string;
+  orderNumber: number;
 
   likeCount: number;
   isLiked: boolean;

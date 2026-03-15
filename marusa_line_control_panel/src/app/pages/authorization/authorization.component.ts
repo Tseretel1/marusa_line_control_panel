@@ -4,6 +4,8 @@ import { AuthService } from '../../shared/services/auth.service';
 import { StringToken } from '@angular/compiler';
 import { AuthReloadService } from '../../shared/AuthReloadServise/AuthReloadService';
 import Swal from 'sweetalert2';
+import { Router } from '@angular/router';
+import { AppRoutes } from '../../shared/AppRoutes/AppRoutes';
 @Component({
   selector: 'app-authorization',
   imports: [FormsModule],
@@ -11,7 +13,7 @@ import Swal from 'sweetalert2';
   styleUrl: './authorization.component.scss'
 })
 export class AuthorizationComponent {
-    constructor(private AuthReloadService:AuthReloadService,private authService:AuthService){
+    constructor(private AuthReloadService:AuthReloadService,private authService:AuthService, private router:Router){
 
   }
 
@@ -27,6 +29,8 @@ export class AuthorizationComponent {
       (resp)=>{ 
         if(resp.succeeded){
           localStorage.setItem('token',resp.token);
+          this.router.navigate([AppRoutes.posts])
+
           this.AuthReloadService.reafresh();
         }
         else{
