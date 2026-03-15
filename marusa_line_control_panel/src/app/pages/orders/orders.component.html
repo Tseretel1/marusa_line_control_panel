@@ -1,4 +1,34 @@
+<div class="search-modal-overlay" *ngIf="modalVisible">
+    <div class="search-modal-back" (click)="closeModal()"></div>
+  <div class="search-modal">
+    <div class="search-modal__header">
+      <div class="search-modal__icon">🔍</div>
+      <h3 class="search-modal__title">შეკვეთის ძებნა</h3>
+      <button class="search-modal__close" (click)="closeModal()">✕</button>
+    </div>
+    <div class="search-modal__body">
+      <label class="search-modal__label">შეკვეთის ნომერი</label>
+      <div class="search-modal__input-row">
+        <span class="search-modal__prefix">#</span>
+        <input
+          class="search-modal__input"
+          type="number"
+          [(ngModel)]="orderSearchNum"
+          placeholder="მაგ: 1042"
+        />
+      </div>
+    </div>
 
+    <!-- Footer -->
+    <div class="search-modal__footer">
+      <button class="search-modal__btn search-modal__btn--cancel" (click)="closeModal()">გაუქმება</button>
+      <button class="search-modal__btn search-modal__btn--search" (click)="OrderSearch()">
+        ძებნა <i class="fas fa-search"></i>
+      </button>
+    </div>
+
+  </div>
+</div>
 
 <div class="center-container">
     <div class="container">
@@ -10,18 +40,10 @@
                 <div class="filter pay-filter " [ngClass]="{'paid-filter':selectedFilter ==1}" (click)="getPaidOrUnpaidOrders(true)">
                     გადახდილი
                 </div>
+                <button class="filter" style="padding: 20px 20px; border-radius: 10px; background-color:blueviolet; border:none; cursor: pointer;" (click)="openmodal()"> <i class="fas fa-search"></i></button>
             </div>
         </div>
-        <div class="order-filter-align" style="margin-top: 10px;">
-            <div class="filters" >
-                <div style="display: flex; gap: 10px; flex-direction: column;">
-                    <div class="filter">
-                        <input type="number"  style="width: 150px; padding: 8px 5px; border-radius: 5px; background-color: transparent; border: 1px solid white; color: white;" [(ngModel)]="orderSearchNum"placeholder="#">
-                        <button class="filter" style="padding: 10px 20px; border-radius: 10px; background-color: green; border:none; cursor: pointer;" (click)="OrderSearch()">ძებნა <i class="fas fa-search"></i></button>
-                    </div>
-                </div>
-            </div>
-        </div>
+
         <div class="orders-grouped" *ngIf="groupedOrders.length>0">
             <ng-container *ngFor="let i of groupedOrders">
             <!-- <div class="month-header">

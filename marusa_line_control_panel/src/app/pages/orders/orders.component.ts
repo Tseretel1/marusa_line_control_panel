@@ -185,6 +185,7 @@ groupOrdersByMonth() {
     this.getOrderDto.UserId  = null;
     this.getOrderDto.OrderId = this.orderSearchNum;
     this.getOrders();
+    this.closeModal();
   }
   UserIdSearch !:number;
   UserIdOrderSearch(){
@@ -354,7 +355,13 @@ dateBulilder() {
     return order.reduce((total, x) => total + x.finalPrice, 0);
   }
 
-
+  modalVisible: boolean = false;
+  closeModal(){
+    this.modalVisible = false;
+  }
+  openmodal(){
+    this.modalVisible = true;
+  }
 }
 export interface orderStatuses{
  id:number;
