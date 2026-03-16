@@ -91,7 +91,7 @@
         <button class="od-info-tile" *ngIf="order.address" (click)="copyToClipboard(order.address)">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#f472b6" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
           <div class="od-info-tile__text">
-            <span class="od-info-tile__label">მისამართი</span>
+            <span class="od-info-tile__label" style="width: 100%; flex: 1;">მისამართი</span>
             <span class="od-info-tile__value">{{ order.address }}</span>
           </div>
           <span class="od-copy-hint">copy</span>
@@ -100,7 +100,7 @@
       </div>
     </div>
 
-    <div class="od-card od-comment" *ngIf="comment">
+    <div class="od-card od-comment">
       <h3 class="od-section-title">კომენტარი</h3>
       <div class="od-comment__body">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="od-comment__icon"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
@@ -109,7 +109,7 @@
       </div>
     </div>
 
-    <div class="od-card od-map-card" >
+    <div class="od-card od-map-card" *ngIf="">
       <h3 class="od-section-title">მდებარეობა</h3>
       <button class="od-coords" (click)="copyToClipboard(`${order.lat},${order.lng}`)">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
