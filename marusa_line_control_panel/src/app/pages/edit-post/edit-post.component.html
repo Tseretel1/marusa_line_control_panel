@@ -16,7 +16,7 @@
                         <img [src]="p.preview" class="photo">
                     </div>
                 </div>
-                <div class="square-container"  (click)="triggerFileInput()">
+                <div class="square-container" *ngIf="uploadPhotos.length<6" (click)="triggerFileInput()">
                     <i class="fas fa-plus-square"></i>
                 </div>
                 <input  id="photoinput" type="file" (change)="onFileChange($event)" accept="image/*" hidden>
