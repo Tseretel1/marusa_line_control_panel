@@ -1,5 +1,5 @@
-import { AfterViewInit, Component, HostListener, OnInit } from '@angular/core';
-import { ActivatedRoute, Router, RouterLink, ɵEmptyOutletComponent } from '@angular/router';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router,   } from '@angular/router';
 import { CommonModule, DatePipe, NgFor } from '@angular/common';
 import * as  AOS from 'aos';
 import Swal from 'sweetalert2';
@@ -10,7 +10,7 @@ import * as L from 'leaflet';
 
 @Component({
   selector: 'app-order-details',
-  imports: [CommonModule, FormsModule, DatePipe, ɵEmptyOutletComponent],
+  imports: [CommonModule, FormsModule, DatePipe, ],
   templateUrl: './order-details.component.html',
   styleUrl: './order-details.component.scss'
 })
