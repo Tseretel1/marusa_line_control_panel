@@ -8,6 +8,7 @@ import { innerFrom } from 'rxjs/internal/observable/innerFrom';
 import { getPosts } from '../../pages/posts/posts.component';
 import { GetUserFilteredDto, GetusersDto } from '../../pages/users/users.component';
 import { DashboardStatsByYear } from '../../pages/dashboard/dashboard.component';
+import { InsertReview, ReviewDto } from '../../pages/edit-post/reviews/reviews.component';
 @Injectable({
   providedIn: 'root'
 })
@@ -134,6 +135,20 @@ export class PostService {
   UpdateShop(Newshop:Shop): Observable<any> {
     return this.http.put<any>(this.apiUrl+`ControlPanel/update-shop`,Newshop);
   }
+
+  
+  //Reviews
+  InsertReviews(review:InsertReview): Observable<any> {
+    return this.http.post<any>(this.apiUrl+`Review/insert-reviews`,review);
+  }
+  GetReviews(productId:number): Observable<ReviewDto[]> {
+    return this.http.get<ReviewDto[]>(this.apiUrl+`Review/get-reviews?productId=${productId}`,);
+  }
+  DeleteReviews(reviewId:number): Observable<any> {
+    return this.http.delete<any>(this.apiUrl+`Review/delete-reviews?Id=${reviewId}`);
+  }
+
+
 }
 export interface StartEndDate{
   startDate :string;

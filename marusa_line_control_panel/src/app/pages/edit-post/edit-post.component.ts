@@ -12,10 +12,11 @@ import {
 } from '../../shared/services/post.service';
 import Swal from 'sweetalert2';
 import { AddPostComponent } from "../add-post/add-post.component";
+import { ReviewsComponent } from "./reviews/reviews.component";
 
 @Component({
   selector: 'app-edit-post',
-  imports: [CommonModule, FormsModule, ɵEmptyOutletComponent, AddPostComponent],
+  imports: [CommonModule, FormsModule, ɵEmptyOutletComponent, AddPostComponent, ReviewsComponent],
   templateUrl: './edit-post.component.html',
   styleUrl: './edit-post.component.scss',
 })

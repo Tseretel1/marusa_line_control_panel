@@ -1,0 +1,347 @@
+// ─── Tokens (keep in sync with your existing tokens) ─────────────────────────
+$bg-surface:    #131317;
+$bg-card:       #1a1a20;
+$border-dim:    rgba(255,255,255,0.07);
+$border-mid:    rgba(255,255,255,0.12);
+$border-accent: rgba(139,92,246,0.35);
+
+$accent:        #8b5cf6;
+$accent-light:  #a78bfa;
+$accent-glow:   rgba(139,92,246,0.12);
+
+$text-primary:  #f0eef8;
+$text-secondary:#9490a8;
+$text-muted:    #4f4d5c;
+
+$star-on:       #f59e0b;
+$star-off:      #2e2d38;
+$success:       #22c55e;
+$error:         #ef4444;
+
+$radius-sm:     6px;
+$radius-md:     10px;
+$radius-lg:     16px;
+$font:          'DM Sans', system-ui, sans-serif;
+
+* { box-sizing: border-box; }
+
+// ─── Page shell ───────────────────────────────────────────────────────────────
+.reviews-page {
+  padding: 32px 0;
+  font-family: $font;
+  color: $text-primary;
+  // box-shadow: 0px 5px 10px black inset;
+  backdrop-filter: blur(20px);
+  background: linear-gradient(180deg,rgba(34, 33, 33, 0.747),transparent);
+}
+
+.reviews-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  width: 90%;
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+// ─── Write section ────────────────────────────────────────────────────────────
+.write-section {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 20px;
+  background: $bg-card;
+  border: 1px solid $border-dim;
+  border-radius: $radius-lg;
+  animation: fadeUp 0.25s ease both;
+}
+
+.user-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.user-avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid $border-mid;
+  flex-shrink: 0;
+}
+
+.user-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.user-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: $text-primary;
+}
+
+.user-sub {
+  font-size: 12px;
+  color: $text-muted;
+}
+
+.add-btn {
+  padding: 7px 14px;
+  border-radius: $radius-sm;
+  border: 1px solid $border-accent;
+  background: $accent-glow;
+  color: $accent-light;
+  font-family: $font;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+  white-space: nowrap;
+
+  &:hover {
+    background: rgba(139,92,246,0.22);
+    border-color: $accent;
+    color: #fff;
+  }
+}
+
+// ─── Inline form ──────────────────────────────────────────────────────────────
+.inline-form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  animation: fadeUp 0.2s ease both;
+}
+
+// ─── Star input ───────────────────────────────────────────────────────────────
+.stars-input {
+  display: flex;
+  gap: 6px;
+}
+
+.star-input {
+  font-size: 30px;
+  line-height: 1;
+  color: white;
+  cursor: pointer;
+  transition: color 0.1s, transform 0.1s;
+  user-select: none;
+
+  &.active {
+    color: $star-on;
+  }
+
+  &:hover {
+    transform: scale(1.18);
+  }
+}
+
+// ─── Comment textarea ─────────────────────────────────────────────────────────
+.comment-input {
+  width: 100%;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid $border-mid;
+  border-radius: $radius-md;
+  color: $text-primary;
+  font-family: $font;
+  font-size: 14px;
+  line-height: 1.6;
+  padding: 10px 13px;
+  resize: vertical;
+  outline: none;
+  transition: border-color 0.15s;
+
+  &::placeholder { color: $text-muted; }
+  &:focus { border-color: $border-accent; }
+}
+
+// ─── Form actions ─────────────────────────────────────────────────────────────
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.cancel-btn {
+  padding: 8px 16px;
+  border-radius: $radius-sm;
+  border: 1px solid $border-mid;
+  background: transparent;
+  color: $text-secondary;
+  font-family: $font;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s;
+
+  &:hover {
+    border-color: rgba($error, 0.4);
+    color: $error;
+    background: rgba($error, 0.06);
+  }
+}
+
+.submit-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 90px;
+  padding: 8px 20px;
+  border-radius: $radius-sm;
+  border: none;
+  background: $accent;
+  color: #fff;
+  font-family: $font;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s, opacity 0.15s;
+
+  &:hover:not(:disabled) { background: $accent-light; }
+
+  &:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+}
+
+.spinner {
+  width: 14px;
+  height: 14px;
+  border: 2px solid rgba(255,255,255,0.3);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+// ─── Feedback ─────────────────────────────────────────────────────────────────
+.form-success {
+  font-size: 13px;
+  font-weight: 500;
+  color: $success;
+}
+
+.form-error {
+  font-size: 13px;
+  font-weight: 500;
+  color: $error;
+}
+
+// ─── Divider ──────────────────────────────────────────────────────────────────
+.divider {
+  height: 1px;
+  background: $border-dim;
+}
+
+// ─── Reviews list ─────────────────────────────────────────────────────────────
+.reviews-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 30px 0;
+}
+
+.review-card {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 16px 20px;
+  background: $bg-card;
+  border: 1px solid $border-dim;
+  border-radius: $radius-lg;
+  transition: border-color 0.15s;
+  position: relative;
+  
+  &:hover { border-color: $border-mid; }
+}
+.delete{
+    background-color: red;
+    border: none;
+    padding: 5px 10px;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    border-radius: 10px;
+    color: white;
+    cursor: pointer;
+}
+.review-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: $accent-glow;
+  border: 1px solid $border-accent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 700;
+  color: $accent-light;
+  letter-spacing: 0.03em;
+  flex-shrink: 0;
+}
+
+.review-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.reviewer-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: $text-primary;
+}
+
+.review-stars {
+  display: flex;
+  gap: 2px;
+}
+
+.star-display {
+  font-size: 13px;
+  color: white;
+
+  &.filled { color: $star-on; }
+}
+
+.review-comment {
+  margin: 0;
+  font-size: 14px;
+  color: $text-secondary;
+  line-height: 1.65;
+  padding-left: 44px; // aligns under name, past avatar
+}
+
+// ─── No reviews ───────────────────────────────────────────────────────────────
+.no-reviews {
+  margin: 0;
+  font-size: 14px;
+  color: $text-muted;
+  padding: 8px 4px;
+}
+
+// ─── Animation ────────────────────────────────────────────────────────────────
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+// ─── Responsive ───────────────────────────────────────────────────────────────
+@media (max-width: 560px) {
+  .reviews-page { padding: 16px 0; }
+  .star-input { font-size: 26px; }
+  .review-comment { padding-left: 0; }
+}
