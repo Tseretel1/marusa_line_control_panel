@@ -54,13 +54,8 @@ export class OrderDetailsComponent implements OnInit{
       easing: 'ease-in-out',
       once: false, 
     });
-    window.scrollTo({
-     top: 0,
-     behavior: 'smooth' 
-   }); 
+  
   }
-
-
 
   mobileNumber:string = '';
   address:string = '';

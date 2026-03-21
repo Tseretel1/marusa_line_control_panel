@@ -1,10 +1,6 @@
    <div class="plans-container">
       <div class="plans-grid">
-        <div 
-          *ngFor="let plan of subscriptionPlans; let i = index"
-          class="plan-card"
-          [ngClass]="{'selected-plan':plan.SubName === selectedPlan,'premium':plan.SubName === 'პრემიუმი'&& plan.SubName== selectedPlan}"
-        >
+        <div *ngFor="let plan of subscriptionPlans; let i = index"class="plan-card" [ngClass]="{'selected-plan':plan.SubName === selectedPlan,'premium':plan.SubName === 'პრემიუმი'&& plan.SubName== selectedPlan}">
           <div class="plan-header">
             <h2>{{ plan.SubName }}
                 <i class="fas fa-crown" style="color: orange;" *ngIf="plan.SubName =='პრემიუმი'"> </i>

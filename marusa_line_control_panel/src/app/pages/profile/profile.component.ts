@@ -44,6 +44,10 @@ export class ProfileComponent implements OnInit{
     }
 
   ngOnInit(): void {
+   window.scrollTo({
+     top: 0,
+     behavior: 'smooth' 
+   });
   }
   
   shopId:number = 0;

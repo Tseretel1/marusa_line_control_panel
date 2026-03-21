@@ -73,8 +73,8 @@
                     <input style="width: 100px;" [disabled]="!editQuantityVisible" type="number" class="form-control" [(ngModel)]="quantity">
                     <div class="edit-group-align">
                         <button *ngIf="!editQuantityVisible" class="edit-quantity" (click)="editQuantity()"><i class="fas fa-edit"></i></button>
-                        <button *ngIf="editQuantityVisible" class="edit-quantity save-quantity"  (click)="saveQuantity()"><i class="fas fa-check"></i></button>
-                        <button *ngIf="editQuantityVisible" class="edit-quantity close-quantity"  (click)="closeQuantityEdit()"><i class="fas fa-close"></i></button>
+                        <button *ngIf="editQuantityVisible" class="edit-quantity save-quantity"  (click)="saveQuantity()"><i class="fas fa-check" style="color: white;"></i></button>
+                        <button *ngIf="editQuantityVisible" class="edit-quantity close-quantity"  (click)="closeQuantityEdit()"><i class="fas fa-close"style="color: white;"></i></button>
                     </div>
                 </div>
             </div>
