@@ -251,11 +251,6 @@ $transition:  .2s cubic-bezier(.4,0,.2,1);
   color: $text-primary;
   flex: 1;
 
-  &:hover {
-    border-color: $border-hover;
-    background: lighten($surface-2, 2%);
-  }
-
   &__label {
     display: block;
     font-size: 11px;
