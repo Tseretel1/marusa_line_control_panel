@@ -59,9 +59,9 @@
               </div> -->
            </div> 
             <div class="order-card-align" >
-                <div class="order-card" [ngClass]="{'finished-order': o.statusId ==5}"  *ngFor="let o of i.orders" [routerLink]="AppRoutes.orderDetails + o.orderId">
+                <div class="order-card" [ngClass]="{'finished-order': o.statusId ==5,'just-now-card':getTimeAgo(o.createDate)==='just now'}"  *ngFor="let o of i.orders" [routerLink]="AppRoutes.orderDetails + o.orderId">
                     <div class="pay-align">
-                        <span class="pay-span" [ngClass]="{'payed-span': o.isPaid,}"> #{{o.orderNumber}}</span>
+                        <span class="pay-span" [ngClass]="{'payed-span': o.isPaid,'old-seven-day': isOlderThan7Day(o.createDate) && !o.isPaid,}"> #{{o.orderNumber}}</span>
                         <div class="user-details">
                             <div class="user-container">
                                 <img [src]="o.user.profilePhoto" class="user-img" alt="">
@@ -72,7 +72,7 @@
                         <div class="order order-details-back"  *ngIf="o.isPaid">
                             <p style="display: flex; justify-content: space-between;">{{o.createDate| date:'dd MMM'}}  <b style="font-size: 14px;">{{o.finalPrice}}₾</b> </p>
                         </div>
-                        <div class="order order-details-back"[ngClass]="{'old-one-day': isOlderThan1Day(o.createDate) && !o.isPaid,'old-seven-day': isOlderThan7Day(o.createDate) && !o.isPaid,'just-now-border':getTimeAgo(o.createDate)==='just now'}" *ngIf="!o.isPaid">
+                        <div class="order order-details-back"[ngClass]="{'old-one-day': isOlderThan1Day(o.createDate) && !o.isPaid,'old-seven-day': isOlderThan7Day(o.createDate) && !o.isPaid}" *ngIf="!o.isPaid">
                             <p style="display: flex; justify-content: space-between;" [ngClass]="{'just-now':getTimeAgo(o.createDate)==='just now'}">{{getTimeAgo(o.createDate)}} <b style="font-size: 14px;">{{o.finalPrice}}₾</b> </p>
                         </div>
                         <div class="order order-details-back" *ngIf="o.isPaid">

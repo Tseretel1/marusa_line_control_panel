@@ -116,7 +116,7 @@ groupOrdersByMonth() {
 
   for (const order of this.orders) {
     const date = new Date(order.createDate);
-    const monthIndex = date.getMonth(); // 0–11
+    const monthIndex = date.getMonth(); 
     const year = date.getFullYear();
     const key = `${year}-${monthIndex}`;
 
@@ -220,9 +220,9 @@ groupOrdersByMonth() {
     const hours = Math.floor((diffFuture / (1000 * 60 * 60)) % 24);
     const minutes = Math.floor((diffFuture / (1000 * 60)) % 60);
 
-    if (days > 0) return `${days} დღის${days > 1 ? 's' : ''} from now`;
-    if (hours > 0) return `${hours} hour${hours > 1 ? 's' : ''} from now`;
-    if (minutes > 0) return `${minutes} minute${minutes > 1 ? 's' : ''} from now`;
+    if (days > 0) return `${days} დღის${days > 5 ? 's' : ''} from now`;
+    if (hours > 0) return `${hours} hour${hours > 5 ? 's' : ''} from now`;
+    if (minutes > 0) return `${minutes} minute${minutes > 5 ? 's' : ''} from now`;
     return 'Just now';
   }
 

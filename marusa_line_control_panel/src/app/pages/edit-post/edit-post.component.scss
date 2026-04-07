@@ -176,10 +176,19 @@
             width: 100%;
             background-color: green;
             border-radius: 5px;
+            color: white;
         }
         .remove{
             background-color: red;
+            color: white;
         }
+        .insert:hover{
+            background-color: green;
+        }
+        .remove:hover{
+            background-color: red;
+        }
+
         .input-group {
             display: flex;
             flex-direction: column;
@@ -223,6 +232,7 @@
                     font-weight: 600;
                     transition: all 0.2s ease;
                     border-radius: 5px;
+                    flex-direction: column;
                     label {
                         cursor: pointer;
                         margin: 0;
@@ -230,24 +240,15 @@
                 }
                 
                 .order-allowed-align {
-                    background-color: #1a4d2e;
-                    border-color: #2d5f3f;
+                    background-color: green;
+                    border-color: green;
                     color: white;
-                    &:hover {
-                        background-color: #22603a;
-                        border-color: #3a7550;
-                    }
                 }
                 
                 .order-not-allowed {
-                    background-color: #4d1a1a;
-                    border-color: #5f2d2d;
+                    background-color: red;
+                    border-color: red;
                     color: white;
-                    
-                    &:hover {
-                        background-color: #602222;
-                        border-color: #753737;
-                    }
                 }
                 .form-control {
                     background-color: #0a0a0a;
