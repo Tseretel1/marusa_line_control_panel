@@ -79,8 +79,9 @@
                 </div>
             </div>
             <div class="input-group" style="width: 300px; grid-template-columns: repeat(1,1fr);">
-                <div class="form-control-group">
-                    <button class="order-allowed-align" [ngClass]="{'order-not-allowed':posts.orderNotAllowed}"(click)="orderAllowedToggle()">შეკვეთა მარაგის ამოწურვის შემდეგ <p *ngIf="!posts.orderNotAllowed">✅️</p> <p *ngIf="posts.orderNotAllowed">❌</p></button>
+                <div class="form-control-group" >
+                    <p>შეკვეთა მარაგის ამოწურვის შემდეგ</p>
+                    <button class="order-allowed-align" [ngClass]="{'order-not-allowed':posts.orderNotAllowed}"(click)="orderAllowedToggle()"> <p *ngIf="!posts.orderNotAllowed">დაშვებული</p> <p *ngIf="posts.orderNotAllowed">შეზღუდული</p></button>
                 </div>
             </div>
         </div>
