@@ -18,6 +18,8 @@ button{
   background: #151516;
   border: 1px solid black;
   border-radius: 10px;
+  background: linear-gradient(145deg, rgba(30, 33, 48, 0.95), rgba(20, 23, 38, 0.95));
+  border: 1px solid rgba(99, 102, 241, 0.3);
 }
 
 .filters {
@@ -333,6 +335,8 @@ button{
   padding: 20px;
   background: #151516;
   border: 1px solid black;
+  background: linear-gradient(145deg, rgba(30, 33, 48, 0.95), rgba(20, 23, 38, 0.95));
+  border: 1px solid rgba(99, 102, 241, 0.3);
   .month-stat{
     padding: 5px 10px;
     display: flex;
@@ -363,6 +367,8 @@ button{
   position: relative;
   overflow: hidden;
   box-shadow: 0px 0px 10px black;
+  background: linear-gradient(145deg, rgba(30, 33, 48, 0.95), rgba(20, 23, 38, 0.95));
+  border: 1px solid rgba(99, 102, 241, 0.3);
 }
 
 .order-card::before {
@@ -507,10 +513,11 @@ button{
 .old-seven-day{
     background-color:red;
     border:  2px solid red;
+  background: linear-gradient(145deg, red, darkred);
 }
 .finished-order {
-    border:  2px solid #22c55e;
-    background-color: #22c55e98;
+  border:  2px solid #22c55e;
+  background: linear-gradient(145deg, #62ad7e98, green);
 }
 .order p {
   margin: 0;

@@ -198,14 +198,12 @@ a{
   text-wrap: nowrap;
 }
     .btn-save {
-      background: #7179a0;
+      background: green;
       color: #fff;
-      text-shadow: 0px 0px 1px black;
     }
 
     .btn-save:hover {
       transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
     }
     .premium{
       // background: #00f2ea;
@@ -239,8 +237,8 @@ a{
     }
 
     .btn-cancel {
-      background: #2a2a2a;
-      color: #999;
+      background: red;
+      color: white;
     }
 
     .btn-cancel:hover {
