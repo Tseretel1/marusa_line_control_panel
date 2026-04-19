@@ -81,7 +81,8 @@
                         <div class="order" style="padding: 0; border: none;">
                             <p class="order-count" s> <i class="fas fa-close"></i> {{o.productQuantity}}</p>               
                             <div class="order-photo-container">
-                                <img [src]="o.photos[0].photoUrl" class="order-photo" alt="">
+                                <img  *ngIf="o.photos[0]?.photoUrl" [src]="o.photos[0].photoUrl" class="order-photo" alt="">
+                                <div *ngIf="!o.photos[0]?.photoUrl" class="order-photo" alt=""></div>
                                 <div class="order-title-absolute" ><p class="orders-title" >{{o.title}}</p></div>
                             </div>
                         </div>

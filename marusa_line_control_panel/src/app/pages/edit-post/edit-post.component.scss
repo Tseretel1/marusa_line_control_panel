@@ -27,6 +27,28 @@
         .revert{
             background-color: green;
         }
+        .copybtn{
+            background-color: #f97316;
+        }
+        .ordernumcopied{
+            position: absolute;
+            right: -10px;
+            top: -10px;
+            animation: 0.3s copyalert;
+        }
+        @keyframes copyalert {
+            0%{
+                scale: 0.5;
+                opacity: 0;
+            }
+            50%{
+                scale: 2;
+                opacity: 1;
+            }
+            100%{
+                scale: 1;
+            }
+        }
     }
     .remove-revert-align{
         width: 90%;

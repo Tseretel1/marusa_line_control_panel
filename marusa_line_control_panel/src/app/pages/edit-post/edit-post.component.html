@@ -1,11 +1,15 @@
 <div class="center-component">
-        <div  class="show-on-web">
-            <b>საიტზე ჩვენება </b>
-            <button class="revert btn" style="width: 50px;" *ngIf="posts.dateDeleted==null" (click)="removePost()"><i class="fas fa-eye"></i> </button>
-            <button class="hide btn"style="width: 50px;"  *ngIf="posts.dateDeleted" (click)="revertPost()"><i class="fas fa-eye-slash"></i> </button>
+        <div  class="show-on-web" style="display: flex; flex-wrap: wrap; align-items: center;">
+            <div>
+                <button class="revert btn"  *ngIf="posts.dateDeleted==null" (click)="removePost()">საიტზე ჩვენება <i class="fas fa-eye"></i> </button>
+                <button class="hide btn"  *ngIf="posts.dateDeleted" (click)="revertPost()">საიტზე ჩვენება <i class="fas fa-eye-slash"></i> </button>
+            </div>
+            <div style="border-radius: 5px; background-color: black; color: white; border: none; position: relative;">
+                <button style="cursor: pointer; text-decoration: underline;" class="btn copybtn" (click)="copyToClipboard(`${AppUrl.ShopsBaseUrl}card-details/${postId}`,1)">{{AppUrl.ShopsBaseUrl+'card-details/'+ postId}}  <i class="fas fa-copy" style="color: white;"></i></button>
+                <span class="ordernumcopied" *ngIf="copiedNumber ==1"> ✅</span>
+            </div>
         </div>
     <div class="main-body">
-        
         <div class="component">
             <div class="photo-align" > 
                 <div *ngFor="let p of uploadPhotos; let i = index" class="ng-container" data-aos="fade-in">

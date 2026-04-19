@@ -167,13 +167,16 @@ export class OrderDetailsComponent implements OnInit{
       this.location = { lat: lat.toString(), lng: lng.toString() };
     }
   }
-  copyToClipboard(text: string): void {
+ copiedNumber:number= 0;
+  copyToClipboard(text: string,numebr:number): void {
+    this.copiedNumber = numebr;
     navigator.clipboard.writeText(text)
     .then(() => {
     })
     .catch(err => {
     });
     setTimeout(() => {
+      this.copiedNumber = 0;
     }, 3000);
   }
 }

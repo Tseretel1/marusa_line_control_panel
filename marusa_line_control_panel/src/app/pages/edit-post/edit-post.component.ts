@@ -4,15 +4,11 @@ import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, ɵEmptyOutletComponent } from '@angular/router';
 import * as AOS from 'aos';
 import { forkJoin, Observable, tap } from 'rxjs';
-import {
-  GetPhoto,
-  GetPost,
-  PostService,
-  ProductTypes,
-} from '../../shared/services/post.service';
+import { GetPhoto, GetPost, PostService, ProductTypes,} from '../../shared/services/post.service';
 import Swal from 'sweetalert2';
 import { AddPostComponent } from "../add-post/add-post.component";
 import { ReviewsComponent } from "./reviews/reviews.component";
+import { AppUrl } from '../../shared/AppUrl/AppUrl';
 
 @Component({
   selector: 'app-edit-post',
@@ -21,6 +17,7 @@ import { ReviewsComponent } from "./reviews/reviews.component";
   styleUrl: './edit-post.component.scss',
 })
 export class EditPostComponent {
+  AppUrl = AppUrl; 
   postId: number = 0;
   posts: GetPost = {} as GetPost;
   photosArray: GetPost[] = [];
@@ -366,6 +363,19 @@ private submitPost(photos:Insertphoto[]|null) {
     this.editProductVisible = true;
   }
 
+
+  copiedNumber:number= 0;
+  copyToClipboard(text: string,numebr:number): void {
+    this.copiedNumber = numebr;
+    navigator.clipboard.writeText(text)
+    .then(() => {
+    })
+    .catch(err => {
+    });
+    setTimeout(() => {
+      this.copiedNumber = 0;
+    }, 3000);
+  }
 }
 
 export interface InsertPost {

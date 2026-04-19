@@ -8,6 +8,7 @@ import Swal from 'sweetalert2';
 import { AppRoutes } from '../../shared/AppRoutes/AppRoutes';
 import { RouterLink } from '@angular/router';
 import { AuthReloadService } from '../../shared/AuthReloadServise/AuthReloadService';
+import { AppUrl } from '../../shared/AppUrl/AppUrl';
 @Component({
   selector: 'app-profile',
   imports: [CommonModule,FormsModule,RouterLink],
@@ -15,7 +16,7 @@ import { AuthReloadService } from '../../shared/AuthReloadServise/AuthReloadServ
   styleUrl: './profile.component.scss'
 })
 export class ProfileComponent implements OnInit{
-
+  AppUrl = AppUrl;
   AppRoutes=AppRoutes;
   shop: Shop = {
     id: 0,
