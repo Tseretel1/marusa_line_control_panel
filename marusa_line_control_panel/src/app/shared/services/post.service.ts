@@ -45,6 +45,13 @@ export class PostService {
   addPost(obj: InsertPost): Observable<any> {
     return this.http.post<any>(this.apiUrl + `ControlPanel/add-post`, obj);
   }
+  addPosts(obj: FormData): Observable<any> {
+    return this.http.post<any>(
+      this.apiUrl + 'ControlPanel/add-post',
+      obj
+    );
+  }
+
   EditPost(obj: InsertPost): Observable<any> {
     return this.http.post<any>(this.apiUrl + `ControlPanel/edit-post`, obj);
   }

@@ -47,6 +47,45 @@ export class AddPostComponent implements OnInit{
   InsertPhotos: Insertphoto[] = [];
 
 
+  sendApplicationtoBackends() {
+  const formData = new FormData();
+  formData.append('title', this.title);
+  formData.append('description', this.description);
+  formData.append('price', this.price.toString());
+  formData.append('discountedPrice', (this.discountedPrice ?? 0).toString());
+  formData.append('quantity', (this.quantity ?? 0).toString());
+  formData.append('productTypeId', (this.productTypeId ?? 0).toString());
+  formData.append('orderNotAllowed', this.orderNotAllowed.toString());
+
+  for (let p of this.uploadPhotos) {
+    if (p.file) {
+      formData.append('photos', p.file); 
+    }
+  }
+  this.postService.addPosts(formData).subscribe({
+    next: (res) => {
+       if (res != null) {
+          Swal.fire({
+            icon: 'success',
+            timer: 3000,
+            showConfirmButton: false,
+            confirmButtonText: 'ოქეი',
+            background:'rgb(25, 26, 25)',
+            color: '#ffffff',    
+            confirmButtonColor: 'green',
+            title: 'პროდუქტი წარმატებით დაემატა!',
+          }).then((results) => {
+            this.router.navigate([this.AppRoutes.posts])
+          });
+        }
+    },
+    error: (err) => {
+      console.error(err);
+    }
+  });
+  
+}
+
 
   sendApplicationtoBackend() {
     var validations = [
