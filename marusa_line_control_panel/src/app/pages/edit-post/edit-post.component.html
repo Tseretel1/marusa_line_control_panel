@@ -62,7 +62,7 @@
                     <textarea name="" [disabled]="!editProductVisible" id="" class="description" [(ngModel)]="description"></textarea>
                 </div>
                 <div style="display: flex; width: 100%; gap: 10px;" *ngIf="editProductVisible">
-                    <button class="insert" (click)="sendApplicationtoBackend()">
+                    <button class="insert" (click)="sendApplicationtoBackends()">
                         შენახვა 
                     </button>
                     <button class="insert remove" style="width: 40%;" (click)="rollbackProduct()">
@@ -91,7 +91,6 @@
         </div>
         </div>
     </div>
-
 </div> 
 <div class="reviews">
     <app-reviews ></app-reviews>

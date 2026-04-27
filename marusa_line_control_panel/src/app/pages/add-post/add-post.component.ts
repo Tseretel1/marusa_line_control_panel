@@ -47,7 +47,7 @@ export class AddPostComponent implements OnInit{
   InsertPhotos: Insertphoto[] = [];
 
 
-  sendApplicationtoBackends() {
+sendApplicationtoBackends() {
   const formData = new FormData();
   formData.append('title', this.title);
   formData.append('description', this.description);
@@ -83,78 +83,7 @@ export class AddPostComponent implements OnInit{
       console.error(err);
     }
   });
-  
 }
-
-
-  sendApplicationtoBackend() {
-    var validations = [
-      { condition: !!this.title, message: 'შეიყვანეთ დასახელება' },
-      { condition: this.price > 0, message: 'ფასი უნდა აღემატებოდეს ნულს' },
-      { condition: this.uploadPhotos.length > 0, message: 'ატვირთეთ მინიმუმ 1 ფოტო' },
-    ];
-    
-    if(this.productTypesList){
-      const validation={
-         condition: !!this.productTypeId && this.productTypeId!=0, message: 'აირჩიეთ კატეგორია' ,
-      }
-      validations.push(validation);
-    }
-    const failed = validations.find(v => !v.condition);
-      if (failed) {
-        Swal.fire({
-          icon: 'error',
-          timer: 3000,
-          showConfirmButton: false,
-          confirmButtonColor: 'green',
-          background:'rgb(25, 26, 25)',
-          color: '#ffffff',    
-          title:failed.message,
-        });
-        return;
-      }
-
-      this.uploadAllImages().subscribe({
-        next: (results) => {
-          const InsertPost: InsertPost = {
-            title: this.title,
-            productTypeId:this.productTypeId,
-            price: this.price,
-            discountedPrice: this.discountedPrice,
-            description: this.description,
-            quantity: this.quantity,
-            photos: this.InsertPhotos,
-            orderNotAllowed: this.orderNotAllowed,
-          };
-          console.log(InsertPost);
-          this.postService.addPost(InsertPost).subscribe(
-            (resp) => {
-              if (resp != null) {
-                Swal.fire({
-                  icon: 'success',
-                  timer: 3000,
-                  showConfirmButton: false,
-                  confirmButtonText: 'ოქეი',
-                  background:'rgb(25, 26, 25)',
-                  color: '#ffffff',    
-                  confirmButtonColor: 'green',
-                  title: 'პროდუქტი წარმატებით დაემატა!',
-                }).then((results) => {
-                  this.router.navigate([this.AppRoutes.posts])
-                });
-              }
-            },
-            (error) => {
-              console.error(error);
-            }
-          );
-        },
-        error: (err) => {
-          console.error('Upload failed:', err);
-        },
-      });
-  }
-
   uploadPhotos: {
     id: number;
     preview?: string | ArrayBuffer | null;

@@ -11,6 +11,7 @@
         align-items: flex-start;
         gap:10px; width: 90%;
         background-color: #1a1a1a;
+        
         border: 1px solid #2a2a2a;
         padding: 10px 20px;
         border-radius: 10px;
@@ -28,7 +29,7 @@
             background-color: green;
         }
         .copybtn{
-            background-color: #f97316;
+             background-color: #07284a;
         }
         .ordernumcopied{
             position: absolute;
@@ -184,6 +185,14 @@
                 }
             }
         }
+    }
+    .on-site-invisible{
+        border-color: #5f2d2d;  
+        background-color: #4d1a1a;
+    }
+    .on-site-visible{
+        background-color: #1a4d2e;
+        border-color: #2d5f3f;
     }
     .form-align {
         display: flex;

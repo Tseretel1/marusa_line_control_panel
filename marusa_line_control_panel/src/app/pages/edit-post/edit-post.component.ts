@@ -167,6 +167,55 @@ sendApplicationtoBackend() {
   }
   this.submitPost(null);
 }
+
+sendApplicationtoBackends() {
+  const validations = [
+    { condition: !!this.title, message: 'შეიყვანეთ დასახელება' },
+    { condition: !!this.productTypeId, message: 'აირჩიეთ პროდუქტის ტიპი' },
+    { condition: this.price > 0, message: 'ფასი უნდა აღემატებოდეს ნულს' },
+    { condition: this.uploadPhotos.length > 0, message: 'ატვირთეთ მინიმუმ 1 ფოტო' },
+  ];
+
+  const failed = validations.find(v => !v.condition);
+    if (failed) {
+    const formData = new FormData();
+    formData.append('title', this.title);
+    formData.append('description', this.description);
+    formData.append('price', this.price.toString());
+    formData.append('discountedPrice', (this.discountedPrice ?? 0).toString());
+    formData.append('quantity', (this.quantity ?? 0).toString());
+    formData.append('productTypeId', (this.productTypeId ?? 0).toString());
+    formData.append('orderNotAllowed', this.posts.orderNotAllowed.toString());
+
+    for (let p of this.uploadPhotos) {
+      if (p.file) {
+        formData.append('photos', p.file); 
+      }
+    }
+    this.postService.EditPosts(formData).subscribe({
+      next: (res) => {
+        if (res != null) {
+            Swal.fire({
+              icon: 'success',
+              timer: 3000,
+              showConfirmButton: false,
+              confirmButtonText: 'ოქეი',
+              background:'rgb(25, 26, 25)',
+              color: '#ffffff',    
+              confirmButtonColor: 'green',
+              title: 'პროდუქტი წარმატებით რედაქტირდა!',
+            }).then((results) => {
+               this.hideEditProduct();
+            });
+          }
+      },
+      error: (err) => {
+        console.error(err);
+      }
+    });
+  }
+}
+
 private submitPost(photos:Insertphoto[]|null) {
   const InsertPost: InsertPost = {
     Id: this.postId,

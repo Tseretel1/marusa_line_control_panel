@@ -55,6 +55,10 @@ export class PostService {
   EditPost(obj: InsertPost): Observable<any> {
     return this.http.post<any>(this.apiUrl + `ControlPanel/edit-post`, obj);
   }
+  
+  EditPosts(obj: FormData): Observable<any> {
+    return this.http.post<any>(this.apiUrl + `ControlPanel/edit-post`, obj);
+  }
   deletePhoto(PhotoId:number): Observable<any> {
     return this.http.post<any>(this.apiUrl + `ControlPanel/delete-photo?photoId=${PhotoId}`,{});
   }
