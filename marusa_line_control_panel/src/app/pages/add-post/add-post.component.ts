@@ -101,7 +101,21 @@ sendApplicationtoBackends() {
   const input = event.target as HTMLInputElement;
   if (input.files && input.files[0]) {
     const file = input.files[0];
+  //  const maxSize = 10 * 1024 * 1024; 
 
+  //   if (file.size > maxSize) {
+
+  //        Swal.fire({
+  //           icon: 'error',
+  //           timer: 3000,
+  //           showConfirmButton: false,
+  //           confirmButtonColor: 'green',
+  //           background:'rgb(25, 26, 25)',
+  //           color: '#ffffff',    
+  //           title:"გთხოვთ ატვირთოთ 10mb ზე მცირე ფოტო",
+  //         });
+  //     return;
+  //   }
     const newPhoto: { id: number; preview: string | ArrayBuffer | null; file: File } = {
       id: Date.now(),
       file: file,
