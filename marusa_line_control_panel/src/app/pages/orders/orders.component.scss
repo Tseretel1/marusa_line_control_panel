@@ -444,9 +444,9 @@ button{
   background-color: red;
 }
 .payed-span {
-  background: #22c55e;
+  background: green;
   color: white;
-  border: 1px solid #15803d;
+  border: 1px solid green;
   
 }
 
@@ -504,7 +504,7 @@ button{
     }
 }
 .paid-order-details-back{
-    border:  2px solid #22c55e;
+    border:  2px solid green;
 }
 .old-one-day{
     background-color: #f97316;
@@ -516,8 +516,8 @@ button{
   background: linear-gradient(145deg, red, darkred);
 }
 .finished-order {
-  border:  2px solid #22c55e;
-  background: linear-gradient(145deg, #62ad7e98, green);
+  border:  2px solid green;
+  background: linear-gradient(145deg,  green);
 }
 .order p {
   margin: 0;
