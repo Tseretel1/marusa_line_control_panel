@@ -168,7 +168,7 @@ sendApplicationtoBackend() {
   this.submitPost(null);
 }
 
-sendApplicationtoBackends() {
+SavePhotos() {
   const validations = [
     { condition: !!this.title, message: 'შეიყვანეთ დასახელება' },
     { condition: !!this.productTypeId, message: 'აირჩიეთ პროდუქტის ტიპი' },
@@ -179,14 +179,6 @@ sendApplicationtoBackends() {
   const failed = validations.find(v => !v.condition);
     if (failed) {
     const formData = new FormData();
-    formData.append('title', this.title);
-    formData.append('description', this.description);
-    formData.append('price', this.price.toString());
-    formData.append('discountedPrice', (this.discountedPrice ?? 0).toString());
-    formData.append('quantity', (this.quantity ?? 0).toString());
-    formData.append('productTypeId', (this.productTypeId ?? 0).toString());
-    formData.append('orderNotAllowed', this.posts.orderNotAllowed.toString());
-
     for (let p of this.uploadPhotos) {
       if (p.file) {
         formData.append('photos', p.file); 
