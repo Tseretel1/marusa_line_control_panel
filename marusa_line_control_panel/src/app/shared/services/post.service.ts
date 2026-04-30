@@ -56,11 +56,11 @@ export class PostService {
     return this.http.post<any>(this.apiUrl + `ControlPanel/edit-post`, obj);
   }
   
-  EditPosts(obj: FormData): Observable<any> {
-    return this.http.post<any>(this.apiUrl + `ControlPanel/edit-post`, obj);
+  EditPostPhotos(obj: FormData): Observable<any> {
+    return this.http.post<any>(this.apiUrl + `ControlPanel/edit-post-photos`, obj);
   }
-  deletePhoto(PhotoId:number): Observable<any> {
-    return this.http.post<any>(this.apiUrl + `ControlPanel/delete-photo?photoId=${PhotoId}`,{});
+  deletePhoto(PhotoId:number,preview:string): Observable<any> {
+    return this.http.post<any>(this.apiUrl + `ControlPanel/delete-photo?photoId=${PhotoId}&&photoUrl=${preview}`,{});
   }
   getTotalLikesCount(): Observable<number> {
     return this.http.get<number>(this.apiUrl+'ControlPanel/get-like-count');

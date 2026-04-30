@@ -25,7 +25,7 @@
                 </div>
                 <input  id="photoinput" type="file" (change)="onFileChange($event)" accept="image/*" hidden>
             </div>
-            <div class="upload-photos-align" *ngIf="this.changeNum!=0"><button class="save-photos-button" (click)="uploadImages()">შენახვა</button></div>
+            <div class="upload-photos-align" *ngIf="this.changeNum!=0"><button class="save-photos-button" (click)="SavePhotos()">შენახვა</button></div>
         </div>
         <div class="component">
             <button class="edit-product" *ngIf="!editProductVisible"(click)="editProduct()"> <b>რედაქტირება</b> <i class="fas fa-edit"></i></button>
@@ -59,10 +59,10 @@
                 </div>
                 <div class="description-group">
                     <label class="form-control-label">პროდუქტის აღწერა</label>
-                    <textarea name="" [disabled]="!editProductVisible" id="" class="description" [(ngModel)]="description"></textarea>
+                    <textarea name="" [disabled]="!editProductVisible" id="" class="description" [(ngModel)]="description" maxlength="500"></textarea>
                 </div>
                 <div style="display: flex; width: 100%; gap: 10px;" *ngIf="editProductVisible">
-                    <button class="insert" (click)="sendApplicationtoBackends()">
+                    <button class="insert" (click)="ValidateAndSaveEditedProduct()">
                         შენახვა 
                     </button>
                     <button class="insert remove" style="width: 40%;" (click)="rollbackProduct()">

@@ -106,44 +106,11 @@ export class EditPostComponent {
     preview?: string | ArrayBuffer | null;
     file?: File | null;
   }[] = [];
-  uploadAllImages(): Observable<any[]> {
-    const uploads: Observable<any>[] = [];
-    this.uploadPhotosTobackend.forEach((p, index) => {
-      if (p.file) {
-        const upload$ = this.postService.uploadImage(p.file).pipe(
-          tap((response: any) => {
-            const photo : Insertphoto={
-              photoUrl :response.secure_url
-            }
-            this.InsertPhotos.push(photo);
-          })
-        );
-        uploads.push(upload$);
-      }
-    });
-    return forkJoin(uploads);
-  }
-
-uploadImages() {
-  const newFilesExist = this.uploadPhotos.some(p => p.file);
-  if (!newFilesExist) {
-    return;
-  }
-  this.InsertPhotos = [];
-
-  this.uploadAllImages().subscribe({
-    next: () => {
-      this.submitPost(this.InsertPhotos);
-    },
-    error: (err) => {
-      console.error('Upload failed:', err);
-    }
-  });
-}
  photosChanged():boolean{
   return this.uploadPhotos.some(p => p.file);
 }
-sendApplicationtoBackend() {
+
+ValidateAndSaveEditedProduct() {
   const validations = [
     { condition: !!this.title, message: 'შეიყვანეთ დასახელება' },
     { condition: !!this.productTypeId, message: 'აირჩიეთ პროდუქტის ტიპი' },
@@ -165,50 +132,42 @@ sendApplicationtoBackend() {
     });
     return;
   }
-  this.submitPost(null);
+  this.submitPost();
 }
 
 SavePhotos() {
-  const validations = [
-    { condition: !!this.title, message: 'შეიყვანეთ დასახელება' },
-    { condition: !!this.productTypeId, message: 'აირჩიეთ პროდუქტის ტიპი' },
-    { condition: this.price > 0, message: 'ფასი უნდა აღემატებოდეს ნულს' },
-    { condition: this.uploadPhotos.length > 0, message: 'ატვირთეთ მინიმუმ 1 ფოტო' },
-  ];
-
-  const failed = validations.find(v => !v.condition);
-    if (failed) {
-    const formData = new FormData();
-    for (let p of this.uploadPhotos) {
-      if (p.file) {
-        formData.append('photos', p.file); 
-      }
+  const formData = new FormData();
+  for (let p of this.uploadPhotos) {
+    if (p.file) {
+      formData.append('postId', this.postId.toString()); 
+      formData.append('photos', p.file); 
     }
-    this.postService.EditPosts(formData).subscribe({
-      next: (res) => {
-        if (res != null) {
-            Swal.fire({
-              icon: 'success',
-              timer: 3000,
-              showConfirmButton: false,
-              confirmButtonText: 'ოქეი',
-              background:'rgb(25, 26, 25)',
-              color: '#ffffff',    
-              confirmButtonColor: 'green',
-              title: 'პროდუქტი წარმატებით რედაქტირდა!',
-            }).then((results) => {
-               this.hideEditProduct();
-            });
-          }
-      },
-      error: (err) => {
-        console.error(err);
-      }
-    });
   }
+  this.postService.EditPostPhotos(formData).subscribe({
+    next: (res) => {
+      if (res != null) {
+          Swal.fire({
+            icon: 'success',
+            timer: 3000,
+            showConfirmButton: false,
+            confirmButtonText: 'ოქეი',
+            background:'rgb(25, 26, 25)',
+            color: '#ffffff',    
+            confirmButtonColor: 'green',
+            title: 'პროდუქტი წარმატებით რედაქტირდა!',
+          
+          });
+        }
+        this.hideEditProduct();
+        this.changeNum=0;
+    },
+    error: (err) => {
+      console.error(err);
+    }
+  });
 }
 
-private submitPost(photos:Insertphoto[]|null) {
+private submitPost() {
   const InsertPost: InsertPost = {
     Id: this.postId,
     title: this.title,
@@ -216,7 +175,7 @@ private submitPost(photos:Insertphoto[]|null) {
     price: this.price,
     discountedPrice: this.discountedPrice,
     description: this.description,
-    photos:photos,
+    photos:null,
   };
 
   this.postService.EditPost(InsertPost).subscribe(
@@ -299,15 +258,29 @@ private submitPost(photos:Insertphoto[]|null) {
       confirmButtonColor: 'green',
       title: 'ნამდვილად გსურთ ფოტოს წაშლა?',
     }).then((results) => {
-      if (results.isConfirmed) {
-          this.uploadPhotos = this.uploadPhotos.filter(p => p.id !== id);
-          this.uploadPhotosTobackend = this.uploadPhotosTobackend.filter(p => p.id !== id);
-          if(this.changeNum>0){
-            this.changeNum--;
-          }     
-          this.postService.deletePhoto(id).subscribe((resp)=>{
-          })   
+     if (results.isConfirmed) {
+
+      const photoToDelete = this.uploadPhotos.find(p => p.id === id);
+
+      if (!photoToDelete) {
+        console.error('Photo not found');
+        return;
       }
+
+      if (!photoToDelete.preview || typeof photoToDelete.preview !== 'string') {
+        console.error('Preview is missing or invalid');
+        return;
+      }
+
+      this.postService.deletePhoto(id, photoToDelete.preview).subscribe((resp) => {
+        this.uploadPhotos = this.uploadPhotos.filter(p => p.id !== id);
+        this.uploadPhotosTobackend = this.uploadPhotosTobackend.filter(p => p.id !== id);
+
+        if (this.changeNum > 0) {
+          this.changeNum--;
+        }
+      });
+    }
     });
   }
 

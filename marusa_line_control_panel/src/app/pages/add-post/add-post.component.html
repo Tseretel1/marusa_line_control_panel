@@ -59,13 +59,10 @@
             </div>
             <div class="description-group">
                 <label class="form-control-label">აღწერა</label>
-                <textarea name="" id="" class="description" [(ngModel)]="description"></textarea >
+                <textarea name="" id="" class="description" [(ngModel)]="description" maxlength="500"></textarea >
             </div>
             <button class="noselect" (click)="sendApplicationtoBackends()">
                 <span class="text">ატვირთვა </span>
-                <span class="icon">
-                <i class="fas fa-cloud-upload-alt"></i>
-                </span>
             </button>
         </div>
     </div>

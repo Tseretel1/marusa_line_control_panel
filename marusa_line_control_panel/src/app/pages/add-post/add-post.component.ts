@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import * as AOS from 'aos'
 import { Observable, forkJoin, tap,} from 'rxjs';
@@ -48,6 +48,27 @@ export class AddPostComponent implements OnInit{
 
 
 sendApplicationtoBackends() {
+  const validations = [
+    { condition: !!this.title, message: 'შეიყვანეთ დასახელება' },
+    { condition: !!this.productTypeId, message: 'აირჩიეთ პროდუქტის ტიპი' },
+    { condition: this.price > 0, message: 'ფასი უნდა აღემატებოდეს ნულს' },
+    { condition: this.uploadPhotos.length > 0, message: 'ატვირთეთ მინიმუმ 1 ფოტო' },
+  ];
+
+  const failed = validations.find(v => !v.condition);
+
+  if (failed) {
+    Swal.fire({
+      icon: 'error',
+      timer: 3000,
+      showConfirmButton: false,
+      confirmButtonColor: 'green',
+      background:'rgb(25, 26, 25)',
+      color: '#ffffff',    
+      title:failed.message,
+    });
+    return;
+  }
   const formData = new FormData();
   formData.append('title', this.title);
   formData.append('description', this.description);
@@ -62,6 +83,7 @@ sendApplicationtoBackends() {
       formData.append('photos', p.file); 
     }
   }
+  console.log(formData)
   this.postService.addPosts(formData).subscribe({
     next: (res) => {
        if (res != null) {
