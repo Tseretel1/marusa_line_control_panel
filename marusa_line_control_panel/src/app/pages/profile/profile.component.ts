@@ -124,26 +124,44 @@ export class ProfileComponent implements OnInit{
     reader.readAsDataURL(file);
       input.value = '';
     }
+}
+
+
+SavePhotos() {
+  const formData = new FormData();
+  if(this.uploadPhoto){
+    formData.append('photo', this.uploadPhoto.file); 
+    this.service.EditShopPhoto(formData).subscribe({
+      next: (res) => {
+        if (res != null) {
+            Swal.fire({
+              icon: 'success',
+              timer: 3000,
+              showConfirmButton: false,
+              confirmButtonText: 'ოქეი',
+              background:'rgb(25, 26, 25)',
+              color: '#ffffff',    
+              confirmButtonColor: 'green',
+              title: 'პროდუქტი წარმატებით რედაქტირდა!',
+            
+            });
+              this.savePhotoVisible = false;
+              this.AuthReloadService.reafresh()
+          }
+      },
+      error: (err) => {
+        console.error(err);
+      }
+    });
   }
+}
+
 
 uploadPhotoToServer() {
   if (!this.uploadPhoto?.file) {
     throw new Error('No photo selected!');
   }
 
-  this.service.uploadImage(this.uploadPhoto.file).subscribe({
-    next: (response: any) => {
-      this.insertPhoto = {
-        photoUrl: response.secure_url
-      };
-      this.shop.logo = this.insertPhoto.photoUrl;
-      this.UpdateShop();
-      this.hideSavePhoto();
-    },
-    error: (err) => {
-      console.error('Upload failed', err);
-    }
-  });
 }
 
 

@@ -165,25 +165,6 @@ removePhoto(id: number) {
 }
 
 
-  uploadAllImages(): Observable<any[]> {
-    const uploads: Observable<any>[] = [];
-    this.uploadPhotos.forEach((p, index) => {
-      if (p.file) {
-        const upload$ = this.postService.uploadImage(p.file).pipe(
-          tap((response: any) => {
-            const photo : Insertphoto={
-              photoUrl :response.secure_url
-            }
-            this.InsertPhotos.push(photo);
-          })
-        );
-        uploads.push(upload$);
-      }
-    });
-    return forkJoin(uploads);
-  }
-
-
   orderNotAllowed:boolean = true;
   ToggleorderNotAllowed(allowed:boolean){
     this.orderNotAllowed = allowed;

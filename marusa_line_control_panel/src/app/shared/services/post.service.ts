@@ -20,21 +20,6 @@ export class PostService {
   {
 
   }
-  
-  private cloudName = 'ds1q7oiea';
-  private uploadPreset = 'cloudinary_Upload_Preset';
-
-  uploadImage(file: File): Observable<any> {
-    const formData = new FormData();
-    formData.append('file', file);
-    formData.append('upload_preset', this.uploadPreset);
-    return this.http.post(
-      `https://api.cloudinary.com/v1_1/${this.cloudName}/image/upload`,
-      formData
-    );
-  }
-
-
 
   getPosts(getPosts:getPosts): Observable<GetPost[]> {
     return this.http.post<GetPost[]>(this.apiUrl+'ControlPanel/get-products',getPosts);
@@ -55,7 +40,9 @@ export class PostService {
   EditPost(obj: InsertPost): Observable<any> {
     return this.http.post<any>(this.apiUrl + `ControlPanel/edit-post`, obj);
   }
-  
+  EditShopPhoto(obj: FormData): Observable<any> {
+    return this.http.post<any>(this.apiUrl + `ControlPanel/edit-shop-photo`, obj);
+  }
   EditPostPhotos(obj: FormData): Observable<any> {
     return this.http.post<any>(this.apiUrl + `ControlPanel/edit-post-photos`, obj);
   }
