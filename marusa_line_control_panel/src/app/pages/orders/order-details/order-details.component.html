@@ -59,6 +59,25 @@
       </div>
 
     </div>
+
+    <div class="od-card od-comment">
+      <h3 class="od-section-title">შეკვეთა </h3>
+      <div style="color: white;" class="param">
+        <p>
+          {{posts.title}}
+        </p> 
+        <p>
+          რაოდენობა - {{order.productQuantity}}
+        </p>
+        <p  *ngFor="let a of order.additionalParams">
+          {{a.paramName}} - {{ a.value}}
+        </p> 
+        <p>
+          სულ - {{order.finalPrice}}₾
+        </p> 
+      </div>
+    </div>
+
     <div class="od-card od-customer">
       <h3 class="od-section-title">მომხმარებელი</h3>
       <div class="od-customer__grid">

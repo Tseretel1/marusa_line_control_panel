@@ -296,8 +296,18 @@ $transition:  .2s cubic-bezier(.4,0,.2,1);
   color: $text-muted;
   margin-bottom: 18px;
 }
-
-// ── Customer card ────────────────────────────
+.param{
+  border-radius: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  p{
+    background: #181b22;
+    padding:10px 20px;
+    border-radius: 5px;
+  }
+}
+// ── Customer crd ────────────────────────────
 .od-customer {
 
   &__grid {

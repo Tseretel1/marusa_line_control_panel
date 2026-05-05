@@ -225,6 +225,7 @@ export interface OrderDetailsDto {
   lng:string;
   lat:string;
   orderNumber:number;
+  additionalParams :additionalParams[];
 }
 
 
@@ -250,4 +251,11 @@ export interface User{
   profileNumber:string;
   profilePhoto:string;
   email:string;
+}
+
+export interface additionalParams{
+  paramId:number;
+  paramName:string;
+  valueId:number;
+  value:string;
 }
