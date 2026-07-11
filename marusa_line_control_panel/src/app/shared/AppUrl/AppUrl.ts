@@ -1,4 +1,6 @@
+import { environment } from '../../../environments/environment';
+
 export const AppUrl = {
-  Url: 'https://localhost:7173/',
-  ShopsBaseUrl:'http://localhost:4200/',
+  Url: environment.apiUrl,
+  ShopsBaseUrl: environment.shopsBaseUrl,
 };

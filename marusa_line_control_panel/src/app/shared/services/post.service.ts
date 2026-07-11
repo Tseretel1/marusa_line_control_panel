@@ -9,13 +9,13 @@ import { getPosts } from '../../pages/posts/posts.component';
 import { GetUserFilteredDto, GetusersDto } from '../../pages/users/users.component';
 import { DashboardStatsByYear } from '../../pages/dashboard/dashboard.component';
 import { InsertReview, ReviewDto } from '../../pages/edit-post/reviews/reviews.component';
+import { environment } from '../../../environments/environment';
 @Injectable({
   providedIn: 'root'
 })
 export class PostService {
 
-   private apiUrl = 'https://localhost:7173/';
-//  private apiUrl = 'https://192.168.1.16:7174/';
+   private apiUrl = environment.apiUrl;
   constructor(private http:HttpClient)
   {
 
