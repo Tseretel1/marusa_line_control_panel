@@ -32,7 +32,7 @@ export class PostsComponent implements OnInit{
     IsDeleted : false,
     PageNumber : 1,
     ProductTypeId : null,
-    PageSize : 10,
+    PageSize : 30,
   }
 
   AppRoutes=AppRoutes;
