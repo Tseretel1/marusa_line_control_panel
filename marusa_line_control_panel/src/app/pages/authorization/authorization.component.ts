@@ -21,12 +21,15 @@ export class AuthorizationComponent {
   gmail:string='';
   password:string='';
   Authorize(){
+    if (this.gmail === '' || this.password === '') {
+      return;
+    }
     const user :Auth={
       gmail : this.gmail,
       password :this.password
     };
-    this.authService.Login(user).subscribe(
-      (resp)=>{ 
+    this.authService.Login(user).subscribe({
+      next: (resp)=>{
         if(resp.succeeded){
           localStorage.setItem('token',resp.token);
           this.router.navigate([AppRoutes.posts])
@@ -44,8 +47,19 @@ export class AuthorizationComponent {
             title:'იმეილი ან პაროლი არასწორია',
           });
         }
+      },
+      error: () => {
+        Swal.fire({
+          icon: 'error',
+          timer: 3000,
+          showConfirmButton: false,
+          confirmButtonColor: 'green',
+          background:'rgb(25, 26, 25)',
+          color: '#ffffff',
+          title:'იმეილი ან პაროლი არასწორია',
+        });
       }
-    )
+    })
   }
 }
 
