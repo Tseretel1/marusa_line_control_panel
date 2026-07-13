@@ -154,14 +154,15 @@ SavePhotos() {
             showConfirmButton: false,
             confirmButtonText: 'ოქეი',
             background:'rgb(25, 26, 25)',
-            color: '#ffffff',    
+            color: '#ffffff',
             confirmButtonColor: 'green',
             title: 'პროდუქტი წარმატებით რედაქტირდა!',
-          
+
           });
         }
         this.hideEditProduct();
         this.changeNum=0;
+        this.getPost();
     },
     error: (err) => {
       console.error(err);
@@ -269,17 +270,39 @@ private submitPost() {
         return;
       }
 
+      if (photoToDelete.file) {
+        this.uploadPhotos = this.uploadPhotos.filter(p => p.id !== id);
+        this.uploadPhotosTobackend = this.uploadPhotosTobackend.filter(p => p.id !== id);
+        if (this.changeNum > 0) {
+          this.changeNum--;
+        }
+        return;
+      }
+
       if (!photoToDelete.preview || typeof photoToDelete.preview !== 'string') {
         console.error('Preview is missing or invalid');
         return;
       }
 
-      this.postService.deletePhoto(id, photoToDelete.preview).subscribe((resp) => {
-        this.uploadPhotos = this.uploadPhotos.filter(p => p.id !== id);
-        this.uploadPhotosTobackend = this.uploadPhotosTobackend.filter(p => p.id !== id);
+      this.postService.deletePhoto(id, photoToDelete.preview).subscribe({
+        next: (resp) => {
+          this.uploadPhotos = this.uploadPhotos.filter(p => p.id !== id);
+          this.uploadPhotosTobackend = this.uploadPhotosTobackend.filter(p => p.id !== id);
 
-        if (this.changeNum > 0) {
-          this.changeNum--;
+          if (this.changeNum > 0) {
+            this.changeNum--;
+          }
+        },
+        error: (err) => {
+          Swal.fire({
+            icon: 'error',
+            timer: 3000,
+            showConfirmButton: false,
+            confirmButtonColor: 'green',
+            background:'rgb(25, 26, 25)',
+            color: '#ffffff',
+            title:'ფოტოს წაშლა ვერ მოხერხდა',
+          });
         }
       });
     }
