@@ -124,6 +124,9 @@ export class PostService {
   DeleteAdditionalParameterValue(valueId:number): Observable<ProductAdditionalParamDto[]> {
     return this.http.delete<ProductAdditionalParamDto[]>(this.apiUrl+`ControlPanel/delete-additional-param-value?valueId=${valueId}`);
   }
+  DeleteProductPermanently(productId:number): Observable<any> {
+    return this.http.delete<any>(this.apiUrl+`ControlPanel/delete-product-permanently?productId=${productId}`);
+  }
   GetUsersList(filter:GetUserFilteredDto): Observable<GetusersDto[]> {
     return this.http.post<GetusersDto[]>(this.apiUrl+`ControlPanel/get-users`,filter);
   }

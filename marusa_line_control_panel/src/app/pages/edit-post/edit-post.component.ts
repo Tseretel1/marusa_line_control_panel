@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { ActivatedRoute, ɵEmptyOutletComponent } from '@angular/router';
+import { ActivatedRoute, Router, ɵEmptyOutletComponent } from '@angular/router';
 import * as AOS from 'aos';
 import { forkJoin, Observable, tap } from 'rxjs';
 import { GetPhoto, GetPost, PostService, ProductTypes,} from '../../shared/services/post.service';
@@ -9,6 +9,7 @@ import Swal from 'sweetalert2';
 import { AddPostComponent } from "../add-post/add-post.component";
 import { ReviewsComponent } from "./reviews/reviews.component";
 import { AppUrl } from '../../shared/AppUrl/AppUrl';
+import { AppRoutes } from '../../shared/AppRoutes/AppRoutes';
 import { AdditionalParamsComponent } from '../../shared/components/additional-params/additional-params.component';
 
 @Component({
@@ -18,12 +19,12 @@ import { AdditionalParamsComponent } from '../../shared/components/additional-pa
   styleUrl: './edit-post.component.scss',
 })
 export class EditPostComponent {
-  AppUrl = AppUrl; 
+  AppUrl = AppUrl;
   postId: number = 0;
   posts: GetPost = {} as GetPost;
   photosArray: GetPost[] = [];
   InsertPhotos: Insertphoto[] = [];
-  constructor(private route: ActivatedRoute, private postService: PostService) {
+  constructor(private route: ActivatedRoute, private postService: PostService, private router: Router) {
     const id = this.route.snapshot.paramMap.get('id');
     this.postId = Number(id);
   }
@@ -303,6 +304,50 @@ private submitPost() {
         }
       }
     )
+  }
+
+  deleteProductPermanently(){
+    Swal.fire({
+      showConfirmButton: true,
+      showCancelButton: true,
+      cancelButtonText: 'გაუქმება',
+      cancelButtonColor: 'green',
+      confirmButtonText: 'დიახ, წაშლა',
+      confirmButtonColor: 'red',
+      background:'rgb(25, 26, 25)',
+      color: '#ffffff',
+      icon: 'warning',
+      title: 'გაითვალისწინე',
+      text: 'პროდუქტი და ყველა მასთან დაკავშირებული შეკვეთა სამუდამოდ წაიშლება!',
+    }).then((results) => {
+      if (!results.isConfirmed) return;
+
+      this.postService.DeleteProductPermanently(this.postId).subscribe({
+        next: () => {
+          Swal.fire({
+            icon: 'success',
+            timer: 3000,
+            showConfirmButton: false,
+            confirmButtonColor: 'green',
+            background:'rgb(25, 26, 25)',
+            color: '#ffffff',
+            title:'პროდუქტი წარმატებით წაიშალა',
+          });
+          this.router.navigate([AppRoutes.posts]);
+        },
+        error: (err) => {
+          Swal.fire({
+            icon: 'error',
+            timer: 3000,
+            showConfirmButton: false,
+            confirmButtonColor: 'green',
+            background:'rgb(25, 26, 25)',
+            color: '#ffffff',
+            title:'პროდუქტის წაშლა ვერ მოხერხდა',
+          });
+        }
+      });
+    });
   }
   orderAllowedToggle(){
     var allowed = false;
