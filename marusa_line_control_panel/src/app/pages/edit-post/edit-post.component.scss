@@ -146,13 +146,6 @@ $radius-lg:     18px;
     letter-spacing: 0.2px;
 }
 
-.card-title-row {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px;
-}
-
 // ─── Photos ───────────────────────────────────────────────────────────────────
 .photo-grid {
     display: grid;
@@ -281,20 +274,18 @@ $radius-lg:     18px;
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    padding: 7px 14px;
+    padding: 10px 20px;
     border-radius: $radius-sm;
-    border: 1px solid $border-mid;
-    background: rgba(255, 255, 255, 0.04);
-    color: $text-primary;
-    font-size: 13px;
-    font-weight: 500;
+    border: none;
+    background: #ffffff;
+    color: #000000;
+    font-size: 14px;
+    font-weight: 600;
     cursor: pointer;
     transition: all 0.2s ease;
 
     &:hover {
-        border-color: $accent-1;
-        color: #b3befb;
-        background: rgba(102, 126, 234, 0.08);
+        background: #e0e0e0;
     }
 }
 

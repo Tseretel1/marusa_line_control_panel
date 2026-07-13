@@ -45,11 +45,14 @@
         <div class="right-column">
 
             <div class="card">
-                <div class="card-title-row">
-                    <h3 class="card-title">დეტალები</h3>
+                <div class="edit-actions">
                     <button class="edit-toggle-btn" *ngIf="!editProductVisible" (click)="editProduct()">
                         <i class="fas fa-pen"></i> რედაქტირება
                     </button>
+                    <ng-container *ngIf="editProductVisible">
+                        <button class="primary-btn" (click)="ValidateAndSaveEditedProduct()">შენახვა</button>
+                        <button class="ghost-btn" (click)="rollbackProduct()">გაუქმება</button>
+                    </ng-container>
                 </div>
 
                 <div class="fields-grid" [class.is-editing]="editProductVisible">
@@ -81,11 +84,6 @@
                         <label class="form-control-label">აღწერა</label>
                         <textarea [disabled]="!editProductVisible" class="form-control description" [(ngModel)]="description" maxlength="500"></textarea>
                     </div>
-                </div>
-
-                <div class="edit-actions" *ngIf="editProductVisible">
-                    <button class="primary-btn" (click)="ValidateAndSaveEditedProduct()">შენახვა</button>
-                    <button class="ghost-btn" (click)="rollbackProduct()">გაუქმება</button>
                 </div>
             </div>
 
