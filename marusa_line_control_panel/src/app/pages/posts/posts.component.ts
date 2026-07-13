@@ -21,12 +21,25 @@ export class PostsComponent implements OnInit{
     AOS.init({
       duration: 300,
       easing: 'ease-in-out',
-      once: false, 
+      once: false,
     });
-    this.getActivePosts();
+    this.getPostsMainMethod();
     this.getProductTypes();
   }
-  
+
+  getPostsMainMethod(){
+    const categoryId = localStorage.getItem('ProductsCategoryId');
+    this.getPostsDto.ProductTypeId = categoryId && categoryId !== 'null' ? Number(categoryId) : null;
+    this.activeFilterNum = this.getPostsDto.ProductTypeId ?? 0;
+
+    const isDeleted = localStorage.getItem('ProductsIsDeleted');
+    if(isDeleted === 'true'){
+      this.getDeletedPosts();
+      return;
+    }
+    this.getActivePosts();
+  }
+
 
   getPostsDto:getPosts={
     IsDeleted : false,
@@ -48,11 +61,19 @@ export class PostsComponent implements OnInit{
 
   totalCount:number = 0;
   getPosts(){
+    const pageNum = localStorage.getItem('ProductsPageNumber');
+    if(pageNum){
+      this.selectedPage = Number(pageNum);
+      this.getPostsDto.PageNumber = Number(pageNum);
+    }
     this.postService.getPosts(this.getPostsDto).subscribe(
       (resp)=>{
         this.posts = resp;
         if(!resp){
           this.posts=[];
+          localStorage.removeItem('ProductsPageNumber');
+          this.getPostsDto.PageNumber = 1;
+          this.selectedPage = 1;
           return;
         }
         else{
@@ -73,6 +94,7 @@ export class PostsComponent implements OnInit{
     this.getPostsDto.PageNumber = 1;
     this.selectedPage = 1;
     this.pageNumber = 1;
+    localStorage.setItem('ProductsIsDeleted', 'false');
     this.getPosts();
   }
   getDeletedPosts(){
@@ -80,6 +102,7 @@ export class PostsComponent implements OnInit{
     this.getPostsDto.PageNumber = 1;
     this.selectedPage = 1;
     this.pageNumber = 1;
+    localStorage.setItem('ProductsIsDeleted', 'true');
     this.getPosts();
   }
 
@@ -87,12 +110,14 @@ export class PostsComponent implements OnInit{
     if(id==null){
       this.getPostsDto.ProductTypeId = null;
       this.activeFilterNum = 0;
+      localStorage.setItem('ProductsCategoryId', 'null');
     }
     else{
       this.getPostsDto.ProductTypeId= id;
       this.activeFilterNum = id;
       this.getPostsDto.PageNumber=1;
       this.selectedPage = 1;
+      localStorage.setItem('ProductsCategoryId', id.toString());
     }
     this.getPosts();
   }
@@ -125,7 +150,7 @@ export class PostsComponent implements OnInit{
     } else if (page < middle && this.pageNumber > 1) {
       this.pageNumber = Math.max(1, page - 2);
     }
-    localStorage.setItem('PageNumber', this.selectedPage.toString());
+    localStorage.setItem('ProductsPageNumber', this.selectedPage.toString());
     this.getPosts();
   }
  
