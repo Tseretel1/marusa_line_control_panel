@@ -7,9 +7,10 @@ import { FormsModule } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
 import { AppRoutes } from '../../shared/AppRoutes/AppRoutes';
+import { AdditionalParamsComponent } from '../../shared/components/additional-params/additional-params.component';
 @Component({
   selector: 'app-add-post',
-  imports: [CommonModule,FormsModule],
+  imports: [CommonModule,FormsModule,AdditionalParamsComponent],
   templateUrl: './add-post.component.html',
   styleUrl: './add-post.component.scss'
 })
@@ -45,6 +46,7 @@ export class AddPostComponent implements OnInit{
   quantity!: number;
   photos: Insertphoto[] = [];
   InsertPhotos: Insertphoto[] = [];
+  selectedParamIds: number[] = [];
 
 
 sendApplicationtoBackends() {
@@ -87,18 +89,36 @@ sendApplicationtoBackends() {
   this.postService.addPosts(formData).subscribe({
     next: (res) => {
        if (res != null) {
-          Swal.fire({
-            icon: 'success',
-            timer: 3000,
-            showConfirmButton: false,
-            confirmButtonText: 'ოქეი',
-            background:'rgb(25, 26, 25)',
-            color: '#ffffff',    
-            confirmButtonColor: 'green',
-            title: 'პროდუქტი წარმატებით დაემატა!',
-          }).then((results) => {
-            this.router.navigate([this.AppRoutes.posts])
-          });
+          const assignParams$ = this.selectedParamIds.length > 0
+            ? forkJoin(this.selectedParamIds.map(paramId => this.postService.AssignAdditionalParam(res, paramId)))
+            : null;
+
+          const showSuccessAndNavigate = () => {
+            Swal.fire({
+              icon: 'success',
+              timer: 3000,
+              showConfirmButton: false,
+              confirmButtonText: 'ოქეი',
+              background:'rgb(25, 26, 25)',
+              color: '#ffffff',
+              confirmButtonColor: 'green',
+              title: 'პროდუქტი წარმატებით დაემატა!',
+            }).then((results) => {
+              this.router.navigate([this.AppRoutes.posts])
+            });
+          };
+
+          if (assignParams$) {
+            assignParams$.subscribe({
+              next: () => showSuccessAndNavigate(),
+              error: (err) => {
+                console.error(err);
+                showSuccessAndNavigate();
+              }
+            });
+          } else {
+            showSuccessAndNavigate();
+          }
         }
     },
     error: (err) => {

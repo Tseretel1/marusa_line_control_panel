@@ -18,19 +18,96 @@
         
         <div class="form-group">
             <label for="password" class="label">პაროლი</label>
-            <input 
-                type="password" 
+            <input
+                type="password"
                 id="password"
-                class="form-control" 
+                class="form-control"
                 [(ngModel)]="password"
                 placeholder="••••••••">
         </div>
-        
+
+        <div class="forgot-password-align">
+            <button type="button" class="forgot-password-link" (click)="openForgotPassword()">დაგავიწყდა პაროლი?</button>
+        </div>
+
         <button class="authorize-btn" (click)="Authorize()">
             <span class="btn-text">ავტორიზაცია</span>
             <svg class="btn-icon" width="20" height="20" viewBox="0 0 20 20" fill="none">
                 <path d="M4 10H16M16 10L11 5M16 10L11 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
         </button>
+    </div>
+</div>
+
+<div class="forgot-password-component" *ngIf="forgotPasswordVisible">
+    <div class="forgot-password-background" (click)="closeForgotPassword()"></div>
+    <div class="forgot-password-modal">
+
+        <ng-container *ngIf="fpStep === 1">
+            <div class="modal-header">
+                <h2 class="modal-title">პაროლის აღდგენა</h2>
+                <p class="modal-subtitle">შეიყვანეთ თქვენი იმეილი, მიიღებთ დამადასტურებელ კოდს</p>
+            </div>
+            <div class="form-group">
+                <label for="fp-gmail" class="label">მომხმარებელი</label>
+                <input
+                    type="text"
+                    id="fp-gmail"
+                    class="form-control"
+                    [(ngModel)]="fpGmail"
+                    placeholder="example@email.com">
+            </div>
+            <button class="authorize-btn" (click)="sendOtp()">
+                <span class="btn-text">კოდის გაგზავნა</span>
+            </button>
+        </ng-container>
+
+        <ng-container *ngIf="fpStep === 2">
+            <div class="modal-header">
+                <h2 class="modal-title">კოდის დადასტურება</h2>
+                <p class="modal-subtitle">შეიყვანეთ იმეილზე გამოგზავნილი კოდი (მოქმედია 1 წუთი)</p>
+            </div>
+            <div class="form-group">
+                <label for="fp-otp" class="label">კოდი</label>
+                <input
+                    type="text"
+                    id="fp-otp"
+                    class="form-control"
+                    maxlength="6"
+                    [(ngModel)]="fpOtpCode"
+                    placeholder="000000">
+            </div>
+            <button class="authorize-btn" (click)="verifyOtp()">
+                <span class="btn-text">დადასტურება</span>
+            </button>
+            <button
+                type="button"
+                class="forgot-password-link resend-link"
+                [disabled]="fpResendCooldown > 0"
+                (click)="sendOtp()">
+                <ng-container *ngIf="fpResendCooldown > 0; else resendReady">კოდის ხელახლა გაგზავნა ({{fpResendCooldown}})</ng-container>
+                <ng-template #resendReady>კოდის ხელახლა გაგზავნა</ng-template>
+            </button>
+        </ng-container>
+
+        <ng-container *ngIf="fpStep === 3">
+            <div class="modal-header">
+                <h2 class="modal-title">ახალი პაროლი</h2>
+                <p class="modal-subtitle">პაროლი უნდა შეიცავდეს 6-ზე მეტ სიმბოლოს</p>
+            </div>
+            <div class="form-group">
+                <label for="fp-new-password" class="label">ახალი პაროლი</label>
+                <input
+                    type="password"
+                    id="fp-new-password"
+                    class="form-control"
+                    [(ngModel)]="fpNewPassword"
+                    placeholder="••••••••">
+            </div>
+            <button class="authorize-btn" (click)="submitNewPassword()">
+                <span class="btn-text">პაროლის შეცვლა</span>
+            </button>
+        </ng-container>
+
     </div>
 </div>

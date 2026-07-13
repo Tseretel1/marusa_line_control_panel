@@ -1,0 +1,60 @@
+<button class="open-modal-btn" (click)="openModal()">
+    <i class="fas fa-sliders-h"></i>
+    დამატებითი პარამეტრები
+    <span class="assigned-count-badge" *ngIf="assignedIds.size>0">{{ assignedIds.size }}</span>
+</button>
+
+<div class="additional-params-overlay" *ngIf="modalVisible">
+    <div class="additional-params-backdrop" (click)="closeModal()"></div>
+    <div class="additional-params-modal">
+        <div class="modal-header-row">
+            <h3 class="card-title">დამატებითი პარამეტრები</h3>
+            <button class="close-btn" (click)="closeModal()"><i class="fas fa-times"></i></button>
+        </div>
+
+        <button class="white-btn" *ngIf="!addingParam" (click)="startAddParam()">
+            <i class="fas fa-plus"></i> ახალი პარამეტრი
+        </button>
+
+        <div class="inline-edit-row" *ngIf="addingParam">
+            <input type="text" class="form-control" placeholder="მაგ: ზომა" maxlength="50"
+                [(ngModel)]="newParamName" (keydown.enter)="confirmAddParam()">
+            <button class="emoji-btn cancel" (click)="cancelAddParam()"><i class="fas fa-times"></i></button>
+            <button class="emoji-btn confirm" (click)="confirmAddParam()"><i class="fas fa-check"></i></button>
+        </div>
+
+        <div class="param-list" *ngIf="catalog.length>0">
+            <div class="param-row" *ngFor="let p of catalog" [class.assigned]="isAssigned(p.parameterId)">
+                <div class="param-row-top">
+                    <button class="assign-icon-btn" (click)="toggleParam(p.parameterId)">
+                        <i class="fas" [ngClass]="isAssigned(p.parameterId) ? 'fa-check' : 'fa-plus'"></i>
+                    </button>
+                    <span class="param-name">{{ p.paramName }}</span>
+                    <button class="delete-param-btn" (click)="deleteParameter(p.parameterId)">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </div>
+
+                <div class="values-row">
+                    <span class="value-chip" *ngFor="let v of p.values">
+                        {{ v.value }}
+                        <button class="remove-value-btn" (click)="deleteValue(v.valueId)">-</button>
+                    </span>
+
+                    <button class="white-btn small" *ngIf="activeAddValueParamId !== p.parameterId" (click)="startAddValue(p.parameterId)">
+                        <i class="fas fa-plus"></i>
+                    </button>
+
+                    <div class="inline-edit-row" *ngIf="activeAddValueParamId === p.parameterId">
+                        <input type="text" class="value-input" placeholder="მნიშვნელობა" maxlength="30"
+                            [(ngModel)]="newValueInputs[p.parameterId]" (keydown.enter)="confirmAddValue(p.parameterId)">
+                        <button class="emoji-btn small cancel" (click)="cancelAddValue()"><i class="fas fa-times"></i></button>
+                        <button class="emoji-btn small confirm" (click)="confirmAddValue(p.parameterId)"><i class="fas fa-check"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <p class="empty-state" *ngIf="catalog.length===0">პარამეტრები ჯერ არ არის დამატებული</p>
+    </div>
+</div>

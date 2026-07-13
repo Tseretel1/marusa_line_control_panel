@@ -1,99 +1,119 @@
-<div class="center-component">
-        <div  class="show-on-web" style="display: flex; flex-wrap: wrap; align-items: center;">
-            <div>
-                <button class="revert btn"  *ngIf="posts.dateDeleted==null" (click)="removePost()">საიტზე ჩვენება <i class="fas fa-eye"></i> </button>
-                <button class="hide btn"  *ngIf="posts.dateDeleted" (click)="revertPost()">საიტზე ჩვენება <i class="fas fa-eye-slash"></i> </button>
-            </div>
-            <div style="border-radius: 5px; background-color: black; color: white; border: none; position: relative;">
-                <button style="cursor: pointer; text-decoration: underline;" class="btn copybtn" (click)="copyToClipboard(`${AppUrl.ShopsBaseUrl}card-details/${postId}`,1)">{{AppUrl.ShopsBaseUrl+'card-details/'+ postId}}  <i class="fas fa-copy" style="color: white;"></i></button>
-                <span class="ordernumcopied" *ngIf="copiedNumber ==1"> ✅</span>
-            </div>
+<div class="edit-post-page">
+
+    <div class="page-toolbar" [ngClass]="posts.dateDeleted ? 'is-hidden' : 'is-visible'">
+        <div class="visibility-block">
+            <button class="toolbar-btn" *ngIf="posts.dateDeleted==null" (click)="removePost()">
+                <i class="fas fa-eye-slash"></i> საიტიდან დამალვა
+            </button>
+            <button class="toolbar-btn confirm" *ngIf="posts.dateDeleted" (click)="revertPost()">
+                <i class="fas fa-eye"></i> საიტზე გამოქვეყნება
+            </button>
         </div>
-    <div class="main-body">
-        <div class="component">
-            <div class="photo-align" > 
-                <div *ngFor="let p of uploadPhotos; let i = index" class="ng-container" data-aos="fade-in">
-                    <button class="remove-photo"  (click)="removePhoto(p.id)">
+
+        <div class="copy-link-block">
+            <button class="toolbar-btn" (click)="copyToClipboard(AppUrl.ShopsBaseUrl+'card-details/'+postId,1)">
+                <i class="fas" [ngClass]="copiedNumber==1 ? 'fa-check' : 'fa-link'"></i>
+                {{ copiedNumber==1 ? 'დაკოპირდა' : 'ბმულის კოპირება' }}
+            </button>
+        </div>
+    </div>
+
+    <div class="content-grid">
+
+        <div class="card photos-card">
+            <h3 class="card-title">ფოტოები</h3>
+            <div class="photo-grid">
+                <div *ngFor="let p of uploadPhotos; let i = index" class="photo-tile" data-aos="fade-in">
+                    <button class="remove-photo" (click)="removePhoto(p.id)">
                         <i class="fas fa-times"></i>
                     </button>
                     <div class="photo-container">
                         <img [src]="p.preview" class="photo">
                     </div>
                 </div>
-                <div class="square-container" *ngIf="uploadPhotos.length<6" (click)="triggerFileInput()">
-                    <i class="fas fa-plus-square"></i>
+                <div class="add-photo-tile" *ngIf="uploadPhotos.length<6" (click)="triggerFileInput()">
+                    <i class="fas fa-plus"></i>
+                    <span>ფოტოს დამატება</span>
                 </div>
-                <input  id="photoinput" type="file" (change)="onFileChange($event)" accept="image/*" hidden>
+                <input id="photoinput" type="file" (change)="onFileChange($event)" accept="image/*" hidden>
             </div>
-            <div class="upload-photos-align" *ngIf="this.changeNum!=0"><button class="save-photos-button" (click)="SavePhotos()">შენახვა</button></div>
+            <button class="primary-btn full-width" *ngIf="changeNum!=0" (click)="SavePhotos()">
+                ფოტოების შენახვა
+            </button>
         </div>
-        <div class="component">
-            <button class="edit-product" *ngIf="!editProductVisible"(click)="editProduct()"> <b>რედაქტირება</b> <i class="fas fa-edit"></i></button>
-            <div class="form-align">
-                <div class="input-group">
-                    <div class="form-control-group">
-                        <label class="form-control-label">პროდუქტის სახელი</label>
-                        <input [disabled]="!editProductVisible" type="text" class="form-control" maxlength="50"  [(ngModel)]="title">
+
+        <div class="right-column">
+
+            <div class="card">
+                <div class="card-title-row">
+                    <h3 class="card-title">დეტალები</h3>
+                    <button class="edit-toggle-btn" *ngIf="!editProductVisible" (click)="editProduct()">
+                        <i class="fas fa-pen"></i> რედაქტირება
+                    </button>
+                </div>
+
+                <div class="fields-grid" [class.is-editing]="editProductVisible">
+                    <div class="form-control-group span-2">
+                        <label class="form-control-label">დასახელება</label>
+                        <input [disabled]="!editProductVisible" type="text" class="form-control" maxlength="50" [(ngModel)]="title">
                     </div>
-                    <div class="form-control-group">
+                    <div class="form-control-group span-2">
                         <label class="form-control-label">კატეგორია</label>
-                        <select name=""  class="form-control select-control" id="" [disabled]="!editProductVisible"  [(ngModel)]="productTypeId">
+                        <select class="form-control select-control" [disabled]="!editProductVisible" [(ngModel)]="productTypeId">
                             <option value="0" disabled></option>
                             <option *ngFor="let i of productTypesList" [value]="i.id">{{i.productType}}</option>
                         </select>
                     </div>
-                        <div class="form-control-group price-group"  >
-                            <label class="form-control-label">ფასი</label>
-                            <input [disabled]="!editProductVisible" type="number" class="form-control" placeholder="₾" (input)="discountAmountChangeDetection()" [(ngModel)]="price">
-                        </div>
-                        <div class="form-control-group price-group">
-                            <div style="display: flex; gap: 5px;">   
-                                ფასდაკლებული ფასი
-                                <div class="discount-top" *ngIf="discountedPrice"[ngClass]="{'green-background':discountedPercentage>0,'red-background':discountedPercentage<0}">
-                                    <p *ngIf="discountedPercentage>0">-</p>
-                                    {{discountedPercentage}}%
-                                </div> 
-                            </div>
-                            <input [disabled]="!editProductVisible" type="number" class="form-control" placeholder="₾" (input)="discountAmountChangeDetection()" [(ngModel)]="discountedPrice">
-                        </div>
-                </div>
-                <div class="description-group">
-                    <label class="form-control-label">პროდუქტის აღწერა</label>
-                    <textarea name="" [disabled]="!editProductVisible" id="" class="description" [(ngModel)]="description" maxlength="500"></textarea>
-                </div>
-                <div style="display: flex; width: 100%; gap: 10px;" *ngIf="editProductVisible">
-                    <button class="insert" (click)="ValidateAndSaveEditedProduct()">
-                        შენახვა 
-                    </button>
-                    <button class="insert remove" style="width: 40%;" (click)="rollbackProduct()">
-                    გაუქმება 
-                    </button>
-                </div>
-            </div>
-                    <div class="form-align">
-            <b>მარაგი</b>
-            <div class="input-group">
-                <div class="form-control-group" style="display: flex; flex-direction: row; align-items: flex-start; justify-content: flex-start;">
-                    <input style="width: 100px;" [disabled]="!editQuantityVisible" type="number" class="form-control" [(ngModel)]="quantity">
-                    <div class="edit-group-align">
-                        <button *ngIf="!editQuantityVisible" class="edit-quantity" (click)="editQuantity()"><i class="fas fa-edit"></i></button>
-                        <button *ngIf="editQuantityVisible" class="edit-quantity save-quantity"  (click)="saveQuantity()"><i class="fas fa-check" style="color: white;"></i></button>
-                        <button *ngIf="editQuantityVisible" class="edit-quantity close-quantity"  (click)="closeQuantityEdit()"><i class="fas fa-close"style="color: white;"></i></button>
+                    <div class="form-control-group">
+                        <label class="form-control-label">ფასი</label>
+                        <input [disabled]="!editProductVisible" type="number" class="form-control" placeholder="₾" (input)="discountAmountChangeDetection()" [(ngModel)]="price">
+                    </div>
+                    <div class="form-control-group">
+                        <label class="form-control-label">
+                            ფასდაკლებული ფასი
+                            <span class="discount-chip" *ngIf="discountedPrice" [ngClass]="{'positive':discountedPercentage>0,'negative':discountedPercentage<0}">
+                                <ng-container *ngIf="discountedPercentage>0">-</ng-container>{{discountedPercentage}}%
+                            </span>
+                        </label>
+                        <input [disabled]="!editProductVisible" type="number" class="form-control" placeholder="₾" (input)="discountAmountChangeDetection()" [(ngModel)]="discountedPrice">
+                    </div>
+                    <div class="form-control-group span-2">
+                        <label class="form-control-label">აღწერა</label>
+                        <textarea [disabled]="!editProductVisible" class="form-control description" [(ngModel)]="description" maxlength="500"></textarea>
                     </div>
                 </div>
-            </div>
-            <div class="input-group" style="width: 300px; grid-template-columns: repeat(1,1fr);">
-                <div class="form-control-group" >
-                    <p>შეკვეთა მარაგის ამოწურვის შემდეგ</p>
-                    <button class="order-allowed-align" [ngClass]="{'order-not-allowed':posts.orderNotAllowed}"(click)="orderAllowedToggle()"> <p *ngIf="!posts.orderNotAllowed">დაშვებული</p> <p *ngIf="posts.orderNotAllowed">შეზღუდული</p></button>
+
+                <div class="edit-actions" *ngIf="editProductVisible">
+                    <button class="primary-btn" (click)="ValidateAndSaveEditedProduct()">შენახვა</button>
+                    <button class="ghost-btn" (click)="rollbackProduct()">გაუქმება</button>
                 </div>
             </div>
-        </div>
+
+            <app-additional-params [productId]="postId"></app-additional-params>
+
+            <div class="card">
+                <h3 class="card-title">მარაგი</h3>
+
+                <div class="inventory-row">
+                    <input [disabled]="!editQuantityVisible" type="number" class="form-control quantity-input" [(ngModel)]="quantity">
+                    <div class="quantity-actions">
+                        <button *ngIf="!editQuantityVisible" class="icon-btn" (click)="editQuantity()"><i class="fas fa-pen"></i></button>
+                        <button *ngIf="editQuantityVisible" class="icon-btn confirm" (click)="saveQuantity()"><i class="fas fa-check"></i></button>
+                        <button *ngIf="editQuantityVisible" class="icon-btn cancel" (click)="closeQuantityEdit()"><i class="fas fa-times"></i></button>
+                    </div>
+                </div>
+
+                <div class="order-allowed-row">
+                    <span class="order-allowed-label">შეკვეთა მარაგის ამოწურვის შემდეგ</span>
+                    <button class="toggle-pill" [ngClass]="{'is-off':posts.orderNotAllowed}" (click)="orderAllowedToggle()">
+                        {{ posts.orderNotAllowed ? 'შეზღუდული' : 'დაშვებული' }}
+                    </button>
+                </div>
+            </div>
+
         </div>
     </div>
-</div> 
-<div class="reviews">
-    <app-reviews ></app-reviews>
 </div>
-
-
+<div class="reviews">
+    <app-reviews></app-reviews>
+</div>

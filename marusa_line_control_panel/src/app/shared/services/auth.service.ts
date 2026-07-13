@@ -19,6 +19,24 @@ export class AuthService {
       password: obj.password,
     });
   }
+  SendPasswordResetOtp(gmail: string): Observable<any> {
+    return this.http.post<any>(this.apiUrl + `ControlPanel/forgot-password/send-otp`, {
+      gmail: gmail,
+    });
+  }
+  VerifyPasswordResetOtp(gmail: string, otpCode: string): Observable<any> {
+    return this.http.post<any>(this.apiUrl + `ControlPanel/forgot-password/verify-otp`, {
+      gmail: gmail,
+      otpCode: otpCode,
+    });
+  }
+  ResetPassword(gmail: string, otpCode: string, newPassword: string): Observable<any> {
+    return this.http.post<any>(this.apiUrl + `ControlPanel/forgot-password/reset-password`, {
+      gmail: gmail,
+      otpCode: otpCode,
+      newPassword: newPassword,
+    });
+  }
   forceLogout(){
       localStorage.removeItem('user');
       localStorage.removeItem('token');

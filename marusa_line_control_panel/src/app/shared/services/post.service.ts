@@ -100,6 +100,30 @@ export class PostService {
   DeleteProductTypes(id:number): Observable<any> {
     return this.http.delete<any>(this.apiUrl+`ControlPanel/delete-product-type?id=${id}`,{});
   }
+  GetShopAdditionalParameters(): Observable<ProductAdditionalParamDto[]> {
+    return this.http.get<ProductAdditionalParamDto[]>(this.apiUrl+`ControlPanel/get-shop-additional-params`);
+  }
+  GetProductAdditionalParams(productId:number): Observable<ProductAdditionalParamDto[]> {
+    return this.http.get<ProductAdditionalParamDto[]>(this.apiUrl+`ControlPanel/get-product-additional-params?productId=${productId}`);
+  }
+  CreateAdditionalParameter(paramName:string): Observable<ProductAdditionalParamDto[]> {
+    return this.http.post<ProductAdditionalParamDto[]>(this.apiUrl+`ControlPanel/create-additional-param`,{ paramName });
+  }
+  CreateAdditionalParameterValue(parameterId:number, value:string): Observable<ProductAdditionalParamDto[]> {
+    return this.http.post<ProductAdditionalParamDto[]>(this.apiUrl+`ControlPanel/create-additional-param-value`,{ parameterId, value });
+  }
+  AssignAdditionalParam(productId:number, parameterId:number): Observable<ProductAdditionalParamDto[]> {
+    return this.http.post<ProductAdditionalParamDto[]>(this.apiUrl+`ControlPanel/assign-additional-param`,{ productId, parameterId });
+  }
+  RemoveAdditionalParam(productId:number, parameterId:number): Observable<ProductAdditionalParamDto[]> {
+    return this.http.delete<ProductAdditionalParamDto[]>(this.apiUrl+`ControlPanel/remove-additional-param?productId=${productId}&parameterId=${parameterId}`);
+  }
+  DeleteAdditionalParameter(parameterId:number): Observable<ProductAdditionalParamDto[]> {
+    return this.http.delete<ProductAdditionalParamDto[]>(this.apiUrl+`ControlPanel/delete-additional-param?parameterId=${parameterId}`);
+  }
+  DeleteAdditionalParameterValue(valueId:number): Observable<ProductAdditionalParamDto[]> {
+    return this.http.delete<ProductAdditionalParamDto[]>(this.apiUrl+`ControlPanel/delete-additional-param-value?valueId=${valueId}`);
+  }
   GetUsersList(filter:GetUserFilteredDto): Observable<GetusersDto[]> {
     return this.http.post<GetusersDto[]>(this.apiUrl+`ControlPanel/get-users`,filter);
   }
@@ -139,8 +163,8 @@ export class PostService {
   InsertReviews(review:InsertReview): Observable<any> {
     return this.http.post<any>(this.apiUrl+`Review/insert-reviews`,review);
   }
-  GetReviews(productId:number): Observable<ReviewDto[]> {
-    return this.http.get<ReviewDto[]>(this.apiUrl+`Review/get-reviews?productId=${productId}`,);
+  GetReviews(productId:number, pageNumber:number, pageSize:number): Observable<ReviewDto[]> {
+    return this.http.get<ReviewDto[]>(this.apiUrl+`Review/get-reviews?productId=${productId}&pageNumber=${pageNumber}&pageSize=${pageSize}`,);
   }
   DeleteReviews(reviewId:number): Observable<any> {
     return this.http.delete<any>(this.apiUrl+`Review/delete-reviews?Id=${reviewId}`);
@@ -186,6 +210,17 @@ export interface GetPost {
 export interface ProductTypes{
  id:number;
  productType:string;
+}
+
+export interface AdditionalParamValueDto{
+  valueId:number;
+  value:string;
+}
+
+export interface ProductAdditionalParamDto{
+  parameterId:number;
+  paramName:string;
+  values:AdditionalParamValueDto[];
 }
 
 

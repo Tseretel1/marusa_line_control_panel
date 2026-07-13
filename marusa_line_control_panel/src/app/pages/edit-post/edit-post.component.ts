@@ -9,10 +9,11 @@ import Swal from 'sweetalert2';
 import { AddPostComponent } from "../add-post/add-post.component";
 import { ReviewsComponent } from "./reviews/reviews.component";
 import { AppUrl } from '../../shared/AppUrl/AppUrl';
+import { AdditionalParamsComponent } from '../../shared/components/additional-params/additional-params.component';
 
 @Component({
   selector: 'app-edit-post',
-  imports: [CommonModule, FormsModule, ɵEmptyOutletComponent, AddPostComponent, ReviewsComponent],
+  imports: [CommonModule, FormsModule, ɵEmptyOutletComponent, AddPostComponent, ReviewsComponent, AdditionalParamsComponent],
   templateUrl: './edit-post.component.html',
   styleUrl: './edit-post.component.scss',
 })
