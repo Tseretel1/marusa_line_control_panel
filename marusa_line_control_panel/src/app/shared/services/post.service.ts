@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { filter, Observable } from 'rxjs';
 import { InsertPost } from '../../pages/edit-post/edit-post.component';
 import { UntypedFormBuilder } from '@angular/forms';
-import { orderStatuses, User } from '../../pages/orders/order-details/order-details.component';
+import { orderStatuses, User, OrderCommentDto } from '../../pages/orders/order-details/order-details.component';
 import { innerFrom } from 'rxjs/internal/observable/innerFrom';
 import { getPosts } from '../../pages/posts/posts.component';
 import { GetUserFilteredDto, GetusersDto } from '../../pages/users/users.component';
@@ -66,6 +66,9 @@ export class PostService {
   }
   getOrderById(orderId:number): Observable<any> {
     return this.http.get<any>(this.apiUrl+`ControlPanel/get-order-details?orderId=${orderId}`);
+  }
+  AddOrderComment(orderId:number, comment:string): Observable<OrderCommentDto[]> {
+    return this.http.post<OrderCommentDto[]>(this.apiUrl+`ControlPanel/add-order-comment`,{ orderId, comment });
   }
   getuserOptionalFields(userId:number): Observable<UserOptionalFields> {
     return this.http.get<UserOptionalFields>(this.apiUrl+`Product/get-users-optional?id=${userId}`);
@@ -266,6 +269,8 @@ export interface OrderProduct {
   photos: Photo[];
   user:user;
   totalCount :number;
+  lastOwnerComment: string | null;
+  lastOwnerCommentDate: string | null;
 }
 
 

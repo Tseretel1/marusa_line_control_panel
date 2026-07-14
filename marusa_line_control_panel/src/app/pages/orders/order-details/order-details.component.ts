@@ -40,6 +40,7 @@ export class OrderDetailsComponent implements OnInit{
         this.Map.lng = this.order.lng;
         this.comment = this.order.comment;
         this.user = this.order.user;
+        this.ownerComments = this.order.comments ?? [];
         this.posts.photos.forEach(item => {
           this.photosArray.push(item);
         });
@@ -179,6 +180,44 @@ export class OrderDetailsComponent implements OnInit{
       this.copiedNumber = 0;
     }, 3000);
   }
+
+  ownerComments: OrderCommentDto[] = [];
+  addingComment: boolean = false;
+  newComment: string = '';
+
+  startAddComment(){
+    this.addingComment = true;
+    this.newComment = '';
+  }
+
+  cancelAddComment(){
+    this.addingComment = false;
+    this.newComment = '';
+  }
+
+  confirmAddComment(){
+    const text = this.newComment.trim();
+    if(!text) return;
+
+    this.postService.AddOrderComment(this.order.orderId, text).subscribe({
+      next: (resp) => {
+        this.ownerComments = resp;
+        this.newComment = '';
+        this.addingComment = false;
+      },
+      error: (err) => {
+        Swal.fire({
+          icon: 'error',
+          timer: 3000,
+          showConfirmButton: false,
+          confirmButtonColor: 'green',
+          background:'rgb(25, 26, 25)',
+          color: '#ffffff',
+          title:'კომენტარის დამატება ვერ მოხერხდა',
+        });
+      }
+    });
+  }
 }
 
 export interface Lnglat {
@@ -215,7 +254,7 @@ export interface OrderDetailsDto {
   productId: number;
   isPaid: boolean;
   statusId: number;
-  createDate: string; 
+  createDate: string;
   deliveryType?: string;
   productQuantity: number;
   comment: string;
@@ -226,6 +265,14 @@ export interface OrderDetailsDto {
   lat:string;
   orderNumber:number;
   additionalParams :additionalParams[];
+  comments: OrderCommentDto[];
+}
+
+export interface OrderCommentDto {
+  id: number;
+  orderId: number;
+  comment: string;
+  createdDate: string;
 }
 
 

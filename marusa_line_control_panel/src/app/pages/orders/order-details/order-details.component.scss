@@ -460,6 +460,128 @@ $transition:  .2s cubic-bezier(.4,0,.2,1);
   }
 }
 
+// ── Owner comments card ──────────────────────
+.od-owner-comments {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  &__title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 0;
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  &__empty {
+    font-size: 13px;
+    color: $text-muted;
+  }
+}
+
+.od-owner-comment {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  background: $surface-2;
+  border: 1px solid $border;
+  border-radius: $radius-sm;
+  padding: 14px 16px;
+
+  &__text {
+    font-size: 14px;
+    line-height: 1.6;
+    color: $text-primary;
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
+
+  &__date {
+    font-size: 11px;
+    color: $text-muted;
+  }
+}
+
+.od-add-comment-btn {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border-radius: $radius-sm;
+  border: none;
+  background: #ffffff;
+  color: #000000;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: $transition;
+
+  &:hover {
+    background: #e0e0e0;
+  }
+}
+
+.od-comment-editor {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  &__textarea {
+    width: 100%;
+    min-height: 90px;
+    max-height: 200px;
+    resize: vertical;
+    background: $surface-2;
+    border: 1px solid $border;
+    border-radius: $radius-sm;
+    padding: 14px 16px;
+    color: $text-primary;
+    font-family: inherit;
+    font-size: 14px;
+    line-height: 1.6;
+    outline: none;
+
+    &::placeholder { color: $text-muted; }
+    &:focus { border-color: $border-hover; }
+  }
+
+  &__actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+  }
+}
+
+.od-icon-btn {
+  width: 46px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  border: none;
+  color: white;
+  cursor: pointer;
+  transition: $transition;
+
+  &--cancel {
+    background: #e03131;
+    &:hover { background: #c92a2a; }
+  }
+
+  &--confirm {
+    background: #2f9e44;
+    &:hover { background: #268a3a; }
+  }
+}
+
 // ── Map card ─────────────────────────────────
 .od-map-card {}
 

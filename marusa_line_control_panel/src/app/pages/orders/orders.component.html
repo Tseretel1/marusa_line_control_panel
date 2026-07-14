@@ -59,7 +59,9 @@
               </div> -->
            </div> 
             <div class="order-card-align" >
-                <div class="order-card" [ngClass]="{'just-now-card':getTimeAgo(o.createDate)==='just now'}"  *ngFor="let o of i.orders" [routerLink]="AppRoutes.orderDetails + o.orderId">
+                <div class="order-card-wrapper" *ngFor="let o of i.orders">
+                <span class="last-comment-badge" *ngIf="o.lastOwnerComment" [title]="o.lastOwnerComment">{{ o.lastOwnerComment }}</span>
+                <div class="order-card" [ngClass]="{'just-now-card':getTimeAgo(o.createDate)==='just now'}" [routerLink]="AppRoutes.orderDetails + o.orderId">
                     <div class="pay-align">
                         <span class="pay-span" [ngClass]="{'finished-order': o.statusId ==5,'payed-span': o.isPaid,'old-seven-day': isOlderThan7Day(o.createDate) && !o.isPaid,}"> #{{o.orderNumber}}</span>
                         <div class="user-details">
@@ -87,6 +89,7 @@
                             </div>
                         </div>
                     </div>
+                </div>
                 </div>
             </div>
             </ng-container>
