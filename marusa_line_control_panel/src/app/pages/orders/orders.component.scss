@@ -36,6 +36,62 @@ button{
   text-align: center;
   color: white;
 }
+
+.search-filter-btn {
+  padding: 20px 20px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border: none;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+@media screen and (max-width: 480px) {
+  .order-filter-align {
+    padding: 8px;
+  }
+  .filters {
+    flex-wrap: nowrap;
+    gap: 8px;
+  }
+  .pay-filter {
+    flex: 1 1 0;
+    min-width: 0;
+    padding: 12px 6px;
+    font-size: 13px;
+    text-align: center;
+    justify-content: center;
+    white-space: nowrap;
+  }
+  .search-filter-btn {
+    padding: 12px 14px;
+    font-size: 14px;
+  }
+}
+
+@media screen and (max-width: 340px) {
+  .filters {
+    gap: 6px;
+  }
+  .pay-filter {
+    font-size: 11px;
+    padding: 10px 4px;
+  }
+  .search-filter-btn {
+    padding: 10px 10px;
+    font-size: 12px;
+  }
+}
+
+@media screen and (max-width: 300px) {
+  .pay-filter {
+    font-size: 10px;
+    padding: 8px 3px;
+  }
+  .search-filter-btn {
+    padding: 8px 8px;
+  }
+}
 /* ─── SEARCH MODAL ─────────────────────────────────────────── */
 
 /* Overlay — fixed, full screen, blurred backdrop */
@@ -362,22 +418,35 @@ button{
 
 .last-comment-badge {
   position: absolute;
-  top: -30px;
-  right: -10px;
+  top: -25px;
+  right: -20px;
   z-index: 5;
   max-width: 120px;
   padding: 8px 12px;
-  border-radius: 10px;
-  background: #000000;
+  border-radius: 16px 16px 16px 6px;
+  background: rgba(24, 38, 74, 0.72);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   color: #ffffff;
   font-size: 11px;
   font-weight: 600;
   overflow: hidden;
   text-overflow: ellipsis;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.45);
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.18);
   cursor: default;
-  max-height: 50px;
+  max-height: 40px;
+
+  &::after {
+    content: '';
+    position: absolute;
+    left: 8px;
+    bottom: -9px;
+    width: 16px;
+    height: 12px;
+    background: rgba(24, 38, 74, 0.85);
+    clip-path: polygon(0% 0%, 60% 0%, 15% 100%);
+  }
 }
 
 /* Order Card Base */
