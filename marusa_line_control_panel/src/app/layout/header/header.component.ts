@@ -39,6 +39,7 @@ export class HeaderComponent implements OnInit{
   bog:null,
   tbc:null,
   receiver:null,
+  mobileNumber:null,
 };
 
   

@@ -31,6 +31,7 @@ export class ProfileComponent implements OnInit{
     bog: null,
     tbc: null,
     receiver: null,
+    mobileNumber: null,
   };
 
   shopStats: ShopStats={

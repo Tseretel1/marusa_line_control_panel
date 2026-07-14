@@ -343,4 +343,5 @@ export interface Shop {
   bog: string|null,
   tbc: string|null,
   receiver: string|null,
+  mobileNumber: string|null,
 }
