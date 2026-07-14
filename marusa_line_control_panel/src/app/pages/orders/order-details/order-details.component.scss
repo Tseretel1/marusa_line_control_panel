@@ -426,6 +426,11 @@ $transition:  .2s cubic-bezier(.4,0,.2,1);
 
 // ── Comment card ─────────────────────────────
 .od-comment {
+  &__title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
   &__body {
     position: relative;
     display: flex;

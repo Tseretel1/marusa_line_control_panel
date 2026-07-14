@@ -134,10 +134,12 @@
       </div>
     </div>
 
-    <div class="od-card od-comment">
-      <h3 class="od-section-title">კომენტარი</h3>
+    <div class="od-card od-comment" *ngIf="comment">
+      <h3 class="od-section-title od-comment__title">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="od-comment__icon"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+        მომხმარებლის კომენტარი
+      </h3>
       <div class="od-comment__body">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="od-comment__icon"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
         <textarea [(ngModel)]="comment" disabled="true" class="od-comment__textarea" maxlength="300"></textarea>
         <span class="od-comment__count">{{ comment.length }}/300</span>
       </div>
