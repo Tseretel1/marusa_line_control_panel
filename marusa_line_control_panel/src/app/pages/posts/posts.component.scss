@@ -4,8 +4,47 @@
     justify-content: center;
     flex-direction: column;
     align-items: center;
+    .search-bar-align {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        width: 90%;
+        max-width: 700px;
+        padding: 0 16px;
+        height: 46px;
+        border-radius: 10px;
+        background-color: rgba(0, 0, 0, 0.3);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        transition: border-color 0.25s ease;
+        margin-bottom: 15px;
+
+        &:focus-within {
+            border-color: rgba(255, 255, 255, 0.35);
+        }
+
+        .search-icon {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 14px;
+            flex-shrink: 0;
+        }
+
+        .search-input {
+            flex: 1;
+            height: 100%;
+            background: transparent;
+            border: none;
+            outline: none;
+            color: white;
+            font-size: 14px;
+            font-family: inherit;
+
+            &::placeholder {
+                color: rgba(255, 255, 255, 0.4);
+            }
+        }
+    }
     .filters-back{
-        width: 90%; 
+        width: 90%;
         display: flex;
         align-items: flex-start;
         flex-direction: column;

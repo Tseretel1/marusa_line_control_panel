@@ -1,5 +1,15 @@
 
 <div class="gallery-align">
+    <div class="search-bar-align">
+        <i class="fas fa-search search-icon"></i>
+        <input
+            type="text"
+            class="search-input"
+            [value]="searchTerm"
+            (input)="onSearchInput($any($event.target).value)"
+            placeholder="ძებნა პროდუქტებში..."
+        >
+    </div>
     <div  class="filters-back">
         <div style="width: 100%; display: flex; justify-content: center;">
         </div>

@@ -94,6 +94,9 @@ export class PostService {
   getProductTypes(): Observable<ProductTypes[]> {
     return this.http.get<ProductTypes[]>(this.apiUrl+'ControlPanel/get-product-types');
   }
+  searchProducts(dto:SearchProductsDto): Observable<SearchProductsResult> {
+    return this.http.post<SearchProductsResult>(this.apiUrl+'Product/search-products',dto);
+  }
   InsertProductTypes(productType:string): Observable<any> {
     return this.http.post<any>(this.apiUrl+`ControlPanel/insert-product-type?productType=${productType}`,{});
   }
@@ -211,6 +214,35 @@ export interface GetPost {
   totalActiveProducts:number;
   totalDeletedProducts:number;
   orderNotAllowed:boolean;
+}
+
+export interface SearchProductsDto{
+  userId:number;
+  shopId:number;
+  searchTerm:string;
+  pageNumber:number;
+  pageSize:number;
+}
+
+export interface SearchProductResult{
+  id:number;
+  title:string;
+  description:string;
+  price:number;
+  discountedPrice:number;
+  productTypeId:number;
+  quantity:number;
+  likeCount:number;
+  isLiked:boolean;
+  photoId:number|null;
+  photoUrl:string|null;
+  orderNotAllowed:boolean;
+  shopId:number;
+}
+
+export interface SearchProductsResult{
+  products:SearchProductResult[];
+  totalCount:number;
 }
 
 export interface ProductTypes{

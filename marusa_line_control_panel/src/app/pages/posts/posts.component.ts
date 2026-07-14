@@ -5,10 +5,11 @@ import { provideSweetAlert2 } from '@sweetalert2/ngx-sweetalert2';
 import { RouterLink } from '@angular/router';
 import { AppRoutes } from '../../shared/AppRoutes/AppRoutes';
 import * as AOS from 'aos'
-import { GetPost, PostService, ProductTypes } from '../../shared/services/post.service';
+import { GetPost, PostService, ProductTypes, SearchProductsDto, SearchProductsResult } from '../../shared/services/post.service';
 import Swal from 'sweetalert2';
 import { FormsModule } from '@angular/forms';
 import { ReturnStatement } from '@angular/compiler';
+import { Subject, of, switchMap } from 'rxjs';
 @Component({
   selector: 'app-posts',
   imports: [CommonModule, PhotoAlbumComponent, RouterLink, FormsModule],
@@ -25,6 +26,72 @@ export class PostsComponent implements OnInit{
     });
     this.getPostsMainMethod();
     this.getProductTypes();
+
+    this.searchSubject.pipe(
+      switchMap(term => {
+        const trimmed = term.trim();
+        if(!trimmed){
+          this.isSearching = false;
+          return of(null);
+        }
+        this.isSearching = true;
+        this.activeFilterNum = 0;
+        this.getPostsDto.ProductTypeId = null;
+        return this.executeSearch(trimmed, 1);
+      })
+    ).subscribe(resp => {
+      if(resp === null){
+        this.getPostsMainMethod();
+        return;
+      }
+      this.selectedPage = 1;
+      this.pageNumber = 1;
+      this.applySearchResults(resp);
+    });
+  }
+
+  searchTerm: string = '';
+  isSearching: boolean = false;
+  private searchSubject = new Subject<string>();
+
+  onSearchInput(value: string){
+    this.searchTerm = value;
+    this.searchSubject.next(value);
+  }
+
+  private getShopIdFromToken(): number {
+    const token = localStorage.getItem('token');
+    if(!token) return 0;
+    try {
+      const payload = JSON.parse(atob(token.split('.')[1]));
+      return Number(payload['ShopId'] ?? 0);
+    } catch {
+      return 0;
+    }
+  }
+
+  private executeSearch(term: string, page: number){
+    const dto: SearchProductsDto = {
+      userId: 0,
+      shopId: this.getShopIdFromToken(),
+      searchTerm: term,
+      pageNumber: page,
+      pageSize: this.getPostsDto.PageSize,
+    };
+    return this.postService.searchProducts(dto);
+  }
+
+  private applySearchResults(resp: SearchProductsResult){
+    this.posts = resp.products.map(p => ({
+      ...p,
+      photos: [],
+      dateDeleted: null,
+      totalActiveProducts: resp.totalCount,
+      totalDeletedProducts: 0,
+    }));
+    this.totalCount = resp.totalCount;
+    this.totalPages = Math.ceil(this.totalCount / this.getPostsDto.PageSize);
+    this.lastPage = Math.ceil(this.totalCount / this.getPostsDto.PageSize);
   }
 
   getPostsMainMethod(){
@@ -61,6 +128,7 @@ export class PostsComponent implements OnInit{
 
   totalCount:number = 0;
   getPosts(){
+    this.isSearching = false;
     const pageNum = localStorage.getItem('ProductsPageNumber');
     if(pageNum){
       this.selectedPage = Number(pageNum);
@@ -90,6 +158,7 @@ export class PostsComponent implements OnInit{
     )
   }
   getActivePosts(){
+    this.searchTerm = '';
     this.getPostsDto.IsDeleted = false;
     this.getPostsDto.PageNumber = 1;
     this.selectedPage = 1;
@@ -98,6 +167,7 @@ export class PostsComponent implements OnInit{
     this.getPosts();
   }
   getDeletedPosts(){
+    this.searchTerm = '';
     this.getPostsDto.IsDeleted = true;
     this.getPostsDto.PageNumber = 1;
     this.selectedPage = 1;
@@ -107,6 +177,7 @@ export class PostsComponent implements OnInit{
   }
 
   GetByCategorie(id:number|null){
+    this.searchTerm = '';
     if(id==null){
       this.getPostsDto.ProductTypeId = null;
       this.activeFilterNum = 0;
@@ -149,6 +220,10 @@ export class PostsComponent implements OnInit{
       this.pageNumber = page - 2;
     } else if (page < middle && this.pageNumber > 1) {
       this.pageNumber = Math.max(1, page - 2);
+    }
+    if(this.isSearching){
+      this.executeSearch(this.searchTerm.trim(), page).subscribe(resp => this.applySearchResults(resp));
+      return;
     }
     localStorage.setItem('ProductsPageNumber', this.selectedPage.toString());
     this.getPosts();
