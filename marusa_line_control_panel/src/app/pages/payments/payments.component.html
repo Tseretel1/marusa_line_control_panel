@@ -1,0 +1,56 @@
+<div class="payments-page">
+
+  <div class="page-header-row">
+    <h2 class="page-title">ჩემი გადახდები</h2>
+
+    <div class="year-switcher">
+      <button class="year-arrow" (click)="previousYear()">
+        <i class="fas fa-chevron-left"></i>
+      </button>
+      <input
+        type="number"
+        class="year-input"
+        [(ngModel)]="selectedYear"
+        (change)="onYearInputChange()"
+      >
+      <button class="year-arrow" (click)="nextYear()">
+        <i class="fas fa-chevron-right"></i>
+      </button>
+    </div>
+  </div>
+
+  <p *ngIf="isLoading" class="status-message">იტვირთება...</p>
+  <p *ngIf="errorMessage && !isLoading" class="error-message">{{ errorMessage }}</p>
+
+  <div class="months-grid" *ngIf="!isLoading">
+    <div
+      class="month-square"
+      [class.paid]="m.isPaid"
+      [class.unpaid]="!m.isPaid"
+      *ngFor="let m of months"
+      (click)="openMonthModal(m)"
+    >
+      <span class="month-name">{{ m.name }}</span>
+
+      <ng-container *ngIf="m.isPaid && m.payment">
+        <span class="month-amount">{{ m.payment.payAmount | number:'1.2-2' }} ₾</span>
+        <span class="month-date">{{ m.payment.payDate | date:'yyyy-MM-dd' }}</span>
+      </ng-container>
+
+      <i class="fas fa-close" *ngIf="!m.isPaid"></i>
+    </div>
+  </div>
+
+</div>
+
+<div class="modal-align" *ngIf="modalVisible">
+  <div class="modal-cancel" (click)="hideModal()"></div>
+  <div class="modal" *ngIf="selectedMonth">
+    <h3>{{ selectedMonth.name }} {{ selectedYear }}</h3>
+
+    <ng-container *ngIf="selectedMonth.isPaid && selectedMonth.payment">
+      <p class="payment-detail">თარიღი: {{ selectedMonth.payment.payDate | date:'yyyy-MM-dd' }}</p>
+      <p class="payment-detail">თანხა: {{ selectedMonth.payment.payAmount | number:'1.2-2' }} ₾</p>
+    </ng-container>
+  </div>
+</div>

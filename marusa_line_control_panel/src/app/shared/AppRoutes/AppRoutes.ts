@@ -7,5 +7,6 @@ export const AppRoutes = {
   orders: '/orders',
   users: '/users',
   dashboard: '/dashboard',
-  orderDetails: '/order-details/'
+  orderDetails: '/order-details/',
+  payments: '/payments'
 };

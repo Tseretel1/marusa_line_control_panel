@@ -166,6 +166,9 @@ export class PostService {
   UpdateShop(Newshop:Shop): Observable<any> {
     return this.http.put<any>(this.apiUrl+`ControlPanel/update-shop`,Newshop);
   }
+  getMyPaySchedule(year:number): Observable<PayScheduleDto[]> {
+    return this.http.get<PayScheduleDto[]>(this.apiUrl+`ControlPanel/get-my-pay-schedule?year=${year}`);
+  }
 
   
   //Reviews
@@ -344,4 +347,12 @@ export interface Shop {
   tbc: string|null,
   receiver: string|null,
   mobileNumber: string|null,
+}
+
+export interface PayScheduleDto {
+  id: number;
+  shopId: number;
+  shopName: string;
+  payDate: string;
+  payAmount: number;
 }
