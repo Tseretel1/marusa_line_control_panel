@@ -34,10 +34,10 @@
     <div class="container">
         <div class="order-filter-align">
             <div class="filters">
-                <div class="filter pay-filter " [ngClass]="{'not-paid':selectedFilter ==0}" (click)="getPaidOrUnpaidOrders(false)">
+                <div class="filter pay-filter " [ngClass]="{'not-paid':selectedFilter ==0}" (click)="selectPaidFilter(false)">
                     გადასახდელი
                 </div>
-                <div class="filter pay-filter " [ngClass]="{'paid-filter':selectedFilter ==1}" (click)="getPaidOrUnpaidOrders(true)">
+                <div class="filter pay-filter " [ngClass]="{'paid-filter':selectedFilter ==1}" (click)="selectPaidFilter(true)">
                     გადახდილი
                 </div>
                 <button class="filter search-filter-btn" (click)="openmodal()"> <i class="fas fa-search"></i></button>

@@ -159,11 +159,17 @@ groupOrdersByMonth() {
   }
 
 
+  selectPaidFilter(IsPaid:boolean){
+    this.pageNumber = 1;
+    this.selectedPage = 1;
+    this.getOrderDto.PageNumber = 1;
+    localStorage.setItem('PageNumber', '1');
+    this.getPaidOrUnpaidOrders(IsPaid);
+  }
+
   getPaidOrUnpaidOrders(IsPaid:boolean){
     this.getOrderDto.OrderId = null;
     this.getOrderDto.UserId = null
-    this.pageNumber =1;
-    this.selectedPage =1;  
     if(IsPaid){
       this.selectedFilter = 1;
       localStorage.setItem('orderIdPaid', 'true');
