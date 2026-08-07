@@ -166,6 +166,12 @@ export class PostService {
   UpdateShop(Newshop:Shop): Observable<any> {
     return this.http.put<any>(this.apiUrl+`ControlPanel/update-shop`,Newshop);
   }
+  getShopUiSettings(shopId:number): Observable<ShopUiSettings> {
+    return this.http.get<ShopUiSettings>(this.apiUrl+`Product/get-shop-ui-settings?shopId=${shopId}`);
+  }
+  updateShopUiSettings(dto:UpdateShopUiSettingsDto): Observable<ShopUiSettings> {
+    return this.http.put<ShopUiSettings>(this.apiUrl+`ControlPanel/update-shop-ui-settings`,dto);
+  }
   getMyPaySchedule(year:number): Observable<PayScheduleDto[]> {
     return this.http.get<PayScheduleDto[]>(this.apiUrl+`ControlPanel/get-my-pay-schedule?year=${year}`);
   }
@@ -347,6 +353,23 @@ export interface Shop {
   tbc: string|null,
   receiver: string|null,
   mobileNumber: string|null,
+}
+
+export interface ShopUiSettings {
+  shopId: number;
+  backgroundColor: string;
+  textColor: string;
+  backgroundAnimationEnabled: boolean;
+  backgroundAnimationShape: 'circle' | 'square' | 'triangle' | 'blob';
+  backgroundAnimationColor: string;
+}
+
+export interface UpdateShopUiSettingsDto {
+  backgroundColor: string;
+  textColor: string;
+  backgroundAnimationEnabled: boolean;
+  backgroundAnimationShape: 'circle' | 'square' | 'triangle' | 'blob';
+  backgroundAnimationColor: string;
 }
 
 export interface PayScheduleDto {

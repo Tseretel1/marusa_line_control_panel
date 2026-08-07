@@ -1,0 +1,128 @@
+<div class="theme-page" *ngIf="loaded">
+  <div class="theme-heading">
+    <h2>საიტის თემა</h2>
+    <p class="subtitle">აირჩიეთ მზა თემა ან მოირგეთ ფერები ხელით — ცვლილება მაშინვე გამოჩნდება გადახედვაში.</p>
+  </div>
+
+  <div class="theme-layout">
+    <div class="controls-panel">
+      <h3 class="section-title">მზა თემები</h3>
+      <div class="preset-grid">
+        <div
+          class="preset-card"
+          *ngFor="let preset of presets"
+          [class.active]="isActivePreset(preset)"
+          (click)="applyPreset(preset)"
+        >
+          <div class="preset-swatch" [style.background]="preset.backgroundColor">
+            <span class="preset-swatch-text" [style.color]="preset.textColor">Aa</span>
+          </div>
+          <span class="preset-name">{{ preset.name }}</span>
+          <i class="fas fa-check-circle preset-check" *ngIf="isActivePreset(preset)"></i>
+        </div>
+      </div>
+
+      <button class="btn-customize" [class.active]="customizeOpen" (click)="openCustomize()">
+        <i class="fas fa-palette"></i> მორგება
+      </button>
+
+      <div class="customize-panel" *ngIf="customizeOpen">
+        <div class="color-row">
+          <label for="bg-color">ფონის ფერი</label>
+          <input id="bg-color" type="color" [(ngModel)]="draft.backgroundColor" class="color-input" />
+          <span class="color-code">{{ draft.backgroundColor }}</span>
+        </div>
+        <div class="color-row">
+          <label for="text-color">ტექსტის ფერი</label>
+          <input id="text-color" type="color" [(ngModel)]="draft.textColor" class="color-input" />
+          <span class="color-code">{{ draft.textColor }}</span>
+        </div>
+      </div>
+
+      <div class="animation-panel">
+        <div class="animation-header">
+          <h3 class="section-title">ანიმირებული ფონი</h3>
+          <button
+            class="toggle-switch"
+            [class.on]="draft.backgroundAnimationEnabled"
+            (click)="toggleAnimation()"
+            [attr.aria-pressed]="draft.backgroundAnimationEnabled"
+          >
+            <span class="toggle-knob"></span>
+          </button>
+        </div>
+
+        <div class="animation-body" *ngIf="draft.backgroundAnimationEnabled">
+          <div class="color-row">
+            <label for="anim-shape">ფორმა</label>
+            <select id="anim-shape" [(ngModel)]="draft.backgroundAnimationShape" class="shape-select">
+              <option *ngFor="let shape of animationShapes" [value]="shape.value">{{ shape.label }}</option>
+            </select>
+          </div>
+          <div class="color-row">
+            <label for="anim-color">ფერი</label>
+            <input id="anim-color" type="color" [(ngModel)]="draft.backgroundAnimationColor" class="color-input" />
+            <span class="color-code">{{ draft.backgroundAnimationColor }}</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button class="btn-save" [disabled]="!isDirty || saving" (click)="save()">
+          {{ saving ? 'ინახება...' : 'შენახვა' }}
+        </button>
+        <button class="btn-cancel" [disabled]="!isDirty" (click)="cancel()">გაუქმება</button>
+      </div>
+    </div>
+
+    <div class="preview-panel">
+      <span class="preview-label">გადახედვა</span>
+      <div
+        class="preview-frame"
+        [style.background]="draft.backgroundColor"
+        [style.color]="draft.textColor"
+      >
+        <div class="preview-shapes" *ngIf="draft.backgroundAnimationEnabled">
+          <div
+            class="preview-shape"
+            *ngFor="let s of previewShapes"
+            [ngClass]="draft.backgroundAnimationShape"
+            [style.background]="draft.backgroundAnimationColor"
+            [style.left.%]="s.left"
+            [style.top.%]="s.top"
+            [style.width.px]="s.size"
+            [style.height.px]="s.size"
+            [style.animation-duration.s]="s.duration"
+            [style.animation-delay.s]="s.delay"
+          ></div>
+        </div>
+
+        <div class="preview-header">
+          <div class="preview-shop-info">
+            <img *ngIf="shopLogo" [src]="shopLogo" class="preview-logo" alt="" />
+            <div class="preview-logo-fallback" *ngIf="!shopLogo"></div>
+            <span class="preview-shop-name">{{ shopName || 'თქვენი მაღაზია' }}</span>
+          </div>
+          <div class="preview-nav">
+            <span>მთავარი</span>
+            <span>გალერეა</span>
+            <span>კონტაქტი</span>
+          </div>
+        </div>
+
+        <div class="preview-body">
+          <h4 class="preview-title">კეთილი იყოს თქვენი მობრძანება</h4>
+          <p class="preview-text">ასე გამოიყურება თქვენი საიტის ტექსტი და ფონი ვიზიტორებისთვის.</p>
+
+          <div class="preview-cards">
+            <div class="preview-card" *ngFor="let i of [1,2,3]">
+              <div class="preview-card-photo"></div>
+              <p class="preview-card-title">პროდუქტი {{ i }}</p>
+              <p class="preview-card-price">25 ₾</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

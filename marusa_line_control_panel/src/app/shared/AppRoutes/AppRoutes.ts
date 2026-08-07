@@ -8,5 +8,6 @@ export const AppRoutes = {
   users: '/users',
   dashboard: '/dashboard',
   orderDetails: '/order-details/',
-  payments: '/payments'
+  payments: '/payments',
+  theme: '/theme'
 };

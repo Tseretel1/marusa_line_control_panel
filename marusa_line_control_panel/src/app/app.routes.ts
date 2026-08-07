@@ -9,6 +9,7 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { SubscriptionsComponent } from './pages/subscriptions/subscriptions.component';
 import { PaymentsComponent } from './pages/payments/payments.component';
+import { ThemeComponent } from './pages/theme/theme.component';
 
 export const routes: Routes = [
     { path:'posts', component: PostsComponent},
@@ -21,6 +22,7 @@ export const routes: Routes = [
     { path:'orders', component: OrdersComponent},
     { path:'users', component: UsersComponent},
     { path:'dashboard', component: DashboardComponent},
+    { path:'theme', component: ThemeComponent},
     { path: '', component: PostsComponent }, 
     { path: '**', component: PostsComponent }  
 ];
