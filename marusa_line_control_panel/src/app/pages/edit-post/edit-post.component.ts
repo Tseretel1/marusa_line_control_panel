@@ -160,7 +160,6 @@ SavePhotos() {
 
           });
         }
-        this.hideEditProduct();
         this.changeNum=0;
         this.getPost();
     },
@@ -193,8 +192,6 @@ private submitPost() {
           color: '#ffffff',
           title:'პროდუქტი წარმატებით რედაქტირდა',
         });
-        this.changeNum = 0;
-        this.hideEditProduct();
         this.oldPost = {
             Id: this.postId,
             title: this.title,
@@ -210,6 +207,19 @@ private submitPost() {
       console.error(error);
     }
   );
+}
+
+get isProductDirty(): boolean {
+  if (!this.oldPost) return false;
+  return this.title !== this.oldPost.title
+      || this.description !== this.oldPost.description
+      || this.productTypeId !== this.oldPost.productTypeId
+      || this.price !== this.oldPost.price
+      || this.discountedPrice !== this.oldPost.discountedPrice;
+}
+
+get isQuantityDirty(): boolean {
+  return this.quantity !== this.quantityRollback;
 }
   changeNum:number = 0;
 
@@ -388,11 +398,6 @@ private submitPost() {
   }
 
 
-  editQuantityVisible:boolean = false;
-  editQuantity(){
-    this.editQuantityVisible = true;
-  }
-
   saveQuantity(){
     if(this.quantity>=0){
       this.postService.UpdateQuantity(this.postId, this.quantity).subscribe(
@@ -406,7 +411,7 @@ private submitPost() {
             color: '#ffffff',
             title:'მარაგი წარმატებით განახლდა!',
           });
-          this.closeQuantity();
+          this.quantityRollback = this.quantity;
         }
       )
     }
@@ -423,27 +428,14 @@ private submitPost() {
     }
   }
   closeQuantityEdit(){
-    this.editQuantityVisible = false;
     this.quantity = this.quantityRollback;
   }
-  closeQuantity(){
-    this.editQuantityVisible = false;
-  }
-  editProductVisible:boolean = false;
   rollbackProduct(){
       this.title = this.oldPost.title;
       this.description = this.oldPost.description;
       this.productTypeId = this.oldPost.productTypeId;
       this.price = this.oldPost.price;
       this.discountedPrice = this.oldPost.discountedPrice;
-    
-    this.editProductVisible = false;
-  }
-  hideEditProduct(){
-    this.editProductVisible = false;
-  }
-  editProduct(){
-    this.editProductVisible = true;
   }
 
 

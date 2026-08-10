@@ -45,31 +45,26 @@
         <div class="right-column">
 
             <div class="card">
-                <div class="edit-actions">
-                    <button class="edit-toggle-btn" *ngIf="!editProductVisible" (click)="editProduct()">
-                        <i class="fas fa-pen"></i> რედაქტირება
-                    </button>
-                    <ng-container *ngIf="editProductVisible">
-                        <button class="primary-btn" (click)="ValidateAndSaveEditedProduct()">შენახვა</button>
-                        <button class="ghost-btn" (click)="rollbackProduct()">გაუქმება</button>
-                    </ng-container>
+                <div class="edit-actions" *ngIf="isProductDirty">
+                    <button class="primary-btn" (click)="ValidateAndSaveEditedProduct()">შენახვა</button>
+                    <button class="ghost-btn" (click)="rollbackProduct()">გაუქმება</button>
                 </div>
 
-                <div class="fields-grid" [class.is-editing]="editProductVisible">
+                <div class="fields-grid" [class.is-editing]="isProductDirty">
                     <div class="form-control-group span-2">
                         <label class="form-control-label">დასახელება</label>
-                        <input [disabled]="!editProductVisible" type="text" class="form-control" maxlength="50" [(ngModel)]="title">
+                        <input type="text" class="form-control" maxlength="50" [(ngModel)]="title">
                     </div>
                     <div class="form-control-group span-2">
                         <label class="form-control-label">კატეგორია</label>
-                        <select class="form-control select-control" [disabled]="!editProductVisible" [(ngModel)]="productTypeId">
+                        <select class="form-control select-control" [(ngModel)]="productTypeId">
                             <option value="0" disabled></option>
                             <option *ngFor="let i of productTypesList" [value]="i.id">{{i.productType}}</option>
                         </select>
                     </div>
                     <div class="form-control-group">
                         <label class="form-control-label">ფასი</label>
-                        <input [disabled]="!editProductVisible" type="number" class="form-control" placeholder="₾" (input)="discountAmountChangeDetection()" [(ngModel)]="price">
+                        <input type="number" class="form-control" placeholder="₾" (input)="discountAmountChangeDetection()" [(ngModel)]="price">
                     </div>
                     <div class="form-control-group">
                         <label class="form-control-label">
@@ -78,11 +73,11 @@
                                 <ng-container *ngIf="discountedPercentage>0">-</ng-container>{{discountedPercentage}}%
                             </span>
                         </label>
-                        <input [disabled]="!editProductVisible" type="number" class="form-control" placeholder="₾" (input)="discountAmountChangeDetection()" [(ngModel)]="discountedPrice">
+                        <input type="number" class="form-control" placeholder="₾" (input)="discountAmountChangeDetection()" [(ngModel)]="discountedPrice">
                     </div>
                     <div class="form-control-group span-2">
                         <label class="form-control-label">აღწერა</label>
-                        <textarea [disabled]="!editProductVisible" class="form-control description" [(ngModel)]="description" maxlength="500"></textarea>
+                        <textarea class="form-control description" [(ngModel)]="description" maxlength="500"></textarea>
                     </div>
                 </div>
             </div>
@@ -93,11 +88,10 @@
                 <h3 class="card-title">მარაგი</h3>
 
                 <div class="inventory-row">
-                    <input [disabled]="!editQuantityVisible" type="number" class="form-control quantity-input" [(ngModel)]="quantity">
-                    <div class="quantity-actions">
-                        <button *ngIf="!editQuantityVisible" class="icon-btn" (click)="editQuantity()"><i class="fas fa-pen"></i></button>
-                        <button *ngIf="editQuantityVisible" class="icon-btn confirm" (click)="saveQuantity()"><i class="fas fa-check"></i></button>
-                        <button *ngIf="editQuantityVisible" class="icon-btn cancel" (click)="closeQuantityEdit()"><i class="fas fa-times"></i></button>
+                    <input type="number" class="form-control quantity-input" [(ngModel)]="quantity">
+                    <div class="quantity-actions" *ngIf="isQuantityDirty">
+                        <button class="icon-btn confirm" (click)="saveQuantity()"><i class="fas fa-check"></i></button>
+                        <button class="icon-btn cancel" (click)="closeQuantityEdit()"><i class="fas fa-times"></i></button>
                     </div>
                 </div>
 

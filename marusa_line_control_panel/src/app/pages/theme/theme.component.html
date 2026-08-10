@@ -37,6 +37,27 @@
           <input id="text-color" type="color" [(ngModel)]="draft.textColor" class="color-input" />
           <span class="color-code">{{ draft.textColor }}</span>
         </div>
+        <div class="color-row">
+          <label for="surface-color">ბარათებისა და პანელების ფერი</label>
+          <input id="surface-color" type="color" [(ngModel)]="draft.surfaceColor" class="color-input" />
+          <span class="color-code">{{ draft.surfaceColor }}</span>
+        </div>
+        <div class="slider-row">
+          <div class="slider-row-header">
+            <label for="surface-opacity">გამჭვირვალობის ინტენსივობა</label>
+            <span class="color-code">{{ (draft.surfaceOpacity * 100) | number:'1.0-0' }}%</span>
+          </div>
+          <input
+            id="surface-opacity"
+            type="range"
+            [min]="minOpacity"
+            [max]="maxOpacity"
+            step="0.05"
+            [(ngModel)]="draft.surfaceOpacity"
+            class="opacity-slider"
+          />
+        </div>
+        <p class="field-note">ეს ფერი გამოჩნდება გამჭვირვალედ ბარათებზე, პანელებზე, ჰედერზე, ფუტერსა და ფანჯრებზე. სლაიდერით არეგულირებთ რამდენად გამოკვეთილია ეს ფერი — ის ყოველთვის დარჩება ნახევრად გამჭვირვალე „მინის" ეფექტით და ვერასდროს გახდება სრულიად მოუმჭვირვალე.</p>
       </div>
 
       <div class="animation-panel">
@@ -97,7 +118,7 @@
           ></div>
         </div>
 
-        <div class="preview-header">
+        <div class="preview-header" [style.background]="surfaceRgba(0.42)" [style.border-bottom-color]="surfaceRgba(0.5)">
           <div class="preview-shop-info">
             <img *ngIf="shopLogo" [src]="shopLogo" class="preview-logo" alt="" />
             <div class="preview-logo-fallback" *ngIf="!shopLogo"></div>
@@ -115,7 +136,12 @@
           <p class="preview-text">ასე გამოიყურება თქვენი საიტის ტექსტი და ფონი ვიზიტორებისთვის.</p>
 
           <div class="preview-cards">
-            <div class="preview-card" *ngFor="let i of [1,2,3]">
+            <div
+              class="preview-card"
+              *ngFor="let i of [1,2,3]"
+              [style.background]="surfaceRgba(0.36)"
+              [style.border-color]="surfaceRgba(0.45)"
+            >
               <div class="preview-card-photo"></div>
               <p class="preview-card-title">პროდუქტი {{ i }}</p>
               <p class="preview-card-price">25 ₾</p>

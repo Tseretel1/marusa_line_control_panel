@@ -10,6 +10,8 @@ export interface ThemePreset {
   name: string;
   backgroundColor: string;
   textColor: string;
+  surfaceColor: string;
+  surfaceOpacity: number;
   backgroundAnimationEnabled: boolean;
   backgroundAnimationShape: AnimationShape;
   backgroundAnimationColor: string;
@@ -23,10 +25,15 @@ interface PreviewShapeLayout {
   delay: number;
 }
 
+const MIN_OPACITY = 0.3;
+const MAX_OPACITY = 1.4;
+
 const DEFAULT_SETTINGS: ShopUiSettings = {
   shopId: 0,
   backgroundColor: '#ffffff',
   textColor: '#000000',
+  surfaceColor: '#808080',
+  surfaceOpacity: 1,
   backgroundAnimationEnabled: true,
   backgroundAnimationShape: 'blob',
   backgroundAnimationColor: '#9ca3af',
@@ -41,6 +48,9 @@ const DEFAULT_SETTINGS: ShopUiSettings = {
 })
 export class ThemeComponent implements OnInit {
 
+  minOpacity = MIN_OPACITY;
+  maxOpacity = MAX_OPACITY;
+
   animationShapes: { value: AnimationShape; label: string }[] = [
     { value: 'blob', label: 'ბლობი' },
     { value: 'circle', label: 'წრე' },
@@ -49,11 +59,8 @@ export class ThemeComponent implements OnInit {
   ];
 
   presets: ThemePreset[] = [
-    { name: 'კლასიკური', backgroundColor: '#ffffff', textColor: '#000000', backgroundAnimationEnabled: true, backgroundAnimationShape: 'blob', backgroundAnimationColor: '#9ca3af' },
-    { name: 'მუქი',       backgroundColor: '#121212', textColor: '#f5f5f5', backgroundAnimationEnabled: true, backgroundAnimationShape: 'blob', backgroundAnimationColor: '#38bdf8' },
-    { name: 'მინიმალური', backgroundColor: '#ffffff', textColor: '#1f2937', backgroundAnimationEnabled: false, backgroundAnimationShape: 'blob', backgroundAnimationColor: '#9ca3af' },
-    { name: 'ოკეანე',     backgroundColor: '#e8f4f8', textColor: '#073b4c', backgroundAnimationEnabled: true, backgroundAnimationShape: 'circle', backgroundAnimationColor: '#38bdf8' },
-    { name: 'ტყე',        backgroundColor: '#f1f8e9', textColor: '#1b5e20', backgroundAnimationEnabled: true, backgroundAnimationShape: 'triangle', backgroundAnimationColor: '#66bb6a' },
+    { name: 'ღია',  backgroundColor: '#ffffff', textColor: '#000000', surfaceColor: '#000000', surfaceOpacity: 1, backgroundAnimationEnabled: true, backgroundAnimationShape: 'blob', backgroundAnimationColor: '#9ca3af' },
+    { name: 'მუქი', backgroundColor: '#121212', textColor: '#f5f5f5', surfaceColor: '#ffffff', surfaceOpacity: 1, backgroundAnimationEnabled: true, backgroundAnimationShape: 'blob', backgroundAnimationColor: '#38bdf8' },
   ];
 
   shopId: number = 0;
@@ -107,6 +114,8 @@ export class ThemeComponent implements OnInit {
   get isDirty(): boolean {
     return this.draft.backgroundColor.toLowerCase() !== this.saved.backgroundColor.toLowerCase()
         || this.draft.textColor.toLowerCase() !== this.saved.textColor.toLowerCase()
+        || this.draft.surfaceColor.toLowerCase() !== this.saved.surfaceColor.toLowerCase()
+        || this.draft.surfaceOpacity !== this.saved.surfaceOpacity
         || this.draft.backgroundAnimationEnabled !== this.saved.backgroundAnimationEnabled
         || this.draft.backgroundAnimationShape !== this.saved.backgroundAnimationShape
         || this.draft.backgroundAnimationColor.toLowerCase() !== this.saved.backgroundAnimationColor.toLowerCase();
@@ -115,6 +124,8 @@ export class ThemeComponent implements OnInit {
   isActivePreset(preset: ThemePreset): boolean {
     return this.draft.backgroundColor.toLowerCase() === preset.backgroundColor.toLowerCase()
         && this.draft.textColor.toLowerCase() === preset.textColor.toLowerCase()
+        && this.draft.surfaceColor.toLowerCase() === preset.surfaceColor.toLowerCase()
+        && this.draft.surfaceOpacity === preset.surfaceOpacity
         && this.draft.backgroundAnimationEnabled === preset.backgroundAnimationEnabled
         && this.draft.backgroundAnimationShape === preset.backgroundAnimationShape
         && this.draft.backgroundAnimationColor.toLowerCase() === preset.backgroundAnimationColor.toLowerCase();
@@ -123,6 +134,8 @@ export class ThemeComponent implements OnInit {
   applyPreset(preset: ThemePreset): void {
     this.draft.backgroundColor = preset.backgroundColor;
     this.draft.textColor = preset.textColor;
+    this.draft.surfaceColor = preset.surfaceColor;
+    this.draft.surfaceOpacity = preset.surfaceOpacity;
     this.draft.backgroundAnimationEnabled = preset.backgroundAnimationEnabled;
     this.draft.backgroundAnimationShape = preset.backgroundAnimationShape;
     this.draft.backgroundAnimationColor = preset.backgroundAnimationColor;
@@ -142,6 +155,8 @@ export class ThemeComponent implements OnInit {
     this.service.updateShopUiSettings({
       backgroundColor: this.draft.backgroundColor,
       textColor: this.draft.textColor,
+      surfaceColor: this.draft.surfaceColor,
+      surfaceOpacity: this.draft.surfaceOpacity,
       backgroundAnimationEnabled: this.draft.backgroundAnimationEnabled,
       backgroundAnimationShape: this.draft.backgroundAnimationShape,
       backgroundAnimationColor: this.draft.backgroundAnimationColor,
@@ -175,5 +190,15 @@ export class ThemeComponent implements OnInit {
 
   cancel(): void {
     this.draft = { ...this.saved };
+  }
+
+  surfaceRgba(baseAlpha: number): string {
+    const match = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(this.draft.surfaceColor?.trim() ?? '');
+    const alpha = Math.min(1, baseAlpha * this.draft.surfaceOpacity);
+    if (!match) {
+      return `rgba(128, 128, 128, ${alpha})`;
+    }
+    const [r, g, b] = [match[1], match[2], match[3]].map((h) => parseInt(h, 16));
+    return `rgba(${r}, ${g}, ${b}, ${alpha})`;
   }
 }
