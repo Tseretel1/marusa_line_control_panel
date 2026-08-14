@@ -27,17 +27,21 @@ interface PreviewShapeLayout {
 }
 
 const MIN_OPACITY = 0;
-const MAX_OPACITY = 1;
 
 // The live shop site renders every "glass" surface (cards, header, footer,
 // modals, ...) by multiplying its own fixed base alpha (hardcoded per
-// element in marusa_line's CSS, up to 0.58 at its highest) by this same
-// surfaceOpacity number. Capping the slider at 1 meant even the strongest
-// surface could never exceed 0.58 alpha — never truly opaque. Letting it
-// run up to 1 / 0.58 lets that strongest surface reach exactly 1.0 (fully
-// opaque) at the slider's max, while surfaceOpacity = 1 (the longstanding
-// default) still renders identically to how every shop already looks today.
-const MAX_SURFACE_BASE_ALPHA = 0.58;
+// element in marusa_line's CSS) by this same surfaceOpacity number. The
+// product cards themselves (cards.component.scss, photo-album.component.scss)
+// sit at the lowest base alpha, 0.36 — so the slider's max must be pegged to
+// THAT value, not the highest one, otherwise the actual cards the shop owner
+// is looking at can never reach true 1.0 (fully opaque) no matter how far the
+// slider is dragged; they'd silently cap out partway (e.g. ~62% when pegged
+// to 0.58) well before reaching the 100% mark. Elements with a higher base
+// alpha than 0.36 simply hit 1.0 (and clip there, which is harmless — alpha
+// can't exceed opaque) before the slider reaches its max. surfaceOpacity = 1
+// (the longstanding default) still renders identically to how every shop
+// already looks today.
+const MAX_SURFACE_BASE_ALPHA = 0.36;
 const MAX_SURFACE_OPACITY = 1 / MAX_SURFACE_BASE_ALPHA;
 
 const DEFAULT_SETTINGS: ShopUiSettings = {
@@ -62,7 +66,6 @@ const DEFAULT_SETTINGS: ShopUiSettings = {
 export class ThemeComponent implements OnInit {
 
   minOpacity = MIN_OPACITY;
-  maxOpacity = MAX_OPACITY;
   maxSurfaceOpacity = MAX_SURFACE_OPACITY;
 
   animationShapes: { value: AnimationShape; label: string }[] = [
@@ -73,7 +76,7 @@ export class ThemeComponent implements OnInit {
   ];
 
   presets: ThemePreset[] = [
-    { name: 'ღია',  backgroundColor: '#ffffff', backgroundOpacity: 1, textColor: '#000000', surfaceColor: '#000000', surfaceOpacity: 1, backgroundAnimationEnabled: true, backgroundAnimationShape: 'blob', backgroundAnimationColor: '#9ca3af' },
+    { name: 'ღია',  backgroundColor: '#ffffff', backgroundOpacity: 1, textColor: '#ffffff', surfaceColor: '#000000', surfaceOpacity: MAX_SURFACE_OPACITY, backgroundAnimationEnabled: true, backgroundAnimationShape: 'blob', backgroundAnimationColor: '#9ca3af' },
     { name: 'მუქი', backgroundColor: '#121212', backgroundOpacity: 1, textColor: '#f5f5f5', surfaceColor: '#2c2a2a', surfaceOpacity: 1.4, backgroundAnimationEnabled: true, backgroundAnimationShape: 'blob', backgroundAnimationColor: '#c2edff' },
   ];
 

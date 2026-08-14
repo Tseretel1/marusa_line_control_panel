@@ -33,22 +33,6 @@
             <input id="bg-color" type="color" [(ngModel)]="draft.backgroundColor" class="color-input" />
             <span class="color-code">{{ draft.backgroundColor }}</span>
           </div>
-          <div class="slider-row">
-            <div class="slider-row-header">
-              <label for="bg-opacity">ფონის გამჭვირვალობა</label>
-              <span class="color-code">{{ (draft.backgroundOpacity * 100) | number:'1.0-0' }}%</span>
-            </div>
-            <input
-              id="bg-opacity"
-              type="range"
-              [min]="minOpacity"
-              [max]="maxOpacity"
-              step="0.01"
-              [(ngModel)]="draft.backgroundOpacity"
-              class="opacity-slider"
-            />
-          </div>
-
           <div class="color-row">
             <label for="text-color">ტექსტის ფერი</label>
             <input id="text-color" type="color" [(ngModel)]="draft.textColor" class="color-input" />
@@ -63,17 +47,22 @@
           <div class="slider-row">
             <div class="slider-row-header">
               <label for="surface-opacity">ბარათებისა და პანელების გამჭვირვალობა</label>
-              <span class="color-code">{{ (draft.surfaceOpacity / maxSurfaceOpacity * 100) | number:'1.0-0' }}%</span>
             </div>
-            <input
-              id="surface-opacity"
-              type="range"
-              [min]="minOpacity"
-              [max]="maxSurfaceOpacity"
-              step="0.01"
-              [(ngModel)]="draft.surfaceOpacity"
-              class="opacity-slider"
-            />
+            <div class="battery-slider">
+              <div class="battery-track">
+                <div class="battery-fill" [style.width.%]="draft.surfaceOpacity / maxSurfaceOpacity * 100"></div>
+                <span class="battery-label">{{ (draft.surfaceOpacity / maxSurfaceOpacity * 100) | number:'1.0-0' }}%</span>
+              </div>
+              <input
+                id="surface-opacity"
+                type="range"
+                [min]="minOpacity"
+                [max]="maxSurfaceOpacity"
+                step="0.01"
+                [(ngModel)]="draft.surfaceOpacity"
+                class="battery-range"
+              />
+            </div>
           </div>
           <p class="field-note">ეს ფერი გამოჩნდება ბარათებზე, პანელებზე, ჰედერზე, ფუტერსა და ფანჯრებზე. სლაიდერით თავად განსაზღვრავთ გამჭვირვალობას — 0%-ზე სრულიად გამჭვირვალე იქნება, 100%-ზე კი სრულიად მოუმჭვირვალე.</p>
         </div>
