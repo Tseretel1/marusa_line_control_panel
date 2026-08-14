@@ -16,6 +16,7 @@
             width: 90%;
             display: flex;
             align-items: center;
+            justify-content: space-between;
             .float-logo{
                 position: absolute;
                 display: flex;
@@ -52,9 +53,8 @@
                 
             }
             .navigation-align{
-                width: 100%;
                 display: flex;
-                justify-content: center;
+                justify-content: flex-end;
                 gap: 25px;
                 .nav-link{
                     cursor: pointer;

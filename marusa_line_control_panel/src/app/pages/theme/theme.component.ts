@@ -9,6 +9,7 @@ export type AnimationShape = 'circle' | 'square' | 'triangle' | 'blob';
 export interface ThemePreset {
   name: string;
   backgroundColor: string;
+  backgroundOpacity: number;
   textColor: string;
   surfaceColor: string;
   surfaceOpacity: number;
@@ -25,12 +26,24 @@ interface PreviewShapeLayout {
   delay: number;
 }
 
-const MIN_OPACITY = 0.3;
-const MAX_OPACITY = 1.4;
+const MIN_OPACITY = 0;
+const MAX_OPACITY = 1;
+
+// The live shop site renders every "glass" surface (cards, header, footer,
+// modals, ...) by multiplying its own fixed base alpha (hardcoded per
+// element in marusa_line's CSS, up to 0.58 at its highest) by this same
+// surfaceOpacity number. Capping the slider at 1 meant even the strongest
+// surface could never exceed 0.58 alpha — never truly opaque. Letting it
+// run up to 1 / 0.58 lets that strongest surface reach exactly 1.0 (fully
+// opaque) at the slider's max, while surfaceOpacity = 1 (the longstanding
+// default) still renders identically to how every shop already looks today.
+const MAX_SURFACE_BASE_ALPHA = 0.58;
+const MAX_SURFACE_OPACITY = 1 / MAX_SURFACE_BASE_ALPHA;
 
 const DEFAULT_SETTINGS: ShopUiSettings = {
   shopId: 0,
   backgroundColor: '#ffffff',
+  backgroundOpacity: 1,
   textColor: '#000000',
   surfaceColor: '#808080',
   surfaceOpacity: 1,
@@ -50,6 +63,7 @@ export class ThemeComponent implements OnInit {
 
   minOpacity = MIN_OPACITY;
   maxOpacity = MAX_OPACITY;
+  maxSurfaceOpacity = MAX_SURFACE_OPACITY;
 
   animationShapes: { value: AnimationShape; label: string }[] = [
     { value: 'blob', label: 'ბლობი' },
@@ -59,8 +73,8 @@ export class ThemeComponent implements OnInit {
   ];
 
   presets: ThemePreset[] = [
-    { name: 'ღია',  backgroundColor: '#ffffff', textColor: '#000000', surfaceColor: '#000000', surfaceOpacity: 1, backgroundAnimationEnabled: true, backgroundAnimationShape: 'blob', backgroundAnimationColor: '#9ca3af' },
-    { name: 'მუქი', backgroundColor: '#121212', textColor: '#f5f5f5', surfaceColor: '#ffffff', surfaceOpacity: 1, backgroundAnimationEnabled: true, backgroundAnimationShape: 'blob', backgroundAnimationColor: '#38bdf8' },
+    { name: 'ღია',  backgroundColor: '#ffffff', backgroundOpacity: 1, textColor: '#000000', surfaceColor: '#000000', surfaceOpacity: 1, backgroundAnimationEnabled: true, backgroundAnimationShape: 'blob', backgroundAnimationColor: '#9ca3af' },
+    { name: 'მუქი', backgroundColor: '#121212', backgroundOpacity: 1, textColor: '#f5f5f5', surfaceColor: '#2c2a2a', surfaceOpacity: 1.4, backgroundAnimationEnabled: true, backgroundAnimationShape: 'blob', backgroundAnimationColor: '#c2edff' },
   ];
 
   shopId: number = 0;
@@ -70,7 +84,6 @@ export class ThemeComponent implements OnInit {
   saved: ShopUiSettings = { ...DEFAULT_SETTINGS };
   draft: ShopUiSettings = { ...DEFAULT_SETTINGS };
 
-  customizeOpen: boolean = false;
   saving: boolean = false;
   loaded: boolean = false;
 
@@ -104,8 +117,8 @@ export class ThemeComponent implements OnInit {
   loadTheme(): void {
     this.service.getShopUiSettings(this.shopId).subscribe({
       next: (data: ShopUiSettings) => {
-        this.saved = { ...data };
-        this.draft = { ...data };
+        this.saved = { ...DEFAULT_SETTINGS, ...data };
+        this.draft = { ...DEFAULT_SETTINGS, ...data };
         this.loaded = true;
       },
     });
@@ -113,6 +126,7 @@ export class ThemeComponent implements OnInit {
 
   get isDirty(): boolean {
     return this.draft.backgroundColor.toLowerCase() !== this.saved.backgroundColor.toLowerCase()
+        || this.draft.backgroundOpacity !== this.saved.backgroundOpacity
         || this.draft.textColor.toLowerCase() !== this.saved.textColor.toLowerCase()
         || this.draft.surfaceColor.toLowerCase() !== this.saved.surfaceColor.toLowerCase()
         || this.draft.surfaceOpacity !== this.saved.surfaceOpacity
@@ -123,6 +137,7 @@ export class ThemeComponent implements OnInit {
 
   isActivePreset(preset: ThemePreset): boolean {
     return this.draft.backgroundColor.toLowerCase() === preset.backgroundColor.toLowerCase()
+        && this.draft.backgroundOpacity === preset.backgroundOpacity
         && this.draft.textColor.toLowerCase() === preset.textColor.toLowerCase()
         && this.draft.surfaceColor.toLowerCase() === preset.surfaceColor.toLowerCase()
         && this.draft.surfaceOpacity === preset.surfaceOpacity
@@ -133,16 +148,13 @@ export class ThemeComponent implements OnInit {
 
   applyPreset(preset: ThemePreset): void {
     this.draft.backgroundColor = preset.backgroundColor;
+    this.draft.backgroundOpacity = preset.backgroundOpacity;
     this.draft.textColor = preset.textColor;
     this.draft.surfaceColor = preset.surfaceColor;
     this.draft.surfaceOpacity = preset.surfaceOpacity;
     this.draft.backgroundAnimationEnabled = preset.backgroundAnimationEnabled;
     this.draft.backgroundAnimationShape = preset.backgroundAnimationShape;
     this.draft.backgroundAnimationColor = preset.backgroundAnimationColor;
-  }
-
-  openCustomize(): void {
-    this.customizeOpen = !this.customizeOpen;
   }
 
   toggleAnimation(): void {
@@ -154,6 +166,7 @@ export class ThemeComponent implements OnInit {
     this.saving = true;
     this.service.updateShopUiSettings({
       backgroundColor: this.draft.backgroundColor,
+      backgroundOpacity: this.draft.backgroundOpacity,
       textColor: this.draft.textColor,
       surfaceColor: this.draft.surfaceColor,
       surfaceOpacity: this.draft.surfaceOpacity,
@@ -163,8 +176,8 @@ export class ThemeComponent implements OnInit {
     }).subscribe({
       next: (data: ShopUiSettings) => {
         this.saving = false;
-        this.saved = { ...data };
-        this.draft = { ...data };
+        this.saved = { ...DEFAULT_SETTINGS, ...data };
+        this.draft = { ...DEFAULT_SETTINGS, ...data };
         Swal.fire({
           icon: 'success',
           timer: 2000,
@@ -192,11 +205,20 @@ export class ThemeComponent implements OnInit {
     this.draft = { ...this.saved };
   }
 
-  surfaceRgba(baseAlpha: number): string {
-    const match = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(this.draft.surfaceColor?.trim() ?? '');
-    const alpha = Math.min(1, baseAlpha * this.draft.surfaceOpacity);
+  surfaceRgba(weight: number = 1): string {
+    const alpha = Math.min(1, Math.max(0, this.draft.surfaceOpacity * weight * MAX_SURFACE_BASE_ALPHA));
+    return this.colorToRgba(this.draft.surfaceColor, alpha, '128, 128, 128');
+  }
+
+  backgroundRgba(): string {
+    const alpha = Math.min(1, Math.max(0, this.draft.backgroundOpacity));
+    return this.colorToRgba(this.draft.backgroundColor, alpha, '255, 255, 255');
+  }
+
+  private colorToRgba(hex: string | null | undefined, alpha: number, fallbackRgb: string): string {
+    const match = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex?.trim() ?? '');
     if (!match) {
-      return `rgba(128, 128, 128, ${alpha})`;
+      return `rgba(${fallbackRgb}, ${alpha})`;
     }
     const [r, g, b] = [match[1], match[2], match[3]].map((h) => parseInt(h, 16));
     return `rgba(${r}, ${g}, ${b}, ${alpha})`;

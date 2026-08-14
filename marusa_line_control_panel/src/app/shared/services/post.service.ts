@@ -358,6 +358,7 @@ export interface Shop {
 export interface ShopUiSettings {
   shopId: number;
   backgroundColor: string;
+  backgroundOpacity: number;
   textColor: string;
   surfaceColor: string;
   surfaceOpacity: number;
@@ -368,6 +369,7 @@ export interface ShopUiSettings {
 
 export interface UpdateShopUiSettingsDto {
   backgroundColor: string;
+  backgroundOpacity: number;
   textColor: string;
   surfaceColor: string;
   surfaceOpacity: number;
