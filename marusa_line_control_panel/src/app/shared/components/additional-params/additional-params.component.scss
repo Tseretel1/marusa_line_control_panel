@@ -20,6 +20,73 @@ $radius-sm:     8px;
 $radius-md:     12px;
 $radius-lg:     18px;
 
+// ─── Assigned parameters (inline, storefront-style name + value pills) ────
+.assigned-params-inline {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 14px;
+}
+
+.assigned-param-block {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 12px;
+    background: $bg-inset;
+    border: 1px solid $border-dim;
+    border-radius: $radius-md;
+}
+
+.assigned-param-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.assigned-param-name {
+    font-size: 13px;
+    font-weight: 600;
+    color: $text-primary;
+}
+
+.remove-assigned-btn {
+    width: 26px;
+    height: 26px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    border: none;
+    background: rgba(239, 68, 68, 0.12);
+    color: #f87171;
+    font-size: 11px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+
+    &:hover {
+        background: rgba(239, 68, 68, 0.22);
+    }
+}
+
+.assigned-param-values {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.assigned-value-chip {
+    padding: 5px 10px;
+    border-radius: $radius-md;
+    font-size: 13px;
+    font-weight: 400;
+    background: $bg-card;
+    border: 1px solid $border-mid;
+    color: $text-primary;
+}
+
 // ─── Trigger button ───────────────────────────────────────────────────────
 .open-modal-btn {
     width: 100%;
@@ -29,32 +96,17 @@ $radius-lg:     18px;
     gap: 10px;
     padding: 14px 20px;
     border-radius: $radius-sm;
-    border: 1px solid $border-mid;
-    background: $bg-card;
-    color: $text-primary;
+    border: 1px solid $success-border;
+    background: $success-bg;
+    color: $success-text;
     font-size: 14px;
     font-weight: 600;
     cursor: pointer;
     transition: all 0.2s ease;
 
     &:hover {
-        border-color: $accent-1;
-        color: #b3befb;
+        background: rgba(34, 197, 94, 0.26);
     }
-}
-
-.assigned-count-badge {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    min-width: 20px;
-    height: 20px;
-    padding: 0 6px;
-    border-radius: 999px;
-    background: $accent-gradient;
-    color: white;
-    font-size: 11px;
-    font-weight: 700;
 }
 
 // ─── Modal shell ──────────────────────────────────────────────────────────

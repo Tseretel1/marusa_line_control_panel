@@ -374,6 +374,14 @@ $radius-lg:     18px;
 .inventory-row {
     display: flex;
     align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 14px;
+}
+
+.inventory-main {
+    display: flex;
+    align-items: center;
     gap: 10px;
 }
 
@@ -429,14 +437,14 @@ $radius-lg:     18px;
 .order-allowed-row {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    gap: 12px;
+    gap: 10px;
     flex-wrap: wrap;
 }
 
 .order-allowed-label {
     font-size: 13px;
     color: $text-secondary;
+    white-space: nowrap;
 }
 
 .toggle-pill {
@@ -449,6 +457,7 @@ $radius-lg:     18px;
     font-weight: 600;
     cursor: pointer;
     transition: all 0.2s ease;
+    white-space: nowrap;
 
     &.is-off {
         border-color: $danger-border;

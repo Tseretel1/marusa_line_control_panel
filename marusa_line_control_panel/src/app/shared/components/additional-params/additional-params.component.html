@@ -1,7 +1,20 @@
+<div class="assigned-params-inline" *ngIf="assignedParamsList.length>0">
+    <div class="assigned-param-block" *ngFor="let p of assignedParamsList">
+        <div class="assigned-param-header">
+            <span class="assigned-param-name">{{ p.paramName }}</span>
+            <button class="remove-assigned-btn" (click)="toggleParam(p.parameterId)" title="პარამეტრის წაშლა">
+                <i class="fas fa-minus"></i>
+            </button>
+        </div>
+        <div class="assigned-param-values" *ngIf="p.values.length>0">
+            <span class="assigned-value-chip" *ngFor="let v of p.values">{{ v.value }}</span>
+        </div>
+    </div>
+</div>
+
 <button class="open-modal-btn" (click)="openModal()">
-    <i class="fas fa-sliders-h"></i>
+    <i class="fas fa-plus"></i>
     დამატებითი პარამეტრები
-    <span class="assigned-count-badge" *ngIf="assignedIds.size>0">{{ assignedIds.size }}</span>
 </button>
 
 <div class="additional-params-overlay" *ngIf="modalVisible">

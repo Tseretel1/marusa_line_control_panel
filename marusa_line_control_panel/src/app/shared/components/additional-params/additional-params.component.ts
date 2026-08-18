@@ -51,6 +51,10 @@ export class AdditionalParamsComponent implements OnInit {
     return this.assignedIds.has(parameterId);
   }
 
+  get assignedParamsList(): ProductAdditionalParamDto[] {
+    return this.catalog.filter(p => this.isAssigned(p.parameterId));
+  }
+
   toggleParam(parameterId: number): void {
     if (this.productId != null) {
       const productId = this.productId;

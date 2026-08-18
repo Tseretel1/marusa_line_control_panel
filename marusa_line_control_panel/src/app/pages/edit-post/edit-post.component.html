@@ -79,27 +79,29 @@
                         <label class="form-control-label">აღწერა</label>
                         <textarea class="form-control description" [(ngModel)]="description" maxlength="500"></textarea>
                     </div>
+
+                    <app-additional-params class="span-2" [productId]="postId"></app-additional-params>
                 </div>
             </div>
-
-            <app-additional-params [productId]="postId"></app-additional-params>
 
             <div class="card">
                 <h3 class="card-title">მარაგი</h3>
 
                 <div class="inventory-row">
-                    <input type="number" class="form-control quantity-input" [(ngModel)]="quantity">
-                    <div class="quantity-actions" *ngIf="isQuantityDirty">
-                        <button class="icon-btn confirm" (click)="saveQuantity()"><i class="fas fa-check"></i></button>
-                        <button class="icon-btn cancel" (click)="closeQuantityEdit()"><i class="fas fa-times"></i></button>
+                    <div class="inventory-main">
+                        <input type="number" class="form-control quantity-input" [(ngModel)]="quantity">
+                        <div class="quantity-actions" *ngIf="isQuantityDirty">
+                            <button class="icon-btn confirm" (click)="saveQuantity()"><i class="fas fa-check"></i></button>
+                            <button class="icon-btn cancel" (click)="closeQuantityEdit()"><i class="fas fa-times"></i></button>
+                        </div>
                     </div>
-                </div>
 
-                <div class="order-allowed-row">
-                    <span class="order-allowed-label">შეკვეთა მარაგის ამოწურვის შემდეგ</span>
-                    <button class="toggle-pill" [ngClass]="{'is-off':posts.orderNotAllowed}" (click)="orderAllowedToggle()">
-                        {{ posts.orderNotAllowed ? 'შეზღუდული' : 'დაშვებული' }}
-                    </button>
+                    <div class="order-allowed-row">
+                        <span class="order-allowed-label">შეკვეთა მარაგის ამოწურვის შემდეგ</span>
+                        <button class="toggle-pill" [ngClass]="{'is-off':posts.orderNotAllowed}" (click)="orderAllowedToggle()">
+                            {{ posts.orderNotAllowed ? 'შეზღუდული' : 'დაშვებული' }}
+                        </button>
+                    </div>
                 </div>
             </div>
 
